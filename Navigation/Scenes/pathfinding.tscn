@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/Cave.png" type="Texture" id=2]
@@ -6,8 +6,8 @@
 [ext_resource path="res://Enemies/Scenes/Crystal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Classes/miner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=6]
-
-
+[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,3 +33,19 @@ position = Vector2( 28, 104 )
 position = Vector2( 75, 101 )
 
 [node name="ui_header" parent="." instance=ExtResource( 6 )]
+
+[node name="pause_button" parent="." instance=ExtResource( 7 )]
+position = Vector2( 14, 14 )
+
+[node name="Pause" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 1.0
+margin_top = 9.0
+margin_right = 13.0
+margin_bottom = 29.0
+rect_scale = Vector2( 2.16, 0.520002 )
+
+[node name="pause_menu" parent="." instance=ExtResource( 8 )]
+pause_mode = 2
+visible = false
+[connection signal="pressed" from="Pause" to="." method="_on_Pause_pressed"]
