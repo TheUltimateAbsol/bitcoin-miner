@@ -26,3 +26,4 @@ margin_bottom = 25.0
 rect_scale = Vector2( 0.995919, 0.525501 )
 shortcut_in_tooltip = false
 script = ExtResource( 3 )
+[connection signal="pressed" from="Label/pause_button" to="Label/pause_button" method="_on_pause_button_pressed"]

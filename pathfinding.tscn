@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://testplatformer.gd" type="Script" id=1]
 [ext_resource path="res://background.png" type="Texture" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://Crystal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://miner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui_header.tscn" type="PackedScene" id=6]
-[ext_resource path="res://pause_button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://pause_button.gd" type="Script" id=7]
 [ext_resource path="res://pause_menu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://pause_menu.gd" type="Script" id=9]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -34,17 +35,21 @@ position = Vector2( 75, 101 )
 
 [node name="ui_header" parent="." instance=ExtResource( 6 )]
 
-[node name="pause_button" parent="." instance=ExtResource( 7 )]
-position = Vector2( 14, 14 )
-
-[node name="Pause" type="Button" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+[node name="pause_button" type="Button" parent="."]
 margin_left = 1.0
-margin_top = 9.0
+margin_top = 22.0
 margin_right = 13.0
-margin_bottom = 29.0
-rect_scale = Vector2( 2.16, 0.520002 )
+margin_bottom = 42.0
+rect_rotation = -89.9999
+script = ExtResource( 7 )
 
-[node name="pause_menu" parent="." instance=ExtResource( 8 )]
+[node name="pause_menu" type="PanelContainer" parent="."]
 pause_mode = 2
 visible = false
+margin_right = 14.0
+margin_bottom = 14.0
+
+[node name="menu" parent="pause_menu" instance=ExtResource( 8 )]
+pause_mode = 2
+script = ExtResource( 9 )
+[connection signal="pressed" from="pause_button" to="pause_button" method="_on_pause_button_pressed"]
