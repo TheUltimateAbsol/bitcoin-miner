@@ -22,6 +22,10 @@ var on_air_time = 100
 var jumping = false #This will be set to true the frame after we process a jump input
 var prev_jump_pressed = false
 
+func death():
+	print(get_child_count())
+	pass
+
 func _physics_process(delta):
 	
 	# Create gravity (this will be applied later)
