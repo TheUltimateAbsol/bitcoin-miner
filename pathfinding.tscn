@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://testplatformer.gd" type="Script" id=1]
 [ext_resource path="res://background.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Crystal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://miner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui_header.tscn" type="PackedScene" id=6]
+[ext_resource path="res://pause_button.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -31,3 +32,6 @@ position = Vector2( 28, 104 )
 position = Vector2( 75, 101 )
 
 [node name="ui_header" parent="." instance=ExtResource( 6 )]
+
+[node name="pause_button" parent="." instance=ExtResource( 7 )]
+position = Vector2( 14, 14 )
