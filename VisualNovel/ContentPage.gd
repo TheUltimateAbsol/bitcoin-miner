@@ -9,8 +9,8 @@ var transition : int
 var expression : int
 var music : int
 var background : int
-var questions #array of strings + id
-	
+var questions #array of strings + id leadsa	
+
 func _init2(xid, xnext_id, xcontent, xcharacter=Global.Characters.NONE, 
 	xspeed=1, xtransition=Global.Transitions.NONE, 
 	xexpression=Global.Expressions.DEFAULT, 
