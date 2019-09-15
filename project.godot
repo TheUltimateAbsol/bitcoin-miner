@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://PlayerScripts/Command.gd"
 }, {
+"base": "Page",
+"class": "ContentPage",
+"language": "GDScript",
+"path": "res://VisualNovel/ContentPage.gd"
+}, {
+"base": "Page",
+"class": "MetaPage",
+"language": "GDScript",
+"path": "res://VisualNovel/MetaPage.gd"
+}, {
 "base": "Node",
 "class": "NavLink",
 "language": "GDScript",
@@ -23,11 +33,25 @@ _global_script_classes=[ {
 "class": "NavPoint",
 "language": "GDScript",
 "path": "res://Navigation/Scenes/NavPoint.gd"
+}, {
+"base": "Node",
+"class": "Page",
+"language": "GDScript",
+"path": "res://VisualNovel/Page.gd"
+}, {
+"base": "Node",
+"class": "Sentence",
+"language": "GDScript",
+"path": "res://VisualNovel/Sentence.gd"
 } ]
 _global_script_class_icons={
 "Command": "",
+"ContentPage": "",
+"MetaPage": "",
 "NavLink": "",
-"NavPoint": ""
+"NavPoint": "",
+"Page": "",
+"Sentence": ""
 }
 
 [application]

@@ -1,5 +1,6 @@
-extends Node
+extends Page
 
+class_name MetaPage
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
