@@ -5,7 +5,6 @@
 [ext_resource path="res://Style/pure_white.tres" type="Material" id=3]
 [ext_resource path="res://Classes/Control.tscn" type="PackedScene" id=4]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "damage"
 length = 0.3

@@ -24,9 +24,18 @@ var prev_jump_pressed = false
 
 signal paused
 
-func death():
-	print(get_child_count())
-	pass
+func _ready():
+	var children = get_tree().get_nodes_in_group("enemy")
+	for child in children:
+		print(child);
+		child.connect("died", self, "death")
+#
+#
+func death(victim):
+	print("OOF")
+	#removing node from the scene
+	remove_child(victim)
+	victim.queue_free()
 
 func _physics_process(delta):
 	

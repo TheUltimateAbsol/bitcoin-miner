@@ -7,7 +7,7 @@ extends Node2D
 signal health_updated(health)
 signal died
 
-export (int) var health = 100
+export (int) var health = 10
 export (int) var max_health = 100
 onready var sprite = $Sprite
 onready var anim = $AnimationPlayer
@@ -28,7 +28,12 @@ func _set_health(value):
 	health = clamp(value, 0, health)
 	if health != prev_health:
 		$Health.update_health(health)
+		if health == 0:
+			on_death()
+	
 		
 func on_death():
-	emit_signal("died")	
+#	print("OOF");
+#	queue_free()
+	emit_signal("died", self)	
 	
