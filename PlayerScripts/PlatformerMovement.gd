@@ -22,6 +22,8 @@ var on_air_time = 100
 var jumping = false #This will be set to true the frame after we process a jump input
 var prev_jump_pressed = false
 
+signal paused
+
 func death():
 	print(get_child_count())
 	pass
@@ -112,3 +114,9 @@ func _on_Pause_pressed():
 	print("PAUSED")
 	get_tree().paused = true
 	$pause_menu.show()
+
+
+func _on_pause_menu_unpause():
+	print("UNPAUSED")
+	get_tree().paused = false
+	$pause_menu.hide()

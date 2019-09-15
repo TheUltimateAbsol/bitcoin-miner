@@ -46,6 +46,6 @@ margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
 
 [node name="pause_menu" parent="." instance=ExtResource( 8 )]
-pause_mode = 2
 visible = false
 [connection signal="pressed" from="Pause" to="." method="_on_Pause_pressed"]
+[connection signal="unpause" from="pause_menu" to="." method="_on_pause_menu_unpause"]
