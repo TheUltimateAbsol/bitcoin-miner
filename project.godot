@@ -12,17 +12,17 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "Command",
 "language": "GDScript",
-"path": "res://Command.gd"
+"path": "res://PlayerScripts/Command.gd"
 }, {
 "base": "Node",
 "class": "NavLink",
 "language": "GDScript",
-"path": "res://NavLink.gd"
+"path": "res://Navigation/Scenes/NavLink.gd"
 }, {
 "base": "Node",
 "class": "NavPoint",
 "language": "GDScript",
-"path": "res://NavPoint.gd"
+"path": "res://Navigation/Scenes/NavPoint.gd"
 } ]
 _global_script_class_icons={
 "Command": "",
@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="New Game Project2"
+config/name="minecraft; the way home"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 
@@ -86,7 +86,7 @@ attack={
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+quality/driver/driver_name="GLES2"
 
 [size]
 

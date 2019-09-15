@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Classes/Control.gd" type="Script" id=1]
+[ext_resource path="res://Classes/Sprites/health_bar_over.png" type="Texture" id=2]
+[ext_resource path="res://Classes/Sprites/health_bar_under.png" type="Texture" id=3]
+[ext_resource path="res://Classes/Sprites/health_bar_progress.png" type="Texture" id=4]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="HealthBar" type="TextureProgress" parent="."]
+margin_left = -9.4441
+margin_top = -47.0059
+margin_right = 30.5559
+margin_bottom = -7.0059
+value = 100.0
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+tint_under = Color( 0.0941176, 0.188235, 0.188235, 1 )
+tint_over = Color( 0.0941176, 0.188235, 0.188235, 1 )
+tint_progress = Color( 0.658824, 0.752941, 0.690196, 1 )
