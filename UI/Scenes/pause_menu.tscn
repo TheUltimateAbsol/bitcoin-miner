@@ -1,28 +1,43 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/Scenes/pause_menu.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/background.png" type="Texture" id=2]
-[ext_resource path="res://UI/Scenes/ui_header_paused.tscn" type="PackedScene" id=3]
-[ext_resource path="res://UI/Scenes/unpause_button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/Sprites/pause_button_background.png" type="Texture" id=3]
+[ext_resource path="res://UI/Scenes/unpause_button.gd" type="Script" id=4]
+[ext_resource path="res://Style/DEFAULT_TEXT.tres" type="Theme" id=5]
 
-[node name="Node2D" type="Node2D"]
-pause_mode = 2
-script = ExtResource( 1 )
-
-[node name="pause_menu" type="Control" parent="."]
+[node name="pause_menu" type="Popup"]
 pause_mode = 2
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 1 )
 
-[node name="Sprite2" type="Sprite" parent="pause_menu"]
-pause_mode = 2
-position = Vector2( 80, 72 )
+[node name="pause_background" type="Sprite" parent="."]
+position = Vector2( 79.9, 72 )
+scale = Vector2( 1.00125, 1 )
 texture = ExtResource( 2 )
 
-[node name="ui_header" parent="pause_menu" instance=ExtResource( 3 )]
-pause_mode = 2
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 17, 14 )
+scale = Vector2( 1.24, 1 )
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
 
-[node name="Sprite" parent="pause_menu" instance=ExtResource( 4 )]
-pause_mode = 2
-position = Vector2( 16, 14 )
-[connection signal="unpause" from="pause_menu/Sprite" to="." method="_on_Sprite_unpause"]
+[node name="Label" type="Label" parent="Sprite"]
+margin_left = -11.0
+margin_top = -8.0
+margin_right = 15.0
+margin_bottom = 5.0
+rect_scale = Vector2( 0.922684, 1.04038 )
+theme = ExtResource( 5 )
+text = "RESUME"
+
+[node name="Button" type="Button" parent="Sprite/Label"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -1.74808
+margin_top = 2.88356
+margin_right = 10.2519
+margin_bottom = 21.8836
+rect_scale = Vector2( 2.33631, 0.503673 )
+[connection signal="unpause" from="Sprite" to="." method="_on_Sprite_unpause"]
+[connection signal="pressed" from="Sprite/Label/Button" to="Sprite" method="_on_Button_pressed"]
