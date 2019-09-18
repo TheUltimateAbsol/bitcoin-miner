@@ -14,11 +14,11 @@ func _ready():
 	var string2 = Sentence.new("BBBBBBBBBBBBBBBBBB");
 	var content = [string1, string2];
 
-	page = ContentPage.new();
-	page._init2(id, next_id, content);
+	page = ContentPage.new(id, next_id, content);
+#	page._init2(id, next_id, content);
 	
 	display_page(page);
-
+ 
 func display_page(page : Page):
 	textlabel.text = ""
 	match 2:
@@ -47,6 +47,5 @@ func write_sentence (sentence):
 		letter_timer.wait_time = CHAR_WAIT*sentence.speed;
 		letter_timer.start();
 		yield(letter_timer, "timeout");
-
 
 
