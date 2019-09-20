@@ -78,8 +78,11 @@ Global="*res://Global.gd"
 
 [display]
 
-window/size/width=720
-window/size/height=720
+window/size/width=480
+window/size/height=864
+window/size/resizable=false
+window/size/borderless=true
+window/size/fullscreen=true
 window/pixel=true
 
 [global]

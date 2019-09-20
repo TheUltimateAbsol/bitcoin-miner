@@ -7,7 +7,7 @@ var sound : int
 var speed : float
 var delay : float
 
-func _init(xcontent, xsound=Global.SoundEffect.NONE, xspeed=1, xdelay=0):
+func _init(xcontent, xdelay=0, xsound=Global.SoundEffect.NONE, xspeed=1):
 	content = xcontent;
 	sound = xsound;
 	speed = xspeed;

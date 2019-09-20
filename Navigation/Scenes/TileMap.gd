@@ -29,11 +29,11 @@ onready var _half_cell_size = cell_size / 2
 
 func _ready():
 	pass
-#	nav_points.resize(map_size.x*map_size.y);
-#	var walkable_cells_list = astar_add_walkable_cells(obstacles)
-#	astar_connect_walkable_cells(walkable_cells_list, obstacles)
-#	display_points(walkable_cells_list)
-	
+	nav_points.resize(map_size.x*map_size.y);
+	var walkable_cells_list = astar_add_walkable_cells(obstacles)
+	astar_connect_walkable_cells(walkable_cells_list, obstacles)
+	display_points(walkable_cells_list)
+
 func display_points(walkable_cells_list):
 	for point in walkable_cells_list:
 		var point_index = calculate_point_index(point)
