@@ -9,15 +9,15 @@ var transition : int
 var expression : int
 var music : int
 var background : int
-var questions #array of strings + id
-	
-func _init2(xid, xnext_id, xcontent, xcharacter=Global.Characters.NONE, 
+var questions #array of strings + id leadsa	
+
+func _init(xid, xnext_id, xcontent, xcharacter=Global.Characters.NONE, 
 	xspeed=1, xtransition=Global.Transitions.NONE, 
 	xexpression=Global.Expressions.DEFAULT, 
 	xmusic=Global.Music.NONE, xbackground=Global.Background.NONE,
-	xquestions=[]):
+	xquestions=[]).(xid, xnext_id):
 		
-	._init_custom(id, next_id);
+#	._init_custom(id, next_id);
 	content = xcontent;
 	character = xcharacter;
 	speed = xspeed;
