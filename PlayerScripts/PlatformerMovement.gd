@@ -21,6 +21,7 @@ var velocity = Vector2()
 var on_air_time = 100
 var jumping = false #This will be set to true the frame after we process a jump input
 var prev_jump_pressed = false
+var duck = false
 
 signal paused
 
@@ -47,6 +48,7 @@ func _physics_process(delta):
 	#Check input states
 	var walk_left = Input.is_action_pressed("left")
 	var walk_right = Input.is_action_pressed("right")
+	var down = Input.is_action_pressed("down")
 	var jump = Input.is_action_pressed("jump")
 	var attack = Input.is_action_pressed("attack")
 	
@@ -78,11 +80,16 @@ func _physics_process(delta):
 		if attack: 
 			if on_floor: main.mine();
 		else: 
-			if on_floor: main.idle(); 
+			if on_floor and not down: 
+				if duck: 
+					main.getUp(); 
+					duck = false;
+				else: main.idle(); 
 
-	
-	# Integrate forces to velocity (gravity)
-	velocity += force * delta	
+	if on_floor and down:
+		velocity.x = 0;
+		main.duck();
+		duck = true;
 	
 	# Integrate velocity into motion and move
 	#Move_and_slide_with snap acts wierd when not on the ground, so we adjust for it
@@ -90,6 +97,9 @@ func _physics_process(delta):
 			velocity = main.move_and_slide_with_snap(velocity, Vector2(), Vector2(0, -1), false, 4, 0.9)
 	else:
 		velocity = main.move_and_slide_with_snap(velocity, Vector2(0, 15), Vector2(0, -1), false, 4, 0.9)
+	
+	# Integrate forces to velocity (gravity)
+	velocity += force * delta	
 	
 	#reset air-time counter (gives window for jumping when in air)
 	if on_floor:
@@ -102,6 +112,7 @@ func _physics_process(delta):
 	
 	#This gives the falling or jumping animations
 	if not main.is_on_floor():
+		duck = false;
 		if velocity.y > 0:
 			main.fall();
 		else:

@@ -3,20 +3,15 @@ extends Node
 class_name NavLink
 
 var type : int
+var src_id : int
 var dest_id : int
 var link_score : int
-var jump_height : int
-var jump_speed : int
+var init_velocity : Vector2
 
-func init(dest : int, score : int, typ = Global.NavLinkTypes.NONE, jmp = 0, jmpspd = 0):
+func _init(src : int, dest : int, score : int, typ = Global.NavLinkTypes.NONE, velocity=Vector2(0,0)):
+	src_id = src
 	dest_id = dest;
 	link_score = score
 	type = typ
-	jump_height = jmp
-	jump_speed = jmpspd
-	
-func set_type(typ = Global.NavLinkTypes.NONE, jmp = 0, jmpspd = 0):
-	type = typ
-	jump_height = jmp
-	jump_speed = jmpspd
+	init_velocity = velocity
 
