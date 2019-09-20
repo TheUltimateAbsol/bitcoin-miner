@@ -21,7 +21,7 @@ func _ready():
  
 func display_page(page : Page):
 	textlabel.text = ""
-	match 2:
+	match 3:
 		Global.Transitions.NONE:
 			pass
 		Global.Transitions.FLASH: #think ace attorny
@@ -31,7 +31,9 @@ func display_page(page : Page):
 			transition.play("fade in")	
 #			yield(transition, "animation_finished")
 		Global.Transitions.SLIDE_RIGHT:
-			pass
+			transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
+			transition.play("slide_from_right")
+#			pass
 		Global.Transitions.SLIDE_LEFT:
 			pass
 		
