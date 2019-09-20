@@ -1,11 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/monica.png" type="Texture" id=2]
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=3]
 
+
 [sub_resource type="Animation" id=1]
 resource_name = "flash"
+
+[sub_resource type="Animation" id=2]
+resource_name = "slide_from_right"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 600, 0 ), Vector2( 0, 0 ) ]
+}
 
 [node name="VNReader" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,12 +34,6 @@ margin_bottom = 404.0
 rect_min_size = Vector2( 372, 404 )
 alignment = 2
 
-[node name="Sprite" type="Sprite" parent="Control"]
-visible = false
-position = Vector2( 186.818, 159.743 )
-scale = Vector2( 0.372, 0.3 )
-texture = ExtResource( 2 )
-
 [node name="NPC" type="TextureRect" parent="Control"]
 margin_right = 372.0
 margin_bottom = 300.0
@@ -35,6 +45,13 @@ stretch_mode = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/NPC"]
 "anims/fade in" = ExtResource( 3 )
 anims/flash = SubResource( 1 )
+anims/slide_from_right = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Control"]
+visible = false
+position = Vector2( 186.818, 159.743 )
+scale = Vector2( 0.372, 0.3 )
+texture = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="Control"]
 margin_top = 304.0
