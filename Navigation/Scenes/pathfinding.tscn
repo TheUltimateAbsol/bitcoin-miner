@@ -19,19 +19,14 @@ texture = ExtResource( 2 )
 
 [node name="TileMap" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 8 )
-tile_data = PoolIntArray( 786433, 0, 2, 786434, 0, 2, 786435, 0, 2, 786436, 0, 2, 786437, 0, 2, 786446, 0, 1, 786447, 0, 1, 786448, 0, 1, 786449, 0, 1, 786450, 0, 1, 1048576, 0, 0, 1048577, 0, 1, 1048578, 0, 1, 1048579, 0, 1, 1048580, 0, 1, 1048581, 0, 1, 1048582, 0, 1, 1048583, 0, 1, 1048584, 0, 1, 1048585, 0, 1, 1048586, 0, 1, 1048587, 0, 1, 1048588, 0, 1, 1048589, 0, 1, 1048590, 0, 1, 1048591, 0, 1, 1048592, 0, 1, 1048593, 0, 1, 1048594, 0, 1, 1048595, 536870912, 0 )
+tile_data = PoolIntArray( 786432, 0, 1, 786433, 0, 1, 786434, 0, 1, 786435, 0, 1, 917511, 0, 1, 917512, 0, 1, 917513, 0, 1, 917514, 0, 1, 917515, 0, 1, 1048576, 0, 0, 1048577, 0, 1, 1048578, 0, 1, 1048579, 0, 1, 1048580, 0, 1, 1048581, 0, 1, 1048582, 0, 1, 1048583, 0, 1, 1048584, 0, 1, 1048585, 0, 1, 1048586, 0, 1, 1048587, 0, 1, 1048588, 0, 1, 1048589, 0, 1, 1048590, 0, 1, 1048591, 0, 1, 1048592, 0, 1, 1048593, 0, 1, 1048594, 0, 1, 1048595, 536870912, 0 )
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 132, 104 )
 
-[node name="Enemy2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 80, 136 )
-
-[node name="Enemy3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 28, 104 )
-
 [node name="Miner" parent="." instance=ExtResource( 5 )]
-position = Vector2( 75, 101 )
+position = Vector2( 74.2094, 74.9116 )
 
 [node name="ui_header" parent="." instance=ExtResource( 6 )]
 

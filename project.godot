@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://VisualNovel/ContentPage.gd"
 }, {
+"base": "Node",
+"class": "JumpTrajectory",
+"language": "GDScript",
+"path": "res://Navigation/Scenes/JumpTrajectory.gd"
+}, {
 "base": "Page",
 "class": "MetaPage",
 "language": "GDScript",
 "path": "res://VisualNovel/MetaPage.gd"
+}, {
+"base": "Node",
+"class": "NavGraph",
+"language": "GDScript",
+"path": "res://Navigation/Scenes/NavGraph.gd"
 }, {
 "base": "Node",
 "class": "NavLink",
@@ -47,7 +57,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Command": "",
 "ContentPage": "",
+"JumpTrajectory": "",
 "MetaPage": "",
+"NavGraph": "",
 "NavLink": "",
 "NavPoint": "",
 "Page": "",

@@ -8,7 +8,7 @@ var numremaining = 1
 var numtotal = 10
 var numcoin = 100000
 
-enum NavLinkTypes {NONE, FLOOR, JUMP}
+enum NavLinkTypes {NONE, FLOOR, JUMP, FALL}
 
 func update_header(input_remaining, input_total, input_coin):
 	emit_signal("header_update", input_remaining, input_total, input_coin);

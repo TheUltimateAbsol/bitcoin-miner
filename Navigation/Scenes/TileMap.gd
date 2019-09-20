@@ -9,16 +9,18 @@ onready var solo_scene = preload("res://Navigation/Scenes/solo.tscn");
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here
 export(Vector2) var map_size = Vector2(20, 17)
 
-# The path start and end variables use setter methods
-# You can find them at the bottom of the script
-var path_start_position = Vector2() setget _set_path_start_position
-var path_end_position = Vector2() setget _set_path_end_position
-
 var nav_points = []
 var _point_path = []
 
 const BASE_LINE_WIDTH = 3.0
 const DRAW_COLOR = Color('#fff')
+const SPEED_DIVISIONS = 1;
+const HEIGHT_DIVISIONS = 1;
+const WALK_MAX_SPEED = 100
+const JUMP_MAX_SPEED = 200
+const GRAVITY = 500.0 # pixels/second/second
+const MAX_GROUND_DISTANCE = 4.0
+const MINER_COLLISION = Vector2(5,15)
 
 # get_used_cells_by_id is a method from the TileMap node
 # here the id 0 corresponds to the grey tile, the obstacles
@@ -26,10 +28,11 @@ onready var obstacles = get_used_cells_by_id(0)
 onready var _half_cell_size = cell_size / 2
 
 func _ready():
-	nav_points.resize(map_size.x*map_size.y);
-	var walkable_cells_list = astar_add_walkable_cells(obstacles)
-	astar_connect_walkable_cells(walkable_cells_list)
-	display_points(walkable_cells_list)
+	pass
+#	nav_points.resize(map_size.x*map_size.y);
+#	var walkable_cells_list = astar_add_walkable_cells(obstacles)
+#	astar_connect_walkable_cells(walkable_cells_list, obstacles)
+#	display_points(walkable_cells_list)
 	
 func display_points(walkable_cells_list):
 	for point in walkable_cells_list:
@@ -48,7 +51,7 @@ func display_points(walkable_cells_list):
 
 		if not (navpoint == null or navpoint.type == Global.NavPointTypes.NONE): 
 			for link in navpoint.navLinks:
-				var relative_point_position = nav_points[link.dest_id].location*8 + Vector2(4,4)
+				var relative_point_position = to_relative(nav_points[link.dest_id].location)
 				
 				var line = Line2D.new()
 				line.add_point(point_position)
@@ -56,27 +59,17 @@ func display_points(walkable_cells_list):
 				line.z_as_relative = false
 				line.z_index = 4095
 				line.width = 2
-				add_child(line);
-		
-#		var points_relative = PoolVector2Array([
-#			Vector2(point.x + 1, point.y),
-#			Vector2(point.x - 1, point.y),
-#			Vector2(point.x, point.y + 1),
-#			Vector2(point.x, point.y - 1)])
-#		for point_relative in points_relative:
-#			var point_relative_index = calculate_point_index(point_relative)
-#			var point_relative_position = Vector2(8*point_relative.x + 4, 8*point_relative.y + 4)
-#			if astar_node.are_points_connected(point_index, point_relative_index):
-#				#draw line
-#				var line = Line2D.new()
-#				line.add_point(point_position)
-#				line.add_point(point_relative_position)
-#				line.z_as_relative = false
-#				line.z_index = 4095
-#				line.width = 2
-#				add_child(line);
 				
-
+				match (link.type):
+					Global.NavLinkTypes.FLOOR:
+						line.set_default_color(Color.blue)
+					Global.NavLinkTypes.FALL:
+						line.set_default_color(Color.aquamarine)
+					Global.NavLinkTypes.JUMP:
+						line.set_default_color(Color.gold)
+					
+				add_child(line);
+	
 
 # Click and Shift force the start and end position of the path to update
 # and the node to redraw everything
@@ -100,23 +93,27 @@ func astar_add_walkable_cells(obstacles = []):
 		platform_started = false
 		for x in range(map_size.x):
 			var point = Vector2(x, y)
+			# The AStar class references points with indices
+			# Using a function to calculate the index from a point's coordinates
+			# ensures we always get the same index with the same input point
+			var point_index = calculate_point_index(point)
+			var navpoint = NavPoint.new(point, point_index)
+			nav_points[point_index] = navpoint;
+			#print(point*8 + Vector2(4,4));
+			
 			if point in obstacles:
 				continue
 			var floor_tile = Vector2(x, y+1)
 			if not (floor_tile in obstacles):
 				continue
+				
 			points_array.append(point)
-			# The AStar class references points with indices
-			# Using a function to calculate the index from a point's coordinates
-			# ensures we always get the same index with the same input point
-			var point_index = calculate_point_index(point)
-			# AStar works for both 2d and 3d, so we have to convert the point
-			# coordinates from and to Vector3s
-			astar_node.add_point(point_index, Vector3(point.x, point.y, 0.0))
+
+#			# AStar works for both 2d and 3d, so we have to convert the point
+#			# coordinates from and to Vector3s
+#			astar_node.add_point(point_index, Vector3(point.x, point.y, 0.0))
 			
 			#At this point we know that the point is a valid floor tile
-			var navpoint = NavPoint.new();
-			navpoint.init(point, point_index)
 			
 			if not platform_started:
 				navpoint.set_type(Global.NavPointTypes.LEFT_EDGE, actual_platform_index)
@@ -152,56 +149,192 @@ func astar_add_walkable_cells(obstacles = []):
 # orthogonal grids, hex grids, tower defense games...
 
 #Also connects all non-null navpoints
-func astar_connect_walkable_cells(points_array):
+func astar_connect_walkable_cells(points_array, obstacles = []):
+	
+	var walk_time = 8.0/WALK_MAX_SPEED;
 	for navpoint in nav_points:
 		if navpoint == null or navpoint.type == Global.NavPointTypes.NONE: continue
+		#Connect floor links
 		if navpoint.location.x >= map_size.x-1 : continue
 		var right_location = navpoint.location + Vector2(1,0)
-		print(navpoint.location, right_location);
 		var right = nav_points[calculate_point_index(right_location)];
 		if right == null or right.type == Global.NavPointTypes.NONE: continue
-		navpoint.link(right, 10, Global.NavLinkTypes.FLOOR)
-		right.link(navpoint, 10, Global.NavLinkTypes.FLOOR)
-#	for point in points_array:
-#		var point_index = calculate_point_index(point)
-#		# For every cell in the map, we check the one to the top, right.
-#		# left and bottom of it. If it's in the map and not an obstalce,
-#		# We connect the current point with it
-#		var points_relative = PoolVector2Array([
-#			Vector2(point.x + 1, point.y),
-#			Vector2(point.x - 1, point.y),
-#			Vector2(point.x, point.y + 1),
-#			Vector2(point.x, point.y - 1)])
-#		for point_relative in points_relative:
-#			var point_relative_index = calculate_point_index(point_relative)
+		navpoint.link(right, walk_time, Global.NavLinkTypes.FLOOR)
+		right.link(navpoint, walk_time, Global.NavLinkTypes.FLOOR)
+		
+	#Connect fall links
+#	for navpoint in nav_points:
+#		if navpoint == null or navpoint.type == Global.NavPointTypes.NONE: continue
+#		if (navpoint.type == Global.NavPointTypes.LEFT_EDGE or 
+#			navpoint.type == Global.NavPointTypes.RIGHT_EDGE or
+#			navpoint.type == Global.NavPointTypes.SOLO):
+#			var a=0 #Starting point (0 = left side)
+#			var b=1 #Ending point (1 = right side)
+#			if (navpoint.type == Global.NavPointTypes.LEFT_EDGE): b = 0;
+#			if (navpoint.type == Global.NavPointTypes.RIGHT_EDGE): a = 1;
 #
-#			if is_outside_map_bounds(point_relative):
-#				continue
-#			if not astar_node.has_point(point_relative_index):
-#				continue
-#			# Note the 3rd argument. It tells the astar_node that we want the
-#			# connection to be bilateral: from point A to B and B to A
-#			# If you set this value to false, it becomes a one-way path
-#			# As we loop through all points we can set it to false
-#			astar_node.connect_points(point_index, point_relative_index, false)
+#			for i in range(a, b+1):
+#				#determine left or right side target
+#				var target_tile = navpoint.location
+#				if i == 1:
+#					target_tile += Vector2(1,0)
+#				else:
+#					target_tile += -Vector2(1,0)
+#
+#				if target_tile in obstacles:
+#					continue;
+#
+#				#Check for any available navpoint below the target
+#				target_tile += Vector2(0, 1)
+#				while not is_outside_map_bounds(target_tile):
+#					var target = nav_points[calculate_point_index(target_tile)];
+#					if target != null and target.type != Global.NavPointTypes.NONE:
+#						navpoint.link(target, 15, Global.NavLinkTypes.FALL);
+#						break;
+#					target_tile += Vector2(0, 1)
+				
+	#Connect jump links
+	for navpoint in nav_points:
+		if navpoint == null or navpoint.type == Global.NavPointTypes.NONE: continue
+		
+		print("FOR NAVPOINT AT" + str(navpoint.location));
+		#Create a set of jump trajectories
+		var trajectories = [];
+		for i in range(0, SPEED_DIVISIONS+1):
+			for j in range(0, HEIGHT_DIVISIONS+2):
+				var point = to_relative(navpoint.location)
+				var walk_speed = WALK_MAX_SPEED/(i+1)
+				var jump_speed;
+				if j == 0: jump_speed = 0
+				else:
+					jump_speed = -JUMP_MAX_SPEED/(j)
+				var velocity = Vector2(walk_speed, jump_speed)
+				trajectories.push_back(JumpTrajectory.new(point, velocity, GRAVITY))
+				trajectories.push_back(JumpTrajectory.new(point, Vector2(-velocity.x, velocity.y), GRAVITY))
+				
+		for trajectory in trajectories:
+			var last_point = trajectory.points[0];
+			var platforms_reached = []; #This may limit the amount of paths
+			print(trajectory.points);
+			for i in range(trajectory.points.size()):
+				var point = trajectory.points[i];
+				var closest_navpoint = get_closest_navpoint(point);
+				if closest_navpoint == null: break;
+				
+				var close_relative = to_relative(closest_navpoint.location)
+				var close_ground = close_relative + Vector2(0, 4);
+#
+				if (closest_navpoint.type != Global.NavPointTypes.NONE and
+					closest_navpoint != navpoint and
+					point.y > last_point.y and
+					point.y - close_ground.y <= MAX_GROUND_DISTANCE and
+					can_stand_at(close_ground) and
+					navpoint.platform_index != closest_navpoint.platform_index): #and
+					#not (closest_navpoint.platform_index in platforms_reached)): #Unecessary restriction
+						
+					navpoint.link(closest_navpoint, i*trajectory.delta, Global.NavLinkTypes.JUMP, trajectory.initial_velocity);
+					platforms_reached.append(closest_navpoint.platform_index)
+					var line = Line2D.new()
+					for point in trajectory.points:
+						line.add_point(point)
+		
+					line.z_as_relative = false
+					line.z_index = 4095
+					line.width = 2
+					line.set_default_color(Color.gold)
+		
+					add_child(line);
+					break;
+				elif not can_stand_at(point + Vector2(0,4)):
+					break;
+				
+				last_point = point
+		
+	for navpoint in nav_points:
+		if not (navpoint == null or navpoint.type == Global.NavPointTypes.NONE): 
+			for link in navpoint.navLinks:
+				var dest = nav_points[link.dest_id];
+				var point_position = to_relative(navpoint.location);
+				var point_index = navpoint.index
+				var dest_relative_position = to_relative(dest.location)
+				var dest_point_index = dest.index
+				
 
-
-# This is a variation of the method above
-# It connects cells horizontally, vertically AND diagonally
-func astar_connect_walkable_cells_diagonal(points_array):
-	for point in points_array:
-		var point_index = calculate_point_index(point)
-		for local_y in range(3):
-			for local_x in range(3):
-				var point_relative = Vector2(point.x + local_x - 1, point.y + local_y - 1)
-				var point_relative_index = calculate_point_index(point_relative)
-
-				if point_relative == point or is_outside_map_bounds(point_relative):
-					continue
-				if not astar_node.has_point(point_relative_index):
-					continue
-				astar_node.connect_points(point_index, point_relative_index, true)
-
+func get_closest_navpoint(point : Vector2):
+	point = to_local(point)
+	point = Vector2(int(round(point.x)), int(round(point.y)))
+	if is_outside_map_bounds(point): return null;
+	var point_index = calculate_point_index(point);
+	return nav_points[point_index];
+	
+#Returns an array of NavLinks as a path
+#If no path can be found, returns null
+func connect_path(start : int, end: int):
+	var start_point = nav_points[start];
+	var end_point = nav_points[end];
+	var current = start;
+	var current_point = start_point;
+	
+	var path = []
+	
+	var is_visited = [];
+	is_visited.resize(map_size.x*map_size.y);
+	var distance = [];
+	for i in range(map_size.x*map_size.y):
+		distance.push_back(99999999)
+		
+	is_visited[start_point] = 1;
+	distance[start_point] = 0;
+	
+	var can_progress = true;
+	while can_progress:
+		for link in current_point.navLinks:
+			if not (is_visited[link.dest_id]):
+				var total = link.link_score + distance[current];
+				if total < distance[link.dest_id]:
+					distance[link.dest_id] = total;
+		is_visited[current] = true;
+		if (current == end):
+			can_progress = false;
+			break
+			#end here;
+		var lowest = 99999999;
+		var choice_point = null;
+		var choice_link = null;
+		for link in current_point.navLinks:
+			if not (is_visited[link.dest_id]):
+				if distance[link.dest_id] < lowest:
+					choice_link = link;
+					choice_point = link.dest_id
+					lowest = distance[link.dest_id];
+		if choice_point == null:
+			return null;
+		current = choice_point;
+		current_point = nav_points[current];
+		path.append(choice_link);
+		
+		
+	
+	
+func to_relative(point : Vector2):
+	return point*8 + Vector2(4, 4);
+	
+func to_local(point: Vector2):
+	return (point - Vector2(4,4))/8.0
+	
+#Creates a collision box standing at the specified point to see if the miner can stand at the point
+func can_stand_at(point : Vector2):
+	var check_shape = RectangleShape2D.new();
+	check_shape.set_extents(MINER_COLLISION - Vector2(0, 0.01));
+	var space_state = get_world_2d().direct_space_state
+	var params = Physics2DShapeQueryParameters.new()
+	params.set_shape_rid(check_shape.get_rid())
+	#print("Transform" + str(Transform2D(0, global_position + point - Vector2(0, MINER_COLLISION.y))))
+	params.set_transform(Transform2D(0, global_position + point - Vector2(0, MINER_COLLISION.y)))
+	var result = space_state.intersect_shape(params)
+	print(params.get_transform())
+	print(result)
+	return result.empty()
 
 func is_outside_map_bounds(point):
 	return point.x < 0 or point.y < 0 or point.x >= map_size.x or point.y >= map_size.y
@@ -209,78 +342,7 @@ func is_outside_map_bounds(point):
 
 func calculate_point_index(point):
 	return point.x + map_size.x * point.y
-
-
-func _get_path(world_start, world_end):
-	self.path_start_position = world_to_map(world_start)
-	self.path_end_position = world_to_map(world_end)
-	_recalculate_path()
-	var path_world = []
-	for point in _point_path:
-		var point_world = map_to_world(Vector2(point.x, point.y)) + _half_cell_size
-		path_world.append(point_world)
-	return path_world
-
-
-func _recalculate_path():
-	clear_previous_path_drawing()
-	var start_point_index = calculate_point_index(path_start_position)
-	var end_point_index = calculate_point_index(path_end_position)
-	# This method gives us an array of points. Note you need the start and end
-	# points' indices as input
-	_point_path = astar_node.get_point_path(start_point_index, end_point_index)
-	# Redraw the lines and circles from the start to the end point
-	update()
-
-
-func clear_previous_path_drawing():
-	if not _point_path:
-		return
-	var point_start = _point_path[0]
-	var point_end = _point_path[len(_point_path) - 1]
-	set_cell(point_start.x, point_start.y, -1)
-	set_cell(point_end.x, point_end.y, -1)
-
-
-func _draw():
-	if not _point_path:
-		return
-	var point_start = _point_path[0]
-	var point_end = _point_path[len(_point_path) - 1]
-
-	set_cell(point_start.x, point_start.y, 1)
-	set_cell(point_end.x, point_end.y, 2)
-
-	var last_point = map_to_world(Vector2(point_start.x, point_start.y)) + _half_cell_size
-	for index in range(1, len(_point_path)):
-		var current_point = map_to_world(Vector2(_point_path[index].x, _point_path[index].y)) + _half_cell_size
-		draw_line(last_point, current_point, DRAW_COLOR, BASE_LINE_WIDTH, true)
-		draw_circle(current_point, BASE_LINE_WIDTH * 2.0, DRAW_COLOR)
-		last_point = current_point
-
-
-# Setters for the start and end path values.
-func _set_path_start_position(value):
-	if value in obstacles:
-		return
-	if is_outside_map_bounds(value):
-		return
-
-	set_cell(path_start_position.x, path_start_position.y, -1)
-	set_cell(value.x, value.y, 1)
-	path_start_position = value
-	if path_end_position and path_end_position != path_start_position:
-		_recalculate_path()
-
-
-func _set_path_end_position(value):
-	if value in obstacles:
-		return
-	if is_outside_map_bounds(value):
-		return
-
-	set_cell(path_start_position.x, path_start_position.y, -1)
-	set_cell(value.x, value.y, 2)
-	path_end_position = value
-	if path_start_position != value:
-		_recalculate_path()
+	
+#func calculate_link_index(nav_link: NavLink):
+#	var num_ids = (map_size.x-1) + map_size.x*(map_size.y-1) + 1
+#	return nav_link.src_id + num_ids*nav_link.dest_id;
