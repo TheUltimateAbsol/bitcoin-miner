@@ -12,9 +12,9 @@ var background : int
 var questions #array of strings + id leadsa	
 
 func _init(xid, xnext_id, xcontent, xcharacter=Global.Characters.NONE, 
-	xspeed=1, xtransition=Global.Transitions.NONE, 
-	xexpression=Global.Expressions.DEFAULT, 
-	xmusic=Global.Music.NONE, xbackground=Global.Background.NONE,
+	xexpression=Global.Expressions.DEFAULT, xtransition=Global.Transitions.NONE, xbackground=Global.Backgrounds.NONE,
+	xspeed=1, 
+	xmusic=Global.Music.NONE, 
 	xquestions=[]).(xid, xnext_id):
 		
 #	._init_custom(id, next_id);

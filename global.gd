@@ -14,11 +14,11 @@ func update_header(input_remaining, input_total, input_coin):
 	emit_signal("header_update", input_remaining, input_total, input_coin);
 	
 	
-enum Characters {NONE, swagmaster, cool_boi, bad_boi}
+enum Characters {NONE, BOY, GIRL}
 enum Transitions{NONE, FLASH, FADE, SLIDE_RIGHT, SLIDE_LEFT}
-enum Expressions{DEFAULT, HAPPY, SCARED}
+enum Expressions{DEFAULT, HAPPY, SAD}
 enum Music{SAME, NONE, SIMPLE, SAD}
-enum Background{SAME, NONE, CLASSROOM}
+enum Backgrounds{SAME, NONE, CLASSROOM}
 enum SoundEffect{NONE, DING, THWACK, WHACK}
 
 signal header_update
