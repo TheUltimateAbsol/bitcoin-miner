@@ -1,0 +1,160 @@
+{
+	"01":{
+		"id": 1,
+		"next_id": 2,
+		"content":[
+			{
+				"string" : "This is a really boring game. \n", 
+				"sound" : 0,
+				"sentence_speed":0.5,
+				"delay": 0.0
+			},
+			{
+				"string" : "Don't Play it.", 
+				"sound" : 0,
+				"sentence_speed":1,
+				"delay": 0.0
+			},
+		],
+		"Character": 0, 
+		"speed": 0.0, 
+		"transition": 0, 
+		"expresssion": 0, 
+		"music": 0, 
+		"background": 0, 
+		"questions": [
+			{
+				"str" : "What is your name?", 
+				"id" : 1234
+			},
+			{
+				"str" : "What is your quest?", 
+				"id" : 12345
+			}
+		]
+	},
+	"02":{
+		"id": 2,
+		"next_id": 3,
+		"content":[
+			{
+				"string" : "wait... \n", 
+				"sound" : 0,
+				"sentence_speed":0.0,
+				"delay": 0.5
+			},
+			{
+				"string" : "aren't I in this game?", 
+				"sound" : 0,
+				"sentence_speed":0,
+				"delay": 0.0
+			},
+		],
+		"Character": 0, 
+		"speed": 0.0, 
+		"transition": 0, 
+		"expresssion": 0, 
+		"music": 0, 
+		"background": 0, 
+		"questions": [
+			{
+				"str" : "What is your name?", 
+				"id" : 1234
+			},
+			{
+				"str" : "What is your quest?", 
+				"id" : 12345
+			}
+		]
+	},
+	"03":{
+		"id": 3,
+		"next_id": 4,
+		"content":[
+			{
+				"string" : "Yes you are you dummy \n", 
+				"sound" : 0,
+				"sentence_speed":1.0,
+				"delay": 0.2
+			}
+		],
+		"Character": 0, 
+		"speed": 0.0, 
+		"transition": 0, 
+		"expresssion": 0, 
+		"music": 0, 
+		"background": 0, 
+		"questions": [
+			{
+				"str" : "What is your name?", 
+				"id" : 1234
+			},
+			{
+				"str" : "What is your quest?", 
+				"id" : 12345
+			}
+		]
+	},
+	"04":{
+		"id": 4,
+		"next_id": 5,
+		"content":[
+			{
+				"string" : "Oh great! \n", 
+				"sound" : 0,
+				"sentence_speed":1.0,
+				"delay": 0.2
+			},
+			{
+				"string" : "This might be really good!", 
+				"sound" : 0,
+				"sentence_speed":1.0,
+				"delay": 0.5
+			},
+		],
+		"Character": 0, 
+		"speed": 0.0, 
+		"transition": 0, 
+		"expresssion": 0, 
+		"music": 0, 
+		"background": 0, 
+		"questions": [
+			{
+				"str" : "What is your name?", 
+				"id" : 1234
+			},
+			{
+				"str" : "What is your quest?", 
+				"id" : 12345
+			}
+		]
+	},
+	"05":{
+		"id": 5,
+		"next_id": 6,
+		"content":[
+			{
+				"string" : "Ahahaha", 
+				"sound" : 0,
+				"sentence_speed":1.0,
+				"delay": 0.0
+			}
+		],
+		"Character": 0, 
+		"speed": 0.0, 
+		"transition": 0, 
+		"expresssion": 0, 
+		"music": 0, 
+		"background": 0, 
+		"questions": [
+			{
+				"str" : "What is your name?", 
+				"id" : 1234
+			},
+			{
+				"str" : "What is your quest?", 
+				"id" : 12345
+			}
+		]
+	}
+}

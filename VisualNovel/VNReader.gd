@@ -22,23 +22,45 @@ var backgrounds = {
 	
 
 var CHAR_WAIT = 1.0/20
+var data_json
 
 func _ready():
+	load_data("res://VisualNovel/data.json")
 	var id = 1 #what number page is this
 	var next_id =2 	#id of the next page in the series
-	var string1 = Sentence.new("This is a really boring game. \n", .5);
-	var string2 = Sentence.new("Don't play it");
-	var string3 = Sentence.new("Wait...", 0.5)
-	var string4 = Sentence.new(" aren't I in this game?");
-	var string5 = Sentence.new("Yes you are you dummy", 0.2);
-	var string6 = Sentence.new("Oh great!", 0.2);
-	var string7 = Sentence.new("This might be really good!", 0.5);
-	var string8 = Sentence.new("Ahahaha");
-	var content1 = [string1, string2];
-	var content2 = [string3, string4];
-	var content3 = [string5];
-	var content4 = [string6, string7];
-	var content5 = [string8];
+#	var string1 = Sentence.new("This is a really boring game. \n", .5);
+#	var string2 = Sentence.new("Don't play it");
+#	var string3 = Sentence.new("Wait...", 0.5)
+#	var string4 = Sentence.new(" aren't I in this game?");
+#	var string5 = Sentence.new("Yes you are you dummy", 0.2);
+#	var string6 = Sentence.new("Oh great!", 0.2);
+#	var string7 = Sentence.new("This might be really good!", 0.5);
+#	var string8 = Sentence.new("Ahahaha");
+#	var content1 = [string1, string2];
+#	var content2 = [string3, string4];
+#	var content3 = [string5];
+#	var content4 = [string6, string7];
+#	var content5 = [string8];
+	var content1 = [];
+	for string in data_json.result["01"]["content"]:
+		content1.append(Sentence.new(string["string"], string["delay"]))
+		
+	var content2 = [];
+	for string in data_json.result["02"]["content"]:
+		content2.append(Sentence.new(string["string"], string["delay"]))
+		
+	var content3 = [];
+	for string in data_json.result["03"]["content"]:
+		content3.append(Sentence.new(string["string"], string["delay"]))
+		
+	var content4 = [];
+	for string in data_json.result["04"]["content"]:
+		content4.append(Sentence.new(string["string"], string["delay"]))
+		
+	var content5 = [];
+	for string in data_json.result["05"]["content"]:
+		content5.append(Sentence.new(string["string"], string["delay"]))
+	
 	var page1 = ContentPage.new(id, next_id, content1, Global.Characters.BOY, Global.Expressions.SAD, Global.Transitions.FADE, Global.Backgrounds.CLASSROOM);
 	var page2 = ContentPage.new(id+1, next_id+1, content2, Global.Characters.BOY);
 	var page3 = ContentPage.new(id+2, next_id+2, content3, Global.Characters.GIRL, Global.Expressions.DEFAULT, Global.Transitions.FADE);
@@ -97,4 +119,23 @@ func write_sentence (sentence):
 	delay_timer.start();
 	yield(delay_timer, "timeout");
 
-
+func load_data(file_path):
+	#retrieves the json file
+	var file = File.new()
+	file.open(file_path, 3)
+	#converts the json file to a text file
+	var text_json = file.get_as_text()
+#	print(text_json)
+	#parses tect file to dictionary
+	data_json = JSON.parse(text_json)
+	#checks to make sure it parsed correctly
+	if data_json.error == OK:
+		print("All is good")
+	else:
+		print("something is wrong")
+		print(typeof(data_json.result))
+		print(data_json.get_error_line())
+	print("checkpoint 1")
+	print(typeof(data_json.result))
+	print(data_json)
+	file.close()
