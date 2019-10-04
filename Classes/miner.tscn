@@ -385,6 +385,7 @@ extents = Vector2( 5, 15 )
 radius = 15.0
 
 [node name="Miner" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

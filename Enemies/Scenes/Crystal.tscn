@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22, 27 )
 
-[node name="Enemy" index="0" groups=[
+[node name="Enemy" groups=[
 "enemy",
 ] instance=ExtResource( 1 )]
 health = 100

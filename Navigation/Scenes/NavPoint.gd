@@ -20,6 +20,6 @@ func set_type(typ: int = Global.NavPointTypes.NONE, plt_ind : int = -1):
 	
 #links a navpoint with another navpoint
 #the link is given to the calling navpoint
-func link(tar : NavPoint, score : int, typ = Global.NavLinkTypes.NONE, velocity=Vector2(0,0)):
-	var my_link : NavLink = NavLink.new(index, tar.index, score, typ, velocity)
+func link(tar : NavPoint, score : float, typ = Global.NavLinkTypes.NONE, velocity=Vector2(0,0)):
+	var my_link : NavLink = NavLink.new(index, tar, score, typ, velocity)
 	navLinks.append(my_link);
