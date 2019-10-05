@@ -20,7 +20,7 @@ func _ready():
 #Resets the character to a "neutral" state
 #The location of the sprite is recentered
 func _reset():
-	print(state);
+	#print(state);
 	anim.stop();
 	sprite.vframes = 1
 	sprite.hframes = 1
@@ -28,7 +28,7 @@ func _reset():
 	$CollisionShape2D.shape.extents = Vector2(5, 15);
 	$CollisionShape2D.position = Vector2(0, 1);
 	$MiningHitbox/CollisionShape2D.disabled = true;
-	print("reset");
+	#print("reset");
 	
 #Player action that makes the miner stand in place
 #input force_reset = function runs regardless of state
@@ -40,13 +40,13 @@ func idle(force_reset=false):
 	set_offset(Vector2(0,0))
 	sprite.texture = idleSprite
 	sprite.frame = 0;
-	print("idle")
+	#print("idle")
 	
 func getUp():
 	if state != IDLE:
 		state = IDLE
 		_reset()
-		print("getup")
+		#print("getup")
 		set_offset(Vector2(1,0))
 		anim.play("GetUp")
 
@@ -57,7 +57,7 @@ func duck():
 		state = DUCKING
 		_reset()
 		sprite.frame = 0;
-		print("duck")
+		#print("duck")
 		set_offset(Vector2(1,0))
 		anim.play("Duck")
 
@@ -68,7 +68,7 @@ func walk():
 		state = WALKING
 		_reset()
 		set_offset(Vector2(0,0))
-		print("walk")
+		#print("walk")
 		anim.play("Walk");
 
 #Player action that makes the miner continuously mine in place
@@ -79,7 +79,7 @@ func mine():
 		_reset()
 		sprite.frame = 0;
 		set_offset(Vector2(2, -1));
-		print("mine");
+		#print("mine");
 		anim.play("Mine");
 		
 #Player action that starts a jump motion (only rises up)
@@ -89,7 +89,7 @@ func jump():
 		state = JUMPING
 		_reset()
 		set_offset(Vector2(0,0));
-		print("jump")
+		#print("jump")
 		anim.play("Jump");
 		
 #Player action that starts a falling motion
@@ -100,7 +100,7 @@ func fall():
 		_reset()
 		sprite.frame = 0;
 		set_offset(Vector2(0,0));
-		print("fall");
+		#print("fall");
 		anim.play("Fall");
 	
 #Flips the character in the correct direction
