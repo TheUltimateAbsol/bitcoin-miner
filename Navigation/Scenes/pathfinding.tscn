@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/Cave.png" type="Texture" id=2]
 [ext_resource path="res://Navigation/Scenes/TileMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Classes/miner.tscn" type="PackedScene" id=4]
-[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=5]
-[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=6]
-[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/Scenes/Crystal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Classes/miner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 pause_mode = 1
@@ -29,12 +30,15 @@ position = Vector2( 143, 115 )
 [node name="MiddleTarget" type="Node2D" parent="TileMap"]
 position = Vector2( 83, 98 )
 
-[node name="Miner" parent="." instance=ExtResource( 4 )]
+[node name="Enemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 85, 112 )
+
+[node name="Miner" parent="." instance=ExtResource( 5 )]
 position = Vector2( 31, 111 )
 
-[node name="ui_header" parent="." instance=ExtResource( 5 )]
+[node name="ui_header" parent="." instance=ExtResource( 6 )]
 
-[node name="pause_button" parent="." instance=ExtResource( 6 )]
+[node name="pause_button" parent="." instance=ExtResource( 7 )]
 position = Vector2( 14, 14 )
 
 [node name="Pause" type="Button" parent="."]
@@ -46,7 +50,7 @@ margin_right = 13.0
 margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
 
-[node name="pause_menu" parent="." instance=ExtResource( 7 )]
+[node name="pause_menu" parent="." instance=ExtResource( 8 )]
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

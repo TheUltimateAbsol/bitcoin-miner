@@ -33,7 +33,7 @@ func _ready():
 	nav_points.resize(map_size.x*map_size.y);
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
 	astar_connect_walkable_cells(walkable_cells_list, obstacles)
-	display_points(walkable_cells_list, false)
+#	display_points(walkable_cells_list, false)
 	#var path = connect_path(valid_points[1].index, valid_points[valid_points.size()-1].index)
 	#display_path(path);
 

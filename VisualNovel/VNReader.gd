@@ -1,6 +1,6 @@
-extends Node2D
+extends Control
 
-onready var textlabel = get_node("Control/Panel/TextLabel")
+onready var textlabel = get_node("Control/Panel/MarginContainer/Control/TextLabel")
 onready var letter_timer = $LetterTimer;
 onready var delay_timer = $DelayTimer;
 onready var transition = get_node("Control/NPC/AnimationPlayer")

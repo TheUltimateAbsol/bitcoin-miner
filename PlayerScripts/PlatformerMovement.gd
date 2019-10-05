@@ -90,10 +90,10 @@ func _ready():
 	if (middle_to_right == null):
 		push_error("Middle to Right Path cannot be drawn")
 
-	$TileMap.display_path(left_to_middle);
-	$TileMap.display_path(right_to_middle);
-	$TileMap.display_path(middle_to_left);
-	$TileMap.display_path(middle_to_right);
+#	$TileMap.display_path(left_to_middle);
+#	$TileMap.display_path(right_to_middle);
+#	$TileMap.display_path(middle_to_left);
+#	$TileMap.display_path(middle_to_right);
 	
 #	yield($Timer, "timeout");
 #	follow_path(left_to_middle);
