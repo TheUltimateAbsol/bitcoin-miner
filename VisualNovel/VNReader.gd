@@ -80,13 +80,14 @@ func display_page(page : Page):
 	print("CHARACTER: " + str(page.character));
 	print("RESULT" + str(expressions[page.character][page.expression]));
 	$Control/NPC.texture = expressions[page.character][page.expression]
-			
+	
 	match page.transition:
 		Global.Transitions.NONE:
 			pass
 		Global.Transitions.FLASH: #think ace attorny
 			pass
 		Global.Transitions.FADE:
+			$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
 			#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
 			transition.play("fade in")	
 			yield(transition, "animation_finished")
