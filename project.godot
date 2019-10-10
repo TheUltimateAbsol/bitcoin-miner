@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://VisualNovel/Page.gd"
 }, {
+"base": "TileMap",
+"class": "PathMap",
+"language": "GDScript",
+"path": "res://Navigation/Scenes/TileMap.gd"
+}, {
 "base": "Node",
 "class": "Sentence",
 "language": "GDScript",
@@ -63,6 +68,7 @@ _global_script_class_icons={
 "NavLink": "",
 "NavPoint": "",
 "Page": "",
+"PathMap": "",
 "Sentence": ""
 }
 

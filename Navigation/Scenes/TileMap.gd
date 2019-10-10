@@ -1,5 +1,7 @@
 extends TileMap
 
+class_name PathMap
+
 # You can only create an AStar node from code, not from the Scene tab
 onready var astar_node = AStar.new()
 onready var point_scene = preload("res://Navigation/Scenes/point.tscn");
