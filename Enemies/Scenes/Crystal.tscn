@@ -6,10 +6,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22, 27 )
 
-[node name="Enemy" index="0" groups=[
-"enemy",
-] instance=ExtResource( 1 )]
-health = 100
+[node name="Enemy" instance=ExtResource( 1 )]
+health = 500
+max_health = 500
+destruction_points = 1000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurtbox" index="0"]
 position = Vector2( 0, -27 )

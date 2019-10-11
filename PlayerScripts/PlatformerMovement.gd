@@ -1,142 +1,223 @@
 extends Node
+	
+var left_to_middle 
+var right_to_middle
+var middle_to_left 
+var middle_to_right 
+var Miner = preload("res://Classes/miner.tscn");
+var Win = preload("res://YOU_WIN.tscn");
+var miners = [];
+var main_command : Command = Command.new(Global.CommandTypes.IDLE)
 
-const GRAVITY = 500.0 # pixels/second/second
-
-# Angle in degrees towards either side that the player can consider "floor"
-const FLOOR_ANGLE_TOLERANCE = 40
-const WALK_FORCE = 600
-const WALK_MIN_SPEED = 10
-const WALK_MAX_SPEED = 200
-const STOP_FORCE = 1300
-const JUMP_SPEED = 200
-const JUMP_MAX_AIRBORNE_TIME = 0.2
-
-const SLIDE_STOP_VELOCITY = 1.0 # one pixel/second
-const SLIDE_STOP_MIN_TRAVEL = 1.0 # one pixel
+var level1 = preload("res://Stages/Levels/Level1/1.tscn");
+var level2 = preload("res://Stages/Levels/Level1/2.tscn");
+var level3 = preload("res://Stages/Levels/Level1/3.tscn");
+var levels = []
+var current_level = 0;
+var level_scene = null
+var next_level_scene = null
 
 #This is just an alias
-onready var main = $Miner
+onready var main : KinematicBody2D = $Miner
 
-var velocity = Vector2()
-var on_air_time = 100
-var jumping = false #This will be set to true the frame after we process a jump input
-var prev_jump_pressed = false
-var duck = false
+
+enum {LEFT, MIDDLE, RIGHT}
+var section = MIDDLE;
 
 signal paused
 
-func _ready():
-	var children = get_tree().get_nodes_in_group("enemy")
-	for child in children:
-		print(child);
-		child.connect("died", self, "death")
-#
-#
-func death(victim):
-	print("OOF")
-	#removing node from the scene
-	remove_child(victim)
-	victim.queue_free()
+signal released_attack
+signal released_down
+	
+func update_section(section_type):
+	section = section_type
+	new_command(Global.CommandTypes.IDLE)
 
-func _physics_process(delta):
-	
-	# Create gravity (this will be applied later)
-	var force = Vector2(0, GRAVITY)
-	if main.is_on_floor():
-		force = Vector2(0,0)
-	
-	#Check input states
-	var walk_left = Input.is_action_pressed("left")
-	var walk_right = Input.is_action_pressed("right")
-	var down = Input.is_action_pressed("down")
-	var jump = Input.is_action_pressed("jump")
-	var attack = Input.is_action_pressed("attack")
-	
-	var stop = true #This will be changed if we find out that we are moving
-	var on_floor = main.is_on_floor(); #This is so we don't call is_on_floor too many times
-	
-	if attack:
-		stop = true
-		
-	#Turn the character in the left direction and set state
-	elif walk_left:
-		velocity.x = -(WALK_MAX_SPEED/2)
-		stop = false
-		main.flip(false)
-		if on_floor: main.walk()
-		
-	#Turn the character in the right direction and set state
-	elif walk_right:
-		velocity.x = (WALK_MAX_SPEED/2)
-		stop = false
-		main.flip(true)
-		if on_floor: main.walk()
-		
-	#Cancel out all X velocity and set state (if mining or idling only)
-	if stop:
-		velocity.x = 0
-		if on_floor and not jumping:
-			velocity.y = 0;
-		if attack: 
-			if on_floor: main.mine();
-		else: 
-			if on_floor and not down: 
-				if duck: 
-					main.getUp(); 
-					duck = false;
-				else: main.idle(); 
+#Precondition: current_level is set to the level we intend to load
+func load_level():
+	#Remove the trash we had before
+	if level_scene != null:
+		level_scene.queue_free();
 
-	if on_floor and down:
-		velocity.x = 0;
-		main.duck();
-		duck = true;
-	
-	# Integrate velocity into motion and move
-	#Move_and_slide_with snap acts wierd when not on the ground, so we adjust for it
-	if jumping or stop:
-			velocity = main.move_and_slide_with_snap(velocity, Vector2(), Vector2(0, -1), false, 4, 0.9)
+	#No next level present, but we are trying to load a next level
+	#Precondition: There is a level to load
+	if next_level_scene == null:
+		level_scene = levels[current_level].instance();
+		$Current.add_child(level_scene);
 	else:
-		velocity = main.move_and_slide_with_snap(velocity, Vector2(0, 15), Vector2(0, -1), false, 4, 0.9)
-	
-	# Integrate forces to velocity (gravity)
-	velocity += force * delta	
-	
-	#reset air-time counter (gives window for jumping when in air)
-	if on_floor:
-		on_air_time = 0
+		level_scene = next_level_scene;
+		level_scene.get_parent().remove_child(level_scene);
+		$Current.add_child(level_scene);
+		next_level_scene = null;
 		
-	# If falling, no longer jumping
-	if jumping and velocity.y > 0:
-		jumping = false
-#		note, this leaves a bug where if you initiate a jump and walk up a platform, you will remain jumping
+	#If there is a next level, load it
+	if current_level+1 < levels.size():
+		next_level_scene = levels[current_level+1].instance();
+		$Next.add_child(next_level_scene);
+	else:
+		next_level_scene = null;
+		
+	#Load Path data
+	#Get main paths
+	var left_target = level_scene.get_node("LeftTarget")
+	var right_target = level_scene.get_node("RightTarget")
+	var middle_target = level_scene.get_node("MiddleTarget")
 	
-	#This gives the falling or jumping animations
-	if not main.is_on_floor():
-		duck = false;
-		if velocity.y > 0:
-			main.fall();
-		else:
-			main.jump();
+	var left_navpoint = level_scene.get_closest_valid_navpoint(left_target.position);
+	var right_navpoint = level_scene.get_closest_valid_navpoint(right_target.position);
+	var middle_navpoint = level_scene.get_closest_valid_navpoint(middle_target.position);
 	
-	#On the frame after the jump command is issued, we account for the jump state
-	#These confusing conditions allow us to jump a little after the character left the floor
-	#This makes controls snappy
-	if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump and not prev_jump_pressed and not jumping:
-		velocity.y = -JUMP_SPEED
-		jumping = true
-		main.jump();
+	if !(is_instance_valid(left_navpoint)):
+		push_error("Left Target is in an invalid location")
+	if !(is_instance_valid(right_navpoint)):
+		push_error("Right Target is in an invalid location")
+	if !(is_instance_valid(middle_navpoint)):
+		push_error("Middle Target is in an invalid location")
+		
+	left_to_middle = level_scene.connect_path(left_navpoint.index, middle_navpoint.index);
+	right_to_middle = level_scene.connect_path(right_navpoint.index, middle_navpoint.index);
+	middle_to_left = level_scene.connect_path(middle_navpoint.index, left_navpoint.index);
+	middle_to_right = level_scene.connect_path(middle_navpoint.index, right_navpoint.index);
 	
-	on_air_time += delta 
-	prev_jump_pressed = jump
+	if (left_to_middle == null):
+		push_error("Left to Middle Path cannot be drawn")
+	if (right_to_middle == null):
+		push_error("Right to Middle Path cannot be drawn")
+	if (middle_to_left == null):
+		push_error("Middle to Left Path cannot be drawn")
+	if (middle_to_right == null):
+		push_error("Middle to Right Path cannot be drawn")
+		
+	if next_level_scene != null:
+		level_scene.connect("room_clear", self, "switch_level", [], CONNECT_ONESHOT);
+	else:
+		level_scene.connect("room_clear", self, "win", [], CONNECT_ONESHOT);
 	
+#precondition: there is another level to switch to
+func switch_level():
+	$Miner.visible = false;
+	$Miners.visible = false;
+	
+	$AnimationPlayer.play("Scene Switch");
+	yield($AnimationPlayer, "animation_finished");
+	$Current.position = Vector2(0, 8)
+	$Next.position = Vector2(0,144)
+	current_level = current_level + 1;
+	load_level();
+	spawn();
+	
+	$Miner.visible = true;
+	$Miners.visible = true
+	
+	
+func _ready():
+	levels.push_back(level1);
+	levels.push_back(level2);
+	levels.push_back(level3);
+	
+	add_child(main_command) # so its timer works
+
+	load_level()
+	spawn();
+
+func spawn():
+	var spawnlocation = level_scene.get_node("MiddleTarget").position.x;
+	main.position = Vector2 (spawnlocation, 32);
+	section = MIDDLE;
+	var i = 1;
+	for miner in $Miners.get_children():
+		miner.position = main.position + Vector2(0, i*(-4))
+		i = i+1;
+
+#	$TileMap.display_path(left_to_middle);
+#	$TileMap.display_path(right_to_middle);
+#	$TileMap.display_path(middle_to_left);
+#	$TileMap.display_path(middle_to_right);
+	
+#	yield($Timer, "timeout");
+#	follow_path(left_to_middle);
+
+
+
 	
 func _on_Pause_pressed():
 	print("PAUSED")
 	get_tree().paused = true
 	$pause_menu.show()
-
-
 func _on_pause_menu_unpause():
 	print("UNPAUSED")
 	get_tree().paused = false
 	$pause_menu.hide()
+	
+	
+func new_command(type, path=[]):
+	var new =  Command.new(type, path)
+	add_child(new);
+	main_command.link(new);
+	main_command.force_end();
+	main_command = new;
+	
+func get_command():
+	var left_input = Input.is_action_pressed("left")
+	var right_input = Input.is_action_pressed("right")
+	var down_input = Input.is_action_pressed("down")
+	var jump_input = Input.is_action_pressed("jump")
+	var attack_input = Input.is_action_pressed("attack")
+	
+	if main.can_attack():
+		if (attack_input):
+			main.attack(self, "released_attack");
+			connect("released_attack", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			new_command(Global.CommandTypes.MINE)
+
+		
+	if main.is_waiting():
+		if left_input:
+			if  section == MIDDLE:
+				main.follow_path(middle_to_left);
+				main.connect("path_traversed", self, "update_section", [LEFT], CONNECT_ONESHOT) 
+				new_command(Global.CommandTypes.MOVE, middle_to_left)
+			elif section == RIGHT:
+				main.follow_path(right_to_middle);
+				main.connect("path_traversed", self, "update_section", [MIDDLE], CONNECT_ONESHOT) 
+				new_command(Global.CommandTypes.MOVE, right_to_middle)
+		elif right_input:
+			if section == LEFT:
+				main.follow_path(left_to_middle);
+				main.connect("path_traversed", self, "update_section", [MIDDLE], CONNECT_ONESHOT) 
+				new_command(Global.CommandTypes.MOVE, left_to_middle)
+			elif section == MIDDLE:
+				main.follow_path(middle_to_right);
+				main.connect("path_traversed", self, "update_section", [RIGHT], CONNECT_ONESHOT) 
+				new_command(Global.CommandTypes.MOVE, middle_to_right)
+#		elif down_input:
+#			main.duck_action(self, "released_down");
+#			new_command(Global.CommandTypes.DUCK)
+
+func _process(delta):
+	if Input.is_action_just_released("attack"): 
+		emit_signal("released_attack");
+	if Input.is_action_just_released("down"): 
+		emit_signal("released_down");
+	get_command();
+
+func _on_ui_header_add_miner():
+	#This really should be part of a separate function
+	$AnimationPlayer2.play("Level_Up");
+	
+	var new_miner = Miner.instance();
+	$Miners.add_child(new_miner);
+	miners.push_back(new_miner);
+	main_command.perform_command(new_miner);
+	new_miner.position = main.position + Vector2(0, -32);
+	
+func drop_win():
+	var win = Win.instance();
+	add_child(win);
+	win.position = $WinDropper.position;
+	win.rotation_degrees = int(rand_range(0, 360))
+	
+func win():
+	$AnimationPlayer.play("Win_spawner");
+	$Timer.connect("timeout", self, "drop_win");
+	

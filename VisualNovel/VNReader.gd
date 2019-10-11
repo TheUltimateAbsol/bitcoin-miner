@@ -1,6 +1,6 @@
-extends Node2D
+extends Control
 
-onready var textlabel = get_node("Control/Panel/TextLabel")
+onready var textlabel = get_node("Control/Panel/MarginContainer/Control/TextLabel")
 onready var letter_timer = $LetterTimer;
 onready var delay_timer = $DelayTimer;
 onready var transition = get_node("Control/NPC/AnimationPlayer")
@@ -76,21 +76,21 @@ func _ready():
  
 func display_page(page : Page):
 	textlabel.text = ""
-	print(expressions);
-	print("CHARACTER: " + str(page.character));
-	print("RESULT" + str(expressions[page.character][page.expression]));
+#	print(expressions);
+#	print("CHARACTER: " + str(page.character));
+#	print("RESULT" + str(expressions[page.character][page.expression]));
 	$Control/NPC.texture = expressions[page.character][page.expression]
-			
+	
 	match page.transition:
 		Global.Transitions.NONE:
 			pass
 		Global.Transitions.FLASH: #think ace attorny
 			pass
 		Global.Transitions.FADE:
+			$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
 			#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
 			transition.play("fade in")	
 			yield(transition, "animation_finished")
-			print("ASD")
 #			yield(transition, "animation_finished")
 		Global.Transitions.SLIDE_RIGHT:
 			#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
@@ -105,7 +105,6 @@ func display_page(page : Page):
 		
 	
 	for sentence in page.content:
-		print("HELLO WORLD")
 		yield(write_sentence(sentence), "completed"); #tells program to wait on everything until this function finishes/this happens
 		
 func write_sentence (sentence):

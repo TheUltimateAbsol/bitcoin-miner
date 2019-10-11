@@ -382,9 +382,9 @@ tracks/3/keys = {
 extents = Vector2( 5, 15 )
 
 [sub_resource type="CircleShape2D" id=8]
-radius = 15.0
 
 [node name="Miner" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
