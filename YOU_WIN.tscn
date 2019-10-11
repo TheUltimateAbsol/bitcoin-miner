@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Style/IMPACT_TEXT.tres" type="Theme" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 21, 6 )
+
+[node name="Node2D" type="RigidBody2D"]
+mass = 14.0388
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -8.0
+margin_right = 20.0
+margin_bottom = 6.0
+theme = ExtResource( 1 )
+text = "YOU WIN"
+align = 1

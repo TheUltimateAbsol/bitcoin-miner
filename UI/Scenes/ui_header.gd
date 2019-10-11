@@ -6,13 +6,27 @@ onready var coin = $coin
 onready var normal_style = load("res://Style/DEFAULT_TEXT.tres")
 onready var impact_style = load("res://Style/IMPACT_TEXT.tres")
 
+signal add_miner
+
+var levels = [300, 1000, 3000, 6000, 10000, 20000, 100000000]
+var level = 0;
+
 func update_data(input_remaining, input_total, input_coin):
 	Global.numremaining = input_remaining
 	Global.numtotal = input_total
 	Global.numcoin = input_coin
+	
+	if Global.numcoin >= levels[level]:
+		level = level +1
+		emit_signal("add_miner");
+		Global.numremaining += 1
+		Global.numtotal += 1
+	
 	remaining.text = str(Global.numremaining)
 	total.text = str(Global.numtotal)
 	coin.text = str(Global.numcoin)
+	
+	
 	
 	if (Global.numremaining == Global.numtotal):
 		remaining.theme = impact_style

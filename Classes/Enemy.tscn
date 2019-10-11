@@ -33,7 +33,9 @@ tracks/1/keys = {
 "values": [ null, ExtResource( 3 ), null ]
 }
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="Node2D" groups=[
+"enemy",
+]]
 script = ExtResource( 1 )
 
 [node name="EnemyHurtbox" parent="." instance=ExtResource( 2 )]
