@@ -1,13 +1,96 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/Cave.png" type="Texture" id=2]
-[ext_resource path="res://Navigation/Scenes/TileMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Enemies/Scenes/Crystal.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Classes/miner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=6]
-[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=7]
-[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Classes/miner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Style/IMPACT_TEXT.tres" type="Theme" id=4]
+[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Scene Switch"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Current:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8 ), Vector2( 0, 8 ), Vector2( 0, -128 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Next:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 144 ), Vector2( 0, 144 ), Vector2( 0, 8 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Win_spawner"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinDropper:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 7.17882e-005, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 160, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Level_Up"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Miner/Node2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Miner/Node2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Miner/Node2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -16 ) ]
+}
 
 [node name="Node2D" type="Node2D"]
 pause_mode = 1
@@ -17,28 +100,35 @@ script = ExtResource( 1 )
 position = Vector2( 80, 72 )
 texture = ExtResource( 2 )
 
-[node name="TileMap" parent="." instance=ExtResource( 3 )]
+[node name="Current" type="Node2D" parent="."]
 position = Vector2( 0, 8 )
-tile_data = PoolIntArray( 851976, 0, 1, 851977, 0, 1, 851978, 0, 1, 851979, 0, 1, 851980, 0, 1, 917512, 0, 131072, 917513, 0, 131072, 917514, 0, 131072, 917515, 0, 131072, 917516, 0, 131072, 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 0, 1, 983048, 0, 131072, 983049, 0, 131072, 983050, 0, 131072, 983051, 0, 131072, 983052, 0, 131072, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 983056, 0, 1, 983057, 0, 1, 983058, 0, 1, 983059, 0, 1, 1048576, 0, 131072, 1048577, 0, 131072, 1048578, 0, 131072, 1048579, 0, 131072, 1048580, 0, 131072, 1048581, 0, 131072, 1048582, 0, 131072, 1048583, 0, 131072, 1048584, 0, 131072, 1048585, 0, 131072, 1048586, 0, 131072, 1048587, 0, 131072, 1048588, 0, 131072, 1048589, 0, 131072, 1048590, 0, 131072, 1048591, 0, 131072, 1048592, 0, 131072, 1048593, 0, 131072, 1048594, 0, 131072, 1048595, 0, 131072 )
 
-[node name="LeftTarget" type="Node2D" parent="TileMap"]
-position = Vector2( 17, 115 )
+[node name="Next" type="Node2D" parent="."]
+position = Vector2( 0, 144 )
 
-[node name="RightTarget" type="Node2D" parent="TileMap"]
-position = Vector2( 143, 115 )
+[node name="Miners" type="Node2D" parent="."]
 
-[node name="MiddleTarget" type="Node2D" parent="TileMap"]
-position = Vector2( 83, 98 )
-
-[node name="Enemy" parent="." instance=ExtResource( 4 )]
-position = Vector2( 85, 112 )
-
-[node name="Miner" parent="." instance=ExtResource( 5 )]
+[node name="Miner" parent="." instance=ExtResource( 3 )]
 position = Vector2( 31, 111 )
+z_index = 1
 
-[node name="ui_header" parent="." instance=ExtResource( 6 )]
+[node name="Node2D" type="Node2D" parent="Miner"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -16 )
 
-[node name="pause_button" parent="." instance=ExtResource( 7 )]
+[node name="Label" type="Label" parent="Miner/Node2D"]
+margin_left = -19.0
+margin_top = -24.0
+margin_right = 21.0
+margin_bottom = -10.0
+theme = ExtResource( 4 )
+text = "LEVEL UP!"
+align = 1
+
+[node name="ui_header" parent="." instance=ExtResource( 5 )]
+
+[node name="pause_button" parent="." instance=ExtResource( 6 )]
 position = Vector2( 14, 14 )
 
 [node name="Pause" type="Button" parent="."]
@@ -50,9 +140,21 @@ margin_right = 13.0
 margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
 
-[node name="pause_menu" parent="." instance=ExtResource( 8 )]
+[node name="pause_menu" parent="." instance=ExtResource( 7 )]
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Scene Switch" = SubResource( 1 )
+anims/Win_spawner = SubResource( 2 )
+
+[node name="WinDropper" type="Node2D" parent="."]
+position = Vector2( 160, 0 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/Level_Up = SubResource( 3 )
+[connection signal="add_miner" from="ui_header" to="." method="_on_ui_header_add_miner"]
 [connection signal="pressed" from="Pause" to="." method="_on_Pause_pressed"]
 [connection signal="unpause" from="pause_menu" to="." method="_on_pause_menu_unpause"]

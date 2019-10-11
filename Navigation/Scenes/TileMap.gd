@@ -20,10 +20,15 @@ const DRAW_COLOR = Color('#fff')
 const SPEED_DIVISIONS = 10;
 const HEIGHT_DIVISIONS = 10;
 const WALK_MAX_SPEED = 100
-const JUMP_MAX_SPEED = 200
+const JUMP_MAX_SPEED = 300 #changed from original
 const GRAVITY = 500.0 # pixels/second/second
 const MAX_GROUND_DISTANCE = 4.0
 const MINER_COLLISION = Vector2(5,15)
+
+var enemies
+var num_dead = 0;
+
+signal room_clear
 
 # get_used_cells_by_id is a method from the TileMap node
 # here the id 0 corresponds to the grey tile, the obstacles
@@ -31,14 +36,26 @@ onready var obstacles = get_used_cells_by_id(0)
 onready var _half_cell_size = cell_size / 2
 
 func _ready():
-	pass
 	nav_points.resize(map_size.x*map_size.y);
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
 	astar_connect_walkable_cells(walkable_cells_list, obstacles)
 #	display_points(walkable_cells_list, false)
 	#var path = connect_path(valid_points[1].index, valid_points[valid_points.size()-1].index)
 	#display_path(path);
+	
+	enemies = get_tree().get_nodes_in_group("enemy")
+	get_tree().call_group("enemy", "connect", "died", self, "on_enemy_death", [], CONNECT_ONESHOT);
+	for enemy in enemies:
+		enemy.connect("died", self, "on_enemy_death");
 
+func on_enemy_death(victim):
+	print("enemy died");
+	num_dead+=1;
+	if num_dead >= enemies.size():
+		emit_signal("room_clear");
+		print("Room_Clear!");
+	victim.queue_free();
+	
 func display_points(walkable_cells_list, display_links=false):
 	for point in walkable_cells_list:
 		var point_index = calculate_point_index(point)

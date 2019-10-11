@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+
 #Load the sprites that we can alternate between
 var idleSprite = preload("res://PlayerSprites/Miner Compress.png")
 
@@ -13,8 +14,8 @@ const JUMP_MAX_AIRBORNE_TIME = 0.2
 #
 const WALK_TOLERANCE = 1
 
-enum {WAITING, WALKING, JUMPING}
-enum {LEFT, MIDDLE, RIGHT}
+enum {WAITING, WALKING, JUMPING, ATTACKING, DUCKING}
+
 var walk_left = false
 var walk_right = false
 var down = false
@@ -23,7 +24,7 @@ var attack = false
 var target = null;
 var jump_velocity = null;
 var state = WAITING;
-var section = LEFT;
+
 
 var velocity = Vector2()
 var on_air_time = 100
@@ -165,14 +166,7 @@ func _on_MiningHitbox_area_entered(area):
 	 if area.is_in_group("enemy_hurtbox"):
         area.take_damage(10)
 
-
-
-
-
-
-
 ###################################################################################################
-
 
 
 func reset_input():
@@ -202,24 +196,40 @@ func jump_to(end, velocity):
 	jump_velocity = velocity;
 	jump_input = true;
 	state = JUMPING;
-
-func follow_path(path):
-	print("Path " + str(path));
 	
+func attack(node : Node, signal_name : String):
+	attack = true;
+	state = ATTACKING;
+	node.connect(signal_name, self, "stop_attack", [], CONNECT_ONESHOT);
+	
+func stop_attack():
+	attack = false;
+	state = WAITING;
+
+func duck_action(node : Node, signal_name : String):
+	down = true;
+	state = DUCKING;
+	node.connect(signal_name, self, "stop_duck", [], CONNECT_ONESHOT);
+	
+func quick_duck():
+	down = true;
+	state = DUCKING;
+	anim.connect("animation_finished", self, "stop_duck", [], CONNECT_ONESHOT);
+	
+func stop_duck():
+	down = false;
+	state = WAITING;
+	print("FSDA")
+	
+func follow_path(path):
 	for link in path:
-		print(link.dest_location);
 		if link.type == Global.NavLinkTypes.FLOOR:
 			walk_to(link.dest_location);
 		if link.type == Global.NavLinkTypes.JUMP:
-			print("Jump");
 			jump_to(link.dest_location, link.init_velocity);
 		yield(self, "target_reached");
-		print("REACHED " + str(link.dest_location))
 		
 	emit_signal("path_traversed");
-
-func update_section(section_type):
-	section = section_type
 
 func _physics_process(delta):
 	
@@ -227,14 +237,6 @@ func _physics_process(delta):
 	var force = Vector2(0, GRAVITY)
 	if is_on_floor():
 		force = Vector2(0,0)
-	
-	#Check input states
-#	get_command();
-#	var walk_left = Input.is_action_pressed("left")
-#	var walk_right = Input.is_action_pressed("right")
-#	var down = Input.is_action_pressed("down")
-#	var jump = Input.is_action_pressed("jump")
-#	var attack = Input.is_action_pressed("attack")
 	
 	var stop = true #This will be changed if we find out that we are moving
 	var on_floor = is_on_floor(); #This is so we don't call is_on_floor too many times
@@ -307,7 +309,6 @@ func _physics_process(delta):
 	#This makes controls snappy
 	if on_air_time < JUMP_MAX_AIRBORNE_TIME and jump_input and not prev_jump_pressed and not jumping:
 #		velocity.y = -JUMP_SPEED
-		print(jump_velocity);
 		velocity = jump_velocity
 		jumping = true
 		jump();
@@ -324,3 +325,9 @@ func _physics_process(delta):
 		reset_input();
 		emit_signal("target_reached")
 
+func is_waiting():
+	return (state == WAITING)
+	
+##May also correspond to an upwards jump
+func can_attack():
+	return (state == WAITING)
