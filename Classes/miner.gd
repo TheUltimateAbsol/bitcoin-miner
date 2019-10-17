@@ -2,8 +2,7 @@ extends KinematicBody2D
 
 
 #Load the sprites that we can alternate between
-var idleSprite = preload("res://PlayerSprites/Miner Compress.png")
-
+export (Texture) var idleSprite = preload("res://PlayerSprites/Miner Compress.png")
 
 const GRAVITY = 500.0 # pixels/second/second
 
@@ -180,6 +179,11 @@ func reset_input():
 	state = WAITING;
 	
 func walk_to(end):
+#	if abs(position.x - end.x) < WALK_TOLERANCE:
+#		reset_input();
+#		emit_signal("target_reached");
+#		return;
+	print("walking");	
 	var right = true;
 	if position.x - end.x > 0: right = false;
 	if right: walk_right = true;
@@ -222,6 +226,13 @@ func stop_duck():
 	print("FSDA")
 	
 func follow_path(path):
+#	print("starting walk")
+#	walk_to(path[0].src_location);
+#	print(position);
+#	print(path[0].src_location)
+#	yield(self, "target_reached");
+#	print("I'm there");
+#	print(position);
 	for link in path:
 		if link.type == Global.NavLinkTypes.FLOOR:
 			walk_to(link.dest_location);
