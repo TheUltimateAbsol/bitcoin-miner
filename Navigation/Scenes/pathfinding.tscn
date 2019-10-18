@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/Cave.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Music/SFX/Level_up.wav" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Scene Switch"
@@ -47,7 +48,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 7.17882e-005, 0.5 ),
+"times": PoolRealArray( 7.17882e-05, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 160, 0 ) ]
@@ -90,6 +91,20 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, -16 ) ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("Level_Up_Sound")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [node name="Node2D" type="Node2D"]
@@ -152,6 +167,9 @@ anims/Win_spawner = SubResource( 2 )
 
 [node name="WinDropper" type="Node2D" parent="."]
 position = Vector2( 160, 0 )
+
+[node name="Level_Up_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 anims/Level_Up = SubResource( 3 )
