@@ -22,8 +22,14 @@ onready var music_box_none = get_node("Panel/HBoxContainer/Layout/sceneInfo/Grid
 onready var music_box_same = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList/sameBox")
 onready var music_box_simple = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList/simpleBox")
 onready var music_box_sad = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList/sadBox")
-# transition check boxes
+
+# Scene transition check boxes
+
+
 # background check boxes
+onready var background_box_classroom = get_node("")
+onready var background_box_same = get_node("")
+onready var background_box_none = get_node("")
 
 # id inputs
 onready var id_input = get_node("Panel/HBoxContainer/Layout/id_info/GridContainer/id_input")
@@ -59,6 +65,8 @@ func _ready():
 func _process(delta):
 	if(parse_btn.is_pressed()):
 		print("Parsing...")
+		get_data()
+		print(character)
 		
 # gets the ids for the page and the id of the page that will follow it
 func get_data():
@@ -74,7 +82,51 @@ func get_data():
 	sentence_speed = int(sentence_speed_input.get_text())
 	# sentence_transition
 	
-	# get character info
-	character
-	character_expression
-	character_transition
+	#  get character info
+	#  which caracter
+	if character_box_boy.is_pressed():
+		character = Global.Characters.BOY
+	elif character_box_girl.is_pressed():
+		character = Global.Characters.GIRL
+	else:
+		character = Global.Characters.NONE
+	
+	#character_expression
+	if expression_box_happy.is_pressed():
+		character_expression = Global.Expressions.HAPPY
+	elif expression_box_sad.is_pressed():
+		character_expression = Global.Expressions.SAD
+	else:
+		character_expression = Global.Expressions.DEFAULT
+		
+	#character_transition
+	if transition_box_fade.is_pressed():
+		character_transition = Global.Transitions.FADE
+	elif transition_box_flash.is_pressed():
+		character_transition = Global.Transitions.FLASH
+	elif transition_box_left.is_pressed():
+		character_transition = Global.transition.LEFT
+	elif transition_box_right.is_pressed():
+		character_transition = Global.Transitions.RIGHT
+	else:
+		character_transition = Global.Transitions.NONE
+		
+	#  MUSIC
+	if music_box_sad.is_pressed():
+		music = Global.Music.SAD
+	elif music_box_simple.is_pressed():
+		music = Global.Music.SIMPLE
+	elif music_box_same.is_pressed():
+		music = Global.Music.SAME
+	else:
+		music = Global.Music.NONE
+		
+	#  BACKGROUND
+	if background_box_classroom.is_pressed():
+		background = Global.Backgrounds.CLASSROOM
+	elif background_box_same.is_pressed():
+		background = Global.Backgrounds.SAME
+	else:
+		background = Global.Backgrounds.NONE
+		
+	
