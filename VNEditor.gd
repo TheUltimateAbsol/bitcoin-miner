@@ -27,9 +27,9 @@ onready var music_box_sad = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridC
 
 
 # background check boxes
-onready var background_box_classroom = get_node("")
-onready var background_box_same = get_node("")
-onready var background_box_none = get_node("")
+onready var background_box_classroom = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list/classroom_box")
+onready var background_box_same = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list/same_box")
+onready var background_box_none = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list/none_background_box")
 
 # id inputs
 onready var id_input = get_node("Panel/HBoxContainer/Layout/id_info/GridContainer/id_input")
@@ -67,7 +67,9 @@ func _process(delta):
 		print("Parsing...")
 		get_data()
 		print(character)
-		
+	
+	if preview_btn.is_pressed():
+		print("Previewing scene")
 # gets the ids for the page and the id of the page that will follow it
 func get_data():
 	# get the IDs

@@ -192,7 +192,6 @@ margin_bottom = 126.0
 text = "Sad"
 
 [node name="background_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
-editor/display_folded = true
 margin_left = 76.0
 margin_right = 171.0
 margin_bottom = 126.0
@@ -202,13 +201,13 @@ margin_right = 95.0
 margin_bottom = 14.0
 text = "Background"
 
-[node name="no_music" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list"]
+[node name="none_background_box" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list"]
 margin_top = 18.0
 margin_right = 95.0
 margin_bottom = 42.0
 text = "None"
 
-[node name="same_music" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list"]
+[node name="same_box" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list"]
 margin_top = 46.0
 margin_right = 95.0
 margin_bottom = 70.0
@@ -221,6 +220,7 @@ margin_bottom = 98.0
 text = "Classroom"
 
 [node name="transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
+editor/display_folded = true
 margin_left = 175.0
 margin_right = 245.0
 margin_bottom = 126.0
