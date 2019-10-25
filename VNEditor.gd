@@ -55,7 +55,10 @@ var character : int
 var character_expression : int
 var character_transition : int
 var music : int
+# sentence sound?
+# speed?
 var background : int
+var page_data
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,10 +69,14 @@ func _process(delta):
 	if(parse_btn.is_pressed()):
 		print("Parsing...")
 		get_data()
-		print(character)
+		make_dictionary()
+		print(page_data)
+		# print(character)
 	
 	if preview_btn.is_pressed():
+		# make_dictionary()
 		print("Previewing scene")
+		# print(page_data)
 # gets the ids for the page and the id of the page that will follow it
 func get_data():
 	# get the IDs
@@ -131,4 +138,22 @@ func get_data():
 	else:
 		background = Global.Backgrounds.NONE
 		
-	
+func make_dictionary():
+	page_data = {
+			str(id) :{
+					"id": id,
+					"next_id": next_id,
+					"content":{
+							"string": sentence_text,
+							"sound": 0,
+							"sentence_speed": sentence_speed,
+							"delay": sentence_delay
+					},
+					"Character": character,
+					"speed": 0.0, 
+					"transition": character_transition, 
+					"expresssion": character_expression, 
+					"music": music, 
+					"background":background,
+				}	
+		}
