@@ -68,7 +68,6 @@ margin_right = 58.0
 margin_bottom = 88.0
 
 [node name="sentenceInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_left = 263.0
 margin_right = 518.0
 margin_bottom = 144.0
@@ -91,7 +90,6 @@ margin_right = 188.0
 margin_bottom = 18.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer"]
-editor/display_folded = true
 margin_top = 22.0
 margin_right = 188.0
 margin_bottom = 130.0

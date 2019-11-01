@@ -143,12 +143,14 @@ func make_dictionary():
 			str(id) :{
 					"id": id,
 					"next_id": next_id,
-					"content":{
+					"content":[
+						{
 							"string": sentence_text,
 							"sound": 0,
 							"sentence_speed": sentence_speed,
 							"delay": sentence_delay
-					},
+						},
+					],
 					"Character": character,
 					"speed": 0.0, 
 					"transition": character_transition, 
