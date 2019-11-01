@@ -17,16 +17,15 @@ onready var expression_box_happy = get_node("Panel/HBoxContainer/Layout/characte
 onready var expression_box_sad = get_node("Panel/HBoxContainer/Layout/characterInfo/character_layout/Expressions/sad")
 
 # scene inputs
-# music check boxes
-onready var music_box_none = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList/noneBox")
-onready var music_box_same = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList/sameBox")
-onready var music_box_simple = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList/simpleBox")
-onready var music_box_sad = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList/sadBox")
+# music
+onready var music_list = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList")
+
 
 # Scene transition check boxes
 
 
 # background check boxes
+onready var background_list = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list")
 onready var background_box_classroom = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list/classroom_box")
 onready var background_box_same = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list/same_box")
 onready var background_box_none = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list/none_background_box")
@@ -51,10 +50,10 @@ var sentence_speed : int
 var sentence_delay : int
 var sentence_text : String
 var sentence_tansition : int
-var character : int
-var character_expression : int
+var character
+var character_expression
 var character_transition : int
-var music : int
+var music
 # sentence sound?
 # speed?
 var background : int
@@ -63,99 +62,135 @@ var page_data
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var have_ids = false
+#	
+	var background_keys = Global.Backgrounds.keys()
+	for key in background_keys:
+		var new_box = CheckBox.new()
+		new_box.text = key
+		background_list.add_child(new_box)
+		
+	var music_keys = Global.Music.keys()
+	for key in music_keys:
+		var new_box = CheckBox.new()
+		new_box.text = key
+		music_list.add_child(new_box)
+		
+	var 
+		
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(parse_btn.is_pressed()):
 		print("Parsing...")
-		get_data()
-		make_dictionary()
-		print(page_data)
+#		get_data()
+#		make_dictionary()
+#		print(page_data)
 		# print(character)
 	
 	if preview_btn.is_pressed():
 		# make_dictionary()
 		print("Previewing scene")
 		# print(page_data)
+
 # gets the ids for the page and the id of the page that will follow it
 func get_data():
+#	for child in music.get_children():
+#		if child.is_pressed(){
+#			value = child.text # what is saved in the JSON (the dictionary for now)
+	
+	
+	
+	
 	# get the IDs
 	var get_id = id_input.get_text()
 	var get_next_id = next_id_input.get_text()
 	id = int(get_id)
 	next_id = int(get_next_id)
-	
+
 	# get sentence info
 	sentence_text = sentence_txt_input.get_text()
 	sentence_delay = int(sentence_delay_input.get_text())
 	sentence_speed = int(sentence_speed_input.get_text())
 	# sentence_transition
-	
+
 	#  get character info
 	#  which caracter
-	if character_box_boy.is_pressed():
-		character = Global.Characters.BOY
-	elif character_box_girl.is_pressed():
-		character = Global.Characters.GIRL
-	else:
-		character = Global.Characters.NONE
-	
-	#character_expression
-	if expression_box_happy.is_pressed():
-		character_expression = Global.Expressions.HAPPY
-	elif expression_box_sad.is_pressed():
-		character_expression = Global.Expressions.SAD
-	else:
-		character_expression = Global.Expressions.DEFAULT
+#	if character_box_boy.is_pressed():
+#		character = Global.Characters.BOY
+#	elif character_box_girl.is_pressed():
+#		character = Global.Characters.GIRL
+#	else:
+#		character = Global.Characters.NONE
+#
+#	#character_expression
+#	if expression_box_happy.is_pressed():
+#		character_expression = Global.Expressions.HAPPY
+#	elif expression_box_sad.is_pressed():
+#		character_expression = Global.Expressions.SAD
+#	else:
+#		character_expression = Global.Expressions.DEFAULT
+#
+#	#character_transition
+#	if transition_box_fade.is_pressed():
+#		character_transition = Global.Transitions.FADE
+#	elif transition_box_flash.is_pressed():
+#		character_transition = Global.Transitions.FLASH
+#	elif transition_box_left.is_pressed():
+#		character_transition = Global.transition.LEFT
+#	elif transition_box_right.is_pressed():
+#		character_transition = Global.Transitions.RIGHT
+#	else:
+#		character_transition = Global.Transitions.NONE
+#
+#	#  MUSIC
+#	if music_box_sad.is_pressed():
+#		music = Global.Music.SAD
+#	elif music_box_simple.is_pressed():
+#		music = Global.Music.SIMPLE
+#	elif music_box_same.is_pressed():
+#		music = Global.Music.SAME
+#	else:
+#		music = Global.Music.NONE
+#
+#	#  BACKGROUND
+#	if background_box_classroom.is_pressed():
+#		background = Global.Backgrounds.CLASSROOM
+#	elif background_box_same.is_pressed():
+#		background = Global.Backgrounds.SAME
+#	else:
+#		background = Global.Backgrounds.NONE
+
+#	var keys = Global.Expressions.keys();
+#	for key in keys:
+#		var new_box = CheckBox.new();
+#		new_box.text = key;
+#		target_node.add_child(new_box);
+#
+#		pass
+		#do something with the key
+		#key is a string.
 		
-	#character_transition
-	if transition_box_fade.is_pressed():
-		character_transition = Global.Transitions.FADE
-	elif transition_box_flash.is_pressed():
-		character_transition = Global.Transitions.FLASH
-	elif transition_box_left.is_pressed():
-		character_transition = Global.transition.LEFT
-	elif transition_box_right.is_pressed():
-		character_transition = Global.Transitions.RIGHT
-	else:
-		character_transition = Global.Transitions.NONE
+# MAKE ON CHANGE FUNCION
 		
-	#  MUSIC
-	if music_box_sad.is_pressed():
-		music = Global.Music.SAD
-	elif music_box_simple.is_pressed():
-		music = Global.Music.SIMPLE
-	elif music_box_same.is_pressed():
-		music = Global.Music.SAME
-	else:
-		music = Global.Music.NONE
-		
-	#  BACKGROUND
-	if background_box_classroom.is_pressed():
-		background = Global.Backgrounds.CLASSROOM
-	elif background_box_same.is_pressed():
-		background = Global.Backgrounds.SAME
-	else:
-		background = Global.Backgrounds.NONE
-		
-func make_dictionary():
-	page_data = {
-			str(id) :{
-					"id": id,
-					"next_id": next_id,
-					"content":[
-						{
-							"string": sentence_text,
-							"sound": 0,
-							"sentence_speed": sentence_speed,
-							"delay": sentence_delay
-						},
-					],
-					"Character": character,
-					"speed": 0.0, 
-					"transition": character_transition, 
-					"expresssion": character_expression, 
-					"music": music, 
-					"background":background,
-				}	
-		}
+#func make_dictionary():
+#	page_data = {
+#			str(id) :{
+#					"id": id,
+#					"next_id": next_id,
+#					"content":[
+#						{
+#							"string": sentence_text,
+#							"sound": 0,
+#							"sentence_speed": sentence_speed,
+#							"delay": sentence_delay
+#						},
+#					],
+#					"Character": character,
+#					"speed": 0.0, 
+#					"transition": character_transition, 
+#					"expresssion": character_expression, 
+#					"music": music, 
+#					"background":background,
+#				}	
+#		}

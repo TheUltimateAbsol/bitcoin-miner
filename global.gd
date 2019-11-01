@@ -13,19 +13,18 @@ enum NavLinkTypes {NONE, FLOOR, JUMP, FALL}
 func update_header(input_remaining, input_total, input_coin):
 	emit_signal("header_update", input_remaining, input_total, input_coin);
 	
-	
 #enum Characters {NONE, BOY, GIRL}
-#enum Transitions{NONE, FLASH, FADE, SLIDE_RIGHT, SLIDE_LEFT}
+#enum Transitions{NONE, FLASH, FADE, SLIDE_RIGHT, SLIDE_LEFT} #character
 #enum Expressions{DEFAULT, HAPPY, SAD}
 #enum Music{SAME, NONE, SIMPLE, SAD}
 #enum Backgrounds{SAME, NONE, CLASSROOM}
-#enum SoundEffect{NONE, DING, THWACK, WHACK}
+#enum SoundEffect{NONE, DING, THWACK, WHACK} # when the text appears on the screen (sentence per sentence basis)
 
-const Characters = ["NONE", "BOY", "GIRL"]
-const Transitions = ["NONE", "FLASH", "FADE", "SLIDE RIGHT", "SLIDE LEFT"]
-const Expressions = ["DEFAULT", "HAPPY", "SAD"]
-const Music = ["SAME", "NONE", "SIMPLE", "SAD"]
-const Backgrounds = ["SAME", "NONE", "CLASSROOM"]
-const soundEffect = ["NONE", "DING", "THWACK", "WHACK"]
+const Characters = {"NONE":"NONE", "BOY":"BOY", "GIRL":"GIRL"}
+const Transitions = {"NONE":"NONE", "FLASH":"FLASH", "FADE":"FADE", "SLIDE_RIGHT":"SLIDE_RIGHT", "SLIDE_LEFT":"SLIDE_LEFT"}
+const Expressions = {"DEFAULT":"DEFAULT", "HAPPY":"HAPPY", "SAD":"SAD"}
+const Music = {"SAME":"SAME", "NONE":"NONE", "SIMPLE":"SIMPLE", "SAD":"SAD"}
+const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOM":"CLASSROOM"}
+const SoundEffect = {"NONE":"NONE", "DING":"DING", "THWACK":"THWACK", "WHACK":"WHACK"}
 
 signal header_update

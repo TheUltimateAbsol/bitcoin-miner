@@ -3,12 +3,12 @@ extends Page
 class_name ContentPage
 
 var content #array of Sentences
-var character : int
+var character
 var speed : float
-var transition : int
-var expression : int
-var music : int
-var background : int
+var transition
+var expression
+var music
+var background
 var questions #array of strings + id leadsa	
 
 func _init(xid, xnext_id, xcontent, xcharacter=Global.Characters.NONE, 
@@ -26,3 +26,4 @@ func _init(xid, xnext_id, xcontent, xcharacter=Global.Characters.NONE,
 	music = xmusic
 	background = xbackground
 	questions = xquestions
+	

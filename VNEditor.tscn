@@ -29,20 +29,20 @@ margin_right = 1547.42
 margin_bottom = 673.06
 
 [node name="Layout" type="GridContainer" parent="Panel/HBoxContainer"]
-margin_right = 518.0
+margin_right = 480.0
 margin_bottom = 435.0
 rect_min_size = Vector2( 480, 435 )
 columns = 2
 
 [node name="id_info" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 editor/display_folded = true
-margin_right = 259.0
+margin_right = 204.0
 margin_bottom = 144.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/id_info"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 252.0
+margin_right = 197.0
 margin_bottom = 137.0
 
 [node name="id" type="Label" parent="Panel/HBoxContainer/Layout/id_info/GridContainer"]
@@ -68,8 +68,9 @@ margin_right = 58.0
 margin_bottom = 88.0
 
 [node name="sentenceInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_left = 263.0
-margin_right = 518.0
+editor/display_folded = true
+margin_left = 208.0
+margin_right = 463.0
 margin_bottom = 144.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo"]
@@ -90,6 +91,7 @@ margin_right = 188.0
 margin_bottom = 18.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer"]
+editor/display_folded = true
 margin_top = 22.0
 margin_right = 188.0
 margin_bottom = 130.0
@@ -144,84 +146,41 @@ margin_bottom = 108.0
 
 [node name="sceneInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 margin_top = 148.0
-margin_right = 259.0
+margin_right = 204.0
 margin_bottom = 316.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 252.0
+margin_right = 197.0
 margin_bottom = 161.0
 columns = 3
 
 [node name="musicList" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
-editor/display_folded = true
-margin_right = 72.0
-margin_bottom = 126.0
+margin_right = 38.0
+margin_bottom = 98.0
 
 [node name="Music" type="Label" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList"]
-margin_right = 72.0
+margin_right = 38.0
 margin_bottom = 14.0
 text = "Music"
 align = 1
 
-[node name="noneBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList"]
-margin_top = 18.0
-margin_right = 72.0
-margin_bottom = 42.0
-text = "NONE"
-
-[node name="sameBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList"]
-margin_top = 46.0
-margin_right = 72.0
-margin_bottom = 70.0
-text = "Same"
-
-[node name="simpleBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList"]
-margin_top = 74.0
-margin_right = 72.0
-margin_bottom = 98.0
-text = "Simple"
-
-[node name="sadBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList"]
-margin_top = 102.0
-margin_right = 72.0
-margin_bottom = 126.0
-text = "Sad"
-
 [node name="background_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
-margin_left = 76.0
-margin_right = 171.0
-margin_bottom = 126.0
+editor/display_folded = true
+margin_left = 42.0
+margin_right = 116.0
+margin_bottom = 98.0
 
 [node name="backgorund_label" type="Label" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list"]
-margin_right = 95.0
+margin_right = 74.0
 margin_bottom = 14.0
 text = "Background"
 
-[node name="none_background_box" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list"]
-margin_top = 18.0
-margin_right = 95.0
-margin_bottom = 42.0
-text = "None"
-
-[node name="same_box" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list"]
-margin_top = 46.0
-margin_right = 95.0
-margin_bottom = 70.0
-text = "Same"
-
-[node name="classroom_box" type="CheckBox" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list"]
-margin_top = 74.0
-margin_right = 95.0
-margin_bottom = 98.0
-text = "Classroom"
-
 [node name="transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
-editor/display_folded = true
-margin_left = 175.0
-margin_right = 245.0
-margin_bottom = 126.0
+margin_left = 120.0
+margin_right = 190.0
+margin_bottom = 98.0
 
 [node name="transition_label" type="Label" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/transition_list"]
 margin_right = 70.0
@@ -245,9 +204,9 @@ margin_bottom = 98.0
 
 [node name="characterInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 editor/display_folded = true
-margin_left = 263.0
+margin_left = 208.0
 margin_top = 148.0
-margin_right = 518.0
+margin_right = 463.0
 margin_bottom = 316.0
 
 [node name="character_layout" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo"]
@@ -360,13 +319,13 @@ text = "Sad"
 
 [node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
 margin_top = 320.0
-margin_right = 259.0
+margin_right = 204.0
 margin_bottom = 340.0
 text = "Preview Scene"
 
 [node name="parse_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_left = 263.0
+margin_left = 208.0
 margin_top = 320.0
-margin_right = 518.0
+margin_right = 463.0
 margin_bottom = 340.0
 text = "Parse JSON"
