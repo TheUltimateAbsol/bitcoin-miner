@@ -4,6 +4,8 @@ Description:
 """
 extends Node2D
 
+class_name Enemy
+
 signal health_updated(health)
 signal died
 

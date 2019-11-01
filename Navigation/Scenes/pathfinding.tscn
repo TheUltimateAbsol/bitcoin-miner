@@ -1,12 +1,53 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/Cave.png" type="Texture" id=2]
-[ext_resource path="res://Classes/miner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Stages/Backgrounds/Dark Background.png" type="Texture" id=3]
 [ext_resource path="res://Style/IMPACT_TEXT.tres" type="Theme" id=4]
-[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=5]
-[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=6]
-[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Classes/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Animation" id=4]
+resource_name = "Game Over"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("GameOver:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameOverLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GameOverLabel:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "Scene Switch"
@@ -56,7 +97,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "Level_Up"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Miner/Node2D:visible")
+tracks/0/path = NodePath("Miner/Node2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -64,8 +105,8 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -16 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Miner/Node2D:modulate")
@@ -80,7 +121,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Miner/Node2D:position")
+tracks/2/path = NodePath("Miner/Node2D:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -89,7 +130,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -16 ) ]
+"values": [ true, false ]
 }
 
 [node name="Node2D" type="Node2D"]
@@ -108,14 +149,28 @@ position = Vector2( 0, 144 )
 
 [node name="Miners" type="Node2D" parent="."]
 
-[node name="Miner" parent="." instance=ExtResource( 3 )]
-position = Vector2( 31, 111 )
-z_index = 1
+[node name="GameOver" type="Sprite" parent="."]
+visible = false
+position = Vector2( 80, 72 )
+texture = ExtResource( 3 )
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+margin_top = 39.0
+margin_right = 160.0
+margin_bottom = 53.0
+theme = ExtResource( 4 )
+text = "GAME OVER"
+align = 1
+percent_visible = 0.0
+
+[node name="Miner" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 visible = false
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, -16 )
+position = Vector2( 31, 95 )
 
 [node name="Label" type="Label" parent="Miner/Node2D"]
 margin_left = -19.0
@@ -126,9 +181,9 @@ theme = ExtResource( 4 )
 text = "LEVEL UP!"
 align = 1
 
-[node name="ui_header" parent="." instance=ExtResource( 5 )]
+[node name="ui_header" parent="." instance=ExtResource( 6 )]
 
-[node name="pause_button" parent="." instance=ExtResource( 6 )]
+[node name="pause_button" parent="." instance=ExtResource( 7 )]
 position = Vector2( 14, 14 )
 
 [node name="Pause" type="Button" parent="."]
@@ -140,13 +195,14 @@ margin_right = 13.0
 margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
 
-[node name="pause_menu" parent="." instance=ExtResource( 7 )]
+[node name="pause_menu" parent="." instance=ExtResource( 8 )]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/Game Over" = SubResource( 4 )
 "anims/Scene Switch" = SubResource( 1 )
 anims/Win_spawner = SubResource( 2 )
 

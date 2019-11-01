@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Classes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Classes/AttackingEnemy.gd" type="Script" id=2]
+
+[node name="Enemy" groups=[
+"attacker",
+] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="AttackPlayer" type="AnimationPlayer" parent="." index="4"]
+
+[node name="HitBox" type="Area2D" parent="." index="5"]
+monitoring = false
+[connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]

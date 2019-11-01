@@ -28,15 +28,18 @@ func update_data(input_remaining, input_total, input_coin):
 	
 	
 	
-	if (Global.numremaining == Global.numtotal):
+	if (Global.numremaining == Global.numtotal and not Global.numremaining == 1):
 		remaining.theme = impact_style
 	else:
 		remaining.theme = normal_style
-		
-	if (Global.numremaining < float(Global.numtotal)/4):
+	
+	$remaining.visible = true;
+	if (Global.numremaining < float(Global.numtotal)/4 or Global.numremaining == 1 and not Global.numremaining == 0):
 		$flash.play("flash");
 	else:
+		$remaining.visible = true;
 		$flash.stop();
+
 		
 func _ready():
 	update_data(Global.numremaining, Global.numtotal, Global.numcoin)

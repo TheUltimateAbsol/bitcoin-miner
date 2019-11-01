@@ -3,6 +3,19 @@ extends KinematicBody2D
 
 #Load the sprites that we can alternate between
 export (Texture) var idleSprite = preload("res://PlayerSprites/Miner Compress.png")
+export (Texture) var jumpingSprite = preload("res://PlayerSprites/jump.png")
+export (Texture) var walkingSprite = preload("res://PlayerSprites/Miner Walking Compress.png")
+export (Texture) var miningSprite = preload("res://PlayerSprites/Miner Axe.png")
+export (Texture) var duckingSprite = preload("res://PlayerSprites/Miner_Duck_1.png")
+export (Texture) var dyingSprite = preload("res://PlayerSprites/Miner_Hurt.png");
+
+export (Vector2) var idleOffset = Vector2(0,0)
+export (Vector2) var jumpingOffset = Vector2(0,0)
+export (Vector2) var walkingOffset =  Vector2(0,0)
+export (Vector2) var miningOffset = Vector2(2, -1)
+export (Vector2) var duckingOffset = Vector2(1,0)
+export (Vector2) var dyingOffset = Vector2(0,0)
+
 
 const GRAVITY = 500.0 # pixels/second/second
 
@@ -13,7 +26,7 @@ const JUMP_MAX_AIRBORNE_TIME = 0.2
 #
 const WALK_TOLERANCE = 1
 
-enum {WAITING, WALKING, JUMPING, ATTACKING, DUCKING}
+enum {WAITING, WALKING, JUMPING, ATTACKING, DUCKING, DYING}
 
 var walk_left = false
 var walk_right = false
@@ -23,6 +36,7 @@ var attack = false
 var target = null;
 var jump_velocity = null;
 var state = WAITING;
+var frozen = false;
 
 
 var velocity = Vector2()
@@ -31,16 +45,18 @@ var jumping = false #This will be set to true the frame after we process a jump 
 var prev_jump_pressed = false
 var ducking = false
 
+var vulnerable = true;
+
 signal target_reached
 signal path_traversed
-
+signal died
 
 #Alias that we can refer to to save code
 onready var sprite = $Sprite
 onready var anim = $AnimationPlayer
 
 #Dictates player animation states
-enum {ANIM_WALKING, ANIM_IDLE, ANIM_MINING, ANIM_JUMPING, ANIM_FALLING, ANIM_DUCKING}
+enum {ANIM_WALKING, ANIM_IDLE, ANIM_MINING, ANIM_JUMPING, ANIM_FALLING, ANIM_DUCKING, ANIM_DYING}
 var anim_state = ANIM_IDLE
 
 # Called when the node enters the scene tree for the first time.
@@ -57,7 +73,7 @@ func _reset():
 	set_offset(Vector2(0,0))
 	$CollisionShape2D.shape.extents = Vector2(5, 15);
 	$CollisionShape2D.position = Vector2(0, 1);
-	$MiningHitbox/CollisionShape2D.disabled = true;
+	#$MiningHitbox/CollisionShape2D.disabled = true;
 	#print("reset");
 	
 #Player action that makes the miner stand in place
@@ -67,17 +83,28 @@ func idle(force_reset=false):
 	if anim_state == ANIM_IDLE and not force_reset: return
 	anim_state = ANIM_IDLE
 	_reset()
-	set_offset(Vector2(0,0))
+	set_offset(idleOffset)
 	sprite.texture = idleSprite
 	sprite.frame = 0;
 	#print("idle")
 	
+func die():
+	if anim_state != ANIM_DYING:
+		anim_state = ANIM_DYING
+		_reset()
+		set_offset(dyingOffset)
+		#THIS SHOULDN'T NEED TO BE HERE
+		sprite.hframes = 2;
+		sprite.texture = dyingSprite
+		anim.play("Die")
+		
 func getUp():
 	if anim_state != ANIM_IDLE:
 		anim_state = ANIM_IDLE
 		_reset()
 		#print("getup")
-		set_offset(Vector2(1,0))
+		set_offset(duckingOffset)
+		sprite.texture = duckingSprite
 		anim.play("GetUp")
 
 #Player action that makes the miner continuously duck
@@ -88,7 +115,8 @@ func duck():
 		_reset()
 		sprite.frame = 0;
 		#print("duck")
-		set_offset(Vector2(1,0))
+		set_offset(duckingOffset)
+		sprite.texture = duckingSprite
 		anim.play("Duck")
 
 #Player action that makes the miner continuously walk
@@ -97,8 +125,9 @@ func walk():
 	if anim_state != ANIM_WALKING:
 		anim_state = ANIM_WALKING
 		_reset()
-		set_offset(Vector2(0,0))
+		set_offset(walkingOffset)
 		#print("walk")
+		sprite.texture = walkingSprite
 		anim.play("Walk");
 
 #Player action that makes the miner continuously mine in place
@@ -108,8 +137,9 @@ func mine():
 		anim_state = ANIM_MINING
 		_reset()
 		sprite.frame = 0;
-		set_offset(Vector2(2, -1));
+		set_offset(miningOffset);
 		#print("mine");
+		sprite.texture = miningSprite
 		anim.play("Mine");
 		
 #Player action that starts a jump motion (only rises up)
@@ -118,8 +148,9 @@ func jump():
 	if anim_state != ANIM_JUMPING:
 		anim_state = ANIM_JUMPING
 		_reset()
-		set_offset(Vector2(0,0));
+		set_offset(jumpingOffset);
 		#print("jump")
+		sprite.texture = jumpingSprite
 		anim.play("Jump");
 		
 #Player action that starts a falling motion
@@ -129,8 +160,9 @@ func fall():
 		anim_state = ANIM_FALLING
 		_reset()
 		sprite.frame = 0;
-		set_offset(Vector2(0,0));
+		set_offset(jumpingOffset);
 		#print("fall");
+		sprite.texture = jumpingSprite
 		anim.play("Fall");
 	
 #Flips the character in the correct direction
@@ -242,7 +274,19 @@ func follow_path(path):
 		
 	emit_signal("path_traversed");
 
+func damage():
+	if vulnerable == false: return false;
+	
+	reset_input();
+	state = DYING;
+	die();
+
+	velocity = Vector2(0, -200);
+	emit_signal("died");
+	return true;
+
 func _physics_process(delta):
+	if frozen: return;
 	
 	# Create gravity (this will be applied later)
 	var force = Vector2(0, GRAVITY)
@@ -270,7 +314,7 @@ func _physics_process(delta):
 		if on_floor: walk()
 		
 	#Cancel out all X velocity and set state (if mining or idling only)
-	if stop and state != JUMPING:
+	if stop and state != JUMPING and state != DYING:
 		velocity.x = 0
 		if on_floor and not jumping:
 			velocity.y = 0;
@@ -308,7 +352,7 @@ func _physics_process(delta):
 #		note, this leaves a bug where if you initiate a jump and walk up a platform, you will remain jumping
 	
 	#This gives the falling or jumping animations
-	if not is_on_floor():
+	if not is_on_floor() and state != DYING:
 		ducking = false;
 		if velocity.y > 0:
 			fall();
@@ -342,3 +386,7 @@ func is_waiting():
 ##May also correspond to an upwards jump
 func can_attack():
 	return (state == WAITING)
+	
+func freeze():
+	frozen= true
+	velocity = Vector2(0,0);

@@ -39,12 +39,12 @@ func _ready():
 	nav_points.resize(map_size.x*map_size.y);
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
 	astar_connect_walkable_cells(walkable_cells_list, obstacles)
-#	display_points(walkable_cells_list, false)
+#	display_points(walkable_cells_list, true)
 	#var path = connect_path(valid_points[1].index, valid_points[valid_points.size()-1].index)
 	#display_path(path);
 	
-	enemies = get_tree().get_nodes_in_group("enemy")
-	get_tree().call_group("enemy", "connect", "died", self, "on_enemy_death", [], CONNECT_ONESHOT);
+	enemies = get_tree().get_nodes_in_group("objective")
+	get_tree().call_group("objective", "connect", "died", self, "on_enemy_death", [], CONNECT_ONESHOT);
 	for enemy in enemies:
 		enemy.connect("died", self, "on_enemy_death");
 

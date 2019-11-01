@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Stages/Tilesets/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Navigation/Scenes/TileMap.gd" type="Script" id=2]
 [ext_resource path="res://Enemies/Scenes/Crystal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/Scenes/TimedBatPlayer.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -106,3 +107,11 @@ position = Vector2( 143, 120 )
 
 [node name="Enemy2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 20, 120 )
+
+[node name="TimedBatPlayer" parent="." instance=ExtResource( 4 )]
+position = Vector2( -6, 25 )
+
+[node name="TimedBatPlayer2" parent="." instance=ExtResource( 4 )]
+position = Vector2( -10, 44 )
+interval = 4.0
+speed = 2.0

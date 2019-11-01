@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22, 27 )
 
-[node name="Enemy" instance=ExtResource( 1 )]
+[node name="Enemy" groups=[
+"objective",
+] instance=ExtResource( 1 )]
 health = 500
 max_health = 500
 destruction_points = 1000

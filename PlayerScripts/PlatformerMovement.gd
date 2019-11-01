@@ -16,6 +16,7 @@ var levels = []
 var current_level = 0;
 var level_scene = null
 var next_level_scene = null
+var dead = false;
 
 #This is just an alias
 onready var main : KinematicBody2D = $Miner
@@ -109,7 +110,6 @@ func switch_level():
 	$Miner.visible = true;
 	$Miners.visible = true
 	
-	
 func _ready():
 	levels.push_back(level1);
 	levels.push_back(level2);
@@ -119,6 +119,9 @@ func _ready():
 
 	load_level()
 	spawn();
+	
+	#connect to gameover
+	$Miner.connect("died", self, "game_over");
 
 func spawn():
 	var spawnlocation = level_scene.get_node("MiddleTarget").position.x;
@@ -158,6 +161,8 @@ func new_command(type, path=[]):
 	main_command = new;
 	
 func get_command():
+	if dead: return;
+	
 	var left_input = Input.is_action_pressed("left")
 	var right_input = Input.is_action_pressed("right")
 	var down_input = Input.is_action_pressed("down")
@@ -205,11 +210,14 @@ func _on_ui_header_add_miner():
 	#This really should be part of a separate function
 	$AnimationPlayer2.play("Level_Up");
 	
+	$Miner.vulnerable = false #This is so we don't have the player die until all are lost
+	
 	var new_miner = Miner.instance();
 	$Miners.add_child(new_miner);
 	miners.push_back(new_miner);
 	main_command.perform_command(new_miner);
 	new_miner.position = main.position + Vector2(0, -32);
+	new_miner.connect("died", self, "on_miner_loss");
 	
 func drop_win():
 	var win = Win.instance();
@@ -221,3 +229,32 @@ func win():
 	$AnimationPlayer.play("Win_spawner");
 	$Timer.connect("timeout", self, "drop_win");
 	
+func on_miner_loss():
+	print("MINER LOST");
+		##PAY ATTENTION TO LOCKS HERE
+	var num_remaining = Global.numremaining - 1;
+	$ui_header.update_data(num_remaining, Global.numtotal, Global.numcoin);
+	if (num_remaining == 1):
+		$Miner.vulnerable = true;
+	
+func release_connections():
+	for connection in get_signal_connection_list("released_attack"):
+		disconnect("released_attack", connection["target"], connection["method"]);
+	for connection in get_signal_connection_list("released_down"):
+		disconnect("released_down", connection["target"], connection["method"]);
+		
+func game_over():
+	$Miner.vulnerable = false;
+	dead = true;
+	release_connections();
+	$ui_header.update_data(0, Global.numtotal, Global.numcoin);
+	$Miner.game_over();
+	$AnimationPlayer.play("Game Over")
+	
+	#Hide everything
+	$Current.visible = false;
+	$Miner.pause_mode = Node.PAUSE_MODE_PROCESS
+	$AnimationPlayer.pause_mode = Node.PAUSE_MODE_PROCESS
+	$GameOver.pause_mode = Node.PAUSE_MODE_PROCESS
+	$GameOverLabel.pause_mode = Node.PAUSE_MODE_PROCESS
+	get_tree().paused = true;
