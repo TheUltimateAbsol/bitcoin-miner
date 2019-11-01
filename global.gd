@@ -20,11 +20,12 @@ func update_header(input_remaining, input_total, input_coin):
 #enum Backgrounds{SAME, NONE, CLASSROOM}
 #enum SoundEffect{NONE, DING, THWACK, WHACK} # when the text appears on the screen (sentence per sentence basis)
 
-const Characters = {"NONE":"NONE", "BOY":"BOY", "GIRL":"GIRL"}
-const Transitions = {"NONE":"NONE", "FLASH":"FLASH", "FADE":"FADE", "SLIDE_RIGHT":"SLIDE_RIGHT", "SLIDE_LEFT":"SLIDE_LEFT"}
+const Characters = {"NONE":"NONE", "BOY":"BOY", "GIRL":"GIRL"} 
+const Transitions = {"NONE":"NONE", "FLASH":"FLASH", "FADE":"FADE", "SLIDE_RIGHT":"SLIDE_RIGHT", "SLIDE_LEFT":"SLIDE_LEFT"} #character
 const Expressions = {"DEFAULT":"DEFAULT", "HAPPY":"HAPPY", "SAD":"SAD"}
 const Music = {"SAME":"SAME", "NONE":"NONE", "SIMPLE":"SIMPLE", "SAD":"SAD"}
 const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOM":"CLASSROOM"}
+# when the text appears on the screen (sentence per sentence basis)
 const SoundEffect = {"NONE":"NONE", "DING":"DING", "THWACK":"THWACK", "WHACK":"WHACK"}
 
 signal header_update

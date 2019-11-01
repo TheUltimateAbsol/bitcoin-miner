@@ -70,13 +70,13 @@ margin_bottom = 88.0
 [node name="sentenceInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 editor/display_folded = true
 margin_left = 208.0
-margin_right = 463.0
+margin_right = 429.0
 margin_bottom = 144.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 248.0
+margin_right = 214.0
 margin_bottom = 137.0
 
 [node name="sentence_info" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer"]
@@ -147,13 +147,13 @@ margin_bottom = 108.0
 [node name="sceneInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 margin_top = 148.0
 margin_right = 204.0
-margin_bottom = 316.0
+margin_bottom = 260.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 197.0
-margin_bottom = 161.0
+margin_bottom = 105.0
 columns = 3
 
 [node name="musicList" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
@@ -178,6 +178,7 @@ margin_bottom = 14.0
 text = "Background"
 
 [node name="transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
+editor/display_folded = true
 margin_left = 120.0
 margin_right = 190.0
 margin_bottom = 98.0
@@ -203,129 +204,61 @@ margin_right = 70.0
 margin_bottom = 98.0
 
 [node name="characterInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_left = 208.0
 margin_top = 148.0
-margin_right = 463.0
-margin_bottom = 316.0
+margin_right = 429.0
+margin_bottom = 260.0
 
 [node name="character_layout" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 248.0
-margin_bottom = 161.0
+margin_right = 214.0
+margin_bottom = 105.0
 columns = 3
 
-[node name="transitionLayout" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout"]
+[node name="char_transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout"]
 editor/display_folded = true
-margin_right = 95.0
-margin_bottom = 154.0
+margin_right = 63.0
+margin_bottom = 14.0
 
-[node name="Transition" type="Label" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/transitionLayout"]
-margin_right = 95.0
+[node name="Transition" type="Label" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/char_transition_list"]
+margin_right = 63.0
 margin_bottom = 14.0
 text = "Transition"
 align = 1
 
-[node name="transition_none" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/transitionLayout"]
-margin_top = 18.0
-margin_right = 95.0
-margin_bottom = 42.0
-text = "NONE"
-
-[node name="flashBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/transitionLayout"]
-margin_top = 46.0
-margin_right = 95.0
-margin_bottom = 70.0
-text = "Flash"
-
-[node name="fadeBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/transitionLayout"]
-margin_top = 74.0
-margin_right = 95.0
-margin_bottom = 98.0
-text = "Fade"
-
-[node name="rightSlideBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/transitionLayout"]
-margin_top = 102.0
-margin_right = 95.0
-margin_bottom = 126.0
-text = "Right Slide"
-
-[node name="leftSlideBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/transitionLayout"]
-margin_top = 130.0
-margin_right = 95.0
-margin_bottom = 154.0
-text = "Left Slide"
-
-[node name="Character" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout"]
+[node name="character_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout"]
 editor/display_folded = true
-margin_left = 99.0
-margin_right = 161.0
-margin_bottom = 154.0
+margin_left = 67.0
+margin_right = 127.0
+margin_bottom = 14.0
 
-[node name="characterLabel" type="Label" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/Character"]
-margin_right = 62.0
+[node name="characterLabel" type="Label" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/character_list"]
+margin_right = 60.0
 margin_bottom = 14.0
 text = "Character"
 align = 1
 
-[node name="noneBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/Character"]
-margin_top = 18.0
-margin_right = 62.0
-margin_bottom = 42.0
-text = "None"
+[node name="expression_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout"]
+margin_left = 131.0
+margin_right = 207.0
+margin_bottom = 14.0
 
-[node name="boyBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/Character"]
-margin_top = 46.0
-margin_right = 62.0
-margin_bottom = 70.0
-text = "Boy"
-
-[node name="girlBox" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/Character"]
-margin_top = 74.0
-margin_right = 62.0
-margin_bottom = 98.0
-text = "Girl"
-
-[node name="Expressions" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout"]
-editor/display_folded = true
-margin_left = 165.0
-margin_right = 241.0
-margin_bottom = 154.0
-
-[node name="expressLabel" type="Label" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/Expressions"]
+[node name="expressLabel" type="Label" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/expression_list"]
 margin_right = 76.0
 margin_bottom = 14.0
 text = "Expressions"
 align = 1
 
-[node name="default" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/Expressions"]
-margin_top = 18.0
-margin_right = 76.0
-margin_bottom = 42.0
-text = "Default"
-
-[node name="happy" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/Expressions"]
-margin_top = 46.0
-margin_right = 76.0
-margin_bottom = 70.0
-text = "Happy"
-
-[node name="sad" type="CheckBox" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/Expressions"]
-margin_top = 74.0
-margin_right = 76.0
-margin_bottom = 98.0
-text = "Sad"
-
 [node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_top = 320.0
+margin_top = 264.0
 margin_right = 204.0
-margin_bottom = 340.0
+margin_bottom = 284.0
 text = "Preview Scene"
 
 [node name="parse_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
 margin_left = 208.0
-margin_top = 320.0
-margin_right = 463.0
-margin_bottom = 340.0
+margin_top = 264.0
+margin_right = 429.0
+margin_bottom = 284.0
 text = "Parse JSON"

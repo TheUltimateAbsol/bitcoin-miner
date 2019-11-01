@@ -74,6 +74,13 @@ func _ready():
 	yield(display_page(page4), "completed");
 	yield(display_page(page5), "completed");
  
+
+func play_page(input:Dictionary): # parsed form JSON
+	#take data from JSON
+	#make content page
+	#display page through VNEditor
+	pass
+
 func display_page(page : Page):
 	textlabel.text = ""
 #	print(expressions);
