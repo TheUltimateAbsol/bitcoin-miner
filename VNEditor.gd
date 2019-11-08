@@ -181,6 +181,9 @@ func make_dictionary():
 		}
 		
 func add_to_json():
+	var new_dict
+	var dir = Directory.new()
+	
 	var file = File.new()
 	file.open("res://VisualNovel/data.json", 3)
 	#converts the json file to a text file
@@ -205,13 +208,15 @@ func add_to_json():
 	else:
     	print("unexpected results")
 	
-	#data_json.result["10"] = page_data
+	data_json.result[str(id)] = page_data
+	new_dict = data_json.result
+	print(new_dict)
 	
-	#print(data_json.result)
-	
-	file.store_line(to_json(page_data))
 	file.close()
 	
+	dir.remove("res://VisualNovel/data.json")
 	
-	
-	
+	var new_file = File.new()
+	new_file.open("res://VisualNovel/data.json", 2)
+	new_file.store_line(to_json(new_dict))
+	file.close()

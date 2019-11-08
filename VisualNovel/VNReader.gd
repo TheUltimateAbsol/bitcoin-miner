@@ -85,7 +85,10 @@ func play_page(input:Dictionary): # parsed form JSON
 
 func display_page(page : Page):
 	#textlabel.text = ""
-#	##print(expressions);
+	print(expressions)
+	print(expressions[page.character])
+	print(expressions[page.character][page.expression])
+	print(self.get_path())
 #	print("CHARACTER: " + str(page.character));
 	#print("RESULT" + str(expressions[page.character][page.expression]));
 	$Control/NPC.texture = expressions[page.character][page.expression]
