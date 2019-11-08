@@ -31,7 +31,7 @@ onready var sentence_transition_input = get_node("Panel/HBoxContainer/Layout/sen
 onready var parse_btn = get_node("Panel/HBoxContainer/Layout/parse_btn")
 onready var preview_btn = get_node("Panel/HBoxContainer/Layout/preview_btn")
 
-var reader = load("res://VisualNovel/VNReader.gd").new()
+onready var reader = $Panel/HBoxContainer/Node2D/VNReader
 
 var id : int
 var next_id : int
@@ -105,14 +105,12 @@ func _process(delta):
 #		print(page_data)
 		print(page_data)
 		add_to_json()
-	
-	if preview_btn.is_pressed():
-		get_data()
-		make_dictionary()
-		print("Previewing scene")
-		reader.play_page(page_data)
-		# print(page_data)
 
+func preview_scene():
+	get_data()
+	make_dictionary()
+	print("Previewing scene")
+	reader.play_page(page_data)
 # gets the ids for the page and the id of the page that will follow it
 func get_data():
 #	var value
@@ -152,7 +150,7 @@ func get_data():
 	next_id = int(get_next_id)
 
 	# get sentence info
-	sentence_text = sentence_txt_input.get_text().split(".")
+	sentence_text = sentence_txt_input.get_text()#.split(".") We need a different way of doing this
 	sentence_delay = int(sentence_delay_input.get_text())
 	sentence_speed = int(sentence_speed_input.get_text())
 	# sentence_transition

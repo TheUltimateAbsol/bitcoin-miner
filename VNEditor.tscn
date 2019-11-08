@@ -261,3 +261,4 @@ margin_top = 264.0
 margin_right = 429.0
 margin_bottom = 284.0
 text = "Parse JSON"
+[connection signal="pressed" from="Panel/HBoxContainer/Layout/preview_btn" to="." method="preview_scene"]
