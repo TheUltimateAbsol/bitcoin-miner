@@ -122,6 +122,7 @@ margin_bottom = 4.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
 margin_left = -32.0
 margin_top = -1.84222
 margin_right = 13.0

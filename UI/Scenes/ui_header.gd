@@ -9,7 +9,7 @@ onready var impact_style = load("res://Style/IMPACT_TEXT.tres")
 signal add_miner
 signal revive
 
-var levels = [300, 1000, 3000, 6000, 10000, 20000, 100000000]
+var levels = [300, 1000, 1001, 1002, 1003, 1005, 1006, 1007, 1009, 3000, 6000, 10000, 20000, 100000000]
 var level = 0;
 var num_countdowns = 0;
 

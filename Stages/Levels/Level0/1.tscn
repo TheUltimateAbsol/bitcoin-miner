@@ -98,4 +98,4 @@ position = Vector2( 17, 115 )
 position = Vector2( 143, 115 )
 
 [node name="MiddleTarget" type="Node2D" parent="."]
-position = Vector2( 83, 98 )
+position = Vector2( 83, 115 )
