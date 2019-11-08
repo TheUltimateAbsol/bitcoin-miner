@@ -9,9 +9,9 @@
 [ext_resource path="res://PlayerSprites/Player_Walk.png" type="Texture" id=7]
 [ext_resource path="res://PlayerSprites/Miner Compress.png" type="Texture" id=8]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=1]
 resource_name = "Die"
-length = 0.05
+length = 5.0
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -74,8 +74,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Duck"
+[sub_resource type="Animation" id=2]
 length = 0.12
 step = 0.01
 tracks/0/type = "value"
@@ -151,7 +150,7 @@ tracks/5/keys = {
 "values": [ Vector2( 0, 1 ), Vector2( 0, 3 ), Vector2( 0, 7 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -202,7 +201,7 @@ tracks/3/keys = {
 "values": [ 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=4]
 resource_name = "Game Over"
 length = 0.8
 tracks/0/type = "value"
@@ -254,8 +253,7 @@ tracks/3/keys = {
 "values": [ 0, 2, 3, 4, 5, 6, 7, 8, 9 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "GetUp"
+[sub_resource type="Animation" id=5]
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -330,7 +328,7 @@ tracks/5/keys = {
 "values": [ Vector2( 0, 1 ), Vector2( 0, 3 ), Vector2( 0, 7 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -381,7 +379,7 @@ tracks/3/keys = {
 "values": [ 2, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 0.7
 loop = true
 tracks/0/type = "value"
@@ -445,7 +443,7 @@ tracks/4/keys = {
 "values": [ true, false, true, true ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -497,10 +495,10 @@ tracks/3/keys = {
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 5, 13 )
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=10]
 
 [node name="Miner" type="KinematicBody2D" groups=[
 "player",
@@ -511,19 +509,18 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 offset = Vector2( 2, -1 )
-vframes = 4
 hframes = 2
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Die = SubResource( 9 )
-anims/Duck = SubResource( 1 )
-anims/Fall = SubResource( 2 )
-"anims/Game Over" = SubResource( 10 )
-anims/GetUp = SubResource( 3 )
-anims/Jump = SubResource( 4 )
-anims/Mine = SubResource( 5 )
-anims/Walk = SubResource( 6 )
+anims/Die = SubResource( 1 )
+anims/Duck = SubResource( 2 )
+anims/Fall = SubResource( 3 )
+"anims/Game Over" = SubResource( 4 )
+anims/GetUp = SubResource( 5 )
+anims/Jump = SubResource( 6 )
+anims/Mine = SubResource( 7 )
+anims/Walk = SubResource( 8 )
 
 [node name="Offset Checker" type="Sprite" parent="."]
 visible = false
@@ -531,13 +528,12 @@ texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
-shape = SubResource( 7 )
-disabled = true
+shape = SubResource( 9 )
 
 [node name="MiningHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiningHitbox"]
 position = Vector2( 22, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 disabled = true
 [connection signal="area_entered" from="MiningHitbox" to="." method="_on_MiningHitbox_area_entered"]

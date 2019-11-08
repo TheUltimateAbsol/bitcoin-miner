@@ -7,7 +7,7 @@ enum {VN, GAME, BOTH}
 var state = VN;
 
 func _ready():
-	to_Game();
+	to_Game(true);
 	pass
 #	update_size();
 
@@ -20,25 +20,40 @@ func update_size():
 	#$PanelContainer/Panel/Node2D.rect_min_size = scale*Vector2(160, 144);
 	$Game/PanelContainer/Panel/Node2D.rect_size = scale*Vector2(160, 144);
 	
-func to_VN():
+func to_VN(instant=false):
 	if state == BOTH:
 		$AnimationPlayer.play("Both to VN");
-	if state == GAME:
+	elif state == GAME:
 		$AnimationPlayer.play_backwards("VN to Game");
+	else:
+		return;
 	state = VN;
+	if instant:
+		$AnimationPlayer.seek(1, true);
+		$AnimationPlayer.stop();
 		
-func to_Game():
+func to_Game(instant=false):
 	if state == BOTH:
 		$AnimationPlayer.play("Both to Game");
-	if state == VN:
+	elif state == VN:
 		$AnimationPlayer.play("VN to Game");
+	else:
+		return;
 	state = GAME
 	
-func to_Both():
+	if instant:
+		$AnimationPlayer.seek(1, true);
+		$AnimationPlayer.stop();
+	
+func to_Both(instant=false):
 	if state == VN:
 		$AnimationPlayer.play_backwards("Both to VN");
-	if state == GAME:
+	elif state == GAME:
 		$AnimationPlayer.play_backwards("Both to Game");
+	else:
+		return;
 	state = BOTH
 	
-	
+	if instant:
+		$AnimationPlayer.seek(1, true);
+		$AnimationPlayer.stop();

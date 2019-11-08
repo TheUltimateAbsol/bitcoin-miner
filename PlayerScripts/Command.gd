@@ -2,6 +2,7 @@ extends Node
 
 class_name Command
 
+
 var must_wait = true
 var type
 var path
@@ -24,7 +25,6 @@ func perform_command(bot):
 	var temp = num_waiting;
 	#END LOCK
 	
-
 	#Start timer
 	#Start countdown using temp
 	if type == Global.CommandTypes.MOVE:
@@ -39,16 +39,18 @@ func perform_command(bot):
 	num_started+=1
 	#END LOCK
 	
+	var actor = CommandActor.new(bot, self);
 	#Wait if it needs waiting for completion
-	var func_pointer = _do_command(bot);
+	var func_pointer = actor.do_command(type, must_wait, path);
+	
 	if func_pointer != null:
-		yield(func_pointer, "completed")
+		yield(actor, "finished_command") #Even if the miner dies, this will still activate
 	
 	#LOCK THIS OPERATION
 	num_completed+=1
 	#END LOCK
 	
-	if (num_completed >= Global.num_bots): #How will this account for lost miners?
+	if (num_completed >= Global.num_bots): 
 		emit_signal("command_completed");
 		
 	return next.perform_command(bot);
@@ -63,29 +65,7 @@ func force_end():
 	emit_signal("force_end_signal");
 
 	
-func _do_command(bot):
-	match type:
-		Global.CommandTypes.IDLE:
-			if not must_wait: return null;
-			yield(self, "force_end_signal");
-		Global.CommandTypes.DUCK:
-			if not must_wait: 
-				yield(bot.quick_duck(), "completed");
-			else:
-				bot.duck_action(self, "force_end_signal")
-				yield(self, "force_end_signal")
-		Global.CommandTypes.MOVE:
-			bot.follow_path(path);
-			yield(bot, "path_traversed");
-		Global.CommandTypes.MINE:
-			if not must_wait: return null;
-			bot.attack(self, "force_end_signal")
-			yield(self, "force_end_signal");
-	
 func link(command : Command):
 	next = command;
-	
-	
-	
 	
 	

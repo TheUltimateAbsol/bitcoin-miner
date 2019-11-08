@@ -73,7 +73,7 @@ func _reset():
 	set_offset(Vector2(0,0))
 	$CollisionShape2D.shape.extents = Vector2(5, 15);
 	$CollisionShape2D.position = Vector2(0, 1);
-	#$MiningHitbox/CollisionShape2D.disabled = true;
+	$MiningHitbox/CollisionShape2D.set_deferred("disabled", true)
 	#print("reset");
 	
 #Player action that makes the miner stand in place
@@ -97,8 +97,11 @@ func die():
 		sprite.hframes = 2;
 		sprite.texture = dyingSprite
 		anim.play("Die")
+		#yield(anim, "animation_finished");
+		#queue_free();
 		
 func getUp():
+	if anim_state == ANIM_DYING: return
 	if anim_state != ANIM_IDLE:
 		anim_state = ANIM_IDLE
 		_reset()
@@ -110,6 +113,7 @@ func getUp():
 #Player action that makes the miner continuously duck
 #If player is already in this state, nothing happens
 func duck():
+	if anim_state == ANIM_DYING: return
 	if anim_state != ANIM_DUCKING:
 		anim_state = ANIM_DUCKING
 		_reset()
@@ -122,6 +126,7 @@ func duck():
 #Player action that makes the miner continuously walk
 #If player is already in this state, nothing happens
 func walk():
+	if anim_state == ANIM_DYING: return
 	if anim_state != ANIM_WALKING:
 		anim_state = ANIM_WALKING
 		_reset()
@@ -133,6 +138,7 @@ func walk():
 #Player action that makes the miner continuously mine in place
 #If player is already in this state, nothing happens
 func mine():
+	if anim_state == ANIM_DYING: return
 	if anim_state != ANIM_MINING:
 		anim_state = ANIM_MINING
 		_reset()
@@ -145,6 +151,7 @@ func mine():
 #Player action that starts a jump motion (only rises up)
 #If player is already in this state, nothing happens
 func jump():
+	if anim_state == ANIM_DYING: return
 	if anim_state != ANIM_JUMPING:
 		anim_state = ANIM_JUMPING
 		_reset()
@@ -156,6 +163,7 @@ func jump():
 #Player action that starts a falling motion
 #If player is already in this state, nothing happens
 func fall():
+	if anim_state == ANIM_DYING: return
 	if anim_state != ANIM_FALLING:
 		anim_state = ANIM_FALLING
 		_reset()

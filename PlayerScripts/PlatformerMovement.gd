@@ -18,15 +18,18 @@ var level_scene = null
 var next_level_scene = null
 var dead = false;
 
+var QTE_Result = false;
+
 #This is just an alias
 onready var main : KinematicBody2D = $Miner
 
 
 enum {LEFT, MIDDLE, RIGHT}
-var section = MIDDLE;
+var section = LEFT;
 
 signal paused
 
+signal QTE_input
 signal released_attack
 signal released_down
 	
@@ -122,6 +125,12 @@ func _ready():
 	
 	#connect to gameover
 	$Miner.connect("died", self, "game_over");
+	
+	connect("pressed_attack", self, "test");
+	
+func test():
+	print("hello world");
+	
 
 func spawn():
 	var spawnlocation = level_scene.get_node("MiddleTarget").position.x;
@@ -129,8 +138,9 @@ func spawn():
 	section = MIDDLE;
 	var i = 1;
 	for miner in $Miners.get_children():
-		miner.position = main.position + Vector2(0, i*(-4))
-		i = i+1;
+		if not miner.frozen:
+			miner.position = main.position + Vector2(0, i*(-4))
+			i = i+1;
 
 #	$TileMap.display_path(left_to_middle);
 #	$TileMap.display_path(right_to_middle);
@@ -234,6 +244,7 @@ func on_miner_loss():
 		##PAY ATTENTION TO LOCKS HERE
 	var num_remaining = Global.numremaining - 1;
 	$ui_header.update_data(num_remaining, Global.numtotal, Global.numcoin);
+	$ui_header.initiate_countdown();
 	if (num_remaining == 1):
 		$Miner.vulnerable = true;
 	
@@ -248,6 +259,7 @@ func game_over():
 	dead = true;
 	release_connections();
 	$ui_header.update_data(0, Global.numtotal, Global.numcoin);
+	$ui_header.stop_countdown();
 	$Miner.game_over();
 	$AnimationPlayer.play("Game Over")
 	
@@ -258,3 +270,67 @@ func game_over():
 	$GameOver.pause_mode = Node.PAUSE_MODE_PROCESS
 	$GameOverLabel.pause_mode = Node.PAUSE_MODE_PROCESS
 	get_tree().paused = true;
+
+func revive():
+	$QuickTimeEvent.pause_mode = Node.PAUSE_MODE_PROCESS
+	$QTEBackground.pause_mode = Node.PAUSE_MODE_PROCESS
+	$QTELabel.pause_mode = Node.PAUSE_MODE_PROCESS
+	$QTECircle.pause_mode = Node.PAUSE_MODE_PROCESS
+	$QTEBackground.visible = true;
+	$QTELabel.visible = true;
+	$QTECircle.visible = true;
+	get_tree().paused = true;
+	
+	$QuickTimeEvent.play("Activate");
+	
+	$QuickTimeEvent.connect("animation_finished", self, "QTE_anim_handler", [], CONNECT_ONESHOT)
+	$InputEventHandler.connect("pressed_attack", self, "QTE_input_handler", [], CONNECT_ONESHOT)
+	yield(self, "QTE_input");
+	
+	get_tree().paused = false
+	
+	#Release connections
+#	for connection in get_signal_connection_list("pressed_attack"):
+#		disconnect("pressed_attack", connection["target"], connection["method"]);
+#	for connection in get_signal_connection_list("QTE_input"):
+#		disconnect("QTE_input", connection["target"], connection["method"]);
+	
+	$QTEBackground.visible = false;
+	$QTELabel.visible = false;
+	$QTECircle.visible = false;
+	$QuickTimeEvent.pause_mode = Node.PAUSE_MODE_INHERIT
+	$QTEBackground.pause_mode = Node.PAUSE_MODE_INHERIT
+	$QTELabel.pause_mode = Node.PAUSE_MODE_INHERIT
+	$QTECircle.pause_mode = Node.PAUSE_MODE_INHERIT
+	
+	if QTE_Result:
+		$RevivePlayer.play("Success");
+		$Miner.vulnerable = false #This is so we don't have the player die until all are lost
+		var num_to_add = Global.numtotal - Global.numremaining
+		$ui_header.update_data(Global.numtotal, Global.numtotal, Global.numcoin);
+		
+		for i in range(num_to_add):
+			var new_miner = Miner.instance();
+			$Miners.add_child(new_miner);
+			miners.push_back(new_miner);
+			main_command.perform_command(new_miner);
+			new_miner.position = main.position + Vector2(0, -32);
+			new_miner.connect("died", self, "on_miner_loss");
+	else:
+			$ui_header.initiate_countdown();
+			$RevivePlayer.play("Fail");
+		
+	
+func QTE_anim_handler(anim_name):
+	QTE_Result = false;
+	emit_signal("QTE_input");
+	
+func QTE_input_handler():
+	var amount = $QuickTimeEvent.current_animation_position;
+	print($QuickTimeEvent.current_animation_length, $QuickTimeEvent.current_animation_position);
+	if ($QuickTimeEvent.current_animation_length-0.1 - $QuickTimeEvent.current_animation_position < 0.2):
+		QTE_Result = true;
+	else:
+		QTE_Result = false;
+	$QuickTimeEvent.stop();
+	emit_signal("QTE_input");

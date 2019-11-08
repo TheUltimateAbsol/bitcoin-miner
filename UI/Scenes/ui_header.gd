@@ -7,9 +7,11 @@ onready var normal_style = load("res://Style/DEFAULT_TEXT.tres")
 onready var impact_style = load("res://Style/IMPACT_TEXT.tres")
 
 signal add_miner
+signal revive
 
 var levels = [300, 1000, 3000, 6000, 10000, 20000, 100000000]
 var level = 0;
+var num_countdowns = 0;
 
 func update_data(input_remaining, input_total, input_coin):
 	Global.numremaining = input_remaining
@@ -45,6 +47,17 @@ func _ready():
 	update_data(Global.numremaining, Global.numtotal, Global.numcoin)
 	Global.connect("header_update", self, "update_data");
 	
-
+func initiate_countdown():
+	$Countdown.stop(true);
+	num_countdowns+=1;
+	$ProgressBar.visible = true;
+	$Countdown.play("Countdown", -1, 1.0+((num_countdowns-1)*.5));
 	
+func on_Countdown_End(anim_name):
+	num_countdowns = 0;
+	$ProgressBar.visible = false;
+	emit_signal("revive");
+	
+func stop_countdown():
+	$Countdown.stop();
 	

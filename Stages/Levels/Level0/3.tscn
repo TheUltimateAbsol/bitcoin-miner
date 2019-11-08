@@ -1,0 +1,127 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Stages/Tilesets/Tileset.png" type="Texture" id=1]
+[ext_resource path="res://Navigation/Scenes/TileMap.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Scenes/Crystal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/Scenes/TimedBatPlayer.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 0, 8, 8, 0, 8, 8, 0, 8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 0, 8, 8, 0, 8, 8, 0, 8 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
+
+[sub_resource type="TileSet" id=8]
+0/name = "Tileset.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 24, 24 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 8, 8 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 1 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 1 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 1 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 2 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource( 8 )
+cell_size = Vector2( 8, 8 )
+format = 1
+tile_data = PoolIntArray( 786432, 536870912, 1, 786433, 536870912, 1, 786434, 536870912, 1, 786435, 536870912, 1, 786436, 536870912, 0, 786440, -2147483648, 0, 786441, 0, 2, 786442, 0, 2, 786443, -1610612736, 0, 786447, 0, 0, 786448, 536870912, 1, 786449, 536870912, 1, 786450, 536870912, 1, 786451, 536870912, 1, 851968, 536870912, 131072, 851969, 536870912, 131072, 851970, 536870912, 131072, 851971, 536870912, 131072, 851972, -1610612736, 1, 851976, -1073741824, 1, 851977, -1610612736, 131072, 851978, -1610612736, 131072, 851979, -1610612736, 1, 851983, -1073741824, 1, 851984, 536870912, 131072, 851985, 536870912, 131072, 851986, 536870912, 131072, 851987, 536870912, 131072, 917504, 536870912, 131072, 917505, 536870912, 131072, 917506, 536870912, 131072, 917507, 536870912, 131072, 917508, -1610612736, 1, 917512, -1073741824, 1, 917513, -1610612736, 131072, 917514, -1610612736, 131072, 917515, -1610612736, 1, 917519, -1073741824, 1, 917520, 536870912, 131072, 917521, 536870912, 131072, 917522, 536870912, 131072, 917523, 536870912, 131072, 983040, 536870912, 131072, 983041, 536870912, 131072, 983042, 536870912, 131072, 983043, 536870912, 131072, 983044, -1610612736, 1, 983048, -1073741824, 1, 983049, -1610612736, 131072, 983050, -1610612736, 131072, 983051, -1610612736, 1, 983055, -1073741824, 1, 983056, 536870912, 131072, 983057, 536870912, 131072, 983058, 536870912, 131072, 983059, 536870912, 131072, 1048576, 0, 131072, 1048577, 0, 131072, 1048578, 0, 131072, 1048579, 0, 131072, 1048580, -1610612736, 1, 1048584, -1073741824, 1, 1048585, -1610612736, 131072, 1048586, 0, 131072, 1048587, -1610612736, 1, 1048591, -1073741824, 1, 1048592, 0, 131072, 1048593, 0, 131072, 1048594, 0, 131072, 1048595, 0, 131072 )
+script = ExtResource( 2 )
+
+[node name="LeftTarget" type="Node2D" parent="."]
+position = Vector2( 17, 90 )
+
+[node name="RightTarget" type="Node2D" parent="."]
+position = Vector2( 143, 90 )
+
+[node name="MiddleTarget" type="Node2D" parent="."]
+position = Vector2( 79, 90 )
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 142, 96 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 21, 96 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 83, 96 )
+
+[node name="TimedBatPlayer" parent="." instance=ExtResource( 4 )]
+position = Vector2( -9, -1 )
+speed = 2.0
+
+[node name="TimedBatPlayer2" parent="." instance=ExtResource( 4 )]
+position = Vector2( -9, 55 )
+speed = 3.0
+
+[node name="TimedBatPlayer4" parent="." instance=ExtResource( 4 )]
+position = Vector2( -9, 32 )
+speed = 0.5
+
+[node name="TimedBatPlayer3" parent="." instance=ExtResource( 4 )]
+position = Vector2( -34, -10 )
