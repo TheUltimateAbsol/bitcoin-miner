@@ -78,14 +78,16 @@ func _ready():
 func play_page(input:Dictionary): # parsed form JSON
 	#take data from JSON
 	#make content page
+	var page = ContentPage.new(input["id"],input["next_id"], input["content"]["string"], input["character"], input["expression"], input["transition"], input["background"], input["music"])
 	#display page through VNEditor
-	pass
+	print(page.character)
+	yield(display_page(page), "completed")
 
 func display_page(page : Page):
-	textlabel.text = ""
-#	print(expressions);
+	#textlabel.text = ""
+#	##print(expressions);
 #	print("CHARACTER: " + str(page.character));
-#	print("RESULT" + str(expressions[page.character][page.expression]));
+	#print("RESULT" + str(expressions[page.character][page.expression]));
 	$Control/NPC.texture = expressions[page.character][page.expression]
 	
 	match page.transition:

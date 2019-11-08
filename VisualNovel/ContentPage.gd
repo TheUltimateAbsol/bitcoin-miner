@@ -4,7 +4,7 @@ class_name ContentPage
 
 var content #array of Sentences
 var character
-var speed : float
+var speed 
 var transition
 var expression
 var music

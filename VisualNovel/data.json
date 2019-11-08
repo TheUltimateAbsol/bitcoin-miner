@@ -1,16 +1,5 @@
-{
-	"01":{
-		"id": 1,
-		"next_id": 2,
-		"content":[
-			{
-				"string" : "This is a really boring game. \n", 
-				"sound" : 0,
-				"sentence_speed":0.5,
-				"delay": 0.0
-			},
-			{
-				"string" : "Don't Play it.", 
+{"background":"NONE","character":"BOY","content":{"delay":0,"sentence_speed":0,"sound":0,"string":[""]},"expression":"DEFAULT","id":0,"music":"NONE","next_id":0,"speed":0,"transition":"NONE"}
+			"string" : "Don't Play it.", 
 				"sound" : 0,
 				"sentence_speed":1,
 				"delay": 0.0

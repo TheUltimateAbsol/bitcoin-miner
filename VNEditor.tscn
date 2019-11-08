@@ -18,15 +18,14 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="Node2D" type="Node2D" parent="Panel/HBoxContainer"]
-editor/display_folded = true
 position = Vector2( 100, 0 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="VNReader" parent="Panel/HBoxContainer/Node2D" instance=ExtResource( 2 )]
-margin_left = 859.419
-margin_top = 6.05984
-margin_right = 1547.42
-margin_bottom = 673.06
+margin_left = 861.525
+margin_top = 12.3756
+margin_right = 1549.53
+margin_bottom = 679.376
 
 [node name="Layout" type="GridContainer" parent="Panel/HBoxContainer"]
 margin_right = 480.0

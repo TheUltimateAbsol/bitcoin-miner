@@ -31,11 +31,13 @@ onready var sentence_transition_input = get_node("Panel/HBoxContainer/Layout/sen
 onready var parse_btn = get_node("Panel/HBoxContainer/Layout/parse_btn")
 onready var preview_btn = get_node("Panel/HBoxContainer/Layout/preview_btn")
 
+var reader = load("res://VisualNovel/VNReader.gd").new()
+
 var id : int
 var next_id : int
 var sentence_speed : int
 var sentence_delay : int
-var sentence_text : String
+var sentence_text
 var sentence_tansition : int
 var character
 var character_expression
@@ -44,7 +46,9 @@ var music
 # sentence sound?
 # speed?
 var background
+
 var page_data
+var data_json
 
 # button groups for the text boxes
 var background_buttons = ButtonGroup.new()
@@ -97,13 +101,16 @@ func _process(delta):
 	if(parse_btn.is_pressed()):
 		print("Parsing...")
 		get_data()
-#		make_dictionary()
+		make_dictionary()
 #		print(page_data)
-		# print(character)
+		print(page_data)
+		add_to_json()
 	
 	if preview_btn.is_pressed():
-		# make_dictionary()
+		get_data()
+		make_dictionary()
 		print("Previewing scene")
+		reader.play_page(page_data)
 		# print(page_data)
 
 # gets the ids for the page and the id of the page that will follow it
@@ -112,16 +119,31 @@ func get_data():
 #	for child in background_list.get_children():
 #		if child.is_pressed():
 #			 value = child.text # what is saved in the JSON (the dictionary for now)
+
 	if background_buttons.get_pressed_button() == null:
 		background = Global.Backgrounds.NONE
 	else:	
 		background = background_buttons.get_pressed_button().text
 	
+	if music_buttons.get_pressed_button() == null:
+		music = Global.Music.NONE
+	else:
+		music = music_buttons.get_pressed_button().text
 	
-	music = music_buttons.get_pressed_button().text
+	if char_transition_buttons.get_pressed_button() == null:
+		character_transition = Global.Transitions.NONE
+	else:
+		character_transition = char_transition_buttons.get_pressed_button().text
+		
+	if character_buttons.get_pressed_button() == null:
+		character = Global.Characters.BOY
+	else:
+		character = character_buttons.get_pressed_button().text
 	
-	print(background)
-	print(music)
+	if expression_buttons.get_pressed_button() == null:
+		character_expression = Global.Expressions.DEFAULT
+	else:
+		character_expression = expression_buttons.get_pressed_button().text
 		
 	# get the IDs
 	var get_id = id_input.get_text()
@@ -130,90 +152,66 @@ func get_data():
 	next_id = int(get_next_id)
 
 	# get sentence info
-	sentence_text = sentence_txt_input.get_text()
+	sentence_text = sentence_txt_input.get_text().split(".")
 	sentence_delay = int(sentence_delay_input.get_text())
 	sentence_speed = int(sentence_speed_input.get_text())
 	# sentence_transition
 
-	
+	# sound effect
 
-	#  get character info
-	#  which caracter
-#	if character_box_boy.is_pressed():
-#		character = Global.Characters.BOY
-#	elif character_box_girl.is_pressed():
-#		character = Global.Characters.GIRL
-#	else:
-#		character = Global.Characters.NONE
-#
-#	#character_expression
-#	if expression_box_happy.is_pressed():
-#		character_expression = Global.Expressions.HAPPY
-#	elif expression_box_sad.is_pressed():
-#		character_expression = Global.Expressions.SAD
-#	else:
-#		character_expression = Global.Expressions.DEFAULT
-#
-#	#character_transition
-#	if transition_box_fade.is_pressed():
-#		character_transition = Global.Transitions.FADE
-#	elif transition_box_flash.is_pressed():
-#		character_transition = Global.Transitions.FLASH
-#	elif transition_box_left.is_pressed():
-#		character_transition = Global.transition.LEFT
-#	elif transition_box_right.is_pressed():
-#		character_transition = Global.Transitions.RIGHT
-#	else:
-#		character_transition = Global.Transitions.NONE
-#
-#	#  MUSIC
-#	if music_box_sad.is_pressed():
-#		music = Global.Music.SAD
-#	elif music_box_simple.is_pressed():
-#		music = Global.Music.SIMPLE
-#	elif music_box_same.is_pressed():
-#		music = Global.Music.SAME
-#	else:
-#		music = Global.Music.NONE
-#
-#	#  BACKGROUND
-#	if background_box_classroom.is_pressed():
-#		background = Global.Backgrounds.CLASSROOM
-#	elif background_box_same.is_pressed():
-#		background = Global.Backgrounds.SAME
-#	else:
-#		background = Global.Backgrounds.NONE
-
-#	var keys = Global.Expressions.keys();
-#	for key in keys:
-#		var new_box = CheckBox.new();
-#		new_box.text = key;
-#		target_node.add_child(new_box);
-#
-#		pass
-		#do something with the key
-		#key is a string.
-		
 # MAKE ON CHANGE FUNCION
 		
-#func make_dictionary():
-#	page_data = {
-#			str(id) :{
-#					"id": id,
-#					"next_id": next_id,
-#					"content":[
-#						{
-#							"string": sentence_text,
-#							"sound": 0,
-#							"sentence_speed": sentence_speed,
-#							"delay": sentence_delay
-#						},
-#					],
-#					"Character": character,
-#					"speed": 0.0, 
-#					"transition": character_transition, 
-#					"expresssion": character_expression, 
-#					"music": music, 
-#					"background":background,
-#				}	
-#		}
+func make_dictionary():
+	
+	page_data = {
+				"id": id,
+				"next_id": next_id,
+				"content":	{
+						"string": sentence_text,
+						"sound": 0,
+						"sentence_speed": sentence_speed,
+						"delay": sentence_delay
+					},
+				"character": character,
+				"speed": 0.0, 
+				"transition": character_transition, 
+				"expression": character_expression, 
+				"music": music, 
+				"background":background,
+		}
+		
+func add_to_json():
+	var file = File.new()
+	file.open("res://VisualNovel/data.json", 3)
+	#converts the json file to a text file
+	var text_json = file.get_as_text()
+#	print(text_json)
+	#parses tect file to dictionary
+	data_json = JSON.parse(text_json)
+	#checks to make sure it parsed correctly
+	print(data_json)
+	if data_json.error == OK:
+		print("All is good")
+	else:
+		print("something is wrong")
+		print(typeof(data_json.result))
+		print(data_json.get_error_line())
+	print("checkpoint 1")
+	#print(typeof(data_json.result))
+	#print(data_json.result)
+	
+	if typeof(data_json.result) == TYPE_ARRAY:
+    	print("Array") # prints 'hello'
+	else:
+    	print("unexpected results")
+	
+	#data_json.result["10"] = page_data
+	
+	#print(data_json.result)
+	
+	file.store_line(to_json(page_data))
+	file.close()
+	
+	
+	
+	
