@@ -3,6 +3,7 @@ extends Control
 onready var textlabel = get_node("Control/Panel/MarginContainer/Control/TextLabel")
 onready var letter_timer = $LetterTimer;
 onready var delay_timer = $DelayTimer;
+onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
 
 var expressions = {
@@ -91,7 +92,7 @@ func display_page(page : Page):
 	print(self.get_path())
 #	print("CHARACTER: " + str(page.character));
 	#print("RESULT" + str(expressions[page.character][page.expression]));
-	$Control/NPC.texture = expressions[page.character][page.expression]
+	npc.texture = expressions[page.character][page.expression]
 	
 	match page.transition:
 		Global.Transitions.NONE:
