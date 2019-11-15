@@ -1,5 +1,7 @@
 extends Control
 
+onready var SentenceLabel = preload("res://UI/Scenes/Sentence_Label.tscn");
+
 # character  transition section
 onready var char_transition_list = get_node("Panel/HBoxContainer/Layout/characterInfo/character_layout/char_transition_list")
 
@@ -13,6 +15,7 @@ onready var expression_list = get_node("Panel/HBoxContainer/Layout/characterInfo
 onready var music_list = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList")
 
 # Scene transition check boxes go here
+onready var scene_transition_list = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/transition_list")
 
 # background check boxes
 onready var background_list = get_node("Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list")
@@ -21,18 +24,21 @@ onready var background_list = get_node("Panel/HBoxContainer/Layout/sceneInfo/Gri
 onready var id_input = get_node("Panel/HBoxContainer/Layout/id_info/GridContainer/id_input")
 onready var next_id_input = get_node("Panel/HBoxContainer/Layout/id_info/GridContainer/next_id_input")
 
-onready var sentence_list = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer")
+onready var sentence_list = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_list")
 
 # Sentence data
 onready var sentence_txt_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt/sentence_input")
 onready var sentence_delay_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2/sent_delay_input")
 onready var sentence_speed_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2/sent_speed_input")
-onready var sentence_transition_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2/sent_transition_input")
+#onready var sentence_transition_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2/sent_transition_input")
 onready var add_sentence_btn = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt/add_sentence")
 
 # parse buttons
 onready var parse_btn = get_node("Panel/HBoxContainer/Layout/parse_btn")
 onready var preview_btn = get_node("Panel/HBoxContainer/Layout/preview_btn")
+
+# sound effect menu options
+onready var sound_menu = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2/sound_menu")
 
 onready var reader = $Panel/HBoxContainer/Node2D/VNReader
 
@@ -41,13 +47,13 @@ var next_id : int
 var sentence_speed : int
 var sentence_delay : int
 var sentence_text
-var sentence_tansition : int
+var scene_transition
 var sentences = []# array of sentence objects
 var character
 var character_expression
 var character_transition 
 var music
-# sentence sound?
+var sentence_sound
 # speed?
 var background
 
@@ -60,6 +66,7 @@ var music_buttons = ButtonGroup.new()
 var char_transition_buttons = ButtonGroup.new()
 var character_buttons = ButtonGroup.new()
 var expression_buttons = ButtonGroup.new()
+var back_transition_buttons = ButtonGroup.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -100,12 +107,27 @@ func _ready():
 		new_box.set_button_group(expression_buttons)
 		expression_list.add_child(new_box)
 
+	var soundeffect_keys = Global.SoundEffect.keys()
+	var x = 1
+	for key in soundeffect_keys:
+		sound_menu.add_item(key, x)
+		x += 1
+		
+	var back_tansition_keys = Global.Background_transitiosn.keys()
+	for key in back_tansition_keys:
+		var new_box = CheckBox.new()
+		new_box.text = key
+		new_box.set_button_group(back_transition_buttons)
+		scene_transition_list.add_child(new_box)
+	
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	for sentence in sentences:
-		var new_sentence = Label.new()
-		new_sentence.text = sentence.content
-		sentence_list.add_child(new_sentence)
+#	for sentence in sentences:
+#		var new_sentence = Label.new()
+#		new_sentence.text = sentence.content
+#		sentence_list.add_child(new_sentence)
 		
 	if(parse_btn.is_pressed()):
 		print("Parsing...")
@@ -114,13 +136,10 @@ func _process(delta):
 #		print(page_data)
 		print(page_data)
 		add_to_json()
-	if preview_btn.is_pressed():
-		preview_scene()
-	if add_sentence_btn.is_pressed():
-		add_sentence()
-		print(sentences)
+	
 
 func preview_scene():
+	print("PLAYING PAGE")
 	get_data()
 	make_dictionary()
 	print("Previewing scene")
@@ -138,6 +157,11 @@ func get_data():
 		background = Global.Backgrounds.NONE
 	else:	
 		background = background_buttons.get_pressed_button().text
+	
+	if back_transition_buttons.get_pressed_button() == null:
+		scene_transition = Global.Background_transitiosn.NONE
+	else:
+		scene_transition = back_transition_buttons.get_pressed_button().text
 	
 	if music_buttons.get_pressed_button() == null:
 		music = Global.Music.NONE
@@ -180,7 +204,7 @@ func make_dictionary():
 	page_data = {
 				"id": id,
 				"next_id": next_id,
-				"contennt": sentences,
+				"content": sentences,
 #				"content":	{
 #						"string": sentence_text,
 #						"sound": 0,
@@ -242,7 +266,34 @@ func add_sentence():
 	sentence_text = sentence_txt_input.get_text()#.split(".") We need a different way of doing this
 	sentence_delay = int(sentence_delay_input.get_text())
 	sentence_speed = int(sentence_speed_input.get_text())
-	sentence_tansition = int(sentence_transition_input.get_text())
+	#sentence_tansition = int(sentence_transition_input.get_text())
+	sentence_sound = sound_menu.get_item_text(sound_menu.get_selected_id())
 	
-	sentences.push_back(Sentence.new(sentence_text, sentence_delay, sentence_speed))
+	sentences.push_back(sentence_to_json(Sentence.new(sentence_text, sentence_delay, sentence_sound, sentence_speed)))
 	
+	print(sentences)
+	
+	sentence_display()
+#	var new_sentence = Label.new()
+#	new_sentence.text = sentences[len(sentences)-1].content
+#	sentence_list.add_child(new_sentence)
+
+
+func sentence_display():
+	for child in sentence_list.get_children():
+		child.queue_free()
+
+	for i in range(sentences.size()):
+		var sentence = sentences[i];
+		var new_sentence = SentenceLabel.instance()
+		new_sentence.set_text(sentence.content);
+		sentence_list.add_child(new_sentence)
+		
+		new_sentence.connect("delete", self, "delete_sentence", [i]);
+
+func sentence_to_json(sentence : Sentence):
+	return {"content" : sentence.content, "delay": sentence.delay, "speed" : sentence.speed, "sound" : sentence.sound}
+	
+func delete_sentence(index):
+	sentences.remove(index)
+	sentence_display()

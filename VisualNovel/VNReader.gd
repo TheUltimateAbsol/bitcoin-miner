@@ -81,10 +81,14 @@ func _ready():
 func play_page(input:Dictionary): # parsed form JSON
 	#take data from JSON
 	#make content page
+	var sentences = [];
+	for sentence in input["content"] :
+		sentences.push_back(Sentence.new(sentence["content"], sentence["speed"], sentence["sound"]));
+		
 	var page = ContentPage.new(
 		input["id"],
 		input["next_id"], 
-		[Sentence.new(input["content"]["string"], input["content"]["delay"])], 
+		sentences, 
 		input["character"], 
 		input["expression"], 
 		input["transition"], 
@@ -96,15 +100,19 @@ func play_page(input:Dictionary): # parsed form JSON
 	yield(display_page(page), "completed")
 
 func display_page(page : Page):
-	#textlabel.text = ""
+	textlabel.text = ""
 	print("PATH" + self.get_path())
 #	print("CHARACTER: " + str(page.character));
 	#print("RESULT" + str(expressions[page.character][page.expression]));
-	npc.texture = expressions[page.character][page.expression]
+	if page.character == Global.Characters.NONE: 
+		npc.texture = null;
+	else:
+		npc.texture = expressions[page.character][page.expression]
 	
 	match page.transition:
 		Global.Transitions.NONE:
-			pass
+			transition.play("appear")	
+			yield(transition, "animation_finished")
 		Global.Transitions.FLASH: #think ace attorny
 			pass
 		Global.Transitions.FADE:
