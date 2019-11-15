@@ -21,11 +21,14 @@ onready var background_list = get_node("Panel/HBoxContainer/Layout/sceneInfo/Gri
 onready var id_input = get_node("Panel/HBoxContainer/Layout/id_info/GridContainer/id_input")
 onready var next_id_input = get_node("Panel/HBoxContainer/Layout/id_info/GridContainer/next_id_input")
 
+onready var sentence_list = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer")
+
 # Sentence data
-onready var sentence_txt_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer/sentence_input")
-onready var sentence_delay_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer/sent_delay_input")
-onready var sentence_speed_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer/sent_speed_input")
-onready var sentence_transition_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer/sent_transition_input")
+onready var sentence_txt_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt/sentence_input")
+onready var sentence_delay_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2/sent_delay_input")
+onready var sentence_speed_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2/sent_speed_input")
+onready var sentence_transition_input = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2/sent_transition_input")
+onready var add_sentence_btn = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt/add_sentence")
 
 # parse buttons
 onready var parse_btn = get_node("Panel/HBoxContainer/Layout/parse_btn")
@@ -39,6 +42,7 @@ var sentence_speed : int
 var sentence_delay : int
 var sentence_text
 var sentence_tansition : int
+var sentences = []# array of sentence objects
 var character
 var character_expression
 var character_transition 
@@ -98,6 +102,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	for sentence in sentences:
+		var new_sentence = Label.new()
+		new_sentence.text = sentence.content
+		sentence_list.add_child(new_sentence)
+		
 	if(parse_btn.is_pressed()):
 		print("Parsing...")
 		get_data()
@@ -105,12 +114,19 @@ func _process(delta):
 #		print(page_data)
 		print(page_data)
 		add_to_json()
+	if preview_btn.is_pressed():
+		preview_scene()
+	if add_sentence_btn.is_pressed():
+		add_sentence()
+		print(sentences)
 
 func preview_scene():
 	get_data()
 	make_dictionary()
 	print("Previewing scene")
 	reader.play_page(page_data)
+
+
 # gets the ids for the page and the id of the page that will follow it
 func get_data():
 #	var value
@@ -150,9 +166,9 @@ func get_data():
 	next_id = int(get_next_id)
 
 	# get sentence info
-	sentence_text = sentence_txt_input.get_text()#.split(".") We need a different way of doing this
-	sentence_delay = int(sentence_delay_input.get_text())
-	sentence_speed = int(sentence_speed_input.get_text())
+#	sentence_text = sentence_txt_input.get_text()#.split(".") We need a different way of doing this
+#	sentence_delay = int(sentence_delay_input.get_text())
+#	sentence_speed = int(sentence_speed_input.get_text())
 	# sentence_transition
 
 	# sound effect
@@ -164,12 +180,13 @@ func make_dictionary():
 	page_data = {
 				"id": id,
 				"next_id": next_id,
-				"content":	{
-						"string": sentence_text,
-						"sound": 0,
-						"sentence_speed": sentence_speed,
-						"delay": sentence_delay
-					},
+				"contennt": sentences,
+#				"content":	{
+#						"string": sentence_text,
+#						"sound": 0,
+#						"sentence_speed": sentence_speed,
+#						"delay": sentence_delay
+#					},
 				"character": character,
 				"speed": 0.0, 
 				"transition": character_transition, 
@@ -177,7 +194,8 @@ func make_dictionary():
 				"music": music, 
 				"background":background,
 		}
-		
+
+
 func add_to_json():
 	var new_dict
 	var dir = Directory.new()
@@ -218,3 +236,13 @@ func add_to_json():
 	new_file.open("res://VisualNovel/data.json", 2)
 	new_file.store_line(to_json(new_dict))
 	file.close()
+	
+	
+func add_sentence():
+	sentence_text = sentence_txt_input.get_text()#.split(".") We need a different way of doing this
+	sentence_delay = int(sentence_delay_input.get_text())
+	sentence_speed = int(sentence_speed_input.get_text())
+	sentence_tansition = int(sentence_transition_input.get_text())
+	
+	sentences.push_back(Sentence.new(sentence_text, sentence_delay, sentence_speed))
+	

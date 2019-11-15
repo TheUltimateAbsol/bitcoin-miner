@@ -18,6 +18,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="Node2D" type="Node2D" parent="Panel/HBoxContainer"]
+editor/display_folded = true
 position = Vector2( 100, 0 )
 scale = Vector2( 0.5, 0.5 )
 
@@ -34,15 +35,14 @@ rect_min_size = Vector2( 480, 435 )
 columns = 2
 
 [node name="id_info" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_right = 204.0
-margin_bottom = 144.0
+margin_bottom = 102.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/id_info"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 197.0
-margin_bottom = 137.0
+margin_bottom = 95.0
 
 [node name="id" type="Label" parent="Panel/HBoxContainer/Layout/id_info/GridContainer"]
 margin_right = 58.0
@@ -67,86 +67,81 @@ margin_right = 58.0
 margin_bottom = 88.0
 
 [node name="sentenceInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_left = 208.0
 margin_right = 429.0
-margin_bottom = 144.0
+margin_bottom = 102.0
 
-[node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 214.0
-margin_bottom = 137.0
+margin_bottom = 95.0
 
-[node name="sentence_info" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer"]
-margin_right = 188.0
+[node name="sentence_info" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer"]
+margin_right = 207.0
 margin_bottom = 14.0
 text = "Sentence Info"
 align = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer"]
+[node name="sentence_txt" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer"]
 margin_top = 18.0
-margin_right = 188.0
-margin_bottom = 18.0
+margin_right = 207.0
+margin_bottom = 42.0
+alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer"]
-editor/display_folded = true
-margin_top = 22.0
-margin_right = 188.0
-margin_bottom = 130.0
-columns = 2
-
-[node name="addSentenceLabel" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer"]
-margin_top = 5.0
-margin_right = 126.0
-margin_bottom = 19.0
-text = "Add a Sentence"
-
-[node name="sentence_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer"]
-margin_left = 130.0
-margin_right = 188.0
+[node name="sentence_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt"]
+margin_left = 62.0
+margin_right = 120.0
 margin_bottom = 24.0
+expand_to_text_length = true
+placeholder_text = "Enter A sentence"
 
-[node name="sentenceDelayLable" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer"]
-margin_top = 33.0
-margin_right = 126.0
-margin_bottom = 47.0
-text = "Sentence Delay"
+[node name="add_sentence" type="Button" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt"]
+margin_left = 124.0
+margin_right = 144.0
+margin_bottom = 24.0
+text = "+"
 
-[node name="sent_delay_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer"]
-margin_left = 130.0
-margin_top = 28.0
-margin_right = 188.0
-margin_bottom = 52.0
+[node name="sentence_info2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer"]
+editor/display_folded = true
+margin_top = 46.0
+margin_right = 207.0
+margin_bottom = 70.0
+alignment = 1
 
-[node name="sentenceSpeedLabel" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer"]
-margin_top = 61.0
-margin_right = 126.0
-margin_bottom = 75.0
-text = "Sentence Speed"
+[node name="sent_delay_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2"]
+margin_left = 12.0
+margin_right = 70.0
+margin_bottom = 24.0
+align = 1
+placeholder_text = "Delay"
 
-[node name="sent_speed_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer"]
-margin_left = 130.0
-margin_top = 56.0
-margin_right = 188.0
-margin_bottom = 80.0
+[node name="sent_speed_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2"]
+margin_left = 74.0
+margin_right = 132.0
+margin_bottom = 24.0
+align = 1
+placeholder_text = "Speed"
 
-[node name="sent_trans_label" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer"]
-margin_top = 89.0
-margin_right = 126.0
-margin_bottom = 103.0
-text = "Sentence Transition"
+[node name="sent_transition_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2"]
+margin_left = 136.0
+margin_right = 194.0
+margin_bottom = 24.0
+align = 1
+expand_to_text_length = true
+placeholder_text = "Transition"
 
-[node name="sent_transition_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/GridContainer/GridContainer"]
-margin_left = 130.0
-margin_top = 84.0
-margin_right = 188.0
-margin_bottom = 108.0
+[node name="sentences_lable" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer"]
+margin_top = 74.0
+margin_right = 207.0
+margin_bottom = 88.0
+text = "Sentences Made:"
 
 [node name="sceneInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 148.0
+editor/display_folded = true
+margin_top = 106.0
 margin_right = 204.0
-margin_bottom = 260.0
+margin_bottom = 218.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo"]
 margin_left = 7.0
@@ -177,7 +172,6 @@ margin_bottom = 14.0
 text = "Background"
 
 [node name="transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
-editor/display_folded = true
 margin_left = 120.0
 margin_right = 190.0
 margin_bottom = 98.0
@@ -203,10 +197,11 @@ margin_right = 70.0
 margin_bottom = 98.0
 
 [node name="characterInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
+editor/display_folded = true
 margin_left = 208.0
-margin_top = 148.0
+margin_top = 106.0
 margin_right = 429.0
-margin_bottom = 260.0
+margin_bottom = 218.0
 
 [node name="character_layout" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo"]
 margin_left = 7.0
@@ -250,15 +245,15 @@ text = "Expressions"
 align = 1
 
 [node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_top = 264.0
+margin_top = 222.0
 margin_right = 204.0
-margin_bottom = 284.0
+margin_bottom = 242.0
 text = "Preview Scene"
 
 [node name="parse_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
 margin_left = 208.0
-margin_top = 264.0
+margin_top = 222.0
 margin_right = 429.0
-margin_bottom = 284.0
+margin_bottom = 242.0
 text = "Parse JSON"
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/preview_btn" to="." method="preview_scene"]
