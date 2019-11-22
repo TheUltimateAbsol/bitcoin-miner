@@ -77,6 +77,9 @@ func _ready():
 		var new_box = CheckBox.new()
 		new_box.text = key
 		new_box.set_button_group(background_buttons)
+		if new_box.text == "NONE":
+#			new_box.set_modulate(Color( 1, 0, 0, 1 ))
+			new_box.pressed = true 
 		background_list.add_child(new_box)
 		
 	var music_keys = Global.Music.keys()
@@ -84,6 +87,8 @@ func _ready():
 		var new_box = CheckBox.new()
 		new_box.text = key
 		new_box.set_button_group(music_buttons)
+		if new_box.text == "NONE":
+			new_box.pressed = true
 		music_list.add_child(new_box)
 		
 	var char_transition_keys = Global.Transitions.keys()
@@ -91,6 +96,8 @@ func _ready():
 		var new_box = CheckBox.new()
 		new_box.text = key
 		new_box.set_button_group(char_transition_buttons)
+		if new_box.text == "NONE":
+			new_box.pressed = true
 		char_transition_list.add_child(new_box)
 		
 	var character_keys = Global.Characters.keys()
@@ -98,6 +105,8 @@ func _ready():
 		var new_box = CheckBox.new()
 		new_box.text = key
 		new_box.set_button_group(character_buttons)
+		if new_box.text == "BOY":
+			new_box.pressed = true
 		character_list.add_child(new_box)
 	
 	var expression_keys = Global.Expressions.keys()
@@ -105,6 +114,8 @@ func _ready():
 		var new_box = CheckBox.new()
 		new_box.text = key
 		new_box.set_button_group(expression_buttons)
+		if new_box.text == "DEFAULT":
+			new_box.pressed = true
 		expression_list.add_child(new_box)
 
 	var soundeffect_keys = Global.SoundEffect.keys()
@@ -118,8 +129,10 @@ func _ready():
 		var new_box = CheckBox.new()
 		new_box.text = key
 		new_box.set_button_group(back_transition_buttons)
+		if new_box.text == "NONE":
+			new_box.pressed = true
 		scene_transition_list.add_child(new_box)
-	
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -186,14 +199,16 @@ func get_data():
 	# get the IDs
 	var get_id = id_input.get_text()
 	var get_next_id = next_id_input.get_text()
-	id = int(get_id)
-	next_id = int(get_next_id)
-
-	# get sentence info
-#	sentence_text = sentence_txt_input.get_text()#.split(".") We need a different way of doing this
-#	sentence_delay = int(sentence_delay_input.get_text())
-#	sentence_speed = int(sentence_speed_input.get_text())
-	# sentence_transition
+	
+	if get_id != null and get_id.is_valid_integer():
+		id = int(get_id)
+	else:
+		id = 0
+	
+	if get_next_id != null and get_next_id.is_valid_integer():
+		next_id = int(get_next_id)
+	else:
+		next_id = 1
 
 	# sound effect
 
@@ -264,9 +279,24 @@ func add_to_json():
 	
 func add_sentence():
 	sentence_text = sentence_txt_input.get_text()#.split(".") We need a different way of doing this
-	sentence_delay = int(sentence_delay_input.get_text())
-	sentence_speed = int(sentence_speed_input.get_text())
+	
+	var get_delay = sentence_delay_input.get_text()
+	var get_speed = sentence_speed_input.get_text()
+	
+	if get_delay != null and get_delay.is_valid_integer():
+		sentence_delay = int(get_delay)
+	else:
+		sentence_delay = 0
+	
+	if get_speed != null and get_speed.is_valid_integer():
+		sentence_speed = int(get_speed)
+	else:
+		sentence_speed = 0
+		
+#	sentence_delay = int(sentence_delay_input.get_text())
+#	sentence_speed = int(sentence_speed_input.get_text())
 	#sentence_tansition = int(sentence_transition_input.get_text())
+	
 	sentence_sound = sound_menu.get_item_text(sound_menu.get_selected_id())
 	
 	sentences.push_back(sentence_to_json(Sentence.new(sentence_text, sentence_delay, sentence_sound, sentence_speed)))

@@ -17,18 +17,8 @@ margin_right = 10.0
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Node2D" type="Node2D" parent="Panel/HBoxContainer"]
-editor/display_folded = true
-position = Vector2( 100, 0 )
-scale = Vector2( 0.5, 0.5 )
-
-[node name="VNReader" parent="Panel/HBoxContainer/Node2D" instance=ExtResource( 2 )]
-margin_left = 861.525
-margin_top = 12.3756
-margin_right = 1549.53
-margin_bottom = 679.376
-
 [node name="Layout" type="GridContainer" parent="Panel/HBoxContainer"]
+editor/display_folded = true
 margin_right = 480.0
 margin_bottom = 435.0
 rect_min_size = Vector2( 480, 435 )
@@ -36,13 +26,13 @@ columns = 2
 
 [node name="id_info" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 editor/display_folded = true
-margin_right = 204.0
+margin_right = 246.0
 margin_bottom = 106.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/id_info"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 197.0
+margin_right = 239.0
 margin_bottom = 99.0
 
 [node name="id" type="Label" parent="Panel/HBoxContainer/Layout/id_info/GridContainer"]
@@ -68,8 +58,9 @@ margin_right = 58.0
 margin_bottom = 88.0
 
 [node name="sentenceInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_left = 208.0
-margin_right = 429.0
+editor/display_folded = true
+margin_left = 250.0
+margin_right = 471.0
 margin_bottom = 106.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo"]
@@ -142,13 +133,13 @@ margin_bottom = 92.0
 
 [node name="sceneInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 margin_top = 110.0
-margin_right = 204.0
+margin_right = 246.0
 margin_bottom = 138.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 197.0
+margin_right = 239.0
 margin_bottom = 21.0
 columns = 3
 
@@ -163,7 +154,6 @@ text = "Music"
 align = 1
 
 [node name="background_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
-editor/display_folded = true
 margin_left = 42.0
 margin_right = 116.0
 margin_bottom = 14.0
@@ -172,22 +162,24 @@ margin_bottom = 14.0
 margin_right = 74.0
 margin_bottom = 14.0
 text = "Background"
+align = 1
 
 [node name="transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
 margin_left = 120.0
-margin_right = 190.0
+margin_right = 232.0
 margin_bottom = 14.0
 
 [node name="transition_label" type="Label" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/transition_list"]
-margin_right = 70.0
+margin_right = 112.0
 margin_bottom = 14.0
-text = "Transitions"
+text = "Scene Transitions"
+align = 1
 
 [node name="characterInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 editor/display_folded = true
-margin_left = 208.0
+margin_left = 250.0
 margin_top = 110.0
-margin_right = 429.0
+margin_right = 471.0
 margin_bottom = 138.0
 
 [node name="character_layout" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo"]
@@ -233,15 +225,29 @@ align = 1
 
 [node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
 margin_top = 142.0
-margin_right = 204.0
+margin_right = 246.0
 margin_bottom = 162.0
 text = "Preview Scene"
 
 [node name="parse_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_left = 208.0
+margin_left = 250.0
 margin_top = 142.0
-margin_right = 429.0
+margin_right = 471.0
 margin_bottom = 162.0
 text = "Parse JSON"
+
+[node name="Node2D" type="Node2D" parent="Panel/HBoxContainer"]
+position = Vector2( 100, 0 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="VNReader" parent="Panel/HBoxContainer/Node2D" instance=ExtResource( 2 )]
+margin_left = 1040.0
+margin_right = 1728.01
+margin_bottom = 667.0
+
+[node name="CheckBox" type="CheckBox" parent="."]
+visible = false
+margin_right = 24.0
+margin_bottom = 24.0
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt/add_sentence" to="." method="add_sentence"]
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/preview_btn" to="." method="preview_scene"]

@@ -18,7 +18,8 @@ var expressions = {
 }
 
 var backgrounds = {
-	Global.Backgrounds.CLASSROOM : load("res://VisualNovel/Backgrounds/classroom_angle.png")
+	Global.Backgrounds.CLASSROOM : load("res://VisualNovel/Backgrounds/classroom_angle.png"),
+	Global.Backgrounds.NONE : load("res://VisualNovel/Backgrounds/none.png")
 }
 	
 
@@ -104,21 +105,25 @@ func display_page(page : Page):
 	print("PATH" + self.get_path())
 #	print("CHARACTER: " + str(page.character));
 	#print("RESULT" + str(expressions[page.character][page.expression]));
+	
 	if page.character == Global.Characters.NONE: 
 		npc.texture = null;
 	else:
-		npc.texture = expressions[page.character][page.expression]
+		if expressions[page.character][page.expression] == null:
+			npc.texture = expressions["BOY"]["DEFAULT"]
+		else:
+			npc.texture = expressions[page.character][page.expression]
 	
 	match page.transition:
 		Global.Transitions.NONE:
-			transition.play("appear")	
+			transition.play("appear")
 			yield(transition, "animation_finished")
 		Global.Transitions.FLASH: #think ace attorny
 			pass
 		Global.Transitions.FADE:
 			$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
 			#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
-			transition.play("fade in")	
+			transition.play("fade in")
 			yield(transition, "animation_finished")
 #			yield(transition, "animation_finished")
 		Global.Transitions.SLIDE_RIGHT:
@@ -130,8 +135,11 @@ func display_page(page : Page):
 			pass
 	
 	if page.background != Global.Backgrounds.SAME:
-		$Control/Background.texture = backgrounds[Global.Backgrounds.CLASSROOM];
-		
+		if backgrounds[page.background] == null:
+			$Control/Background.texture = backgrounds[Global.Backgrounds.CLASSROOM];
+		else:
+			$Control/Background.texture = backgrounds[page.background];
+	# else incolves being able to reference previous pages
 	
 	for sentence in page.content:
 		yield(write_sentence(sentence), "completed"); #tells program to wait on everything until this function finishes/this happens

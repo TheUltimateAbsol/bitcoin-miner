@@ -84,7 +84,7 @@ Global="*res://Global.gd"
 
 [display]
 
-window/size/width=864
+window/size/width=964
 window/size/height=480
 window/size/resizable=false
 window/pixel=true
