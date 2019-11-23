@@ -1,0 +1,52 @@
+[
+    {
+        "type" :"message",
+        "id" : 1,
+        "next" : 2,
+        "text" : "Test Message 1"
+    },
+    {
+        "type" :"message",
+        "id" : 2,
+        "next" : 3,
+        "text" : "Test Message 2"
+    },
+    {
+        "type" :"questions",
+        "id" : 3,
+        "text" : "Questions 1", 
+        "questions" : [
+            {
+                "text" : "Choice 1",
+                "next" : 4
+            },
+            {
+                "text" : "Choice 2",
+                "next" : 5
+            }
+        ]
+    },
+    {
+        "type" : "message",
+        "id" : 4,
+        "next" : 6,
+        "text" : "Result 1"
+    },
+    {
+        "type" : "message",
+        "id" : 5,
+        "next" : 6,
+        "text" : "Result 2"
+    },
+    {
+        "type" : "control",
+        "id" : 6,
+        "next" : 7,
+        "comment" : "Control"
+    },
+    {
+        "type" : "end",
+        "id" : 7,
+        "comment" : "Endpoint"
+    }
+]
