@@ -8,6 +8,7 @@ export (Texture) var walkingSprite = preload("res://PlayerSprites/Miner Walking 
 export (Texture) var miningSprite = preload("res://PlayerSprites/Miner Axe.png")
 export (Texture) var duckingSprite = preload("res://PlayerSprites/Miner_Duck_1.png")
 export (Texture) var dyingSprite = preload("res://PlayerSprites/Miner_Hurt.png");
+export (Texture) var levelCompleteSprite = preload("res://PlayerSprites/Ending_1.png");
 
 export (Vector2) var idleOffset = Vector2(0,0)
 export (Vector2) var jumpingOffset = Vector2(0,0)
@@ -15,7 +16,7 @@ export (Vector2) var walkingOffset =  Vector2(0,0)
 export (Vector2) var miningOffset = Vector2(2, -1)
 export (Vector2) var duckingOffset = Vector2(1,0)
 export (Vector2) var dyingOffset = Vector2(0,0)
-
+export (Vector2) var levelCompleteOffset = Vector2(-6,-11)
 
 const GRAVITY = 500.0 # pixels/second/second
 
