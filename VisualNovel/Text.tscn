@@ -8,9 +8,9 @@ margin_bottom = -511.0
 alignment = 2
 
 [node name="Panel" type="Panel" parent="."]
-margin_top = 109.0
+margin_top = 829.0
 margin_right = 383.0
-margin_bottom = 209.0
+margin_bottom = 929.0
 rect_min_size = Vector2( 0, 100 )
 
 [node name="Label" type="Label" parent="Panel"]

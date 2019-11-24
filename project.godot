@@ -59,10 +59,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://VisualNovel/Sentence.gd"
 }, {
-"base": "Node",
+"base": "Panel",
 "class": "VNlinkbarItem",
 "language": "GDScript",
-"path": "res://VNlinkbarItem.gd"
+"path": "res://VisualNovel/VNlinkbarItem.gd"
 } ]
 _global_script_class_icons={
 "Command": "",
