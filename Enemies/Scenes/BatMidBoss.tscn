@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Enemies/Scenes/BatMidBoss.gd" type="Script" id=1]
+[ext_resource path="res://Classes/AttackingEnemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemies/Sprites/Bat.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 25.0
+height = 30.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "Flap"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 22.0
+height = 24.0
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[node name="BatMidBoss" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
+editor/display_folded = true
+miner_damage = 2
+
+[node name="Sprite" parent="Enemy" index="1"]
+position = Vector2( 2, -20 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/EnemyHurtbox" index="0"]
+position = Vector2( 0, -23 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="AttackPlayer" parent="Enemy" index="4"]
+anims/Flap = SubResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/HitBox" index="0"]
+position = Vector2( 0, -23 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/PathFollow2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[editable path="Enemy"]

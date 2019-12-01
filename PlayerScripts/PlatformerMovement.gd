@@ -233,6 +233,8 @@ func win():
 #	$LevelComplete/Timer.connect("timeout", self, "drop_win");
 	$LevelLoadout.visible = false;
 	$Miners.visible = false;
+	$Miner/Node2D.visible = false;
+	$Miner/Revive.visible = false;
 	$Miner.pause_mode = Node.PAUSE_MODE_PROCESS
 	$LevelComplete.pause_mode = Node.PAUSE_MODE_PROCESS
 	get_tree().paused = true;

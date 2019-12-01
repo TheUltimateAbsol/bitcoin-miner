@@ -90,13 +90,12 @@ tracks/3/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.47, 0.47 ) ]
 }
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 outline_color = Color( 0.878431, 0.941176, 0.909804, 1 )
 font_data = ExtResource( 8 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "Activate"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
 tracks/0/interp = 1
@@ -110,7 +109,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=6]
 resource_name = "DisplayScores"
 length = 2.0
 tracks/0/type = "value"
@@ -191,7 +190,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=7]
 resource_name = "FlashText"
 length = 0.9
 tracks/0/type = "value"
@@ -243,12 +242,12 @@ tracks/3/keys = {
 "values": [ Vector2( 1e-005, 1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Curve2D" id=5]
+[sub_resource type="Curve2D" id=8]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 81, 111 )
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Miner/Node2D:position")
 tracks/0/interp = 1
@@ -286,7 +285,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Miner/Revive:visible")
 tracks/0/interp = 1
@@ -336,7 +335,7 @@ tracks/3/keys = {
 "values": [ "MISS!" ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Miner/Revive:visible")
 tracks/0/interp = 1
@@ -491,7 +490,7 @@ margin_left = -161.0
 margin_top = 15.0
 margin_right = -1.0
 margin_bottom = 41.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.0941176, 0.188235, 0.188235, 1 )
 text = "LEVEL COMPLETE"
 align = 1
@@ -501,19 +500,19 @@ margin_left = 160.0
 margin_top = 14.0
 margin_right = 319.999
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "LEVEL COMPLETE"
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LevelComplete"]
-anims/Activate = SubResource( 4 )
-anims/DisplayScores = SubResource( 11 )
-anims/FlashText = SubResource( 10 )
+anims/Activate = SubResource( 5 )
+anims/DisplayScores = SubResource( 6 )
+anims/FlashText = SubResource( 7 )
 
 [node name="Path2D" type="Path2D" parent="LevelComplete"]
 editor/display_folded = true
-curve = SubResource( 5 )
+curve = SubResource( 8 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="LevelComplete/Path2D"]
 rotate = false
@@ -683,7 +682,6 @@ anims/SceneSwitch = ExtResource( 15 )
 [node name="Miners" type="Node2D" parent="."]
 
 [node name="Miner" parent="." instance=ExtResource( 16 )]
-editor/display_folded = true
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 editor/display_folded = true
@@ -721,11 +719,11 @@ align = 1
 editor/display_folded = true
 
 [node name="LevelUp" type="AnimationPlayer" parent="DecoratorAnimations"]
-anims/Level_Up = SubResource( 6 )
+anims/Level_Up = SubResource( 9 )
 
 [node name="Revive" type="AnimationPlayer" parent="DecoratorAnimations"]
-anims/Fail = SubResource( 7 )
-anims/Success = SubResource( 8 )
+anims/Fail = SubResource( 10 )
+anims/Success = SubResource( 11 )
 
 [node name="Pause" type="Node" parent="."]
 editor/display_folded = true
