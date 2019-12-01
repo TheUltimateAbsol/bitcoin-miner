@@ -10,8 +10,8 @@ var miners = [];
 var main_command : Command = Command.new(Global.CommandTypes.IDLE)
 
 var level1 = preload("res://Stages/Levels/Level1/1.tscn");
-var level2 = preload("res://Stages/Levels/Level1/2.tscn");
-var level3 = preload("res://Stages/Levels/Level1/3.tscn");
+#var level2 = preload("res://Stages/Levels/Level1/2.tscn");
+#var level3 = preload("res://Stages/Levels/Level1/3.tscn");
 var levels = []
 var current_level = 0;
 var level_scene = null

@@ -10,6 +10,7 @@ _data = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "Back"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
 tracks/0/interp = 1
@@ -17,10 +18,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.0198365, 0.3, 0.5, 2 ),
+"transitions": PoolRealArray( 0.5, 1, 0.5, 1 ),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [ 1.0, 0.85, 0.85, 0.0 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("Path2D/PathFollow2D/Enemy")
@@ -29,7 +30,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.9 ),
+"times": PoolRealArray( 0.1, 1.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -41,6 +42,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=3]
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
 tracks/0/interp = 1
@@ -48,10 +50,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.0198365, 0.986237 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.0198365, 0.3, 0.5, 2 ),
+"transitions": PoolRealArray( 0.5, 1, 0.5, 1 ),
 "update": 0,
-"values": [ 0.0, 1.0 ]
+"values": [ 0.0, 0.141485, 0.141485, 1.0 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("Path2D/PathFollow2D/Enemy")
@@ -60,7 +62,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.9 ),
+"times": PoolRealArray( 0.1, 1.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -78,8 +80,7 @@ script = ExtResource( 1 )
 curve = SubResource( 1 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2( -9.3202, 2.0988 )
-offset = 1.6634
+position = Vector2( -10, 1 )
 rotate = false
 loop = false
 

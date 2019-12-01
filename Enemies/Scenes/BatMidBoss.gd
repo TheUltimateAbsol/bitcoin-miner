@@ -2,28 +2,42 @@ extends Node2D
 
 export (float) var interval = 3.0;
 export (float) var speed = 1.0;
-var is_left = true;
+
+const NUM_ATTACKS = 3;
+enum {LEFT=0, RIGHT=1, CRAZY=2}
+var attack = LEFT;
 
 func _ready():
 	$Timer.wait_time = interval;
 	$Timer.start();
 
 func cycle():
-	if is_left:
-		$AnimationPlayer.play("Forward", -1, speed);
-		is_left = false;
-	else:
-		$AnimationPlayer.play("Back", -1, speed);
-		is_left = true;
-	yield($AnimationPlayer, "animation_finished");
-	$Timer.start();
-	
-func _on_Timer_timeout():
-	cycle();
+	match attack:
+		LEFT:
+			yield(attack_left(), "completed");
+		RIGHT:
+			yield(attack_right(), "completed");
+		CRAZY:
+			yield(crazy_attack(), "completed");
+			
+	attack = (attack+1)%NUM_ATTACKS;
+	print("ATTACK + " + str(attack));
+	$Timer.start()
 	
 func attack_left():
 	$AttackLeft/PathFollow2D/RemoteTransform2D.set_remote_node($Enemy.get_path());
-	$AnimationPlayer.play
+	$AnimationPlayer.play("AttackLeft");
+	yield($AnimationPlayer, "animation_finished"); 
+	$AttackLeft/PathFollow2D/RemoteTransform2D.set_remote_node(NodePath());
 	
-func release_control():
+func attack_right():
+	$AttackRight/PathFollow2D/RemoteTransform2D.set_remote_node($Enemy.get_path());
+	$AnimationPlayer.play("AttackRight");
+	yield($AnimationPlayer, "animation_finished"); 
+	$AttackRight/PathFollow2D/RemoteTransform2D.set_remote_node(NodePath());
 	
+func crazy_attack():
+	$CrazyAttack/PathFollow2D/RemoteTransform2D.set_remote_node($Enemy.get_path());
+	$AnimationPlayer.play("CrazyAttack");
+	yield($AnimationPlayer, "animation_finished"); 
+	$CrazyAttack/PathFollow2D/RemoteTransform2D.set_remote_node(NodePath());
