@@ -25,6 +25,14 @@ func perform_command(bot):
 	var temp = num_waiting;
 	#END LOCK
 	
+	
+#	var asdf = Timer.new()
+#	asdf.wait_time = 0.25;
+#	add_child(asdf) #to process
+#	asdf.start() #to start
+#	yield(asdf, "timeout");
+		
+		
 	#Start timer
 	#Start countdown using temp
 	if type == Global.CommandTypes.MOVE:
@@ -46,13 +54,16 @@ func perform_command(bot):
 	if func_pointer != null:
 		yield(actor, "finished_command") #Even if the miner dies, this will still activate
 	
+	print('Command completed for real');
 	#LOCK THIS OPERATION
 	num_completed+=1
 	#END LOCK
 	
 	if (num_completed >= Global.num_bots): 
 		emit_signal("command_completed");
-		
+	
+	if actor.dead: return null;
+
 	return next.perform_command(bot);
 
 

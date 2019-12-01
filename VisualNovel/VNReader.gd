@@ -114,7 +114,7 @@ func write_sentence (sentence):
 		letter_timer.start();
 		yield(letter_timer, "timeout");
 		
-	delay_timer.wait_time = sentence.delay*sentence.speed;
+	delay_timer.wait_time = sentence.delay*sentence.speed + 0.0001; #so it shuts up
 	delay_timer.start();
 	yield(delay_timer, "timeout");
 

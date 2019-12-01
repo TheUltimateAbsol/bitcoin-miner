@@ -14,7 +14,6 @@ func stop_attack():
 	$HitBox.set_monitoring(false);
 
 func _on_HitBox_body_entered(area):
-	print(area.get_path());
 	if num_damage>=miner_damage: return;
 	if area.is_in_group("player"):
 		var result = area.damage();

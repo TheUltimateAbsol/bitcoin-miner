@@ -45,8 +45,6 @@ func _ready():
 	
 	enemies = get_tree().get_nodes_in_group("objective")
 	get_tree().call_group("objective", "connect", "died", self, "on_enemy_death", [], CONNECT_ONESHOT);
-	for enemy in enemies:
-		enemy.connect("died", self, "on_enemy_death");
 
 func on_enemy_death(victim):
 	print("enemy died");

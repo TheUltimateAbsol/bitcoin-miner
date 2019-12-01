@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://UI/Sprites/ui_header.png" type="Texture" id=1]
 [ext_resource path="res://UI/Scenes/ui_header.gd" type="Script" id=2]
 [ext_resource path="res://Style/DEFAULT_TEXT.tres" type="Theme" id=3]
 [ext_resource path="res://UI/Sprites/Miner Icon.png" type="Texture" id=4]
+[ext_resource path="res://UI/Sprites/Time Icon.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "flash"
@@ -23,6 +24,10 @@ tracks/0/keys = {
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 8, 8 )
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -69,30 +74,38 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="remaining" type="Label" parent="."]
-margin_left = -73.2553
+margin_left = -78.0
 margin_top = -8.0
-margin_right = -58.2553
+margin_right = -63.0
 margin_bottom = 5.0
 theme = ExtResource( 3 )
-text = "100"
+text = "99"
 align = 2
 
 [node name="Label3" type="Label" parent="."]
-margin_left = -57.2553
+margin_left = -63.0
 margin_top = -8.0
-margin_right = -52.2553
+margin_right = -58.0
 margin_bottom = 5.0
 theme = ExtResource( 3 )
 text = "/"
 align = 2
 
 [node name="total" type="Label" parent="."]
-margin_left = -51.0
+margin_left = -57.0
 margin_top = -8.0
-margin_right = -39.0
+margin_right = -45.0
 margin_bottom = 5.0
 theme = ExtResource( 3 )
-text = "100"
+text = "99"
+
+[node name="time" type="Label" parent="."]
+margin_left = -4.0
+margin_top = -8.0
+margin_right = 14.0
+margin_bottom = 5.0
+theme = ExtResource( 3 )
+text = "00:00"
 
 [node name="Label5" type="Label" parent="."]
 margin_left = 20.9107
@@ -121,12 +134,19 @@ margin_right = -72.0
 margin_bottom = 4.0
 custom_styles/panel = SubResource( 2 )
 
+[node name="Panel2" type="Panel" parent="."]
+margin_left = -13.0
+margin_top = -4.0
+margin_right = -5.0
+margin_bottom = 4.0
+custom_styles/panel = SubResource( 7 )
+
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
-margin_left = -32.0
-margin_top = -1.84222
-margin_right = 13.0
-margin_bottom = 2.15778
+margin_left = -45.0
+margin_top = -2.0
+margin_right = -18.0
+margin_bottom = 2.0
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
 custom_fonts/font = SubResource( 5 )
@@ -134,5 +154,8 @@ step = 1.0
 
 [node name="Countdown" type="AnimationPlayer" parent="."]
 anims/Countdown = SubResource( 6 )
-[connection signal="animation_finished" from="Countdown" to="." method="_on_Countdown_animation_finished"]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 [connection signal="animation_finished" from="Countdown" to="." method="on_Countdown_End"]
+[connection signal="timeout" from="Timer" to="." method="increment_timer"]

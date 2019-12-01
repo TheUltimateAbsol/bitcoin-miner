@@ -61,3 +61,8 @@ func on_Countdown_End(anim_name):
 func stop_countdown():
 	$Countdown.stop();
 	
+func increment_timer():
+	var num_seconds = Global.numseconds
+	num_seconds += 1;
+	$time.text = str(num_seconds/60).pad_zeros(2) + ":" + str(num_seconds%60).pad_zeros(2);
+	Global.numseconds = num_seconds

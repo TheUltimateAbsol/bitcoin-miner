@@ -7,6 +7,7 @@ enum CommandTypes {IDLE, MOVE, MINE, DUCK}
 var numremaining = 1
 var numtotal = 1
 var numcoin = 0
+var numseconds = 0;
 
 enum NavLinkTypes {NONE, FLOOR, JUMP, FALL}
 

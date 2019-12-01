@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+class_name Miner
 
 #Load the sprites that we can alternate between
 export (Texture) var idleSprite = preload("res://PlayerSprites/Miner Compress.png")
@@ -101,6 +102,16 @@ func die():
 		#yield(anim, "animation_finished");
 		#queue_free();
 		
+func level_complete():
+	if anim_state != ANIM_DYING:
+		anim_state = ANIM_DYING
+		_reset()
+		sprite.texture = levelCompleteSprite
+		set_offset(levelCompleteOffset)
+		anim.play("Level Complete")
+		#yield(anim, "animation_finished");
+		#queue_free();
+		
 func getUp():
 	if anim_state == ANIM_DYING: return
 	if anim_state != ANIM_IDLE:
@@ -193,6 +204,13 @@ func flip(right=true):
 				-$MiningHitbox/CollisionShape2D.position.x,
 				$MiningHitbox/CollisionShape2D.position.y)
 		sprite.flip_h = false;
+		
+#Precondition: Not being modified by a RemoteTransform2D
+func flip_towards(target : Vector2):
+	if (target.x >= global_position.x):
+		flip(true);
+	else:
+		flip(false);
 
 #Wrapper function for setting the offset to a sprite, as to keep any flipped dimensions
 func set_offset(new : Vector2):
@@ -224,7 +242,6 @@ func walk_to(end):
 #		reset_input();
 #		emit_signal("target_reached");
 #		return;
-	print("walking");	
 	var right = true;
 	if position.x - end.x > 0: right = false;
 	if right: walk_right = true;
@@ -257,9 +274,23 @@ func duck_action(node : Node, signal_name : String):
 	node.connect(signal_name, self, "stop_duck", [], CONNECT_ONESHOT);
 	
 func quick_duck():
+	print("QUICK DUCK");
 	down = true;
 	state = DUCKING;
-	anim.connect("animation_finished", self, "stop_duck", [], CONNECT_ONESHOT);
+
+	#UNSAFE
+	yield(anim, "animation_finished");
+	print ("QUICK DUCK STOP")
+	stop_duck();
+#	anim.connect("animation_finished", self, "stop_duck", [], CONNECT_ONESHOT);
+#	anim.connect("animation_changed", self, "cancel_duck", [], CONNECT_ONESHOT);
+	
+#func cancel_duck( old_name, new_name ):
+#	if (old_name == "Duck"):
+#		anim.disconnect("animation_finished", self, "stop_duck");
+	
+#SO, you are looking at why the "stop_duck" only happens on the bots during the next down_pressed event	
+	
 	
 func stop_duck():
 	down = false;
@@ -284,6 +315,7 @@ func follow_path(path):
 	emit_signal("path_traversed");
 
 func damage():
+	if ducking == true: return false;
 	if vulnerable == false: return false;
 	
 	reset_input();
