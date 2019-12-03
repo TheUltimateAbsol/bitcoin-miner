@@ -10,14 +10,16 @@ var miners = [];
 var main_command : Command = Command.new(Global.CommandTypes.IDLE)
 
 var level1 = preload("res://Stages/Levels/Level1/1.tscn");
-#var level2 = preload("res://Stages/Levels/Level1/2.tscn");
-#var level3 = preload("res://Stages/Levels/Level1/3.tscn");
+var level2 = preload("res://Stages/Levels/Level1/2.tscn");
+var level3 = preload("res://Stages/Levels/Level1/3.tscn");
 var levels = []
 var current_level = 0;
 var level_scene = null
 var next_level_scene = null
 var dead = false;
 
+var attack_buffers = [false, false, false, false, false];
+signal cancel_attack
 #This is just an alias
 onready var main : KinematicBody2D = $Miner
 
@@ -51,7 +53,7 @@ func load_level():
 	#If there is a next level, load it
 	if current_level+1 < levels.size():
 		next_level_scene = levels[current_level+1].instance();
-		$LevelLoadout/Next.add_child(next_level_scene);
+		#$LevelLoadout/Next.add_child(next_level_scene);
 	else:
 		next_level_scene = null;
 		
@@ -90,27 +92,58 @@ func load_level():
 		level_scene.connect("room_clear", self, "switch_level", [], CONNECT_ONESHOT);
 	else:
 		level_scene.connect("room_clear", self, "win", [], CONNECT_ONESHOT);
+
+	
+func recursive_invisible(node: Node, list):
+	for enemy in node.get_children():
+		recursive_invisible(enemy, list);
+	
+	if (node.is_in_group("enemy") and not node.is_in_group("objective")):
+		node.visible = false;
+		list.push_back(node);
 	
 #precondition: there is another level to switch to
 func switch_level():
 	$Miner.visible = false;
 	$Miners.visible = false;
 	
+	#A CHEAP TRICK TO MAKE SURE MINING STATE DOES NOT SAVE ACROSS SCENES
+	$Miner.stop_attack()
+	
+	#Makes next level visible
+	$LevelLoadout/Next.call_deferred("add_child", next_level_scene);
+	
+	#Make all enemies invisible
+	var affected = [];
+	recursive_invisible(next_level_scene, affected);
+	
+	$LevelLoadout/AnimationPlayer.pause_mode = Node.PAUSE_MODE_PROCESS
+	get_tree().paused = true;
+	
 	$LevelLoadout/AnimationPlayer.play("SceneSwitch");
 	yield($LevelLoadout/AnimationPlayer, "animation_finished");
+	
+	#Make them visible again
+	#Note: this is here so that the "affected" list is not messed up by load_level's deletions
+	for enemy in affected:
+		enemy.visible = true;
+	
 	$LevelLoadout/Current.position = Vector2(0, 8)
 	$LevelLoadout/Next.position = Vector2(0,144)
 	current_level = current_level + 1;
 	load_level();
 	spawn();
 	
+	$LevelLoadout/AnimationPlayer.pause_mode = Node.PAUSE_MODE_INHERIT
+	get_tree().paused = false;
+	
 	$Miner.visible = true;
 	$Miners.visible = true
 	
 func _ready():
 	levels.push_back(level1);
-	#levels.push_back(level2);
-	#levels.push_back(level3);
+	levels.push_back(level2);
+	levels.push_back(level3);
 	
 	add_child(main_command) # so its timer works
 	
@@ -121,18 +154,34 @@ func _ready():
 	$Miner.connect("died", self, "game_over");
 	
 	connect("pressed_attack", self, "test");
+	main.connect("finished_mining", self, "finished_mining_fire");
+	
+func finished_mining_fire():
+	emit_signal("cancel_attack");
 	
 func test():
 	print("hello world");
 	
 
 func spawn():
-	var spawnlocation = level_scene.get_node("MiddleTarget").position.x;
+	var spawnlocation;
+	match level_scene.spawn_location:
+		"Left":
+			spawnlocation = level_scene.get_node("LeftTarget").position.x;
+			section = LEFT;
+		"Middle":
+			spawnlocation = level_scene.get_node("MiddleTarget").position.x;
+			section = MIDDLE;
+		"Right":
+			spawnlocation = level_scene.get_node("RightTarget").position.x;
+			section = RIGHT;
+			
 	main.position = Vector2 (spawnlocation, 32);
-	section = MIDDLE;
+
 	var i = 1;
 	for miner in $Miners.get_children():
 		if not miner.frozen:
+			miner.reset_input();
 			miner.position = main.position + Vector2(0, i*(-4))
 			i = i+1;
 
@@ -171,10 +220,22 @@ func get_command():
 	var jump_input = Input.is_action_pressed("jump")
 	var attack_input = Input.is_action_pressed("attack")
 	
+	attack_buffers.pop_front();
+	attack_buffers.push_back(attack_input);
+	
+	attack_input = attack_buffers.has(true);
+	print(attack_input);
+	
+	if not attack_input and (left_input or right_input or down_input):
+		emit_signal("cancel_attack");
+	
 	if main.can_attack():
 		if (attack_input):
-			main.attack(InputEventHandler, "released_attack");
-			InputEventHandler.connect("released_attack", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+#			main.attack(InputEventHandler, "released_attack");
+			main.attack(self, "cancel_attack");
+
+#			InputEventHandler.connect("released_attack", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			connect("cancel_attack", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
 			new_command(Global.CommandTypes.MINE)
 
 		

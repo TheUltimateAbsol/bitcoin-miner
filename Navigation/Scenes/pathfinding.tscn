@@ -125,7 +125,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HBoxContainer2/VBoxContainer3/Label:visible")
+tracks/1/path = NodePath("HBoxContainer2/VBoxContainer3/Enemy:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -137,7 +137,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("HBoxContainer2/VBoxContainer3/Label2:visible")
+tracks/2/path = NodePath("HBoxContainer2/VBoxContainer3/Time:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -149,7 +149,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("HBoxContainer2/VBoxContainer3/Label3:visible")
+tracks/3/path = NodePath("HBoxContainer2/VBoxContainer3/Total:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -161,7 +161,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("HBoxContainer2/VBoxContainer3/Label4:visible")
+tracks/4/path = NodePath("HBoxContainer2/VBoxContainer3/Inventory:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -182,10 +182,10 @@ tracks/5/keys = {
 "times": PoolRealArray( 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
-"args": [ NodePath("HBoxContainer2/VBoxContainer3/Label3") ],
+"args": [ NodePath("HBoxContainer2/VBoxContainer3/Total") ],
 "method": "roll"
 }, {
-"args": [ NodePath("HBoxContainer2/VBoxContainer3/Label4") ],
+"args": [ NodePath("HBoxContainer2/VBoxContainer3/Inventory") ],
 "method": "roll"
 } ]
 }
@@ -469,7 +469,6 @@ percent_visible = 0.0
 anims/GameOver = ExtResource( 10 )
 
 [node name="LevelComplete" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 11 )
 
 [node name="Background" type="Sprite" parent="LevelComplete"]
@@ -522,7 +521,6 @@ loop = false
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="LevelComplete/Path2D/PathFollow2D"]
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="LevelComplete"]
-editor/display_folded = true
 visible = false
 margin_left = 33.0
 margin_top = 41.0
@@ -608,8 +606,7 @@ margin_right = 88.0
 margin_bottom = 65.0
 custom_constants/separation = 0
 
-[node name="Label" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
-visible = false
+[node name="Enemy" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
 margin_right = 40.0
 margin_bottom = 13.0
 theme = ExtResource( 7 )
@@ -617,7 +614,7 @@ custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "100000"
 align = 2
 
-[node name="Label2" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
+[node name="Time" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
 visible = false
 margin_top = 13.0
 margin_right = 40.0
@@ -627,7 +624,7 @@ custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "x1.2"
 align = 2
 
-[node name="Label3" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
+[node name="Total" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
 visible = false
 margin_top = 26.0
 margin_right = 40.0
@@ -637,7 +634,7 @@ custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "1000000000"
 align = 2
 
-[node name="Label4" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
+[node name="Inventory" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
 visible = false
 margin_top = 39.0
 margin_right = 40.0
@@ -648,8 +645,9 @@ text = "1000000000"
 align = 2
 
 [node name="SPACER" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
+margin_top = 13.0
 margin_right = 40.0
-margin_bottom = 13.0
+margin_bottom = 26.0
 theme = ExtResource( 7 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "        "
@@ -669,7 +667,6 @@ wait_time = 0.1
 autostart = true
 
 [node name="LevelLoadout" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Current" type="Node2D" parent="LevelLoadout"]
 position = Vector2( 0, 8 )
@@ -715,6 +712,7 @@ text = "MISS!"
 align = 1
 
 [node name="ui_header" parent="." instance=ExtResource( 17 )]
+z_index = 10
 
 [node name="DecoratorAnimations" type="Node" parent="."]
 editor/display_folded = true

@@ -10,6 +10,7 @@ onready var right_edge_scene = preload("res://Navigation/Scenes/right_edge.tscn"
 onready var solo_scene = preload("res://Navigation/Scenes/solo.tscn");
 # The Tilemap node doesn't have clear bounds so we're defining the map's limits here
 export(Vector2) var map_size = Vector2(20, 17)
+export(String, "Left", "Middle", "Right") var spawn_location = "Middle"
 
 var nav_points = []
 var valid_points = []
@@ -43,8 +44,15 @@ func _ready():
 	#var path = connect_path(valid_points[1].index, valid_points[valid_points.size()-1].index)
 	#display_path(path);
 	
-	enemies = get_tree().get_nodes_in_group("objective")
-	get_tree().call_group("objective", "connect", "died", self, "on_enemy_death", [], CONNECT_ONESHOT);
+	#GODOT IS STUPID. HERE's SOMETHING UNSAFE.
+	#This will break if the enemies are not direct children
+#	enemies = get_tree().get_nodes_in_group("objective")
+	enemies = []
+	for child in get_children():
+		if child.is_in_group("objective"):
+			child.connect("died", self, "on_enemy_death", [], CONNECT_ONESHOT);
+			enemies.push_back(child);
+#	get_tree().call_group("objective", "connect", "died", self, "on_enemy_death", [], CONNECT_ONESHOT);
 
 func on_enemy_death(victim):
 	print("enemy died");

@@ -1,11 +1,9 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Stages/Tilesets/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Navigation/Scenes/TileMap.gd" type="Script" id=2]
-[ext_resource path="res://Enemies/Scenes/Crystal.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Enemies/Scenes/BatMidBoss.gd" type="Script" id=4]
-[ext_resource path="res://Classes/AttackingEnemy.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Enemies/Sprites/Bat.png" type="Texture" id=6]
+[ext_resource path="res://Enemies/Scenes/SmallRock.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Classes/GameFlow/Reminder.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -88,247 +86,24 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 } ]
 0/z_index = 0
 
-[sub_resource type="CapsuleShape2D" id=14]
-radius = 25.0
-height = 30.0
-
-[sub_resource type="Animation" id=15]
-resource_name = "Flap"
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-
-[sub_resource type="CapsuleShape2D" id=16]
-radius = 22.0
-height = 24.0
-
-[sub_resource type="Curve2D" id=10]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -33, 47, -13.6343, 0.0595383, 13.6343, -0.0595383, -17, 34, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 204, 47 )
-}
-
-[sub_resource type="Curve2D" id=17]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 83, -33, 0, 0, 0, 0, 83, 75, 18.4413, 10.0295, -18.4413, -10.0295, 54, -20, 4.30298, 24.8958, -4.30298, -24.8958, -8, -13, -3.38091, -7.06918, 3.38091, 7.06918, 14, -24, 0, 0, 0, 0, 17, -17, 0, 0, 0, 0, 17, 92, -22.0002, 11.0001, 22.0002, -11.0001, 105, -21, -13.2163, 13.2163, 13.2163, -13.2163, 170, -4, 9.83538, -2.7662, -9.83538, 2.7662, 150, -28, 0, 0, 0, 0, 142, -9, 0, 0, 0, 0, 142, 92, -21.0296, 15.5295, 21.0296, -15.5295, 200, -18, 0, 0, 0, 0, 249, -18 )
-}
-
-[sub_resource type="Curve2D" id=12]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 240, 47, 15.7326, -0.245599, -15.7326, 0.245599, 220, 35, 0, 0, 0, 0, 204, 47, 0, 0, 0, 0, 9, 47 )
-}
-
-[sub_resource type="Animation" id=13]
-resource_name = "AttackLeft"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("AttackLeft/PathFollow2D:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.1, 1.3, 2, 2.001 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 45.2771, 45.2771, 249.089, 249.089 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("Enemy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1.1, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "start_attack"
-}, {
-"args": [  ],
-"method": "stop_attack"
-} ]
-}
-
-[sub_resource type="Animation" id=11]
-resource_name = "AttackRight"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("AttackRight/PathFollow2D:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.1, 1.3, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 45.2771, 45.2771, 249.089 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("Enemy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 1.3, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "start_attack"
-}, {
-"args": [  ],
-"method": "stop_attack"
-} ]
-}
-
-[sub_resource type="Animation" id=18]
-resource_name = "CrazyAttack"
-length = 4.5
-tracks/0/type = "method"
-tracks/0/path = NodePath("Enemy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.4, 1.2, 1.8, 2.6, 3.2, 3.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "start_attack"
-}, {
-"args": [  ],
-"method": "stop_attack"
-}, {
-"args": [  ],
-"method": "start_attack"
-}, {
-"args": [  ],
-"method": "stop_attack"
-}, {
-"args": [  ],
-"method": "start_attack"
-}, {
-"args": [  ],
-"method": "stop_attack"
-} ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CrazyAttack/PathFollow2D:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.4, 1.2, 1.7, 1.8, 2.6, 3.1, 3.2, 3.8, 4.4 ),
-"transitions": PoolRealArray( 1, 2, 2, 0.5, 2, 2, 0.5, 2, 2, 0.5, 1 ),
-"update": 0,
-"values": [ 0.0, 11.0204, 11.0204, 99.1833, 319.591, 319.591, 418.774, 705.304, 705.304, 804.487, 980.813 ]
-}
-
 [node name="TileMap" type="TileMap"]
 tile_set = SubResource( 8 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 851976, -2147483648, 0, 851977, 0, 1, 851978, 0, 1, 851979, 0, 1, 851980, -1610612736, 0, 917512, -2147483648, 1, 917513, 0, 131072, 917514, 0, 131072, 917515, 0, 131072, 917516, -1610612736, 2, 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 536870912, 1, 983048, -2147483648, 65538, 983049, 0, 131072, 983050, 0, 131072, 983051, 0, 131072, 983052, -1610612736, 65538, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 983056, 0, 1, 983057, 0, 1, 983058, 0, 1, 983059, 0, 1, 1048576, 0, 131072, 1048577, 0, 131072, 1048578, 0, 131072, 1048579, 0, 131072, 1048580, 0, 131072, 1048581, 0, 131072, 1048582, 0, 131072, 1048583, 0, 131072, 1048584, 0, 131072, 1048585, 0, 131072, 1048586, 0, 131072, 1048587, 0, 131072, 1048588, 0, 131072, 1048589, 0, 131072, 1048590, 0, 131072, 1048591, 0, 131072, 1048592, 0, 131072, 1048593, 0, 131072, 1048594, 0, 131072, 1048595, 0, 131072 )
+tile_data = PoolIntArray( 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 0, 1, 983048, 0, 1, 983049, 0, 1, 983050, 0, 1, 983051, 0, 1, 983052, 0, 1, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 983056, 0, 1, 983057, 0, 1, 983058, 0, 1, 983059, 0, 1, 1048576, 0, 131072, 1048577, 0, 131072, 1048578, 0, 131072, 1048579, 0, 131072, 1048580, 0, 131072, 1048581, 0, 131072, 1048582, 0, 131072, 1048583, 0, 131072, 1048584, 0, 131072, 1048585, 0, 131072, 1048586, 0, 131072, 1048587, 0, 131072, 1048588, 0, 131072, 1048589, 0, 131072, 1048590, 0, 131072, 1048591, 0, 131072, 1048592, 0, 131072, 1048593, 0, 131072, 1048594, 0, 131072, 1048595, 0, 131072 )
 script = ExtResource( 2 )
+spawn_location = "Left"
 
 [node name="LeftTarget" type="Node2D" parent="."]
-position = Vector2( 17, 115 )
+position = Vector2( 33, 116 )
 
 [node name="RightTarget" type="Node2D" parent="."]
-position = Vector2( 143, 115 )
+position = Vector2( 143, 116 )
 
 [node name="MiddleTarget" type="Node2D" parent="."]
-position = Vector2( 83, 98 )
+position = Vector2( 81, 116 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 81, 104 )
+position = Vector2( 144, 120 )
 
-[node name="BatMidBoss" type="Node2D" parent="."]
-script = ExtResource( 4 )
-
-[node name="Enemy" parent="BatMidBoss" instance=ExtResource( 5 )]
-position = Vector2( -8, -9 )
-miner_damage = 2
-
-[node name="Sprite" parent="BatMidBoss/Enemy" index="1"]
-position = Vector2( 2, -20 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 6 )
-vframes = 2
-frame = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BatMidBoss/Enemy/EnemyHurtbox" index="0"]
-position = Vector2( 0, -23 )
-rotation = 1.5708
-shape = SubResource( 14 )
-
-[node name="AttackPlayer" parent="BatMidBoss/Enemy" index="4"]
-autoplay = "Flap"
-anims/Flap = SubResource( 15 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BatMidBoss/Enemy/HitBox" index="0"]
-position = Vector2( 0, -23 )
-rotation = 1.5708
-shape = SubResource( 16 )
-
-[node name="AttackRight" type="Path2D" parent="BatMidBoss"]
-position = Vector2( -3, 40 )
-curve = SubResource( 10 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="BatMidBoss/AttackRight"]
-position = Vector2( -33, 47 )
-rotate = false
-loop = false
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="BatMidBoss/AttackRight/PathFollow2D"]
-
-[node name="CrazyAttack" type="Path2D" parent="BatMidBoss"]
-editor/display_folded = true
-position = Vector2( 0, 16 )
-curve = SubResource( 17 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="BatMidBoss/CrazyAttack"]
-position = Vector2( 249, -18 )
-rotation = 0.444695
-offset = 980.813
-loop = false
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="BatMidBoss/CrazyAttack/PathFollow2D"]
-rotation = 1.5708
-
-[node name="AttackLeft" type="Path2D" parent="BatMidBoss"]
-position = Vector2( -45, 40 )
-curve = SubResource( 12 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="BatMidBoss/AttackLeft"]
-position = Vector2( 240, 47 )
-rotate = false
-loop = false
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="BatMidBoss/AttackLeft/PathFollow2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BatMidBoss"]
-anims/AttackLeft = SubResource( 13 )
-anims/AttackRight = SubResource( 11 )
-anims/CrazyAttack = SubResource( 18 )
-
-[node name="Timer" type="Timer" parent="BatMidBoss"]
-one_shot = true
-[connection signal="timeout" from="BatMidBoss/Timer" to="BatMidBoss" method="cycle"]
-
-[editable path="BatMidBoss/Enemy"]
+[node name="Reminder" parent="." instance=ExtResource( 4 )]

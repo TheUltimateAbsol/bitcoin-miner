@@ -9,6 +9,29 @@ var skip = false;
 func activate(miner: Miner):
 	$Background.visible = true;
 	
+	#Set scores
+	var bonus = Global.numenemies*1000
+	
+	var multiplier = 1.0;
+	if Global.numseconds > 60:
+		multiplier = 1;
+	elif Global.numseconds > 45:
+		multiplier = 1.2;
+	elif Global.numseconds > 40:
+		multiplier = 1.3;
+	elif Global.numseconds > 35:
+		multiplier = 1.5;
+	else:
+		multiplier = 2;
+		
+	var total = (Global.numcoin+bonus)*multiplier;
+	
+		
+	$HBoxContainer2/VBoxContainer3/Enemy.text = str(bonus)
+	$HBoxContainer2/VBoxContainer3/Time.text = "x" + str(multiplier).pad_decimals(1)
+	$HBoxContainer2/VBoxContainer3/Total.text = str(total)
+	$HBoxContainer2/VBoxContainer3/Inventory.text = str(total);
+	
 	miner.flip_towards($Path2D.curve.get_point_position(0));
 	miner.freeze();
 	miner.walk();

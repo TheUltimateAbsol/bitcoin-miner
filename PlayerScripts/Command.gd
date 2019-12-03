@@ -54,7 +54,6 @@ func perform_command(bot):
 	if func_pointer != null:
 		yield(actor, "finished_command") #Even if the miner dies, this will still activate
 	
-	print('Command completed for real');
 	#LOCK THIS OPERATION
 	num_completed+=1
 	#END LOCK

@@ -27,7 +27,6 @@ func do_command(type, must_wait, path):
 				if not must_wait: 
 					#yield(bot.quick_duck(), "completed");
 					yield(bot.quick_duck(), "completed")
-					print("FINISHED Command");
 				else:
 					bot.duck_action(command, "force_end_signal")
 					yield(command, "force_end_signal")

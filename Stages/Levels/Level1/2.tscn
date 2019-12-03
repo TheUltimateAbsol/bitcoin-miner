@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Stages/Tilesets/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Navigation/Scenes/TileMap.gd" type="Script" id=2]
-[ext_resource path="res://Enemies/Scenes/Crystal.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Enemies/Scenes/TimedBatPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/Scenes/TimedBatPlayer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/Scenes/MediumRock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Classes/GameFlow/Reminder.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -90,28 +91,30 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 tile_set = SubResource( 8 )
 cell_size = Vector2( 8, 8 )
 format = 1
-tile_data = PoolIntArray( 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 0, 1, 983048, 0, 1, 983049, 0, 1, 983050, 0, 1, 983051, 0, 1, 983052, 0, 1, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 983056, 0, 1, 983057, 0, 1, 983058, 0, 1, 983059, 0, 1, 1048576, 0, 131072, 1048577, 0, 131072, 1048578, 0, 131072, 1048579, 0, 131072, 1048580, 0, 131072, 1048581, 0, 131072, 1048582, 0, 131072, 1048583, 0, 131072, 1048584, 0, 131072, 1048585, 0, 131072, 1048586, 0, 131072, 1048587, 0, 131072, 1048588, 0, 131072, 1048589, 0, 131072, 1048590, 0, 131072, 1048591, 0, 131072, 1048592, 0, 131072, 1048593, 0, 131072, 1048594, 0, 131072, 1048595, 0, 131072 )
+tile_data = PoolIntArray( 786432, 536870912, 1, 786433, 536870912, 1, 786434, 536870912, 1, 786435, 536870912, 1, 786436, 536870912, 0, 786440, -2147483648, 0, 786441, 0, 2, 786442, 0, 2, 786443, -1610612736, 0, 786447, 0, 0, 786448, 536870912, 1, 786449, 536870912, 1, 786450, 536870912, 1, 786451, 536870912, 1, 851968, 536870912, 131072, 851969, 536870912, 131072, 851970, 536870912, 131072, 851971, 536870912, 131072, 851972, -1610612736, 1, 851976, -1073741824, 1, 851977, -1610612736, 131072, 851978, -1610612736, 131072, 851979, -1610612736, 1, 851983, -1073741824, 1, 851984, 536870912, 131072, 851985, 536870912, 131072, 851986, 536870912, 131072, 851987, 536870912, 131072, 917504, 536870912, 131072, 917505, 536870912, 131072, 917506, 536870912, 131072, 917507, 536870912, 131072, 917508, -1610612736, 1, 917512, -1073741824, 1, 917513, -1610612736, 131072, 917514, -1610612736, 131072, 917515, -1610612736, 1, 917519, -1073741824, 1, 917520, 536870912, 131072, 917521, 536870912, 131072, 917522, 536870912, 131072, 917523, 536870912, 131072, 983040, 536870912, 131072, 983041, 536870912, 131072, 983042, 536870912, 131072, 983043, 536870912, 131072, 983044, -1610612736, 1, 983048, -1073741824, 1, 983049, -1610612736, 131072, 983050, -1610612736, 131072, 983051, -1610612736, 1, 983055, -1073741824, 1, 983056, 536870912, 131072, 983057, 536870912, 131072, 983058, 536870912, 131072, 983059, 536870912, 131072, 1048576, 0, 131072, 1048577, 0, 131072, 1048578, 0, 131072, 1048579, 0, 131072, 1048580, -1610612736, 1, 1048584, -1073741824, 1, 1048585, -1610612736, 131072, 1048586, 0, 131072, 1048587, -1610612736, 1, 1048591, -1073741824, 1, 1048592, 0, 131072, 1048593, 0, 131072, 1048594, 0, 131072, 1048595, 0, 131072 )
 script = ExtResource( 2 )
 
 [node name="LeftTarget" type="Node2D" parent="."]
-position = Vector2( 33, 116 )
+position = Vector2( 17, 90 )
 
 [node name="RightTarget" type="Node2D" parent="."]
-position = Vector2( 143, 116 )
+position = Vector2( 143, 90 )
 
 [node name="MiddleTarget" type="Node2D" parent="."]
-position = Vector2( 81, 116 )
+position = Vector2( 79, 90 )
 
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 143, 120 )
+[node name="TimedBatPlayer" parent="." instance=ExtResource( 3 )]
+position = Vector2( -6, 9 )
 
-[node name="Enemy2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 20, 120 )
+[node name="Enemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 17, 96 )
 
-[node name="TimedBatPlayer" parent="." instance=ExtResource( 4 )]
-position = Vector2( -6, 25 )
+[node name="Enemy2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 141, 96 )
 
-[node name="TimedBatPlayer2" parent="." instance=ExtResource( 4 )]
-position = Vector2( -10, 44 )
-interval = 4.0
-speed = 2.0
+[node name="Reminder" parent="." instance=ExtResource( 5 )]
+
+[node name="Label" parent="Reminder" index="1"]
+text = "D = Duck"
+
+[editable path="Reminder"]

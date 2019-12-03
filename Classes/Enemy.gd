@@ -41,5 +41,6 @@ func _set_health(value):
 		
 func on_death():
 	Global.update_header(Global.numremaining, Global.numtotal, Global.numcoin + damage_points);
+	Global.numenemies+= 1
 	emit_signal("died", self)	
 	

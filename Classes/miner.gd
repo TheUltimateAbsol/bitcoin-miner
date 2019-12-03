@@ -28,7 +28,7 @@ const JUMP_MAX_AIRBORNE_TIME = 0.2
 #
 const WALK_TOLERANCE = 1
 
-enum {WAITING, WALKING, JUMPING, ATTACKING, DUCKING, DYING}
+enum {WAITING, WALKING, JUMPING, ATTACKING, DUCKING, DYING, MIDATTACKING, MIDATTACKING2}
 
 var walk_left = false
 var walk_right = false
@@ -52,7 +52,7 @@ var vulnerable = true;
 signal target_reached
 signal path_traversed
 signal died
-
+signal finished_mining #PATCH FOR TAP MINING
 #Alias that we can refer to to save code
 onready var sprite = $Sprite
 onready var anim = $AnimationPlayer
@@ -64,6 +64,11 @@ var anim_state = ANIM_IDLE
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	idle(true);
+
+
+#PATCH FOR TAP MINING:
+func finish_cycle():
+	emit_signal("finished_mining");
 
 #Resets the character to a "neutral" state
 #The location of the sprite is recentered
@@ -238,6 +243,8 @@ func reset_input():
 	state = WAITING;
 	
 func walk_to(end):
+	reset_input(); #PATCH
+	
 #	if abs(position.x - end.x) < WALK_TOLERANCE:
 #		reset_input();
 #		emit_signal("target_reached");
@@ -251,6 +258,8 @@ func walk_to(end):
 	state = WALKING;	
 
 func jump_to(end, velocity):
+	reset_input(); #PATCH
+		
 	var right = true;
 	if position.x - end.x > 0: right = false;
 	flip(right);
@@ -265,8 +274,8 @@ func attack(node : Node, signal_name : String):
 	node.connect(signal_name, self, "stop_attack", [], CONNECT_ONESHOT);
 	
 func stop_attack():
-	attack = false;
-	state = WAITING;
+#	attack = false;
+	state = MIDATTACKING;
 
 func duck_action(node : Node, signal_name : String):
 	down = true;
@@ -420,6 +429,14 @@ func _physics_process(delta):
 	if state == JUMPING and abs(position.x - target.x) < WALK_TOLERANCE:
 		reset_input();
 		emit_signal("target_reached")
+		
+	#CHEAP TRICK
+	if state == MIDATTACKING2:
+		state = WAITING
+		attack = false;
+		
+	if state == MIDATTACKING:
+		state = MIDATTACKING2;
 
 func is_waiting():
 	return (state == WAITING)

@@ -1,22 +1,21 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Classes/Enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Enemies/Sprites/Crystal fail.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Sprites/bulky-rock.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 22, 27 )
+extents = Vector2( 24, 19 )
 
 [node name="Enemy" groups=[
 "objective",
 ] instance=ExtResource( 1 )]
-health = 500
-max_health = 500
-destruction_points = 1000
+health = 200
+max_health = 200
 
 [node name="Sprite" parent="." index="1"]
-position = Vector2( 0, -32 )
+position = Vector2( 0, -29 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurtbox" index="0"]
-position = Vector2( 0, -27 )
+position = Vector2( 0, -19 )
 shape = SubResource( 1 )

@@ -1,5 +1,20 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Classes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/Sprites/Test-rock.png" type="Texture" id=2]
 
-[node name="Enemy" instance=ExtResource( 1 )]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 15 )
+
+[node name="Enemy" groups=[
+"objective",
+] instance=ExtResource( 1 )]
+health = 100
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2( 0, -16 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHurtbox" index="0"]
+position = Vector2( 0, -15 )
+shape = SubResource( 1 )
