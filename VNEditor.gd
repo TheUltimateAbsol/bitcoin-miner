@@ -166,20 +166,24 @@ func get_data():
 #		if child.is_pressed():
 #			 value = child.text # what is saved in the JSON (the dictionary for now)
 
+	
 	if background_buttons.get_pressed_button() == null:
 		background = Global.Backgrounds.NONE
 	else:	
 		background = background_buttons.get_pressed_button().text
+	
 	
 	if back_transition_buttons.get_pressed_button() == null:
 		scene_transition = Global.Background_transitiosn.NONE
 	else:
 		scene_transition = back_transition_buttons.get_pressed_button().text
 	
+	
 	if music_buttons.get_pressed_button() == null:
 		music = Global.Music.NONE
 	else:
 		music = music_buttons.get_pressed_button().text
+	
 	
 	if char_transition_buttons.get_pressed_button() == null:
 		character_transition = Global.Transitions.NONE
@@ -191,10 +195,12 @@ func get_data():
 	else:
 		character = character_buttons.get_pressed_button().text
 	
+	
 	if expression_buttons.get_pressed_button() == null:
 		character_expression = Global.Expressions.DEFAULT
 	else:
 		character_expression = expression_buttons.get_pressed_button().text
+		
 		
 	# get the IDs
 	var get_id = id_input.get_text()

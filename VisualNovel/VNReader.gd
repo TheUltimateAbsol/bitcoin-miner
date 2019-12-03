@@ -28,7 +28,8 @@ var data_json
 
 func _ready():
 	textlabel.text = ""
-	pass;
+	npc.texture = null
+	#pass;
 #	load_data("res://VisualNovel/data.json")
 #	var id = 1 #what number page is this
 #	var next_id =2 	#id of the next page in the series
@@ -101,6 +102,7 @@ func play_page(input:Dictionary): # parsed form JSON
 	yield(display_page(page), "completed")
 
 func display_page(page : Page):
+	npc.hide()
 	textlabel.text = ""
 	print("PATH" + self.get_path())
 #	print("CHARACTER: " + str(page.character));
@@ -114,12 +116,18 @@ func display_page(page : Page):
 		else:
 			npc.texture = expressions[page.character][page.expression]
 	
+	
+	#var file2Check = File.new()
+	#var doFileExists = file2Check.file_exists(PATH_2_FILE):
+	npc.show()
 	match page.transition:
 		Global.Transitions.NONE:
 			transition.play("appear")
 			yield(transition, "animation_finished")
 		Global.Transitions.FLASH: #think ace attorny
-			pass
+			# MAKE TRANSITION
+			transition.play("appear")
+			yield(transition, "animation_finished")
 		Global.Transitions.FADE:
 			$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
 			#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
@@ -132,7 +140,11 @@ func display_page(page : Page):
 			yield(transition, "animation_finished")
 #			pass
 		Global.Transitions.SLIDE_LEFT:
-			pass
+			# MAKE TRANSITION
+			transition.play("slide_from_left")
+			yield(transition, "animation_finished")
+	
+	
 	
 	if page.background != Global.Backgrounds.SAME:
 		if backgrounds[page.background] == null:
