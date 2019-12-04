@@ -1,30 +1,86 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/Cave.png" type="Texture" id=2]
-[ext_resource path="res://Classes/GameFlow/QuickTimeEvent.gd" type="Script" id=3]
-[ext_resource path="res://Stages/Backgrounds/Dark Background.png" type="Texture" id=4]
-[ext_resource path="res://UI/Sprites/Outer Rim.png" type="Texture" id=5]
-[ext_resource path="res://UI/Sprites/Inner Circle.png" type="Texture" id=6]
-[ext_resource path="res://Style/DEFAULT_TEXT.tres" type="Theme" id=7]
-[ext_resource path="res://Style/m3x6.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://Style/IMPACT_TEXT.tres" type="Theme" id=9]
-[ext_resource path="res://Classes/GameFlowAnimations/GameOver.tres" type="Animation" id=10]
-[ext_resource path="res://Classes/GameFlow/LevelComplete.gd" type="Script" id=11]
-[ext_resource path="res://Stages/Backgrounds/background.png" type="Texture" id=12]
-[ext_resource path="res://Stages/Backgrounds/Light Background.png" type="Texture" id=13]
-[ext_resource path="res://Classes/GameFlowAnimations/WinSpawner.tres" type="Animation" id=14]
-[ext_resource path="res://Classes/GameFlowAnimations/SceneSwitch.tres" type="Animation" id=15]
-[ext_resource path="res://Classes/Player.tscn" type="PackedScene" id=16]
-[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=17]
-[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=18]
-[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=19]
+[ext_resource path="res://UI/Sprites/logo.png" type="Texture" id=3]
+[ext_resource path="res://Classes/GameFlow/QuickTimeEvent.gd" type="Script" id=4]
+[ext_resource path="res://Stages/Backgrounds/Dark Background.png" type="Texture" id=5]
+[ext_resource path="res://UI/Sprites/Outer Rim.png" type="Texture" id=6]
+[ext_resource path="res://UI/Sprites/Inner Circle.png" type="Texture" id=7]
+[ext_resource path="res://Style/DEFAULT_TEXT.tres" type="Theme" id=8]
+[ext_resource path="res://Style/m3x6.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Style/IMPACT_TEXT.tres" type="Theme" id=10]
+[ext_resource path="res://Classes/GameFlowAnimations/GameOver.tres" type="Animation" id=11]
+[ext_resource path="res://Classes/GameFlow/LevelComplete.gd" type="Script" id=12]
+[ext_resource path="res://Stages/Backgrounds/background.png" type="Texture" id=13]
+[ext_resource path="res://Stages/Backgrounds/Light Background.png" type="Texture" id=14]
+[ext_resource path="res://Classes/GameFlowAnimations/WinSpawner.tres" type="Animation" id=15]
+[ext_resource path="res://Classes/GameFlowAnimations/SceneSwitch.tres" type="Animation" id=16]
+[ext_resource path="res://Classes/Player.tscn" type="PackedScene" id=17]
+[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=18]
+[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=19]
+[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=20]
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.878431, 0.941176, 0.909804, 1 )
+
+[sub_resource type="Animation" id=13]
+resource_name = "Activate"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 0.5 ),
+"update": 0,
+"values": [ Vector2( 80, -9 ), Vector2( 80, 70 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.001, 1.99144 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:rect_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5, 2 ),
+"transitions": PoolRealArray( 0.5, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 160, 144 ), Vector2( 160, 144 ), Vector2( 160, 0 ) ]
+}
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
 outline_size = 1
 outline_color = Color( 0.658824, 0.752941, 0.690196, 1 )
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
@@ -93,7 +149,7 @@ tracks/3/keys = {
 [sub_resource type="DynamicFont" id=4]
 size = 32
 outline_color = Color( 0.878431, 0.941176, 0.909804, 1 )
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
 [sub_resource type="Animation" id=5]
 tracks/0/type = "value"
@@ -394,34 +450,51 @@ position = Vector2( 80, 72 )
 z_index = -1
 texture = ExtResource( 2 )
 
+[node name="Startup" type="Node2D" parent="."]
+pause_mode = 2
+z_index = 11
+
+[node name="Panel" type="Panel" parent="Startup"]
+margin_right = 160.0
+margin_bottom = 144.0
+custom_styles/panel = SubResource( 12 )
+
+[node name="Sprite2" type="Sprite" parent="Startup"]
+position = Vector2( 80, -9 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Startup"]
+autoplay = "Activate"
+anims/Activate = SubResource( 13 )
+
 [node name="QuickTimeEvent" type="Node2D" parent="."]
 editor/display_folded = true
 visible = false
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="Background" type="Sprite" parent="QuickTimeEvent"]
 position = Vector2( 80, 72 )
 z_index = -1
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="Circle" type="Sprite" parent="QuickTimeEvent"]
 position = Vector2( 80, 76 )
 scale = Vector2( 0.8675, 0.8675 )
 z_index = 1
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Label" type="Sprite" parent="QuickTimeEvent"]
 editor/display_folded = true
 position = Vector2( 80, 76 )
 z_index = 1
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="QuickTimeEvent/Label"]
 margin_left = -20.0
 margin_top = -26.0
 margin_right = 20.0
 margin_bottom = -12.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 text = "PRESS"
 align = 1
 
@@ -430,7 +503,7 @@ margin_left = -20.0
 margin_top = 9.0
 margin_right = 20.0
 margin_bottom = 23.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 text = "IN TIME!"
 align = 1
 
@@ -453,35 +526,36 @@ editor/display_folded = true
 visible = false
 position = Vector2( 80, 72 )
 z_index = -1
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="GameOver"]
 visible = false
 margin_top = 39.0
 margin_right = 160.0
 margin_bottom = 53.0
-theme = ExtResource( 9 )
+theme = ExtResource( 10 )
 text = "GAME OVER"
 align = 1
 percent_visible = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
-anims/GameOver = ExtResource( 10 )
+anims/GameOver = ExtResource( 11 )
 
 [node name="LevelComplete" type="Node" parent="."]
-script = ExtResource( 11 )
+editor/display_folded = true
+script = ExtResource( 12 )
 
 [node name="Background" type="Sprite" parent="LevelComplete"]
 visible = false
 position = Vector2( 80, 72 )
 z_index = -1
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 
 [node name="Container" type="Sprite" parent="LevelComplete"]
 visible = false
 position = Vector2( 80, 30 )
 scale = Vector2( 0.0280609, 1 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 160, 20 )
 
@@ -546,7 +620,7 @@ custom_constants/separation = 0
 [node name="Label2" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_right = 28.0
 margin_bottom = 13.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "ENEMY"
 
@@ -554,7 +628,7 @@ text = "ENEMY"
 margin_top = 13.0
 margin_right = 28.0
 margin_bottom = 26.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "TIME  "
 
@@ -567,7 +641,7 @@ custom_constants/separation = 0
 [node name="Label" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 20.0
 margin_bottom = 13.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "BONUS"
 
@@ -575,7 +649,7 @@ text = "BONUS"
 margin_top = 13.0
 margin_right = 20.0
 margin_bottom = 26.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "BONUS"
 
@@ -588,7 +662,7 @@ custom_constants/separation = 0
 [node name="Label" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer/VBoxContainer"]
 margin_right = 48.0
 margin_bottom = 13.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "TOTAL"
 
@@ -596,7 +670,7 @@ text = "TOTAL"
 margin_top = 13.0
 margin_right = 48.0
 margin_bottom = 26.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "INVENTORY"
 
@@ -609,7 +683,7 @@ custom_constants/separation = 0
 [node name="Enemy" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
 margin_right = 40.0
 margin_bottom = 13.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "100000"
 align = 2
@@ -619,7 +693,7 @@ visible = false
 margin_top = 13.0
 margin_right = 40.0
 margin_bottom = 26.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "x1.2"
 align = 2
@@ -629,7 +703,7 @@ visible = false
 margin_top = 26.0
 margin_right = 40.0
 margin_bottom = 39.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "1000000000"
 align = 2
@@ -639,7 +713,7 @@ visible = false
 margin_top = 39.0
 margin_right = 40.0
 margin_bottom = 52.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "1000000000"
 align = 2
@@ -648,7 +722,7 @@ align = 2
 margin_top = 13.0
 margin_right = 40.0
 margin_bottom = 26.0
-theme = ExtResource( 7 )
+theme = ExtResource( 8 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "        "
 align = 2
@@ -660,7 +734,7 @@ editor/display_folded = true
 position = Vector2( 160, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OldLevelComplete"]
-anims/WinSpawner = ExtResource( 14 )
+anims/WinSpawner = ExtResource( 15 )
 
 [node name="Timer" type="Timer" parent="OldLevelComplete"]
 wait_time = 0.1
@@ -675,11 +749,11 @@ position = Vector2( 0, 8 )
 position = Vector2( 0, 144 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LevelLoadout"]
-anims/SceneSwitch = ExtResource( 15 )
+anims/SceneSwitch = ExtResource( 16 )
 
 [node name="Miners" type="Node2D" parent="."]
 
-[node name="Miner" parent="." instance=ExtResource( 16 )]
+[node name="Miner" parent="." instance=ExtResource( 17 )]
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 editor/display_folded = true
@@ -692,7 +766,7 @@ margin_left = -19.0
 margin_top = -24.0
 margin_right = 21.0
 margin_bottom = -10.0
-theme = ExtResource( 9 )
+theme = ExtResource( 10 )
 text = "LEVEL UP!"
 align = 1
 
@@ -707,11 +781,11 @@ margin_left = -19.0
 margin_top = -24.0
 margin_right = 21.0
 margin_bottom = -10.0
-theme = ExtResource( 9 )
+theme = ExtResource( 10 )
 text = "MISS!"
 align = 1
 
-[node name="ui_header" parent="." instance=ExtResource( 17 )]
+[node name="ui_header" parent="." instance=ExtResource( 18 )]
 z_index = 10
 
 [node name="DecoratorAnimations" type="Node" parent="."]
@@ -727,7 +801,7 @@ anims/Success = SubResource( 11 )
 [node name="Pause" type="Node" parent="."]
 editor/display_folded = true
 
-[node name="pause_button" parent="Pause" instance=ExtResource( 18 )]
+[node name="pause_button" parent="Pause" instance=ExtResource( 19 )]
 visible = false
 position = Vector2( 14, 14 )
 
@@ -741,7 +815,7 @@ margin_right = 13.0
 margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
 
-[node name="pause_menu" parent="Pause" instance=ExtResource( 19 )]
+[node name="pause_menu" parent="Pause" instance=ExtResource( 20 )]
 [connection signal="animation_finished" from="QuickTimeEvent/AnimationPlayer" to="QuickTimeEvent" method="QTE_anim_handler"]
 [connection signal="add_miner" from="ui_header" to="." method="_on_ui_header_add_miner"]
 [connection signal="revive" from="ui_header" to="." method="revive"]

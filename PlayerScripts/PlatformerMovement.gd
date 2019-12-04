@@ -156,6 +156,10 @@ func _ready():
 	connect("pressed_attack", self, "test");
 	main.connect("finished_mining", self, "finished_mining_fire");
 	
+	get_tree().paused = true;
+	yield($Startup/AnimationPlayer, "animation_finished");
+	get_tree().paused = false;
+	
 func finished_mining_fire():
 	emit_signal("cancel_attack");
 	
@@ -176,7 +180,7 @@ func spawn():
 			spawnlocation = level_scene.get_node("RightTarget").position.x;
 			section = RIGHT;
 			
-	main.position = Vector2 (spawnlocation, 32);
+	main.position = Vector2 (spawnlocation, -8);
 
 	var i = 1;
 	for miner in $Miners.get_children():
