@@ -8,6 +8,7 @@ class_name VNlinkbarItem
 #var type
 var id
 var next
+var clicked = false
 #var text
 
 onready var display_id = $HBoxContainer/Id;
@@ -58,3 +59,15 @@ func populate(data, question_num=0):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+# Checks when object is clicked
+func _gui_input(event):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		print("Left mouse button was pressed!")
+		var children = get_parent().get_children()
+		for item in children:
+			if item.id == next:
+				item.modulate = Color(150, 150, 150)
+			if item.id.next == id:
+				item.modulate = Color(0, 255, 255)
+		 

@@ -41,4 +41,4 @@ margin_top = 710.0
 margin_right = 764.0
 margin_bottom = 730.0
 text = "Maximum character count is 30................."
-percent_visible = 7.5
+[connection signal="gui_input" from="." to="." method="_on_Panel_gui_input"]

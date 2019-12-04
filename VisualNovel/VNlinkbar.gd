@@ -87,10 +87,11 @@ func _ready():
 				var question = LinkItem.instance()
 				add_child(question);
 				question.populate(item["questions"][i],i);
+				
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	pass
 
 #func load_data(file_path):
 #	#retrieves the json file
