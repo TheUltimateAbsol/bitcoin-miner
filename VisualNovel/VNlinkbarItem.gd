@@ -15,6 +15,10 @@ onready var display_id = $HBoxContainer/Id;
 onready var display_type = $HBoxContainer/Type;
 onready var display_text = $HBoxContainer/Text
 
+onready var defaultStyle = preload("res://Style/LinkBarDefault.tres");
+onready var nextStyle = preload("res://Style/LinkBarNext.tres");
+onready var previousStyle = preload("res://Style/LinkBarPrevious.tres");
+
 # Called when the node enters the scene tree for the first time.
 func _init():
 #	type = xtype
@@ -23,6 +27,7 @@ func _init():
 #	text = xtext
 	pass
 	
+				
 #This function actually is only called with a new() call
 #The new call only works for hypothetical objects. Not instances.
 #Therefore, we have to use the instance() function (Which takes 0 args), then
@@ -67,7 +72,10 @@ func _gui_input(event):
 		var children = get_parent().get_children()
 		for item in children:
 			if item.id == next:
-				item.modulate = Color(150, 150, 150)
-			if item.id.next == id:
-				item.modulate = Color(0, 255, 255)
+				item.theme = nextStyle
+			elif item.next == id:
+				item.theme = previousStyle
+			else:
+				item.theme = defaultStyle;
+			
 		 

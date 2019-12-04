@@ -1,21 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://UI/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Style/LinkBarDefault.tres" type="Theme" id=1]
 [ext_resource path="res://VisualNovel/VNlinkbarItem.gd" type="Script" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-size = 20
-font_data = ExtResource( 1 )
-
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
 
 [node name="Panel" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_vertical = 4
-theme = SubResource( 2 )
+theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -41,4 +34,10 @@ margin_top = 710.0
 margin_right = 764.0
 margin_bottom = 730.0
 text = "Maximum character count is 30................."
+
+[node name="Button" type="Button" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 [connection signal="gui_input" from="." to="." method="_on_Panel_gui_input"]
