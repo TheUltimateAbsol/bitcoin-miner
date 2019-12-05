@@ -10,6 +10,7 @@ extents = Vector2( 16, 15 )
 "objective",
 ] instance=ExtResource( 1 )]
 health = 100
+destruction_points = 300
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2( 0, -16 )

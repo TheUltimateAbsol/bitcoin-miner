@@ -9,8 +9,8 @@ extents = Vector2( 24, 19 )
 [node name="Enemy" groups=[
 "objective",
 ] instance=ExtResource( 1 )]
-health = 200
-max_health = 200
+health = 300
+max_health = 300
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2( 0, -29 )

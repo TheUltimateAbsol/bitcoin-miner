@@ -7,6 +7,8 @@ export (Texture) var idleSprite = preload("res://PlayerSprites/Miner Compress.pn
 export (Texture) var jumpingSprite = preload("res://PlayerSprites/jump.png")
 export (Texture) var walkingSprite = preload("res://PlayerSprites/Miner Walking Compress.png")
 export (Texture) var miningSprite = preload("res://PlayerSprites/Miner Axe.png")
+export (Texture) var miningSprite2 = preload("res://PlayerSprites/Miner_Bat.png")
+export (Texture) var miningSprite3 = preload("res://PlayerSprites/Miner_Axe_2.png")
 export (Texture) var duckingSprite = preload("res://PlayerSprites/Miner_Duck_1.png")
 export (Texture) var dyingSprite = preload("res://PlayerSprites/Miner_Hurt.png");
 export (Texture) var levelCompleteSprite = preload("res://PlayerSprites/Ending_1.png");
@@ -18,6 +20,8 @@ export (Vector2) var miningOffset = Vector2(2, -1)
 export (Vector2) var duckingOffset = Vector2(1,0)
 export (Vector2) var dyingOffset = Vector2(0,0)
 export (Vector2) var levelCompleteOffset = Vector2(-6,-11)
+
+export (bool) var is_protagonist = false;
 
 const GRAVITY = 500.0 # pixels/second/second
 
@@ -162,8 +166,19 @@ func mine():
 		sprite.frame = 0;
 		set_offset(miningOffset);
 		#print("mine");
-		sprite.texture = miningSprite
-		anim.play("Mine");
+		randomize();
+		var choice = randi()%3;
+		if is_protagonist: choice = 0;			
+		match choice:
+			0:
+				sprite.texture = miningSprite;
+				anim.play("Mine");
+			1:
+				sprite.texture = miningSprite2;
+				anim.play("Mine2");
+			2:
+				sprite.texture = miningSprite3;
+				anim.play("Mine3");
 		
 #Player action that starts a jump motion (only rises up)
 #If player is already in this state, nothing happens

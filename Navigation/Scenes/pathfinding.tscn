@@ -21,10 +21,10 @@
 [ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=19]
 [ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=20]
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.878431, 0.941176, 0.909804, 1 )
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=2]
 resource_name = "Activate"
 length = 2.0
 tracks/0/type = "value"
@@ -76,14 +76,14 @@ tracks/3/keys = {
 "values": [ Vector2( 160, 144 ), Vector2( 160, 144 ), Vector2( 160, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 outline_size = 1
 outline_color = Color( 0.658824, 0.752941, 0.690196, 1 )
 font_data = ExtResource( 9 )
 
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
 Label/colors/font_color = Color( 0.878431, 0.941176, 0.909804, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 0.878431, 0.941176, 0.909804, 1 )
@@ -94,8 +94,7 @@ Label/constants/shadow_offset_y = 1
 Label/fonts/font = null
 Label/styles/normal = null
 
-[sub_resource type="Animation" id=3]
-resource_name = "Activate"
+[sub_resource type="Animation" id=5]
 length = 2.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Circle:visible")
@@ -104,10 +103,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 2.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ true, false ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Background:visible")
@@ -146,12 +145,12 @@ tracks/3/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.47, 0.47 ) ]
 }
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 32
 outline_color = Color( 0.878431, 0.941176, 0.909804, 1 )
 font_data = ExtResource( 9 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
 tracks/0/interp = 1
@@ -165,8 +164,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "DisplayScores"
+[sub_resource type="Animation" id=8]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("HBoxContainer2:visible")
@@ -246,8 +244,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "FlashText"
+[sub_resource type="Animation" id=9]
 length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("BackLabel:rect_position")
@@ -298,12 +295,12 @@ tracks/3/keys = {
 "values": [ Vector2( 1e-005, 1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Curve2D" id=8]
+[sub_resource type="Curve2D" id=10]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 81, 111 )
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Miner/Node2D:position")
 tracks/0/interp = 1
@@ -341,7 +338,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=12]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Miner/Revive:visible")
 tracks/0/interp = 1
@@ -391,7 +388,7 @@ tracks/3/keys = {
 "values": [ "MISS!" ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=13]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Miner/Revive:visible")
 tracks/0/interp = 1
@@ -452,23 +449,25 @@ texture = ExtResource( 2 )
 
 [node name="Startup" type="Node2D" parent="."]
 pause_mode = 2
+editor/display_folded = true
 z_index = 11
 
 [node name="Panel" type="Panel" parent="Startup"]
+visible = false
 margin_right = 160.0
 margin_bottom = 144.0
-custom_styles/panel = SubResource( 12 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="Sprite2" type="Sprite" parent="Startup"]
+visible = false
 position = Vector2( 80, -9 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Startup"]
 autoplay = "Activate"
-anims/Activate = SubResource( 13 )
+anims/Activate = SubResource( 2 )
 
 [node name="QuickTimeEvent" type="Node2D" parent="."]
-editor/display_folded = true
 visible = false
 script = ExtResource( 4 )
 
@@ -478,15 +477,15 @@ z_index = -1
 texture = ExtResource( 5 )
 
 [node name="Circle" type="Sprite" parent="QuickTimeEvent"]
+visible = false
 position = Vector2( 80, 76 )
-scale = Vector2( 0.8675, 0.8675 )
-z_index = 1
+z_index = 10
 texture = ExtResource( 6 )
 
 [node name="Label" type="Sprite" parent="QuickTimeEvent"]
 editor/display_folded = true
 position = Vector2( 80, 76 )
-z_index = 1
+z_index = 10
 texture = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="QuickTimeEvent/Label"]
@@ -512,12 +511,12 @@ margin_left = -20.0
 margin_top = -23.0
 margin_right = 20.0
 margin_bottom = 15.0
-theme = SubResource( 2 )
+theme = SubResource( 4 )
 text = "'F'"
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="QuickTimeEvent"]
-anims/Activate = SubResource( 3 )
+anims/Activate = SubResource( 5 )
 
 [node name="GameOver" type="Node" parent="."]
 editor/display_folded = true
@@ -564,7 +563,7 @@ margin_left = -161.0
 margin_top = 15.0
 margin_right = -1.0
 margin_bottom = 41.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.0941176, 0.188235, 0.188235, 1 )
 text = "LEVEL COMPLETE"
 align = 1
@@ -574,19 +573,19 @@ margin_left = 160.0
 margin_top = 14.0
 margin_right = 319.999
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "LEVEL COMPLETE"
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LevelComplete"]
-anims/Activate = SubResource( 5 )
-anims/DisplayScores = SubResource( 6 )
-anims/FlashText = SubResource( 7 )
+anims/Activate = SubResource( 7 )
+anims/DisplayScores = SubResource( 8 )
+anims/FlashText = SubResource( 9 )
 
 [node name="Path2D" type="Path2D" parent="LevelComplete"]
 editor/display_folded = true
-curve = SubResource( 8 )
+curve = SubResource( 10 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="LevelComplete/Path2D"]
 rotate = false
@@ -741,6 +740,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="LevelLoadout" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Current" type="Node2D" parent="LevelLoadout"]
 position = Vector2( 0, 8 )
@@ -754,6 +754,7 @@ anims/SceneSwitch = ExtResource( 16 )
 [node name="Miners" type="Node2D" parent="."]
 
 [node name="Miner" parent="." instance=ExtResource( 17 )]
+editor/display_folded = true
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 editor/display_folded = true
@@ -792,11 +793,11 @@ z_index = 10
 editor/display_folded = true
 
 [node name="LevelUp" type="AnimationPlayer" parent="DecoratorAnimations"]
-anims/Level_Up = SubResource( 9 )
+anims/Level_Up = SubResource( 11 )
 
 [node name="Revive" type="AnimationPlayer" parent="DecoratorAnimations"]
-anims/Fail = SubResource( 10 )
-anims/Success = SubResource( 11 )
+anims/Fail = SubResource( 12 )
+anims/Success = SubResource( 13 )
 
 [node name="Pause" type="Node" parent="."]
 editor/display_folded = true

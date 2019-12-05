@@ -9,7 +9,7 @@ onready var impact_style = load("res://Style/IMPACT_TEXT.tres")
 signal add_miner
 signal revive
 
-var levels = [300, 1000, 1001, 1002, 1003, 1005, 1006, 1007, 1009, 3000, 6000, 10000, 20000, 100000000]
+var levels = [300, 1000, 2000, 4000, 6000, 9000, 12000, 15000, 20000, 25000, 30000, 40000, 100000000]
 var level = 0;
 var num_countdowns = 0;
 
@@ -51,7 +51,8 @@ func initiate_countdown():
 	$Countdown.stop(true);
 	num_countdowns+=1;
 	$ProgressBar.visible = true;
-	$Countdown.play("Countdown", -1, 1.0+((num_countdowns-1)*.5));
+#	$Countdown.play("Countdown", -1, 1.0+((num_countdowns-1)*.5));
+	$Countdown.play("Countdown", -1, 1.0);
 	
 func on_Countdown_End(anim_name):
 	num_countdowns = 0;

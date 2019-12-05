@@ -5,6 +5,14 @@ var QTE_Result = false;
 
 func activate():
 	visible = true;
+	$Circle.visible = false;
+	
+	var temp = Timer.new();
+	temp.wait_time = 1;
+	add_child(temp);
+	temp.start();
+	yield(temp, "timeout");
+	temp.queue_free();
 	
 	$AnimationPlayer.play("Activate");
 	InputEventHandler.connect("pressed_attack", self, "QTE_input_handler", [], CONNECT_ONESHOT)

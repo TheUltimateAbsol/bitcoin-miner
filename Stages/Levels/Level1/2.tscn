@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Stages/Tilesets/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Navigation/Scenes/TileMap.gd" type="Script" id=2]
 [ext_resource path="res://Enemies/Scenes/TimedBatPlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemies/Scenes/MediumRock.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Classes/GameFlow/Reminder.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Enemies/Scenes/Crystal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Classes/GameFlow/Reminder.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -105,6 +106,7 @@ position = Vector2( 79, 90 )
 
 [node name="TimedBatPlayer" parent="." instance=ExtResource( 3 )]
 position = Vector2( -6, 9 )
+interval = 1.0
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 position = Vector2( 17, 96 )
@@ -112,7 +114,10 @@ position = Vector2( 17, 96 )
 [node name="Enemy2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 141, 96 )
 
-[node name="Reminder" parent="." instance=ExtResource( 5 )]
+[node name="Enemy3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 81, 96 )
+
+[node name="Reminder" parent="." instance=ExtResource( 6 )]
 
 [node name="Label" parent="Reminder" index="1"]
 text = "D = Duck"
