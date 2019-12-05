@@ -37,7 +37,7 @@ func _init():
 	
 func populate(data, question_num=0):
 	#We do this only for the sake of highlighting later
-	next = data.get("next"); #The "get" command will return null if it is empty
+	next = data.get("next_id"); #The "get" command will return null if it is empty
 	#We do this because this information might be important on click
 	id = data.get("id");
 	
@@ -54,8 +54,12 @@ func populate(data, question_num=0):
 #		Match an answer; has no type
 		_: display_type.text= " " + char(question_num + 65) + ":";
 	
-	if data.get("text"):
-		display_text.text = data.get("text");
+	if data.get("content"):
+		display_text.text = "FORMATTING ERROR";
+		if typeof(data.get("content")) == TYPE_ARRAY:
+			if data.get("content").size() > 0:
+				print(data.get("content")[0]);
+				display_text.text = str(data.get("content")[0].get("content"))
 		#Then some code here to set the text preview
 	elif data.get("comment"):
 		display_text.text = data.get("comment");

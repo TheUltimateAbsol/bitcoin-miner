@@ -12,3 +12,11 @@ func _init(xcontent, xdelay=0, xsound= VNGlobal.SoundEffect.NONE, xspeed=1):
 	sound = xsound;
 	speed = xspeed;
 	delay = xdelay
+	
+func serialize():
+	return {
+		"content" : content, 
+		"delay": delay, 
+		"speed" : speed, 
+		"sound" : sound
+	};

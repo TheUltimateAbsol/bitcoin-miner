@@ -29,55 +29,6 @@ var data_json
 func _ready():
 	textlabel.text = ""
 	npc.texture = null
-	#pass;
-#	load_data("res://VisualNovel/data.json")
-#	var id = 1 #what number page is this
-#	var next_id =2 	#id of the next page in the series
-##	var string1 = Sentence.new("This is a really boring game. \n", .5);
-##	var string2 = Sentence.new("Don't play it");
-##	var string3 = Sentence.new("Wait...", 0.5)
-##	var string4 = Sentence.new(" aren't I in this game?");
-##	var string5 = Sentence.new("Yes you are you dummy", 0.2);
-##	var string6 = Sentence.new("Oh great!", 0.2);
-##	var string7 = Sentence.new("This might be really good!", 0.5);
-##	var string8 = Sentence.new("Ahahaha");
-##	var content1 = [string1, string2];
-##	var content2 = [string3, string4];
-##	var content3 = [string5];
-##	var content4 = [string6, string7];
-##	var content5 = [string8];
-#	var content1 = [];
-#	for string in data_json.result["01"]["content"]:
-#		content1.append(Sentence.new(string["string"], string["delay"]))
-#
-#	var content2 = [];
-#	for string in data_json.result["02"]["content"]:
-#		content2.append(Sentence.new(string["string"], string["delay"]))
-#
-#	var content3 = [];
-#	for string in data_json.result["03"]["content"]:
-#		content3.append(Sentence.new(string["string"], string["delay"]))
-#
-#	var content4 = [];
-#	for string in data_json.result["04"]["content"]:
-#		content4.append(Sentence.new(string["string"], string["delay"]))
-#
-#	var content5 = [];
-#	for string in data_json.result["05"]["content"]:
-#		content5.append(Sentence.new(string["string"], string["delay"]))
-#
-#	var page1 = ContentPage.new(id, next_id, content1, VNGlobal.Characters.BOY, VNGlobal.Expressions.SAD, VNGlobal.Transitions.FADE, VNGlobal.Backgrounds.CLASSROOM);
-#	var page2 = ContentPage.new(id+1, next_id+1, content2, VNGlobal.Characters.BOY);
-#	var page3 = ContentPage.new(id+2, next_id+2, content3, VNGlobal.Characters.GIRL, VNGlobal.Expressions.DEFAULT, VNGlobal.Transitions.FADE);
-#	var page4 = ContentPage.new(id+3, next_id+3, content4, VNGlobal.Characters.BOY, VNGlobal.Expressions.HAPPY, VNGlobal.Transitions.FADE);
-#	var page5 = ContentPage.new(id+4, next_id+4, content5, VNGlobal.Characters.BOY, VNGlobal.Expressions.HAPPY);
-##	page._init2(id, next_id, content);
-#
-#	yield(display_page(page1), "completed");
-#	yield(display_page(page2), "completed");
-#	yield(display_page(page3), "completed");
-#	yield(display_page(page4), "completed");
-#	yield(display_page(page5), "completed");
  
 
 func play_page(input:Dictionary): # parsed form JSON
