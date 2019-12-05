@@ -115,9 +115,11 @@ InputEventHandler="*res://InputEventHandler.gd"
 
 [display]
 
-window/size/width=964
-window/size/height=480
+window/size/width=720
+window/size/height=1440
 window/size/resizable=false
+window/size/test_width=360
+window/size/test_height=720
 window/pixel=true
 
 [global]
