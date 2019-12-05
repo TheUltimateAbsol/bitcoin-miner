@@ -248,7 +248,7 @@ func add_to_json():
 	var dir = Directory.new()
 	
 	var file = File.new()
-	file.open(BASE_DIR + "VisualNovel/data.json", 3)
+	file.open("VisualNovel/data.json", 3)
 	#converts the json file to a text file
 	var text_json = file.get_as_text()
 #	print(text_json)
@@ -277,10 +277,10 @@ func add_to_json():
 	
 	file.close()
 	
-	dir.remove(BASE_DIR + "VisualNovel/data.json")
+	dir.remove("VisualNovel/data.json")
 	
 	var new_file = File.new()
-	new_file.open(BASE_DIR + "VisualNovel/data.json", 2)
+	new_file.open("VisualNovel/data.json", 2)
 	new_file.store_line(to_json(new_dict))
 	file.close()
 	
