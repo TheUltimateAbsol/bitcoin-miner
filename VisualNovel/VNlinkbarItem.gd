@@ -15,9 +15,10 @@ onready var display_id = $HBoxContainer/Id;
 onready var display_type = $HBoxContainer/Type;
 onready var display_text = $HBoxContainer/Text
 
-onready var defaultStyle = preload("res://Style/LinkBarDefault.tres");
-onready var nextStyle = preload("res://Style/LinkBarNext.tres");
-onready var previousStyle = preload("res://Style/LinkBarPrevious.tres");
+onready var defaultStyle = preload("Style/LinkBarDefault.tres");
+onready var selectedStyle = preload("Style/LinkBarSelected.tres");
+onready var nextStyle = preload("Style/LinkBarNext.tres");
+onready var previousStyle = preload("Style/LinkBarPrevious.tres");
 
 # Called when the node enters the scene tree for the first time.
 func _init():
@@ -70,6 +71,11 @@ func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		print("Left mouse button was pressed!")
 		var children = get_parent().get_children()
+		print(theme);
+		set_deferred("theme", selectedStyle)
+		
+		print(theme);
+		
 		for item in children:
 			if item.id == next:
 				item.theme = nextStyle

@@ -11,10 +11,10 @@ var music
 var background
 var questions #array of strings + id leadsa	
 
-func _init(xid, xnext_id, xcontent, xcharacter=Global.Characters.NONE, 
-	xexpression=Global.Expressions.DEFAULT, xtransition=Global.Transitions.NONE, xbackground=Global.Backgrounds.NONE,
+func _init(xid, xnext_id, xcontent, xcharacter=VNGlobal.Characters.NONE, 
+	xexpression=VNGlobal.Expressions.DEFAULT, xtransition=VNGlobal.Transitions.NONE, xbackground=VNGlobal.Backgrounds.NONE,
 	xspeed=1, 
-	xmusic=Global.Music.NONE, 
+	xmusic=VNGlobal.Music.NONE, 
 	xquestions=[]).(xid, xnext_id):
 		
 #	._init_custom(id, next_id);

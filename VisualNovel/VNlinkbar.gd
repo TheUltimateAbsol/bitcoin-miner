@@ -4,7 +4,7 @@ extends VBoxContainer
 # var a = 2
 # var b = "text"
 var data_json
-var LinkItem = preload("res://VisualNovel/LinkBarItem.tscn");
+var LinkItem = preload("LinkBarItem.tscn");
 #Notice how this links to the scene, not the script.
 
 var my_data = [

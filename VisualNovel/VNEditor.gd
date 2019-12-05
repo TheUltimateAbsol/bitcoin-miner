@@ -1,6 +1,8 @@
 extends Control
 
-onready var SentenceLabel = preload("res://UI/Scenes/Sentence_Label.tscn");
+var BASE_DIR =  self.get_script().get_path().get_base_dir();
+
+onready var SentenceLabel = preload("Sentence_Label.tscn");
 
 # character  transition section
 onready var char_transition_list = get_node("Panel/HBoxContainer/Layout/characterInfo/character_layout/char_transition_list")
@@ -40,7 +42,7 @@ onready var preview_btn = get_node("Panel/HBoxContainer/Layout/preview_btn")
 # sound effect menu options
 onready var sound_menu = get_node("Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2/sound_menu")
 
-onready var reader = $Panel/HBoxContainer/Node2D/VNReader
+onready var reader = $Panel/HBoxContainer/VNReader
 
 var id : int
 var next_id : int
@@ -72,7 +74,7 @@ var back_transition_buttons = ButtonGroup.new()
 func _ready():
 	var have_ids = false
 	
-	var background_keys = Global.Backgrounds.keys()
+	var background_keys = VNGlobal.Backgrounds.keys()
 	for key in background_keys:
 		var new_box = CheckBox.new()
 		new_box.text = key
@@ -82,7 +84,7 @@ func _ready():
 			new_box.pressed = true 
 		background_list.add_child(new_box)
 		
-	var music_keys = Global.Music.keys()
+	var music_keys = VNGlobal.Music.keys()
 	for key in music_keys:
 		var new_box = CheckBox.new()
 		new_box.text = key
@@ -91,7 +93,7 @@ func _ready():
 			new_box.pressed = true
 		music_list.add_child(new_box)
 		
-	var char_transition_keys = Global.Transitions.keys()
+	var char_transition_keys = VNGlobal.Transitions.keys()
 	for key in char_transition_keys:
 		var new_box = CheckBox.new()
 		new_box.text = key
@@ -100,7 +102,7 @@ func _ready():
 			new_box.pressed = true
 		char_transition_list.add_child(new_box)
 		
-	var character_keys = Global.Characters.keys()
+	var character_keys = VNGlobal.Characters.keys()
 	for key in character_keys:
 		var new_box = CheckBox.new()
 		new_box.text = key
@@ -109,7 +111,7 @@ func _ready():
 			new_box.pressed = true
 		character_list.add_child(new_box)
 	
-	var expression_keys = Global.Expressions.keys()
+	var expression_keys = VNGlobal.Expressions.keys()
 	for key in expression_keys:
 		var new_box = CheckBox.new()
 		new_box.text = key
@@ -118,13 +120,13 @@ func _ready():
 			new_box.pressed = true
 		expression_list.add_child(new_box)
 
-	var soundeffect_keys = Global.SoundEffect.keys()
+	var soundeffect_keys = VNGlobal.SoundEffect.keys()
 	var x = 1
 	for key in soundeffect_keys:
 		sound_menu.add_item(key, x)
 		x += 1
 		
-	var back_tansition_keys = Global.Background_transitiosn.keys()
+	var back_tansition_keys = VNGlobal.Background_transitiosn.keys()
 	for key in back_tansition_keys:
 		var new_box = CheckBox.new()
 		new_box.text = key
@@ -168,36 +170,36 @@ func get_data():
 
 	
 	if background_buttons.get_pressed_button() == null:
-		background = Global.Backgrounds.NONE
+		background = VNGlobal.Backgrounds.NONE
 	else:	
 		background = background_buttons.get_pressed_button().text
 	
 	
 	if back_transition_buttons.get_pressed_button() == null:
-		scene_transition = Global.Background_transitiosn.NONE
+		scene_transition = VNGlobal.Background_transitiosn.NONE
 	else:
 		scene_transition = back_transition_buttons.get_pressed_button().text
 	
 	
 	if music_buttons.get_pressed_button() == null:
-		music = Global.Music.NONE
+		music = VNGlobal.Music.NONE
 	else:
 		music = music_buttons.get_pressed_button().text
 	
 	
 	if char_transition_buttons.get_pressed_button() == null:
-		character_transition = Global.Transitions.NONE
+		character_transition = VNGlobal.Transitions.NONE
 	else:
 		character_transition = char_transition_buttons.get_pressed_button().text
 		
 	if character_buttons.get_pressed_button() == null:
-		character = Global.Characters.BOY
+		character = VNGlobal.Characters.BOY
 	else:
 		character = character_buttons.get_pressed_button().text
 	
 	
 	if expression_buttons.get_pressed_button() == null:
-		character_expression = Global.Expressions.DEFAULT
+		character_expression = VNGlobal.Expressions.DEFAULT
 	else:
 		character_expression = expression_buttons.get_pressed_button().text
 		
@@ -246,7 +248,7 @@ func add_to_json():
 	var dir = Directory.new()
 	
 	var file = File.new()
-	file.open("res://VisualNovel/data.json", 3)
+	file.open(BASE_DIR + "VisualNovel/data.json", 3)
 	#converts the json file to a text file
 	var text_json = file.get_as_text()
 #	print(text_json)
@@ -275,10 +277,10 @@ func add_to_json():
 	
 	file.close()
 	
-	dir.remove("res://VisualNovel/data.json")
+	dir.remove(BASE_DIR + "VisualNovel/data.json")
 	
 	var new_file = File.new()
-	new_file.open("res://VisualNovel/data.json", 2)
+	new_file.open(BASE_DIR + "VisualNovel/data.json", 2)
 	new_file.store_line(to_json(new_dict))
 	file.close()
 	
@@ -333,3 +335,6 @@ func sentence_to_json(sentence : Sentence):
 func delete_sentence(index):
 	sentences.remove(index)
 	sentence_display()
+
+func _on_Button_pressed():
+	get_tree().quit()

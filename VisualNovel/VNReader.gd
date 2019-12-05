@@ -7,19 +7,19 @@ onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
 
 var expressions = {
-	Global.Characters.BOY : {
-		Global.Expressions.DEFAULT :  load("res://VisualNovel/Characters/BoyeNeutral.png"),
-		Global.Expressions.HAPPY : load("res://VisualNovel/Characters/BoyeSmile.png"),
-		Global.Expressions.SAD : load("res://VisualNovel/Characters/BoyeFrown.png")
+	VNGlobal.Characters.BOY : {
+		VNGlobal.Expressions.DEFAULT :  preload("Characters/BoyeNeutral.png"),
+		VNGlobal.Expressions.HAPPY : preload("Characters/BoyeSmile.png"),
+		VNGlobal.Expressions.SAD : preload("Characters/BoyeFrown.png")
 	},
-	Global.Characters.GIRL : {
-		Global.Expressions.DEFAULT :  load("res://VisualNovel/Characters/verylegit.png")
+	VNGlobal.Characters.GIRL : {
+		VNGlobal.Expressions.DEFAULT :  preload("Characters/verylegit.png")
 	}
 }
 
 var backgrounds = {
-	Global.Backgrounds.CLASSROOM : load("res://VisualNovel/Backgrounds/classroom_angle.png"),
-	Global.Backgrounds.NONE : load("res://VisualNovel/Backgrounds/none.png")
+	VNGlobal.Backgrounds.CLASSROOM : preload("Backgrounds/classroom_angle.png"),
+	VNGlobal.Backgrounds.NONE : preload("Backgrounds/none.png")
 }
 	
 
@@ -66,11 +66,11 @@ func _ready():
 #	for string in data_json.result["05"]["content"]:
 #		content5.append(Sentence.new(string["string"], string["delay"]))
 #
-#	var page1 = ContentPage.new(id, next_id, content1, Global.Characters.BOY, Global.Expressions.SAD, Global.Transitions.FADE, Global.Backgrounds.CLASSROOM);
-#	var page2 = ContentPage.new(id+1, next_id+1, content2, Global.Characters.BOY);
-#	var page3 = ContentPage.new(id+2, next_id+2, content3, Global.Characters.GIRL, Global.Expressions.DEFAULT, Global.Transitions.FADE);
-#	var page4 = ContentPage.new(id+3, next_id+3, content4, Global.Characters.BOY, Global.Expressions.HAPPY, Global.Transitions.FADE);
-#	var page5 = ContentPage.new(id+4, next_id+4, content5, Global.Characters.BOY, Global.Expressions.HAPPY);
+#	var page1 = ContentPage.new(id, next_id, content1, VNGlobal.Characters.BOY, VNGlobal.Expressions.SAD, VNGlobal.Transitions.FADE, VNGlobal.Backgrounds.CLASSROOM);
+#	var page2 = ContentPage.new(id+1, next_id+1, content2, VNGlobal.Characters.BOY);
+#	var page3 = ContentPage.new(id+2, next_id+2, content3, VNGlobal.Characters.GIRL, VNGlobal.Expressions.DEFAULT, VNGlobal.Transitions.FADE);
+#	var page4 = ContentPage.new(id+3, next_id+3, content4, VNGlobal.Characters.BOY, VNGlobal.Expressions.HAPPY, VNGlobal.Transitions.FADE);
+#	var page5 = ContentPage.new(id+4, next_id+4, content5, VNGlobal.Characters.BOY, VNGlobal.Expressions.HAPPY);
 ##	page._init2(id, next_id, content);
 #
 #	yield(display_page(page1), "completed");
@@ -108,7 +108,7 @@ func display_page(page : Page):
 #	print("CHARACTER: " + str(page.character));
 	#print("RESULT" + str(expressions[page.character][page.expression]));
 	
-	if page.character == Global.Characters.NONE: 
+	if page.character == VNGlobal.Characters.NONE: 
 		npc.texture = null;
 	else:
 		if expressions[page.character][page.expression] == null:
@@ -121,34 +121,34 @@ func display_page(page : Page):
 	#var doFileExists = file2Check.file_exists(PATH_2_FILE):
 	npc.show()
 	match page.transition:
-		Global.Transitions.NONE:
+		VNGlobal.Transitions.NONE:
 			transition.play("appear")
 			yield(transition, "animation_finished")
-		Global.Transitions.FLASH: #think ace attorny
+		VNGlobal.Transitions.FLASH: #think ace attorny
 			# MAKE TRANSITION
 			transition.play("appear")
 			yield(transition, "animation_finished")
-		Global.Transitions.FADE:
+		VNGlobal.Transitions.FADE:
 			$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
 			#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
 			transition.play("fade in")
 			yield(transition, "animation_finished")
 #			yield(transition, "animation_finished")
-		Global.Transitions.SLIDE_RIGHT:
+		VNGlobal.Transitions.SLIDE_RIGHT:
 			#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
 			transition.play("slide_from_right")
 			yield(transition, "animation_finished")
 #			pass
-		Global.Transitions.SLIDE_LEFT:
+		VNGlobal.Transitions.SLIDE_LEFT:
 			# MAKE TRANSITION
 			transition.play("slide_from_left")
 			yield(transition, "animation_finished")
 	
 	
 	
-	if page.background != Global.Backgrounds.SAME:
+	if page.background != VNGlobal.Backgrounds.SAME:
 		if backgrounds[page.background] == null:
-			$Control/Background.texture = backgrounds[Global.Backgrounds.CLASSROOM];
+			$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
 		else:
 			$Control/Background.texture = backgrounds[page.background];
 	# else incolves being able to reference previous pages

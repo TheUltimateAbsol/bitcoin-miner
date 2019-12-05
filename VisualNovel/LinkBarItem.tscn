@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Style/LinkBarDefault.tres" type="Theme" id=1]
+[ext_resource path="res://VisualNovel/Style/LinkBarDefault.tres" type="Theme" id=1]
 [ext_resource path="res://VisualNovel/VNlinkbarItem.gd" type="Script" id=2]
+
 
 [node name="Panel" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 50 )
+rect_min_size = Vector2( 0, 30 )
 size_flags_vertical = 4
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -16,23 +17,23 @@ anchor_bottom = 1.0
 margin_right = 602.0
 
 [node name="Id" type="Label" parent="HBoxContainer"]
-margin_top = 710.0
+margin_top = 290.0
 margin_right = 70.0
-margin_bottom = 730.0
+margin_bottom = 310.0
 text = "0000:"
 
 [node name="Type" type="Label" parent="HBoxContainer"]
 margin_left = 74.0
-margin_top = 710.0
+margin_top = 290.0
 margin_right = 116.0
-margin_bottom = 730.0
+margin_bottom = 310.0
 text = " + "
 
 [node name="Text" type="Label" parent="HBoxContainer"]
 margin_left = 120.0
-margin_top = 710.0
+margin_top = 290.0
 margin_right = 764.0
-margin_bottom = 730.0
+margin_bottom = 310.0
 text = "Maximum character count is 30................."
 
 [node name="Button" type="Button" parent="."]
@@ -40,4 +41,4 @@ visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-[connection signal="gui_input" from="." to="." method="_on_Panel_gui_input"]
+[connection signal="gui_input" from="." to="." method="_gui_input"]

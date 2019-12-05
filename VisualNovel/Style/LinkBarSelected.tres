@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=4 format=2]
 
-[ext_resource path="res://UI/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 1 )
+bg_color = Color( 0, 0.0392157, 0.478431, 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 20

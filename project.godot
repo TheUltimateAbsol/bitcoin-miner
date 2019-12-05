@@ -112,15 +112,16 @@ config/icon="res://icon.png"
 
 Global="*res://Global.gd"
 InputEventHandler="*res://InputEventHandler.gd"
+VNGlobal="*res://VisualNovel/VNGlobal.gd"
 
 [display]
 
 window/size/width=720
 window/size/height=1440
 window/size/resizable=false
+window/size/fullscreen=true
 window/size/test_width=360
 window/size/test_height=720
-window/stretch/mode="viewport"
 window/pixel=true
 
 [global]
