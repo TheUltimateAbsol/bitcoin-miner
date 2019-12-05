@@ -1,210 +1,253 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://VNEditor.gd" type="Script" id=1]
+[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 573.0
-margin_bottom = 365.0
-
-[node name="GridContainer" type="GridContainer" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 10.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Layout" type="GridContainer" parent="Panel/HBoxContainer"]
+editor/display_folded = true
+margin_right = 480.0
+margin_bottom = 435.0
+rect_min_size = Vector2( 480, 435 )
 columns = 2
 
-[node name="id_info" type="PanelContainer" parent="Panel/GridContainer"]
+[node name="id_info" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 editor/display_folded = true
-margin_right = 80.0
-margin_bottom = 46.0
+margin_right = 246.0
+margin_bottom = 106.0
 
-[node name="GridContainer" type="GridContainer" parent="Panel/GridContainer/id_info"]
+[node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/id_info"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 73.0
-margin_bottom = 39.0
+margin_right = 239.0
+margin_bottom = 99.0
 
-[node name="id" type="Label" parent="Panel/GridContainer/id_info/GridContainer"]
-margin_right = 49.0
+[node name="id" type="Label" parent="Panel/HBoxContainer/Layout/id_info/GridContainer"]
+margin_right = 58.0
 margin_bottom = 14.0
 size_flags_vertical = 5
 text = "ID"
 
-[node name="Next_id" type="Label" parent="Panel/GridContainer/id_info/GridContainer"]
+[node name="id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/id_info/GridContainer"]
 margin_top = 18.0
-margin_right = 49.0
-margin_bottom = 32.0
+margin_right = 58.0
+margin_bottom = 42.0
+
+[node name="Next_id" type="Label" parent="Panel/HBoxContainer/Layout/id_info/GridContainer"]
+margin_top = 46.0
+margin_right = 58.0
+margin_bottom = 60.0
 text = "Next ID"
 
-[node name="sentenceInfo" type="PanelContainer" parent="Panel/GridContainer"]
+[node name="next_id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/id_info/GridContainer"]
+margin_top = 64.0
+margin_right = 58.0
+margin_bottom = 88.0
+
+[node name="sentenceInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 editor/display_folded = true
-margin_left = 84.0
-margin_right = 355.0
-margin_bottom = 46.0
+margin_left = 250.0
+margin_right = 471.0
+margin_bottom = 106.0
 
-[node name="GridContainer" type="GridContainer" parent="Panel/GridContainer/sentenceInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 264.0
-margin_bottom = 39.0
+margin_right = 214.0
+margin_bottom = 99.0
 
-[node name="sentence_info" type="Label" parent="Panel/GridContainer/sentenceInfo/GridContainer"]
-margin_right = 257.0
+[node name="sentence_info" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer"]
+margin_right = 207.0
 margin_bottom = 14.0
-text = "Add a Sentence, delay, speed, transition"
+text = "Sentence Info"
+align = 1
 
-[node name="sceneInfo" type="PanelContainer" parent="Panel/GridContainer"]
-margin_top = 50.0
-margin_right = 80.0
-margin_bottom = 218.0
-
-[node name="GridContainer" type="GridContainer" parent="Panel/GridContainer/sceneInfo"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 73.0
-margin_bottom = 161.0
-
-[node name="musicList" type="GridContainer" parent="Panel/GridContainer/sceneInfo/GridContainer"]
-margin_right = 66.0
-margin_bottom = 126.0
-
-[node name="Music" type="Label" parent="Panel/GridContainer/sceneInfo/GridContainer/musicList"]
-margin_right = 66.0
-margin_bottom = 14.0
-text = "Music"
-
-[node name="noneBox" type="CheckBox" parent="Panel/GridContainer/sceneInfo/GridContainer/musicList"]
+[node name="sentence_txt" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer"]
+editor/display_folded = true
 margin_top = 18.0
-margin_right = 66.0
+margin_right = 207.0
 margin_bottom = 42.0
-text = "NONE"
+alignment = 1
 
-[node name="sameBox" type="CheckBox" parent="Panel/GridContainer/sceneInfo/GridContainer/musicList"]
+[node name="sentence_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt"]
+margin_left = 62.0
+margin_right = 120.0
+margin_bottom = 24.0
+expand_to_text_length = true
+placeholder_text = "Enter A sentence"
+
+[node name="add_sentence" type="Button" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt"]
+margin_left = 124.0
+margin_right = 144.0
+margin_bottom = 24.0
+text = "+"
+
+[node name="sentence_info2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer"]
 margin_top = 46.0
-margin_right = 66.0
+margin_right = 207.0
 margin_bottom = 70.0
-text = "Same"
+alignment = 1
 
-[node name="simpleBox" type="CheckBox" parent="Panel/GridContainer/sceneInfo/GridContainer/musicList"]
+[node name="sent_delay_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2"]
+margin_left = 21.0
+margin_right = 79.0
+margin_bottom = 24.0
+align = 1
+placeholder_text = "Delay"
+
+[node name="sent_speed_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2"]
+margin_left = 83.0
+margin_right = 141.0
+margin_bottom = 24.0
+align = 1
+placeholder_text = "Speed"
+
+[node name="sound_menu" type="OptionButton" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_info2"]
+margin_left = 145.0
+margin_right = 186.0
+margin_bottom = 24.0
+
+[node name="sentences_lable" type="Label" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer"]
 margin_top = 74.0
-margin_right = 66.0
-margin_bottom = 98.0
+margin_right = 207.0
+margin_bottom = 88.0
+text = "Sentences Made:"
 
-[node name="CheckBox" type="CheckBox" parent="Panel/GridContainer/sceneInfo/GridContainer/musicList"]
-margin_top = 102.0
-margin_right = 66.0
-margin_bottom = 126.0
+[node name="sentence_list" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer"]
+margin_top = 92.0
+margin_right = 207.0
+margin_bottom = 92.0
 
-[node name="characterInfo" type="PanelContainer" parent="Panel/GridContainer"]
-editor/display_folded = true
-margin_left = 84.0
-margin_top = 50.0
-margin_right = 355.0
-margin_bottom = 218.0
+[node name="sceneInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
+margin_top = 110.0
+margin_right = 246.0
+margin_bottom = 138.0
 
-[node name="GridContainer" type="GridContainer" parent="Panel/GridContainer/characterInfo"]
+[node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 264.0
-margin_bottom = 161.0
+margin_right = 239.0
+margin_bottom = 21.0
 columns = 3
 
-[node name="transitionLayout" type="GridContainer" parent="Panel/GridContainer/characterInfo/GridContainer"]
-editor/display_folded = true
-margin_right = 95.0
-margin_bottom = 154.0
+[node name="musicList" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
+margin_right = 38.0
+margin_bottom = 14.0
 
-[node name="Transition" type="Label" parent="Panel/GridContainer/characterInfo/GridContainer/transitionLayout"]
-margin_right = 95.0
+[node name="Music" type="Label" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/musicList"]
+margin_right = 38.0
+margin_bottom = 14.0
+text = "Music"
+align = 1
+
+[node name="background_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
+margin_left = 42.0
+margin_right = 116.0
+margin_bottom = 14.0
+
+[node name="backgorund_label" type="Label" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/background_list"]
+margin_right = 74.0
+margin_bottom = 14.0
+text = "Background"
+align = 1
+
+[node name="transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer"]
+margin_left = 120.0
+margin_right = 232.0
+margin_bottom = 14.0
+
+[node name="transition_label" type="Label" parent="Panel/HBoxContainer/Layout/sceneInfo/GridContainer/transition_list"]
+margin_right = 112.0
+margin_bottom = 14.0
+text = "Scene Transitions"
+align = 1
+
+[node name="characterInfo" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
+editor/display_folded = true
+margin_left = 250.0
+margin_top = 110.0
+margin_right = 471.0
+margin_bottom = 138.0
+
+[node name="character_layout" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 214.0
+margin_bottom = 21.0
+columns = 3
+
+[node name="char_transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout"]
+editor/display_folded = true
+margin_right = 63.0
+margin_bottom = 14.0
+
+[node name="Transition" type="Label" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/char_transition_list"]
+margin_right = 63.0
 margin_bottom = 14.0
 text = "Transition"
 align = 1
 
-[node name="noneBox" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/transitionLayout"]
-margin_top = 18.0
-margin_right = 95.0
-margin_bottom = 42.0
-text = "NONE"
-
-[node name="flashBox" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/transitionLayout"]
-margin_top = 46.0
-margin_right = 95.0
-margin_bottom = 70.0
-text = "Flash"
-
-[node name="fadeBox" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/transitionLayout"]
-margin_top = 74.0
-margin_right = 95.0
-margin_bottom = 98.0
-text = "Fade"
-
-[node name="rightSlideBox" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/transitionLayout"]
-margin_top = 102.0
-margin_right = 95.0
-margin_bottom = 126.0
-text = "Right Slide"
-
-[node name="leftSlideBox" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/transitionLayout"]
-margin_top = 130.0
-margin_right = 95.0
-margin_bottom = 154.0
-text = "Left Slide"
-
-[node name="Character" type="GridContainer" parent="Panel/GridContainer/characterInfo/GridContainer"]
+[node name="character_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout"]
 editor/display_folded = true
-margin_left = 99.0
-margin_right = 161.0
-margin_bottom = 154.0
+margin_left = 67.0
+margin_right = 127.0
+margin_bottom = 14.0
 
-[node name="characterLabel" type="Label" parent="Panel/GridContainer/characterInfo/GridContainer/Character"]
-margin_right = 62.0
+[node name="characterLabel" type="Label" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/character_list"]
+margin_right = 60.0
 margin_bottom = 14.0
 text = "Character"
 align = 1
 
-[node name="noneBox" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/Character"]
-margin_top = 18.0
-margin_right = 62.0
-margin_bottom = 42.0
-text = "None"
+[node name="expression_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout"]
+margin_left = 131.0
+margin_right = 207.0
+margin_bottom = 14.0
 
-[node name="boyBox" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/Character"]
-margin_top = 46.0
-margin_right = 62.0
-margin_bottom = 70.0
-text = "Boy"
-
-[node name="girlBox" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/Character"]
-margin_top = 74.0
-margin_right = 62.0
-margin_bottom = 98.0
-text = "Girl"
-
-[node name="Expressions" type="GridContainer" parent="Panel/GridContainer/characterInfo/GridContainer"]
-margin_left = 165.0
-margin_right = 241.0
-margin_bottom = 154.0
-
-[node name="expressLabel" type="Label" parent="Panel/GridContainer/characterInfo/GridContainer/Expressions"]
+[node name="expressLabel" type="Label" parent="Panel/HBoxContainer/Layout/characterInfo/character_layout/expression_list"]
 margin_right = 76.0
 margin_bottom = 14.0
 text = "Expressions"
 align = 1
 
-[node name="default" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/Expressions"]
-margin_top = 18.0
-margin_right = 76.0
-margin_bottom = 42.0
-text = "Default"
+[node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
+margin_top = 142.0
+margin_right = 246.0
+margin_bottom = 162.0
+text = "Preview Scene"
 
-[node name="happy" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/Expressions"]
-margin_top = 46.0
-margin_right = 76.0
-margin_bottom = 70.0
-text = "Happy"
+[node name="parse_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
+margin_left = 250.0
+margin_top = 142.0
+margin_right = 471.0
+margin_bottom = 162.0
+text = "Parse JSON"
 
-[node name="sad" type="CheckBox" parent="Panel/GridContainer/characterInfo/GridContainer/Expressions"]
-margin_top = 74.0
-margin_right = 76.0
-margin_bottom = 98.0
-text = "Sad"
+[node name="Node2D" type="Node2D" parent="Panel/HBoxContainer"]
+position = Vector2( 100, 0 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="VNReader" parent="Panel/HBoxContainer/Node2D" instance=ExtResource( 2 )]
+margin_left = 1040.0
+margin_right = 1728.01
+margin_bottom = 667.0
+
+[node name="CheckBox" type="CheckBox" parent="."]
+visible = false
+margin_right = 24.0
+margin_bottom = 24.0
+[connection signal="pressed" from="Panel/HBoxContainer/Layout/sentenceInfo/VBoxContainer/sentence_txt/add_sentence" to="." method="add_sentence"]
+[connection signal="pressed" from="Panel/HBoxContainer/Layout/preview_btn" to="." method="preview_scene"]
