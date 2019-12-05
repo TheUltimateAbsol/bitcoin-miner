@@ -120,6 +120,7 @@ window/size/height=1440
 window/size/resizable=false
 window/size/test_width=360
 window/size/test_height=720
+window/stretch/mode="viewport"
 window/pixel=true
 
 [global]
