@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Classes/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Style/pure_white.tres" type="Material" id=2]
@@ -32,6 +32,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [ null, ExtResource( 2 ), null ]
 }
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [node name="Enemy" type="Node2D" groups=[
 "enemy",
@@ -46,8 +60,12 @@ anims/damage = SubResource( 1 )
 [node name="EnemyHurtbox" parent="." instance=ExtResource( 3 )]
 
 [node name="Health" parent="." instance=ExtResource( 4 )]
+
 margin_left = -6.93286
 margin_top = 44.248
 margin_right = -6.93286
 margin_bottom = 44.248
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 [connection signal="damaged" from="EnemyHurtbox" to="." method="_on_EnemyHurtbox_damaged"]

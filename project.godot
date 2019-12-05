@@ -78,6 +78,11 @@ _global_script_classes=[ {
 "class": "Sentence",
 "language": "GDScript",
 "path": "res://VisualNovel/Sentence.gd"
+}, {
+"base": "Panel",
+"class": "VNlinkbarItem",
+"language": "GDScript",
+"path": "res://VisualNovel/VNlinkbarItem.gd"
 } ]
 _global_script_class_icons={
 "AttackingEnemy": "",
@@ -93,7 +98,8 @@ _global_script_class_icons={
 "NavPoint": "",
 "Page": "",
 "PathMap": "",
-"Sentence": ""
+"Sentence": "",
+"VNlinkbarItem": ""
 }
 
 [application]
