@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/253096_8_bit_Victory.wav-b82cd38b7d046cbbe5efe6684c23adb4.sample"
+
+[deps]
+
+source_file="res://Sounds/253096_8_bit_Victory.wav"
+dest_files=[ "res://.import/253096_8_bit_Victory.wav-b82cd38b7d046cbbe5efe6684c23adb4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

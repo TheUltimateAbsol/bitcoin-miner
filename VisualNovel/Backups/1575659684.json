@@ -1,0 +1,83 @@
+[
+    {
+        "background": "CLASSROOM",
+        "character": "NONE",
+        "content": [
+            {
+                "content": "TEACHER:",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "So can anyone tell me what year the Emancipation Proclamation was given?\r\n",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "Anyone?",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 0,
+        "music": "NONE",
+        "next_id": 2,
+        "questions": [],
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "SAME",
+        "character": "NONE",
+        "content": [
+            {
+                "content": "...",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 1,
+        "music": "NONE",
+        "next_id": 3,
+        "questions": [],
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "SAME",
+        "character": "NONE",
+        "content": [
+            {
+                "content": "Ah, Mr. Miller!",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "Perhaps you know the answer!",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 2,
+        "music": "NONE",
+        "next_id": 1,
+        "questions": [],
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    }
+]

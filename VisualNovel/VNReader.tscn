@@ -19,7 +19,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ Color( 1, 1, 1, 1 ) ]
@@ -31,10 +31,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -156,7 +156,7 @@ expand = true
 stretch_mode = 1
 
 [node name="NPC" type="TextureRect" parent="Control"]
-editor/display_folded = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
@@ -205,7 +205,7 @@ anchor_bottom = 1.0
 custom_fonts/font = SubResource( 4 )
 text = "aaaaaaaaaaaaaaaaaaaaaaaaa"
 autowrap = true
-percent_visible = 0.0
+percent_visible = -0.04
 
 [node name="LetterTimer" type="Timer" parent="."]
 wait_time = 0.2
@@ -214,6 +214,7 @@ wait_time = 0.2
 wait_time = 0.2
 
 [node name="Conclusion" type="Control" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 

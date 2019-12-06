@@ -280,6 +280,8 @@ func drop_win():
 func win():
 #	$LevelComplete/AnimationPlayer.play("WinSpawner");
 #	$LevelComplete/Timer.connect("timeout", self, "drop_win");
+	get_node("AudioStreamPlayer").stop();
+	
 	$LevelLoadout.visible = false;
 	$Miners.visible = false;
 	$Miner/Node2D.visible = false;
@@ -377,9 +379,11 @@ func start():
 	#connect to gameover
 	$Miner.connect("died", self, "game_over");
 	
-	connect("pressed_attack", self, "test");
 	main.connect("finished_mining", self, "finished_mining_fire");
 	
 	get_tree().paused = true;
 	yield($Startup/AnimationPlayer, "animation_finished");
 	get_tree().paused = false;
+	
+	$AudioStreamPlayer.play();
+	

@@ -169,7 +169,6 @@ func on_selected(index):
 	if index != current_index:
 		current_index = index;
 		update_options();
-		alert(current_index);
 		
 func insert(id):
 	var last_index = save_data.size();

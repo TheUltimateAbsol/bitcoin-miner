@@ -13,13 +13,13 @@ func activate(miner: Miner):
 	var bonus = Global.numenemies*1000
 	
 	var multiplier = 1.0;
-	if Global.numseconds > 60:
+	if Global.numseconds > 120:
 		multiplier = 1;
-	elif Global.numseconds > 45:
+	elif Global.numseconds > 100:
 		multiplier = 1.2;
-	elif Global.numseconds > 40:
+	elif Global.numseconds > 90:
 		multiplier = 1.3;
-	elif Global.numseconds > 35:
+	elif Global.numseconds > 75:
 		multiplier = 1.5;
 	else:
 		multiplier = 2;

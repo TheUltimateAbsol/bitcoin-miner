@@ -26,12 +26,12 @@ func add_sentence():
 	var speed = sentence_speed_input.get_text()
 	
 	if delay != null and delay.is_valid_float():
-		delay = int(delay)
+		delay = float(delay)
 	else:
-		delay = Global.DEFAULT_SENTENCE_DELAY
+		delay = VNGlobal.DEFAULT_SENTENCE_DELAY
 	
 	if speed != null and speed.is_valid_float():
-		speed = int(speed)
+		speed = float(speed)
 	else:
 		speed = 1.0
 	

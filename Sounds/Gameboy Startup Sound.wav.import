@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Gameboy Startup Sound.wav-62a8a71d17573a76f903aa0effb65ade.sample"
+
+[deps]
+
+source_file="res://Sounds/Gameboy Startup Sound.wav"
+dest_files=[ "res://.import/Gameboy Startup Sound.wav-62a8a71d17573a76f903aa0effb65ade.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

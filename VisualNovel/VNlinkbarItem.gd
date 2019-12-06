@@ -71,6 +71,8 @@ func populate(data, question_num=0):
 		display_text.text = "<GAME START>";
 	elif data.get("type") == "GameEndPage":
 		display_text.text = "<GAME END>";
+	elif data.get("type") == "EndPage":
+		display_text.text = "<END>";
 	
 	
 

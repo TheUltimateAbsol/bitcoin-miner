@@ -34,6 +34,7 @@ margin_top = 714.0
 margin_right = 128.0
 margin_bottom = 726.0
 text = "[BLANK]"
+percent_visible = 1.42857
 max_lines_visible = 1
 
 [node name="Button" type="Button" parent="."]
