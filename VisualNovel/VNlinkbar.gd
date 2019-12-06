@@ -5,69 +5,22 @@ extends VBoxContainer
 # var b = "text"
 var data_json
 var LinkItem = preload("LinkBarItem.tscn");
+
+signal selected
 #Notice how this links to the scene, not the script.
-
-var my_old_data = [
-    {
-        "type" :"message",
-        "id" : 1,
-        "next" : 2,
-        "text" : "Test Message 1"
-    },
-    {
-        "type" :"message",
-        "id" : 2,
-        "next" : 3,
-        "text" : "Test Message 2"
-    },
-    {
-        "type" :"questions",
-        "id" : 3,
-        "text" : "Questions 1", 
-        "questions" : [
-            {
-                "text" : "Choice 1",
-                "next" : 4
-            },
-            {
-                "text" : "Choice 2",
-                "next" : 5
-            }
-        ]
-    },
-    {
-        "type" : "message",
-        "id" : 4,
-        "next" : 6,
-        "text" : "Result 1"
-    },
-    {
-        "type" : "message",
-        "id" : 5,
-        "next" : 6,
-        "text" : "Result 2"
-    },
-    {
-        "type" : "control",
-        "id" : 6,
-        "next" : 7,
-        "comment" : "Control"
-    },
-    {
-        "type" : "end",
-        "id" : 7,
-        "comment" : "Endpoint"
-    }
-]
-
 
 # Called when the node enters the scene tree for the first time.
 func load_data(my_data: Array):
-	for item in my_data:
+	for child in get_children():
+		child.queue_free();
+	
+	for i in range(my_data.size()):
+		var item = my_data[i];
 		#Create a message element
 		var message = LinkItem.instance()
 		add_child(message);
 		message.populate(item);
+		message.index = i;
 		
 		#Add question options if they exist.
 		if item.get("type") == "questions":
@@ -75,3 +28,13 @@ func load_data(my_data: Array):
 				var question = LinkItem.instance()
 				add_child(question);
 				question.populate(item["questions"][i],i);
+				
+func on_selected(index):
+	emit_signal("selected", index);
+	
+func select(index):
+	if index == -1: return;
+	
+	for item in get_children():
+		if item.index == index:
+			item.select();

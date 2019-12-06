@@ -9,6 +9,7 @@ class_name VNlinkbarItem
 var id
 var next
 var clicked = false
+var index = -1;
 #var text
 
 onready var display_id = $HBoxContainer/Id;
@@ -41,13 +42,16 @@ func populate(data, question_num=0):
 	#We do this because this information might be important on click
 	id = data.get("id");
 	
-	if data.get("id"):
+	if data.get("id") or data.get("id") == 0:
 		display_id.text = str(data.get("id")).pad_zeros(4) + ":";
 	else:
 		display_id.text = "     "
 
 	match data.get("type"):
-		"message": display_type.text= " + ";
+		"Page": display_type.text= " - ";
+		"ContentPage": display_type.text= " + ";
+		"GameStartPage": display_type.text= " > ";
+		"GameEndPage": display_type.text= " # ";
 		"questions": display_type.text= " ? ";
 		"control": display_type.text= " * ";
 		"end": display_type.text= " X ";
@@ -63,6 +67,10 @@ func populate(data, question_num=0):
 		#Then some code here to set the text preview
 	elif data.get("comment"):
 		display_text.text = data.get("comment");
+	elif data.get("type") == "GameStartPage":
+		display_text.text = "<GAME START>";
+	elif data.get("type") == "GameEndPage":
+		display_text.text = "<GAME END>";
 	
 	
 
@@ -74,18 +82,20 @@ func populate(data, question_num=0):
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		print("Left mouse button was pressed!")
-		var children = get_parent().get_children()
-		print(theme);
-		set_deferred("theme", selectedStyle)
-		
-		print(theme);
-		
-		for item in children:
-			if item.id == next:
-				item.theme = nextStyle
-			elif item.next == id:
-				item.theme = previousStyle
-			else:
-				item.theme = defaultStyle;
-			
-		 
+		select();
+
+				
+func select():
+	var children = get_parent().get_children()
+	print(theme);
+	set_deferred("theme", selectedStyle)
+	
+	get_parent().on_selected(index);
+	
+	for item in children:
+		if item.id == next:
+			item.theme = nextStyle
+		elif item.next == id:
+			item.theme = previousStyle
+		else:
+			item.theme = defaultStyle;

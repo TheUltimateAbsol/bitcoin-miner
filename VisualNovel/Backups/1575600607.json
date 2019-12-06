@@ -1,0 +1,50 @@
+[
+    {
+        "background": "NONE",
+        "character": "NONE",
+        "content": [],
+        "expression": "DEFAULT",
+        "id": 0,
+        "music": "NONE",
+        "next_id": 1,
+        "questions": [],
+        "scene_transition": "NONE",
+        "speed": 1
+    },
+    {
+        "background": "NONE",
+        "character": "NONE",
+        "content": [],
+        "expression": "DEFAULT",
+        "id": 1,
+        "music": "NONE",
+        "next_id": 2,
+        "questions": [],
+        "scene_transition": "NONE",
+        "speed": 1
+    },
+    {
+        "background": "NONE",
+        "character": "NONE",
+        "content": [],
+        "expression": "DEFAULT",
+        "id": 2,
+        "music": "NONE",
+        "next_id": 3,
+        "questions": [],
+        "scene_transition": "NONE",
+        "speed": 1
+    },
+    {
+        "background": "NONE",
+        "character": "NONE",
+        "content": [],
+        "expression": "DEFAULT",
+        "id": 3,
+        "music": "NONE",
+        "next_id": 4,
+        "questions": [],
+        "scene_transition": "NONE",
+        "speed": 1
+    }
+]

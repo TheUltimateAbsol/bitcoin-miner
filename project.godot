@@ -34,6 +34,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/Enemy.gd"
 }, {
+"base": "Page",
+"class": "GameEndPage",
+"language": "GDScript",
+"path": "res://VisualNovel/GameEndPage.gd"
+}, {
+"base": "Page",
+"class": "GameStartPage",
+"language": "GDScript",
+"path": "res://VisualNovel/GameStartPage.gd"
+}, {
 "base": "Node",
 "class": "JumpTrajectory",
 "language": "GDScript",
@@ -90,6 +100,8 @@ _global_script_class_icons={
 "CommandActor": "",
 "ContentPage": "",
 "Enemy": "",
+"GameEndPage": "",
+"GameStartPage": "",
 "JumpTrajectory": "",
 "MetaPage": "",
 "Miner": "",

@@ -31,9 +31,9 @@ text = " + "
 [node name="Text" type="Label" parent="HBoxContainer"]
 margin_left = 72.0
 margin_top = 714.0
-margin_right = 440.0
+margin_right = 128.0
 margin_bottom = 726.0
-text = "Maximum character count is 30................."
+text = "[BLANK]"
 max_lines_visible = 1
 
 [node name="Button" type="Button" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://VisualNovel/VNEditor.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/LinkBar.tscn" type="PackedScene" id=2]
@@ -6,13 +6,14 @@
 [ext_resource path="res://VisualNovel/SentenceInput.gd" type="Script" id=4]
 [ext_resource path="res://VisualNovel/SceneInput.gd" type="Script" id=5]
 [ext_resource path="res://VisualNovel/CharacterInput.gd" type="Script" id=6]
-[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=7]
-[ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://VisualNovel/SnackBar.gd" type="Script" id=9]
+[ext_resource path="res://VisualNovel/DirectoryInput.gd" type="Script" id=7]
+[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=8]
+[ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://VisualNovel/SnackBar.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0.0470588, 0.301961, 1 )
@@ -84,38 +85,36 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
-editor/display_folded = true
-margin_right = 187.0
+margin_right = 185.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer"]
-editor/display_folded = true
-margin_right = 187.0
+margin_right = 185.0
 margin_bottom = 20.0
 alignment = 1
 
-[node name="New" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 1.0
-margin_right = 41.0
+[node name="New" type="MenuButton" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 40.0
 margin_bottom = 20.0
 text = "New"
+flat = false
 
 [node name="Delete" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 45.0
-margin_right = 100.0
+margin_left = 44.0
+margin_right = 99.0
 margin_bottom = 20.0
 text = "Delete"
 
 [node name="Up" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 104.0
-margin_right = 134.0
+margin_left = 103.0
+margin_right = 133.0
 margin_bottom = 20.0
 text = "Up"
 
 [node name="Down" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 138.0
-margin_right = 186.0
+margin_left = 137.0
+margin_right = 185.0
 margin_bottom = 20.0
 text = "Down"
 
@@ -123,17 +122,16 @@ text = "Down"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 24.0
-margin_right = 187.0
+margin_right = 185.0
 margin_bottom = 24.0
 
 [node name="Layout" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_left = 191.0
-margin_right = 671.0
+margin_left = 189.0
+margin_right = 669.0
 margin_bottom = 1440.0
 rect_min_size = Vector2( 480, 435 )
 
 [node name="IdInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_right = 480.0
 margin_bottom = 102.0
 script = ExtResource( 3 )
@@ -154,6 +152,7 @@ text = "ID"
 margin_top = 18.0
 margin_right = 58.0
 margin_bottom = 42.0
+editable = false
 
 [node name="Next_id" type="Label" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
 margin_top = 46.0
@@ -167,7 +166,6 @@ margin_right = 58.0
 margin_bottom = 88.0
 
 [node name="SentenceInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_top = 106.0
 margin_right = 480.0
 margin_bottom = 212.0
@@ -301,7 +299,6 @@ margin_bottom = 21.0
 columns = 3
 
 [node name="char_transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout"]
-editor/display_folded = true
 margin_right = 63.0
 margin_bottom = 14.0
 
@@ -334,16 +331,47 @@ margin_bottom = 14.0
 text = "Expressions"
 align = 1
 
-[node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
+[node name="DirectoryInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 margin_top = 280.0
 margin_right = 480.0
-margin_bottom = 300.0
-text = "Preview Scene"
+margin_bottom = 336.0
+script = ExtResource( 7 )
 
-[node name="VNReader" parent="Panel/HBoxContainer" instance=ExtResource( 7 )]
-margin_left = 675.0
+[node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/DirectoryInput"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 473.0
+margin_bottom = 49.0
+
+[node name="directory" type="Label" parent="Panel/HBoxContainer/Layout/DirectoryInput/GridContainer"]
+margin_right = 466.0
+margin_bottom = 14.0
+size_flags_vertical = 5
+text = "Level Directory"
+
+[node name="directory_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/DirectoryInput/GridContainer"]
+margin_top = 18.0
+margin_right = 466.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+placeholder_text = "Enter a File Directory..."
+
+[node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
+margin_top = 340.0
+margin_right = 480.0
+margin_bottom = 360.0
+text = "Update & Preview Scene"
+
+[node name="update_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
+margin_top = 364.0
+margin_right = 480.0
+margin_bottom = 384.0
+text = "Update Scene"
+
+[node name="VNReader" parent="Panel/HBoxContainer" instance=ExtResource( 8 )]
+margin_left = 673.0
 margin_top = 720.0
-margin_right = 1395.0
+margin_right = 1393.0
 margin_bottom = 1440.0
 rect_min_size = Vector2( 720, 720 )
 size_flags_horizontal = 8
@@ -376,7 +404,7 @@ text = "SAVE"
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="Panel" type="Panel" parent="SnackBar"]
 anchor_right = 1.0
@@ -393,7 +421,12 @@ valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SnackBar"]
 anims/Activate = SubResource( 3 )
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Delete" to="." method="delete"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Up" to="." method="up"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Down" to="." method="down"]
+[connection signal="selected" from="Panel/HBoxContainer/VBoxContainer/LinkBar" to="." method="on_selected"]
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_txt/add_sentence" to="Panel/HBoxContainer/Layout/SentenceInput" method="add_sentence"]
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/preview_btn" to="." method="preview_scene"]
+[connection signal="pressed" from="Panel/HBoxContainer/Layout/update_btn" to="." method="update_page"]
 [connection signal="pressed" from="Exit" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Save" to="." method="save_json"]
