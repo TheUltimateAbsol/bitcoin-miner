@@ -50,6 +50,9 @@ func activate(miner: Miner):
 	$AnimationPlayer.play("DisplayScores");
 	yield($AnimationPlayer, "animation_finished")
 	
+	yield(InputEventHandler, "released_attack")
+	get_parent().emit_signal("room_cleared");
+	
 func skip():
 	print("SKIP");
 	skip = true;

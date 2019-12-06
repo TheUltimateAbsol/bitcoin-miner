@@ -51,7 +51,7 @@ tracks/0/keys = {
 "values": [ Vector2( 600, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 28
 font_data = ExtResource( 6 )
 
@@ -75,6 +75,7 @@ expand = true
 stretch_mode = 1
 
 [node name="NPC" type="TextureRect" parent="Control"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
@@ -120,9 +121,10 @@ margin_bottom = 140.0
 [node name="TextLabel" type="Label" parent="Control/Panel/MarginContainer/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "aaaaaaaaaaaaaaaaaaaaaaaaa"
 autowrap = true
+percent_visible = 0.0
 
 [node name="LetterTimer" type="Timer" parent="."]
 wait_time = 0.2

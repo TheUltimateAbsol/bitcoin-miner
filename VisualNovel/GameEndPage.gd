@@ -1,4 +1,4 @@
-extends Page
+extends MetaPage
 
 class_name GameEndPage
 
@@ -9,3 +9,4 @@ func serialize():
 	return VNGlobal.merge_dir(.serialize(), {
 		"type" : "GameEndPage"
 	});
+	

@@ -11,8 +11,13 @@ var music
 var background
 var questions #array of strings + id leadsa	
 
-func _init(xid=0, xnext_id=0, xcontent=[], xcharacter=VNGlobal.Characters.NONE, 
-	xexpression=VNGlobal.Expressions.DEFAULT, xtransition=VNGlobal.Transitions.NONE, xbackground=VNGlobal.Backgrounds.NONE,
+func _init(xid=0, 
+	xnext_id=0, 
+	xcontent=[], 
+	xcharacter=VNGlobal.Characters.NONE, 
+	xexpression=VNGlobal.Expressions.DEFAULT, 
+	xtransition=VNGlobal.Transitions.NONE, 
+	xbackground=VNGlobal.Backgrounds.NONE,
 	xspeed=1, 
 	xmusic=VNGlobal.Music.NONE, 
 	xquestions=[]).(xid, xnext_id):
@@ -39,6 +44,3 @@ func serialize():
 		"questions": questions,
 		"type" : "ContentPage"
 	});
-	
-	
-	

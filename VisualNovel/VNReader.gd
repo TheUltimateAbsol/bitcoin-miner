@@ -1,10 +1,24 @@
 extends Control
 
+export (bool) var autoplay = false;
+
 onready var textlabel = get_node("Control/Panel/MarginContainer/Control/TextLabel")
-onready var letter_timer = $LetterTimer;
-onready var delay_timer = $DelayTimer;
 onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
+
+onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
+onready var delay_timer : TimerRequest = TimerRequest.new($DelayTimer);
+
+enum {PLAYING, WAITING, UNSET}
+
+signal start_game
+signal end_game
+signal goto_next_page
+
+var save_data : Array;
+var tap_skip = true;
+var skipped = false;
+var state = UNSET;
 
 var expressions = {
 	VNGlobal.Characters.BOY : {
@@ -13,7 +27,9 @@ var expressions = {
 		VNGlobal.Expressions.SAD : preload("Characters/BoyeFrown.png")
 	},
 	VNGlobal.Characters.GIRL : {
-		VNGlobal.Expressions.DEFAULT :  preload("Characters/verylegit.png")
+		VNGlobal.Expressions.DEFAULT :  preload("Characters/verylegit.png"),
+		VNGlobal.Expressions.HAPPY :  preload("Characters/verylegit.png"),
+		VNGlobal.Expressions.SAD :  preload("Characters/verylegit.png")
 	}
 }
 
@@ -22,119 +38,168 @@ var backgrounds = {
 	VNGlobal.Backgrounds.NONE : preload("Backgrounds/none.png")
 }
 	
-
 var CHAR_WAIT = 1.0/20
 var data_json
 
 func _ready():
 	textlabel.text = ""
 	npc.texture = null
- 
+	
+	VNGlobal.connect("user_input", self, "attempt_skip");
+	load_data("res://VisualNovel/data.json");
+	if autoplay:
+		play();
 
-func play_page(input:Dictionary): # parsed form JSON
-	#take data from JSON
-	#make content page
-	var sentences = [];
-	for sentence in input["content"] :
-		sentences.push_back(Sentence.new(sentence["content"], sentence["speed"], sentence["sound"]));
-		
-	var page = ContentPage.new(
-		input["id"],
-		input["next_id"], 
-		sentences, 
-		input["character"], 
-		input["expression"], 
-		input["transition"], 
-		input["background"], 
-		input["music"]
-		)
-	#display page through VNEditor
-	print(page.character)
-	yield(display_page(page), "completed")
+func play():
+	for page in save_data:
+		if page is ContentPage:
+			skipped = false;
+			state = PLAYING
+			var func_pointer = display_page(page)
+			
+			if func_pointer:
+				yield(func_pointer, "completed");
+				
+			state = WAITING;
+			yield(self, "goto_next_page");
+			
+		elif page is MetaPage:
+			display_page(page)
+			
+
+func play_json(json_data : Dictionary):
+	display_page(VNGlobal.deserialize(json_data));
 
 func display_page(page : Page):
 	npc.hide()
 	textlabel.text = ""
-	print("PATH" + self.get_path())
-#	print("CHARACTER: " + str(page.character));
-	#print("RESULT" + str(expressions[page.character][page.expression]));
+	textlabel.set_visible_characters(0);
 	
-	if page.character == VNGlobal.Characters.NONE: 
-		npc.texture = null;
-	else:
-		if expressions[page.character][page.expression] == null:
-			npc.texture = expressions["BOY"]["DEFAULT"]
+	if page is ContentPage:
+		print("ContentPage");
+		
+		if page.character == VNGlobal.Characters.NONE: 
+			npc.texture = null;
 		else:
-			npc.texture = expressions[page.character][page.expression]
-	
-	
-	#var file2Check = File.new()
-	#var doFileExists = file2Check.file_exists(PATH_2_FILE):
-	npc.show()
-	match page.transition:
-		VNGlobal.Transitions.NONE:
-			transition.play("appear")
-			yield(transition, "animation_finished")
-		VNGlobal.Transitions.FLASH: #think ace attorny
-			# MAKE TRANSITION
-			transition.play("appear")
-			yield(transition, "animation_finished")
-		VNGlobal.Transitions.FADE:
-			$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
-			#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
-			transition.play("fade in")
-			yield(transition, "animation_finished")
-#			yield(transition, "animation_finished")
-		VNGlobal.Transitions.SLIDE_RIGHT:
-			#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
-			transition.play("slide_from_right")
-			yield(transition, "animation_finished")
-#			pass
-		VNGlobal.Transitions.SLIDE_LEFT:
-			# MAKE TRANSITION
-			transition.play("slide_from_left")
-			yield(transition, "animation_finished")
-	
-	
-	
-	if page.background != VNGlobal.Backgrounds.SAME:
-		if backgrounds[page.background] == null:
-			$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
-		else:
-			$Control/Background.texture = backgrounds[page.background];
-	# else incolves being able to reference previous pages
-	
-	for sentence in page.content:
-		yield(write_sentence(sentence), "completed"); #tells program to wait on everything until this function finishes/this happens
+			if expressions[page.character][page.expression] == null:
+				npc.texture = expressions["BOY"]["DEFAULT"]
+			else:
+				npc.texture = expressions[page.character][page.expression]
+		
+		
+		#var file2Check = File.new()
+		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
+		npc.show()
+		match page.transition:
+			VNGlobal.Transitions.NONE:
+				transition.play("appear")
+				yield(transition, "animation_finished")
+			VNGlobal.Transitions.FLASH: #think ace attorny
+				# MAKE TRANSITION
+				transition.play("appear")
+				yield(transition, "animation_finished")
+			VNGlobal.Transitions.FADE:
+				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
+				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
+				transition.play("fade in")
+				yield(transition, "animation_finished")
+	#			yield(transition, "animation_finished")
+			VNGlobal.Transitions.SLIDE_RIGHT:
+				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
+				transition.play("slide_from_right")
+				yield(transition, "animation_finished")
+	#			pass
+			VNGlobal.Transitions.SLIDE_LEFT:
+				# MAKE TRANSITION
+				transition.play("slide_from_left")
+				yield(transition, "animation_finished")
+			
+		if page.background != VNGlobal.Backgrounds.SAME:
+			if backgrounds[page.background] == null:
+				$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
+			else:
+				$Control/Background.texture = backgrounds[page.background];
+	# else involves being able to reference previous pages
+		for sentence in page.content:
+			var func_pointer = write_sentence(sentence)
+			if func_pointer:
+				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
+	elif page is GameStartPage:
+		emit_signal("start_game", page.game_dir);
+		tap_skip = false;
+	elif page is GameEndPage:
+		emit_signal("end_game");
+		tap_skip = true;
 		
 func write_sentence (sentence):
-	for c in sentence.content:
-		textlabel.text += str(c)
-		letter_timer.wait_time = CHAR_WAIT*sentence.speed;
-		letter_timer.start();
-		yield(letter_timer, "timeout");
-		
-	delay_timer.wait_time = sentence.delay*sentence.speed + 0.0001; #so it shuts up
-	delay_timer.start();
-	yield(delay_timer, "timeout");
+	textlabel.text += sentence.content
+	var target = textlabel.get_visible_characters() + sentence.content.length()
+	
+	letter_timer.set_time(CHAR_WAIT/sentence.speed);
+	letter_timer.start();
+	for i in range(sentence.content.length()):
+		if (skipped == false):
+			textlabel.set_visible_characters(textlabel.get_visible_characters()+1);
+			print("letter" + str(i));
+			yield(letter_timer, "timeout");
+	letter_timer.stop();
+	
+	if (skipped == false):
+		delay_timer.set_time(sentence.delay/sentence.speed + 0.0001); #so it shuts up
+		delay_timer.start();
+		yield(delay_timer, "timeout");
+		delay_timer.stop();
+	
+	if (skipped):
+		textlabel.set_visible_characters(target);
 
-func load_data(file_path):
-	#retrieves the json file
+func skip():
+	skipped = true;
+	letter_timer.force_end();
+	delay_timer.force_end();
+
+func load_data(file_path):	
 	var file = File.new()
-	file.open(file_path, 3)
+	file.open("res://VisualNovel/data.json", 3)
 	#converts the json file to a text file
 	var text_json = file.get_as_text()
+	file.close()
 #	print(text_json)
 	#parses tect file to dictionary
-	data_json = JSON.parse(text_json)
+	var data_json = JSON.parse(text_json)
 	#checks to make sure it parsed correctly
-	if data_json.error == OK:
-		print("All is good")
-	else:
-		print("something is wrong")
-		print(typeof(data_json.result))
-		print(data_json.get_error_line())
-	print("checkpoint 1")
-	print(typeof(data_json.result))
 	print(data_json)
-	file.close()
+	if data_json.error == OK:
+#		print("All is good")
+		pass
+	else:
+		print("Error parsing JSON from file");
+#		print(typeof(data_json.result))
+#		print(data_json.get_error_line())
+	if typeof(data_json.result) == TYPE_ARRAY:
+#    	print("Array") # prints 'hello'
+		pass
+	else:
+    	print("JSON data is not an array")
+		
+	save_data = data_json.result
+	
+	#Parse it into pages
+	var page_table = []
+	for item in save_data:
+		page_table.push_back(VNGlobal.deserialize(item));
+	save_data = page_table;
+
+func next_page():
+	emit_signal("goto_next_page");
+
+func attempt_skip():
+	if tap_skip == false: return;
+	
+	match state:
+		PLAYING:
+			skip();
+		WAITING:
+			next_page();
+		UNSET:
+			pass;

@@ -25,15 +25,15 @@ func add_sentence():
 	var delay = sentence_delay_input.get_text()
 	var speed = sentence_speed_input.get_text()
 	
-	if delay != null and delay.is_valid_integer():
+	if delay != null and delay.is_valid_float():
 		delay = int(delay)
 	else:
-		delay = 0
+		delay = Global.DEFAULT_SENTENCE_DELAY
 	
-	if speed != null and speed.is_valid_integer():
+	if speed != null and speed.is_valid_float():
 		speed = int(speed)
 	else:
-		speed = 0
+		speed = 1.0
 	
 	var sound = sound_menu.get_item_text(sound_menu.get_selected_id())
 	sentences.push_back(Sentence.new(sentence_text, delay, sound, speed).serialize())

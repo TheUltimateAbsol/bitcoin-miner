@@ -1,4 +1,4 @@
-extends Page
+extends MetaPage
 
 class_name GameStartPage
 

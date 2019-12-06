@@ -9,9 +9,6 @@ var Win = preload("res://YOU_WIN.tscn");
 var miners = [];
 var main_command : Command = Command.new(Global.CommandTypes.IDLE)
 
-var level1 = preload("res://Stages/Levels/Level1/1.tscn");
-var level2 = preload("res://Stages/Levels/Level1/2.tscn");
-var level3 = preload("res://Stages/Levels/Level1/3.tscn");
 var levels = []
 var current_level = 0;
 var level_scene = null
@@ -28,6 +25,7 @@ enum {LEFT, MIDDLE, RIGHT}
 var section = LEFT;
 
 signal paused
+signal room_cleared
 
 func update_section(section_type):
 	section = section_type
@@ -140,25 +138,12 @@ func switch_level():
 	$Miner.visible = true;
 	$Miners.visible = true
 	
+	emit_signal("room_cleared");
+	
 func _ready():
-	levels.push_back(level1);
-	levels.push_back(level2);
-	levels.push_back(level3);
-	
 	add_child(main_command) # so its timer works
-	
-	load_level()
-	spawn();
-	
-	#connect to gameover
-	$Miner.connect("died", self, "game_over");
-	
-	connect("pressed_attack", self, "test");
-	main.connect("finished_mining", self, "finished_mining_fire");
-	
 	get_tree().paused = true;
-	yield($Startup/AnimationPlayer, "animation_finished");
-	get_tree().paused = false;
+	
 	
 func finished_mining_fire():
 	emit_signal("cancel_attack");
@@ -228,7 +213,6 @@ func get_command():
 	attack_buffers.push_back(attack_input);
 	
 	attack_input = attack_buffers.has(true);
-	print(attack_input);
 	
 	if not attack_input and (left_input or right_input or down_input):
 		emit_signal("cancel_attack");
@@ -359,3 +343,43 @@ func revive():
 	else:
 		$ui_header.initiate_countdown();
 		$DecoratorAnimations/Revive.play("Fail");
+		
+		
+func list_files_in_directory(path):
+    var files = []
+    var dir = Directory.new()
+    dir.open(path)
+    dir.list_dir_begin()
+
+    while true:
+        var file = dir.get_next()
+        if file == "":
+            break
+        elif not file.begins_with("."):
+            files.append(file)
+
+    dir.list_dir_end()
+
+    return files
+	
+func load_dir(dir):
+	print(dir);
+	var level_names = list_files_in_directory(dir);
+	
+	for name in level_names:
+		levels.push_back(load(dir + name));
+		
+func start():
+	$Startup.pause_mode = Node.PAUSE_MODE_PROCESS
+	
+	load_level()
+	spawn();
+	#connect to gameover
+	$Miner.connect("died", self, "game_over");
+	
+	connect("pressed_attack", self, "test");
+	main.connect("finished_mining", self, "finished_mining_fire");
+	
+	get_tree().paused = true;
+	yield($Startup/AnimationPlayer, "animation_finished");
+	get_tree().paused = false;

@@ -76,7 +76,7 @@ func _ready():
 
 func preview_scene():
 	update_page()
-	reader.play_page(save_data[current_index])
+	reader.play_json(save_data[current_index])
 		
 # gets the ids for the page and the id of the page that will follow it
 func update_page():
