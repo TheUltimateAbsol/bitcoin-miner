@@ -67,8 +67,6 @@ func to_Both(instant=false):
 	else:
 		return;
 	state = BOTH
-	
-
 
 func _on_VNReader_start_game(dir):
 	game_logic.load_dir(dir);
@@ -78,3 +76,7 @@ func _on_VNReader_start_game(dir):
 
 func _on_VNReader_end_game():
 	to_VN();
+
+
+func _on_Game_room_cleared():
+	$VN/VSplitContainer/VSplitContainer/VNReader.next_page();

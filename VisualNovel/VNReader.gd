@@ -70,13 +70,11 @@ func play():
 func play_json(json_data : Dictionary):
 	display_page(VNGlobal.deserialize(json_data));
 
-func display_page(page : Page):
-	npc.hide()
-	textlabel.text = ""
-	textlabel.set_visible_characters(0);
-	
+func display_page(page : Page):	
 	if page is ContentPage:
-		print("ContentPage");
+		npc.hide()
+		textlabel.text = ""
+		textlabel.set_visible_characters(0);
 		
 		if page.character == VNGlobal.Characters.NONE: 
 			npc.texture = null;
@@ -130,6 +128,9 @@ func display_page(page : Page):
 	elif page is GameEndPage:
 		emit_signal("end_game");
 		tap_skip = true;
+	elif page is EndPage:
+		print("ENDING");
+		$Conclusion/AnimationPlayer.play("Activate");
 		
 func write_sentence (sentence):
 	textlabel.text += sentence.content

@@ -217,5 +217,6 @@ pause_mode = 2
 "anims/Both to VN" = SubResource( 4 )
 "anims/VN to Game" = SubResource( 5 )
 [connection signal="resized" from="Game" to="Game" method="update_size"]
+[connection signal="room_cleared" from="Game/PanelContainer/Panel/Node2D/Viewport/Game" to="." method="_on_Game_room_cleared"]
 [connection signal="end_game" from="VN/VSplitContainer/VSplitContainer/VNReader" to="." method="_on_VNReader_end_game"]
 [connection signal="start_game" from="VN/VSplitContainer/VSplitContainer/VNReader" to="." method="_on_VNReader_start_game"]

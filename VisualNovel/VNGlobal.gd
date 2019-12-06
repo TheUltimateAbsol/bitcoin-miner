@@ -74,4 +74,9 @@ static func deserialize(json_object):
 				json_object["id"], 
 				json_object["next_id"]
 			);
+		"EndPage":
+			return EndPage.new(
+				json_object["id"], 
+				json_object["next_id"]
+			);
 		

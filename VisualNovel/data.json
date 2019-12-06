@@ -7,40 +7,19 @@
                 "content": "asdf",
                 "delay": 0.5,
                 "sound": "DING",
-                "speed": 1.0
+                "speed": 1
             },
             {
                 "content": "fdsa",
                 "delay": 0.5,
                 "sound": "DING",
-                "speed": 1.0
+                "speed": 1
             }
         ],
         "expression": "DEFAULT",
         "id": 0,
         "music": "NONE",
         "next_id": 1,
-        "questions": [],
-        "scene_transition": "NONE",
-        "speed": 1,
-        "transition": "NONE",
-        "type": "ContentPage"
-    },
-    {
-        "background": "NONE",
-        "character": "NONE",
-        "content": [
-            {
-                "content": "hello world",
-                "delay": 0.5,
-                "sound": "DING",
-                "speed": 1.0
-            }
-        ],
-        "expression": "DEFAULT",
-        "id": 1,
-        "music": "NONE",
-        "next_id": 2,
         "questions": [],
         "scene_transition": "NONE",
         "speed": 1,
@@ -61,7 +40,7 @@
                 "content": "hello world",
                 "delay": 0.5,
                 "sound": "DING",
-                "speed": 1.0
+                "speed": 1
             }
         ],
         "expression": "DEFAULT",
@@ -82,7 +61,7 @@
                 "content": "hello world again",
                 "delay": 0.5,
                 "sound": "DING",
-                "speed": 1.0
+                "speed": 1
             }
         ],
         "expression": "DEFAULT",
@@ -103,7 +82,7 @@
                 "content": "hello world AGAIN",
                 "delay": 0.5,
                 "sound": "DING",
-                "speed": 1.0
+                "speed": 1
             }
         ],
         "expression": "DEFAULT",
@@ -129,7 +108,7 @@
                 "content": "Everything is done",
                 "delay": 0.5,
                 "sound": "DING",
-                "speed": 1.0
+                "speed": 1
             }
         ],
         "expression": "DEFAULT",
@@ -141,5 +120,31 @@
         "speed": 1,
         "transition": "NONE",
         "type": "ContentPage"
+    },
+    {
+        "background": "NONE",
+        "character": "NONE",
+        "content": [
+            {
+                "content": "hello world",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 1,
+        "music": "NONE",
+        "next_id": 2,
+        "questions": [],
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "id": 8,
+        "next_id": 9,
+        "type": "EndPage"
     }
 ]

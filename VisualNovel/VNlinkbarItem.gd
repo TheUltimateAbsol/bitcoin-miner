@@ -54,7 +54,7 @@ func populate(data, question_num=0):
 		"GameEndPage": display_type.text= " # ";
 		"questions": display_type.text= " ? ";
 		"control": display_type.text= " * ";
-		"end": display_type.text= " X ";
+		"EndPage": display_type.text= " X ";
 #		Match an answer; has no type
 		_: display_type.text= " " + char(question_num + 65) + ":";
 	

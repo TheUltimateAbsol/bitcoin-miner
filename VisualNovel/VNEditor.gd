@@ -12,7 +12,7 @@ onready var sceneInput = $Panel/HBoxContainer/Layout/SceneInput
 onready var characterInput = $Panel/HBoxContainer/Layout/CharacterInput
 onready var directoryInput = $Panel/HBoxContainer/Layout/DirectoryInput
 
-enum {CONTENT_PAGE, GAME_START_PAGE, GAME_END_PAGE}
+enum {CONTENT_PAGE, GAME_START_PAGE, GAME_END_PAGE, END_PAGE}
 
 var data_json
 var save_data : Array
@@ -60,6 +60,12 @@ func update_options():
 			
 			var page_data = save_data[current_index];
 			idInput.load_data(page_data["id"], page_data["next_id"]);
+		"EndPage":
+			idInput.show();
+			update_btn.show();
+			
+			var page_data = save_data[current_index];
+			idInput.load_data(page_data["id"], page_data["next_id"]);
 			
 			
 			
@@ -69,6 +75,7 @@ func _ready():
 	insert_btn.get_popup().add_item("ContentPage", CONTENT_PAGE);
 	insert_btn.get_popup().add_item("GameStartPage", GAME_START_PAGE);
 	insert_btn.get_popup().add_item("GameEndPage", GAME_END_PAGE);
+	insert_btn.get_popup().add_item("EndPage", END_PAGE);
 	insert_btn.get_popup().connect("id_pressed", self, "insert");
 
 	load_from_json();
@@ -93,6 +100,9 @@ func update_page():
 			page_data=GameStartPage.new().serialize();
 			VNGlobal.merge_dir(page_data, idInput.get_data());
 			VNGlobal.merge_dir(page_data, directoryInput.get_data());
+		"GameEndPage":
+			page_data=GameStartPage.new().serialize();
+			VNGlobal.merge_dir(page_data, idInput.get_data());
 		"GameEndPage":
 			page_data=GameStartPage.new().serialize();
 			VNGlobal.merge_dir(page_data, idInput.get_data());
@@ -171,6 +181,8 @@ func insert(id):
 			save_data.push_back(GameStartPage.new(last_index, last_index+1).serialize());
 		GAME_END_PAGE:
 			save_data.push_back(GameEndPage.new(last_index, last_index+1).serialize());
+		END_PAGE:
+			save_data.push_back(EndPage.new(last_index, last_index+1).serialize());
 			
 	$Panel/HBoxContainer/VBoxContainer/LinkBar.load_data(save_data);
 	$Panel/HBoxContainer/VBoxContainer/LinkBar.select(current_index);

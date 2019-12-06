@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/Cave.png" type="Texture" id=2]
@@ -17,9 +17,13 @@
 [ext_resource path="res://Classes/GameFlowAnimations/WinSpawner.tres" type="Animation" id=15]
 [ext_resource path="res://Classes/GameFlowAnimations/SceneSwitch.tres" type="Animation" id=16]
 [ext_resource path="res://Classes/Player.tscn" type="PackedScene" id=17]
-[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=18]
-[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=19]
-[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=20]
+[ext_resource path="res://PlayerSprites/Miner_Bat.png" type="Texture" id=18]
+[ext_resource path="res://PlayerSprites/Miner_Axe_2.png" type="Texture" id=19]
+[ext_resource path="res://PlayerSprites/Miner_Hurt.png" type="Texture" id=20]
+[ext_resource path="res://PlayerSprites/Ending_1.png" type="Texture" id=21]
+[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=22]
+[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=23]
+[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=24]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.878431, 0.941176, 0.909804, 1 )
@@ -448,7 +452,6 @@ texture = ExtResource( 2 )
 
 [node name="Startup" type="Node2D" parent="."]
 pause_mode = 1
-editor/display_folded = true
 z_index = 11
 
 [node name="Panel" type="Panel" parent="Startup"]
@@ -463,6 +466,8 @@ texture = ExtResource( 3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Startup"]
 autoplay = "Activate"
 anims/Activate = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Startup"]
 
 [node name="QuickTimeEvent" type="Node2D" parent="."]
 editor/display_folded = true
@@ -753,6 +758,16 @@ anims/SceneSwitch = ExtResource( 16 )
 
 [node name="Miner" parent="." instance=ExtResource( 17 )]
 editor/display_folded = true
+miningSprite2 = ExtResource( 18 )
+miningSprite3 = ExtResource( 19 )
+dyingSprite = ExtResource( 20 )
+levelCompleteSprite = ExtResource( 21 )
+idleOffset = Vector2( 0, 0 )
+jumpingOffset = Vector2( 0, 0 )
+walkingOffset = Vector2( 0, 0 )
+miningOffset = Vector2( 2, -1 )
+dyingOffset = Vector2( 0, 0 )
+levelCompleteOffset = Vector2( -6, -11 )
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 editor/display_folded = true
@@ -784,7 +799,7 @@ theme = ExtResource( 10 )
 text = "MISS!"
 align = 1
 
-[node name="ui_header" parent="." instance=ExtResource( 18 )]
+[node name="ui_header" parent="." instance=ExtResource( 22 )]
 z_index = 10
 
 [node name="DecoratorAnimations" type="Node" parent="."]
@@ -800,7 +815,7 @@ anims/Success = SubResource( 13 )
 [node name="Pause" type="Node" parent="."]
 editor/display_folded = true
 
-[node name="pause_button" parent="Pause" instance=ExtResource( 19 )]
+[node name="pause_button" parent="Pause" instance=ExtResource( 23 )]
 visible = false
 position = Vector2( 14, 14 )
 
@@ -814,7 +829,7 @@ margin_right = 13.0
 margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
 
-[node name="pause_menu" parent="Pause" instance=ExtResource( 20 )]
+[node name="pause_menu" parent="Pause" instance=ExtResource( 24 )]
 [connection signal="animation_finished" from="QuickTimeEvent/AnimationPlayer" to="QuickTimeEvent" method="QTE_anim_handler"]
 [connection signal="add_miner" from="ui_header" to="." method="_on_ui_header_add_miner"]
 [connection signal="revive" from="ui_header" to="." method="revive"]

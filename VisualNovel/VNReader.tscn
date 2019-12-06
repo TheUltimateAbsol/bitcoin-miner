@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/classroom_angle.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=4]
 [ext_resource path="res://VisualNovel/slide_from_left.tres" type="Animation" id=5]
 [ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://VisualNovel/Fonts/the_brandy/The Brandy.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "appear"
@@ -54,6 +56,85 @@ tracks/0/keys = {
 [sub_resource type="DynamicFont" id=4]
 size = 28
 font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.647059 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 109
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Activate"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.0256612, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CPUParticles2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 398.088 ), Vector2( 722.357, 398.088 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.873469, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.412245, 0.412245, 0.412245, 1, 0, 0, 0, 1 )
 
 [node name="VNReader" type="Control"]
 margin_right = 720.0
@@ -131,3 +212,39 @@ wait_time = 0.2
 
 [node name="DelayTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="Conclusion" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="Conclusion"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 5 )
+
+[node name="Label" type="Label" parent="Conclusion"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 6 )
+text = "The End"
+align = 1
+valign = 1
+percent_visible = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Conclusion"]
+anims/Activate = SubResource( 7 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Conclusion"]
+material = SubResource( 8 )
+position = Vector2( -0.000645838, 398.088 )
+emitting = false
+amount = 50
+lifetime = 1.56
+local_coords = false
+texture = ExtResource( 8 )
+gravity = Vector2( 0, 200 )
+angular_velocity = 313.55
+angular_velocity_random = 0.61
+scale_amount = 0.1
+color_ramp = SubResource( 9 )
