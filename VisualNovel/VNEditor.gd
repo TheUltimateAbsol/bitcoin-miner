@@ -64,7 +64,7 @@ func update_options():
 			idInput.show();
 			update_btn.show();
 			
-			var page_data = save_data[current_index];
+
 			idInput.load_data(page_data["id"], page_data["next_id"]);
 			
 			
