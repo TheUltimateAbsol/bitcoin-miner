@@ -1,7 +1,7 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
-[ext_resource path="res://Stages/Backgrounds/Cave.png" type="Texture" id=2]
+[ext_resource path="res://Stages/Backgrounds/Dark sharp cave.png" type="Texture" id=2]
 [ext_resource path="res://UI/Sprites/logo.png" type="Texture" id=3]
 [ext_resource path="res://Sounds/Gameboy Startup Sound.wav" type="AudioStream" id=4]
 [ext_resource path="res://Classes/GameFlow/QuickTimeEvent.gd" type="Script" id=5]
@@ -20,17 +20,13 @@
 [ext_resource path="res://Classes/GameFlowAnimations/WinSpawner.tres" type="Animation" id=18]
 [ext_resource path="res://Classes/GameFlowAnimations/SceneSwitch.tres" type="Animation" id=19]
 [ext_resource path="res://Classes/Player.tscn" type="PackedScene" id=20]
-[ext_resource path="res://PlayerSprites/Miner_Bat.png" type="Texture" id=21]
-[ext_resource path="res://PlayerSprites/Miner_Axe_2.png" type="Texture" id=22]
-[ext_resource path="res://PlayerSprites/Miner_Hurt.png" type="Texture" id=23]
-[ext_resource path="res://PlayerSprites/Ending_1.png" type="Texture" id=24]
-[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Sounds/sfx_sounds_powerup16.wav" type="AudioStream" id=26]
-[ext_resource path="res://Sounds/sfx_sounds_damage1.wav" type="AudioStream" id=27]
-[ext_resource path="res://Sounds/sfx_sounds_powerup7.wav" type="AudioStream" id=28]
-[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=29]
-[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=30]
-[ext_resource path="res://Sounds/3-21 Giron -HEAT UP- [8bit].wav" type="AudioStream" id=31]
+[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Sounds/sfx_sounds_powerup16.wav" type="AudioStream" id=22]
+[ext_resource path="res://Sounds/sfx_sounds_damage1.wav" type="AudioStream" id=23]
+[ext_resource path="res://Sounds/sfx_sounds_powerup7.wav" type="AudioStream" id=24]
+[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=25]
+[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Sounds/3-21 Giron -HEAT UP- [8bit].wav" type="AudioStream" id=27]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.878431, 0.941176, 0.909804, 1 )
@@ -386,7 +382,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 26 )
+"stream": ExtResource( 22 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -450,7 +446,7 @@ tracks/4/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 27 )
+"stream": ExtResource( 23 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -514,7 +510,7 @@ tracks/4/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 28 )
+"stream": ExtResource( 24 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -845,16 +841,6 @@ anims/SceneSwitch = ExtResource( 19 )
 
 [node name="Miner" parent="." instance=ExtResource( 20 )]
 editor/display_folded = true
-miningSprite2 = ExtResource( 21 )
-miningSprite3 = ExtResource( 22 )
-dyingSprite = ExtResource( 23 )
-levelCompleteSprite = ExtResource( 24 )
-idleOffset = Vector2( 0, 0 )
-jumpingOffset = Vector2( 0, 0 )
-walkingOffset = Vector2( 0, 0 )
-miningOffset = Vector2( 2, -1 )
-dyingOffset = Vector2( 0, 0 )
-levelCompleteOffset = Vector2( -6, -11 )
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 editor/display_folded = true
@@ -886,7 +872,7 @@ theme = ExtResource( 11 )
 text = "REVIVE!"
 align = 1
 
-[node name="ui_header" parent="." instance=ExtResource( 25 )]
+[node name="ui_header" parent="." instance=ExtResource( 21 )]
 z_index = 10
 
 [node name="DecoratorAnimations" type="Node" parent="."]
@@ -897,7 +883,7 @@ anims/Level_Up = SubResource( 11 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DecoratorAnimations/LevelUp"]
 pause_mode = 2
-stream = ExtResource( 26 )
+stream = ExtResource( 22 )
 
 [node name="Revive" type="AnimationPlayer" parent="DecoratorAnimations"]
 anims/Fail = SubResource( 12 )
@@ -905,12 +891,12 @@ anims/Success = SubResource( 13 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DecoratorAnimations/Revive"]
 pause_mode = 2
-stream = ExtResource( 28 )
+stream = ExtResource( 24 )
 
 [node name="Pause" type="Node" parent="."]
 editor/display_folded = true
 
-[node name="pause_button" parent="Pause" instance=ExtResource( 29 )]
+[node name="pause_button" parent="Pause" instance=ExtResource( 25 )]
 visible = false
 position = Vector2( 14, 14 )
 
@@ -924,11 +910,11 @@ margin_right = 13.0
 margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
 
-[node name="pause_menu" parent="Pause" instance=ExtResource( 30 )]
+[node name="pause_menu" parent="Pause" instance=ExtResource( 26 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
-stream = ExtResource( 31 )
+stream = ExtResource( 27 )
 [connection signal="animation_finished" from="QuickTimeEvent/AnimationPlayer" to="QuickTimeEvent" method="QTE_anim_handler"]
 [connection signal="add_miner" from="ui_header" to="." method="_on_ui_header_add_miner"]
 [connection signal="revive" from="ui_header" to="." method="revive"]
