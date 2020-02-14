@@ -3,7 +3,7 @@ extends Control
 # parse buttons
 onready var preview_btn = $Panel/HBoxContainer/Layout/preview_btn
 onready var update_btn = $Panel/HBoxContainer/Layout/update_btn
-onready var reader = $Panel/HBoxContainer/VNReader
+onready var reader = $Panel/HBoxContainer/Control/VNReader
 onready var insert_btn = $Panel/HBoxContainer/VBoxContainer/HBoxContainer/New
 
 onready var idInput = $Panel/HBoxContainer/Layout/IdInput
@@ -11,6 +11,8 @@ onready var sentenceInput = $Panel/HBoxContainer/Layout/SentenceInput
 onready var sceneInput = $Panel/HBoxContainer/Layout/SceneInput
 onready var characterInput = $Panel/HBoxContainer/Layout/CharacterInput
 onready var directoryInput = $Panel/HBoxContainer/Layout/DirectoryInput
+
+onready var LinkBar = $Panel/HBoxContainer/VBoxContainer/ScrollContainer/LinkBar
 
 enum {CONTENT_PAGE, GAME_START_PAGE, GAME_END_PAGE, END_PAGE}
 
@@ -110,8 +112,8 @@ func update_page():
 	save_data[current_index] = page_data;
 	
 	#Update the navbar in case of "Prev" being changed
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.load_data(save_data);
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.select(current_index);
+	LinkBar.load_data(save_data);
+	LinkBar.select(current_index);
 
 func load_from_json():
 	var new_dict
@@ -141,7 +143,7 @@ func load_from_json():
     	alert("JSON data is not an array")
 
 	save_data = data_json.result
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.load_data(save_data);
+	LinkBar.load_data(save_data);
 
 func save_json():
 	var dir = Directory.new()
@@ -182,8 +184,8 @@ func insert(id):
 		END_PAGE:
 			save_data.push_back(EndPage.new(last_index, last_index+1).serialize());
 			
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.load_data(save_data);
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.select(current_index);
+	LinkBar.load_data(save_data);
+	LinkBar.select(current_index);
 
 	
 func delete():
@@ -193,7 +195,7 @@ func delete():
 	save_data.remove(current_index);
 	current_index = -1;
 	
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.load_data(save_data);
+	LinkBar.load_data(save_data);
 	update_options();
 	
 #A is before B
@@ -226,8 +228,8 @@ func up():
 	_adjacent_swap(target, current_index);
 	
 	current_index -=1;
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.load_data(save_data);
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.select(current_index);
+	LinkBar.load_data(save_data);
+	LinkBar.select(current_index);
 	update_options();
 	
 func down():
@@ -237,6 +239,6 @@ func down():
 	_adjacent_swap(current_index, target);
 	
 	current_index +=1;
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.load_data(save_data);
-	$Panel/HBoxContainer/VBoxContainer/LinkBar.select(current_index);
+	LinkBar.load_data(save_data);
+	LinkBar.select(current_index);
 	update_options();

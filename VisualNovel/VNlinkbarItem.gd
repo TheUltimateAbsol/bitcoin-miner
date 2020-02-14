@@ -73,7 +73,9 @@ func populate(data, question_num=0):
 		display_text.text = "<GAME END>";
 	elif data.get("type") == "EndPage":
 		display_text.text = "<END>";
-	
+		
+		
+#display_text.visible_characters = 20
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
