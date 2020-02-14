@@ -61,10 +61,9 @@ func update_options():
 			var page_data = save_data[current_index];
 			idInput.load_data(page_data["id"], page_data["next_id"]);
 		"EndPage":
+			var page_data = save_data[current_index];
 			idInput.show();
 			update_btn.show();
-			
-
 			idInput.load_data(page_data["id"], page_data["next_id"]);
 			
 			
