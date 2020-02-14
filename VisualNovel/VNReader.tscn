@@ -205,7 +205,6 @@ anchor_bottom = 1.0
 custom_fonts/font = SubResource( 4 )
 text = "aaaaaaaaaaaaaaaaaaaaaaaaa"
 autowrap = true
-percent_visible = -0.04
 
 [node name="LetterTimer" type="Timer" parent="."]
 wait_time = 0.2

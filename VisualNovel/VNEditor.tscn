@@ -85,36 +85,37 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
 editor/display_folded = true
-margin_right = 185.0
+margin_right = 189.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer"]
-margin_right = 185.0
+margin_right = 189.0
 margin_bottom = 20.0
 alignment = 1
 
 [node name="New" type="MenuButton" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 40.0
+margin_left = 2.0
+margin_right = 42.0
 margin_bottom = 20.0
 text = "New"
 flat = false
 
 [node name="Delete" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 44.0
-margin_right = 99.0
+margin_left = 46.0
+margin_right = 101.0
 margin_bottom = 20.0
 text = "Delete"
 
 [node name="Up" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 103.0
-margin_right = 133.0
+margin_left = 105.0
+margin_right = 135.0
 margin_bottom = 20.0
 text = "Up"
 
 [node name="Down" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 137.0
-margin_right = 185.0
+margin_left = 139.0
+margin_right = 187.0
 margin_bottom = 20.0
 text = "Down"
 
@@ -122,13 +123,13 @@ text = "Down"
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 24.0
-margin_right = 185.0
+margin_right = 189.0
 margin_bottom = 24.0
 
 [node name="Layout" type="VBoxContainer" parent="Panel/HBoxContainer"]
 editor/display_folded = true
-margin_left = 189.0
-margin_right = 669.0
+margin_left = 193.0
+margin_right = 673.0
 margin_bottom = 1440.0
 rect_min_size = Vector2( 480, 435 )
 
@@ -372,13 +373,11 @@ margin_bottom = 384.0
 text = "Update Scene"
 
 [node name="VNReader" parent="Panel/HBoxContainer" instance=ExtResource( 8 )]
-margin_left = 673.0
-margin_top = 720.0
-margin_right = 1393.0
-margin_bottom = 1440.0
+margin_left = 677.0
+margin_right = 1397.0
 rect_min_size = Vector2( 720, 720 )
-size_flags_horizontal = 8
-size_flags_vertical = 8
+size_flags_horizontal = 9
+size_flags_vertical = 0
 
 [node name="CheckBox" type="CheckBox" parent="."]
 visible = false
