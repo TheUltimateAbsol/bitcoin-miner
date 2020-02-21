@@ -89,6 +89,7 @@ margin_bottom = 1440.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer"]
+editor/display_folded = true
 margin_right = 185.0
 margin_bottom = 20.0
 alignment = 1
@@ -139,6 +140,7 @@ margin_bottom = 1440.0
 rect_min_size = Vector2( 480, 435 )
 
 [node name="IdInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
+editor/display_folded = true
 margin_right = 480.0
 margin_bottom = 102.0
 script = ExtResource( 3 )
@@ -293,22 +295,22 @@ text = "Scene Transitions"
 align = 1
 
 [node name="CharacterInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_top = 248.0
 margin_right = 480.0
-margin_bottom = 276.0
+margin_bottom = 300.0
 script = ExtResource( 6 )
 
 [node name="character_layout" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 21.0
-columns = 3
+margin_bottom = 45.0
+columns = 4
 
 [node name="char_transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout"]
+editor/display_folded = true
 margin_right = 63.0
-margin_bottom = 14.0
+margin_bottom = 38.0
 
 [node name="Transition" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout/char_transition_list"]
 margin_right = 63.0
@@ -320,7 +322,7 @@ align = 1
 editor/display_folded = true
 margin_left = 67.0
 margin_right = 127.0
-margin_bottom = 14.0
+margin_bottom = 38.0
 
 [node name="characterLabel" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout/character_list"]
 margin_right = 60.0
@@ -329,9 +331,10 @@ text = "Character"
 align = 1
 
 [node name="expression_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout"]
+editor/display_folded = true
 margin_left = 131.0
 margin_right = 207.0
-margin_bottom = 14.0
+margin_bottom = 38.0
 
 [node name="expressLabel" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout/expression_list"]
 margin_right = 76.0
@@ -339,11 +342,27 @@ margin_bottom = 14.0
 text = "Expressions"
 align = 1
 
+[node name="character_name_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout"]
+margin_left = 211.0
+margin_right = 256.0
+margin_bottom = 38.0
+
+[node name="nameLabel" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout/character_name_list"]
+margin_right = 45.0
+margin_bottom = 14.0
+text = "Names"
+align = 1
+
+[node name="name_menu" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout/character_name_list"]
+margin_top = 18.0
+margin_right = 45.0
+margin_bottom = 38.0
+
 [node name="DirectoryInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 editor/display_folded = true
-margin_top = 280.0
+margin_top = 304.0
 margin_right = 480.0
-margin_bottom = 336.0
+margin_bottom = 360.0
 script = ExtResource( 7 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/DirectoryInput"]
@@ -366,15 +385,15 @@ size_flags_horizontal = 3
 placeholder_text = "Enter a File Directory..."
 
 [node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_top = 340.0
-margin_right = 480.0
-margin_bottom = 360.0
-text = "Update & Preview Scene"
-
-[node name="update_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
 margin_top = 364.0
 margin_right = 480.0
 margin_bottom = 384.0
+text = "Update & Preview Scene"
+
+[node name="update_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
+margin_top = 388.0
+margin_right = 480.0
+margin_bottom = 408.0
 text = "Update Scene"
 
 [node name="Control" type="Control" parent="Panel/HBoxContainer"]

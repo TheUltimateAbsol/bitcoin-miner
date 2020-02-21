@@ -3,6 +3,7 @@ extends Control
 export (bool) var autoplay = false;
 
 onready var textlabel = get_node("Control/Control/MarginContainer/Control/TextLabel")
+onready var nameLabel = get_node("Control/Control/MarginContainer/Control/NameLabel")
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
@@ -22,12 +23,12 @@ var skipped = false;
 var state = UNSET;
 
 var expressions = {
-	VNGlobal.Characters.BOY : {
+	VNGlobal.Characters.SIMON : {
 		VNGlobal.Expressions.DEFAULT :  preload("Characters/BoyeNeutral.png"),
 		VNGlobal.Expressions.HAPPY : preload("Characters/BoyeSmile.png"),
 		VNGlobal.Expressions.SAD : preload("Characters/BoyeFrown.png")
 	},
-	VNGlobal.Characters.GIRL : {
+	VNGlobal.Characters.ANNA : {
 		VNGlobal.Expressions.DEFAULT :  preload("Characters/verylegit.png"),
 		VNGlobal.Expressions.HAPPY :  preload("Characters/verylegit.png"),
 		VNGlobal.Expressions.SAD :  preload("Characters/verylegit.png")
@@ -44,6 +45,7 @@ var data_json
 
 func _ready():
 	textlabel.text = ""
+	nameLabel.text = ""
 	npc.texture = null
 	
 	VNGlobal.connect("user_input", self, "attempt_skip");
@@ -81,9 +83,11 @@ func display_page(page : Page):
 			npc.texture = null;
 		else:
 			if expressions[page.character][page.expression] == null:
-				npc.texture = expressions["BOY"]["DEFAULT"]
+				npc.texture = expressions[VNGlobal.SIMON]["DEFAULT"]
 			else:
 				npc.texture = expressions[page.character][page.expression]
+				var nameID = page.character
+				nameLabel.text = VNGlobal.CharacterNames[nameID]
 		
 		
 		#var file2Check = File.new()

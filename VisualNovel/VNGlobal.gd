@@ -7,7 +7,8 @@ extends Node
 #enum Backgrounds{SAME, NONE, CLASSROOM}
 #enum SoundEffect{NONE, DING, THWACK, WHACK} # when the text appears on the screen (sentence per sentence basis)
 
-const Characters = {"NONE":"NONE", "BOY":"BOY", "GIRL":"GIRL"} 
+const Characters = {"NONE":"NONE", "SIMON":"SIMON", "ANNA":"ANNA"} 
+const CharacterNames = {"NONE":"NONE", "SIMON":"Simon", "ANNA":"Anna", "TEACHER":"Teacher", "BELL":"Bell"} 
 const Transitions = {"NONE":"NONE", "FLASH":"FLASH", "FADE":"FADE", "SLIDE_RIGHT":"SLIDE_RIGHT", "SLIDE_LEFT":"SLIDE_LEFT"} #character
 const Expressions = {"DEFAULT":"DEFAULT", "HAPPY":"HAPPY", "SAD":"SAD"}
 const Music = {"SAME":"SAME", "NONE":"NONE", "SIMPLE":"SIMPLE", "SAD":"SAD"}

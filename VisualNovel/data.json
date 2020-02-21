@@ -82,7 +82,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "...",
@@ -103,7 +103,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "What was the question again?",
@@ -157,7 +157,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "GIRL",
+        "character": "ANNA",
         "content": [
             {
                 "content": " Don’t worry, man",
@@ -190,7 +190,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "(She doesn’t realize that this is much more than just a game…)",
@@ -211,7 +211,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "My name is Simon Miller.",
@@ -244,7 +244,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "I am NOT playing some video game.",
@@ -271,7 +271,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "It has learned from hours and hours of data from gaming livestreams to operate through the magic of playing a game, Mining Adventure.",
@@ -292,7 +292,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "Unfortunately, I can’t just sit here and press the buttons.",
@@ -319,7 +319,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "Oh, right!",
@@ -346,7 +346,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "The Ea-Ville Corporation has plans to release a product that would end the world:",
@@ -367,7 +367,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": " And I’m going to stop them!",
@@ -388,7 +388,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "The bitcoin that I get from the AI is how I’m going to buy my way into power!",
@@ -409,7 +409,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "There’s only one thing stopping me...",
@@ -436,7 +436,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "I’m going to have to make friends with the right people if I want to be able to stop them.",
@@ -457,7 +457,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "But I think the right people might be closer than you would think",
@@ -576,7 +576,7 @@
     },
     {
         "background": "NONE",
-        "character": "GIRL",
+        "character": "ANNA",
         "content": [
             {
                 "content": "Is he dead?",
@@ -597,7 +597,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "GIRL",
+        "character": "ANNA",
         "content": [
             {
                 "content": " I think we’ve got a dead student over here!",
@@ -618,7 +618,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "I'M NOT DEAD",
@@ -639,7 +639,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "I was...…",
@@ -666,7 +666,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "GIRL",
+        "character": "ANNA",
         "content": [
             {
                 "content": "Yeah,",
@@ -693,7 +693,7 @@
     },
     {
         "background": "NONE",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "Bell:",
@@ -720,7 +720,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "GIRL",
+        "character": "ANNA",
         "content": [
             {
                 "content": "Well, I guess I’ll see you around,",
@@ -747,7 +747,7 @@
     },
     {
         "background": "NONE",
-        "character": "GIRL",
+        "character": "ANNA",
         "content": [
             {
                 "content": "Hopefully you stay alive next time though.",
@@ -768,7 +768,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "GIRL",
+        "character": "ANNA",
         "content": [
             {
                 "content": "Yeah,",
@@ -801,7 +801,7 @@
     },
     {
         "background": "CLASSROOM",
-        "character": "BOY",
+        "character": "SIMON",
         "content": [
             {
                 "content": "(Making friends may be harder than I thought…)",

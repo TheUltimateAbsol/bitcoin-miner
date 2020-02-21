@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/classroom_angle.png" type="Texture" id=2]
@@ -6,9 +6,10 @@
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=4]
 [ext_resource path="res://VisualNovel/slide_from_left.tres" type="Animation" id=5]
 [ext_resource path="res://dialogebox2.png" type="Texture" id=6]
-[ext_resource path="res://new_kiddofont.tres" type="DynamicFont" id=7]
-[ext_resource path="res://VisualNovel/Fonts/the_brandy/The Brandy.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=9]
+[ext_resource path="res://VisualNovel/Fonts/gloria_hallelujah/gloria_hallelujah.tres" type="DynamicFont" id=7]
+[ext_resource path="res://new_kiddofont.tres" type="DynamicFont" id=8]
+[ext_resource path="res://VisualNovel/Fonts/the_brandy/The Brandy.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "appear"
@@ -54,16 +55,16 @@ tracks/0/keys = {
 "values": [ Vector2( 600, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0, 0, 0.647059 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 109
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "Activate"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
@@ -126,10 +127,10 @@ tracks/4/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=8]
+[sub_resource type="CanvasItemMaterial" id=7]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=9]
+[sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.873469, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.412245, 0.412245, 0.412245, 1, 0, 0, 0, 1 )
 
@@ -224,6 +225,17 @@ custom_fonts/font = ExtResource( 7 )
 text = "aaaaaaaaaaaaaaaaaaaaaaaaa "
 autowrap = true
 
+[node name="NameLabel" type="Label" parent="Control/Control/MarginContainer/Control"]
+margin_left = -40.9828
+margin_top = -130.189
+margin_right = 92.0172
+margin_bottom = -70.1891
+rect_rotation = 35.0
+custom_fonts/font = ExtResource( 8 )
+text = "Simon"
+align = 1
+valign = 1
+
 [node name="Panel" type="Panel" parent="Control"]
 visible = false
 anchor_top = 1.0
@@ -248,30 +260,30 @@ anchor_bottom = 1.0
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="Label" type="Label" parent="Conclusion"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 5 )
 text = "The End"
 align = 1
 valign = 1
 percent_visible = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Conclusion"]
-anims/Activate = SubResource( 7 )
+anims/Activate = SubResource( 6 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Conclusion"]
-material = SubResource( 8 )
+material = SubResource( 7 )
 position = Vector2( -0.000645838, 398.088 )
 emitting = false
 amount = 50
 lifetime = 1.56
 local_coords = false
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 gravity = Vector2( 0, 200 )
 angular_velocity = 313.55
 angular_velocity_random = 0.61
 scale_amount = 0.1
-color_ramp = SubResource( 9 )
+color_ramp = SubResource( 8 )

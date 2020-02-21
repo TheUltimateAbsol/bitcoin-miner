@@ -3,6 +3,7 @@ extends PanelContainer
 onready var character_list = $character_layout/character_list
 onready var expression_list = $character_layout/expression_list
 onready var char_transition_list = $character_layout/char_transition_list
+onready var name_menu = $character_layout/character_name_list/name_menu
 
 var character_buttons = ButtonGroup.new()
 var expression_buttons = ButtonGroup.new()
@@ -36,11 +37,17 @@ func _ready():
 			new_box.pressed = true
 		expression_list.add_child(new_box)
 		
+	var name_keys = VNGlobal.CharacterNames.keys()
+	var count = 1
+	for key in name_keys:
+		name_menu.add_item(key, count)
+		count += 1
 		
 func get_data():
 	var character
 	var character_expression
-	var character_transition 
+	var character_transition
+	var character_name 
 	
 	if char_transition_buttons.get_pressed_button() == null:
 		character_transition = VNGlobal.Transitions.NONE
@@ -58,10 +65,15 @@ func get_data():
 	else:
 		character_expression = expression_buttons.get_pressed_button().text
 		
+	# GET THE NAME OF THE CHARACTER HERE	
+		
+		
+		
 	return {
 		"character": character,
 		"transition": character_transition, 
-		"expression": character_expression
+		"expression": character_expression,
+		"character name": charcter_name
 	};
 	
 func load_data(character, character_expression, character_transition):
