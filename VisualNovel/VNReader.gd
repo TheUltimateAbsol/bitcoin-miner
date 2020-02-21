@@ -2,7 +2,8 @@ extends Control
 
 export (bool) var autoplay = false;
 
-onready var textlabel = get_node("Control/Panel/MarginContainer/Control/TextLabel")
+onready var textlabel = get_node("Control/Control/MarginContainer/Control/TextLabel")
+# Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
 
