@@ -62,7 +62,7 @@ func populate(data, question_num=0):
 		display_text.text = "FORMATTING ERROR";
 		if typeof(data.get("content")) == TYPE_ARRAY:
 			if data.get("content").size() > 0:
-				print(data.get("content")[0]);
+#				print(data.get("content")[0]);
 				display_text.text = str(data.get("content")[0].get("content"))
 		#Then some code here to set the text preview
 	elif data.get("comment"):
@@ -85,7 +85,7 @@ func populate(data, question_num=0):
 # Checks when object is clicked
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
-		print("Left mouse button was pressed!")
+		#print("Left mouse button was pressed!")
 		select();
 
 				

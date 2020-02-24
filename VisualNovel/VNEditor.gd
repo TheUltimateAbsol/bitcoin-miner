@@ -128,7 +128,7 @@ func load_from_json():
 	#parses tect file to dictionary
 	data_json = JSON.parse(text_json)
 	#checks to make sure it parsed correctly
-	print(data_json)
+#	print(data_json)
 	if data_json.error == OK:
 #		print("All is good")
 		pass

@@ -224,6 +224,7 @@ rect_rotation = -2.0
 custom_fonts/font = ExtResource( 7 )
 text = "aaaaaaaaaaaaaaaaaaaaaaaaa "
 autowrap = true
+percent_visible = 0.0
 
 [node name="NameLabel" type="Label" parent="Control/Control/MarginContainer/Control"]
 margin_left = -40.9828

@@ -77,7 +77,7 @@ func display_page(page : Page):
 	if page is ContentPage:
 		npc.hide()
 		textlabel.text = ""
-#		textlabel.set_visible_characters(0);
+		textlabel.set_visible_characters(0);
 		
 		if page.character == VNGlobal.Characters.NONE: 
 			npc.texture = null;
@@ -125,6 +125,9 @@ func display_page(page : Page):
 	# else involves being able to reference previous pages
 	
 		for sentence in page.content:
+			prepend_sentence(sentence);
+			
+		for sentence in page.content:
 			var func_pointer = write_sentence(sentence)
 			if func_pointer:
 				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
@@ -170,27 +173,55 @@ func display_page(page : Page):
 #		textlabel.set_visible_characters(target);
 
 
-#func prepend_sentence (sentence):
-#	textlabel.text += sentence.content + " ";
-#
-#func write_sentence (sentence):
+func prepend_sentence (sentence):
+	textlabel.text += sentence.content + " ";
+	
+func count_printable(string:String):
+	string = string.replace(" ", "");
+	string = string.replace("\n", "");
+	return string.length();
+
+func write_sentence (sentence):
 #	print("Sentence length: ", sentence.content.length())
 #	print("Visible characters: ", textlabel.get_visible_characters())
-#	var visible_characters_base = textlabel.get_visible_characters();
-#
-#	var target = textlabel.get_visible_characters() + sentence.content.length() + 1
-#
+
+	var target = textlabel.get_visible_characters() + count_printable(sentence.content);
+
 #	print("Target: ", target);
+
+	letter_timer.set_time(CHAR_WAIT/sentence.speed);
+	letter_timer.start();
+	
+	for i in range(count_printable(sentence.content)):
+		if (skipped == false):
+#			textlabel.set_visible_characters(index);
+			textlabel.visible_characters+=1;
+			yield(letter_timer, "timeout");
+	letter_timer.stop();
+
+	if (skipped == false):
+#		delay_timer.set_time(sentence.delay/float(sentence.speed) + 0.0001); #so it shuts up
+		delay_timer.set_time(VNGlobal.DEFAULT_SENTENCE_DELAY); #so it shuts up
+		delay_timer.start();
+		yield(delay_timer, "timeout");
+		delay_timer.stop();
+
+	if (skipped):
+#		textlabel.set_visible_characters(target);
+		textlabel.visible_characters = target;
+	
+	print("SENTENCE END");
+#
+#func write_sentence (sentence):
+#	var original = textlabel.text;
+#	var target = original + sentence.content + " ";
 #
 #	letter_timer.set_time(CHAR_WAIT/sentence.speed);
 #	letter_timer.start();
 #
-#	var index = textlabel.get_visible_characters();
-#
-#	for i in range(sentence.content.length()+1):
-#		index+=1;
+#	for c in (sentence.content + " "):
 #		if (skipped == false):
-#			textlabel.set_visible_characters(index);
+#			textlabel.text+=c;
 #			yield(letter_timer, "timeout");
 #	letter_timer.stop();
 #
@@ -201,31 +232,8 @@ func display_page(page : Page):
 #		yield(delay_timer, "timeout");
 #		delay_timer.stop();
 #
-#	if (skipped):
-#		textlabel.set_visible_characters(target);
-
-func write_sentence (sentence):
-	var original = textlabel.text;
-	var target = original + sentence.content + " ";
-
-	letter_timer.set_time(CHAR_WAIT/sentence.speed);
-	letter_timer.start();
-
-	for c in (sentence.content + " "):
-		if (skipped == false):
-			textlabel.text+=c;
-			yield(letter_timer, "timeout");
-	letter_timer.stop();
-
-	if (skipped == false):
-#		delay_timer.set_time(sentence.delay/float(sentence.speed) + 0.0001); #so it shuts up
-		delay_timer.set_time(VNGlobal.DEFAULT_SENTENCE_DELAY); #so it shuts up
-		delay_timer.start();
-		yield(delay_timer, "timeout");
-		delay_timer.stop();
-		
-	if(skipped == true):
-		textlabel.text = target;
+#	if(skipped == true):
+#		textlabel.text = target;
 
 func skip():
 	skipped = true;
@@ -242,7 +250,7 @@ func load_data(file_path):
 	#parses tect file to dictionary
 	var data_json = JSON.parse(text_json)
 	#checks to make sure it parsed correctly
-	print(data_json)
+#	print(data_json)
 	if data_json.error == OK:
 #		print("All is good")
 		pass
