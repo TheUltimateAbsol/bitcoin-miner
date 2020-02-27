@@ -57,7 +57,6 @@ func play():
 	for page in save_data:
 		if page is ContentPage:
 			skipped = false;
-			state = PLAYING
 			var func_pointer = display_page(page)
 			
 			if func_pointer:
@@ -73,11 +72,15 @@ func play():
 func play_json(json_data : Dictionary):
 	display_page(VNGlobal.deserialize(json_data));
 
-func display_page(page : Page):	
+
+func display_page(page:Page):
+	if state == PLAYING: return;
+	
+	state = PLAYING;
 	if page is ContentPage:
 		npc.hide()
 		textlabel.text = ""
-#		textlabel.set_visible_characters(0);
+		textlabel.set_visible_characters(0);
 		
 		if page.character == VNGlobal.Characters.NONE: 
 			npc.texture = null;
@@ -125,6 +128,10 @@ func display_page(page : Page):
 	# else involves being able to reference previous pages
 	
 		for sentence in page.content:
+			prepend_sentence(sentence);
+		textlabel.set_visible_characters(0);
+		
+		for sentence in page.content:
 			var func_pointer = write_sentence(sentence)
 			if func_pointer:
 				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
@@ -138,94 +145,40 @@ func display_page(page : Page):
 		print("ENDING");
 		$Conclusion/AnimationPlayer.play("Activate");
 		
-#func prepend_sentence (sentence):
-#	textlabel.text += sentence.content + "H";
-#
-#func write_sentence (sentence):
-#	print("Sentence length: ", sentence.content.length())
-#	print("Visible characters: ", textlabel.get_visible_characters())
-#	var visible_characters_base = textlabel.get_visible_characters();
-#
-#	var target = textlabel.get_visible_characters() + sentence.content.length() + 1
-#
-#	print("Target: ", target);
-#
-#	letter_timer.set_time(CHAR_WAIT/sentence.speed);
-#	letter_timer.start();
-#	for i in range(sentence.content.length()+1):
-#		print(i);
-#		if (skipped == false):
-#			textlabel.set_visible_characters(visible_characters_base+i);
-#			yield(letter_timer, "timeout");
-#	letter_timer.stop();
-#
-#	if (skipped == false):
-##		delay_timer.set_time(sentence.delay/float(sentence.speed) + 0.0001); #so it shuts up
-#		delay_timer.set_time(VNGlobal.DEFAULT_SENTENCE_DELAY); #so it shuts up
-#		delay_timer.start();
-#		yield(delay_timer, "timeout");
-#		delay_timer.stop();
-#
-#	if (skipped):
-#		textlabel.set_visible_characters(target);
+	state = WAITING
 
 
-#func prepend_sentence (sentence):
-#	textlabel.text += sentence.content + " ";
-#
-#func write_sentence (sentence):
-#	print("Sentence length: ", sentence.content.length())
-#	print("Visible characters: ", textlabel.get_visible_characters())
-#	var visible_characters_base = textlabel.get_visible_characters();
-#
-#	var target = textlabel.get_visible_characters() + sentence.content.length() + 1
-#
-#	print("Target: ", target);
-#
-#	letter_timer.set_time(CHAR_WAIT/sentence.speed);
-#	letter_timer.start();
-#
-#	var index = textlabel.get_visible_characters();
-#
-#	for i in range(sentence.content.length()+1):
-#		index+=1;
-#		if (skipped == false):
-#			textlabel.set_visible_characters(index);
-#			yield(letter_timer, "timeout");
-#	letter_timer.stop();
-#
-#	if (skipped == false):
-##		delay_timer.set_time(sentence.delay/float(sentence.speed) + 0.0001); #so it shuts up
-#		delay_timer.set_time(VNGlobal.DEFAULT_SENTENCE_DELAY); #so it shuts up
-#		delay_timer.start();
-#		yield(delay_timer, "timeout");
-#		delay_timer.stop();
-#
-#	if (skipped):
-#		textlabel.set_visible_characters(target);
+func prepend_sentence (sentence):
+	textlabel.text += sentence.content + " ";
+	
+func count_printable(string:String):
+	string = string.replace(" ", "");
+	string = string.replace("\n", "");
+	string = string.replace("\r", "");
+	return string.length();
 
 func write_sentence (sentence):
-	var original = textlabel.text;
-	var target = original + sentence.content + " ";
+	var target = textlabel.get_visible_characters() + count_printable(sentence.content);
 
 	letter_timer.set_time(CHAR_WAIT/sentence.speed);
 	letter_timer.start();
-
-	for c in (sentence.content + " "):
+	
+	for i in range(count_printable(sentence.content)):
 		if (skipped == false):
-			textlabel.text+=c;
+			textlabel.visible_characters+=1;
 			yield(letter_timer, "timeout");
 	letter_timer.stop();
 
 	if (skipped == false):
-#		delay_timer.set_time(sentence.delay/float(sentence.speed) + 0.0001); #so it shuts up
-		delay_timer.set_time(VNGlobal.DEFAULT_SENTENCE_DELAY); #so it shuts up
+		delay_timer.set_time(VNGlobal.DEFAULT_SENTENCE_DELAY); 
 		delay_timer.start();
 		yield(delay_timer, "timeout");
 		delay_timer.stop();
-		
-	if(skipped == true):
-		textlabel.text = target;
+
+	if (skipped):
+		textlabel.visible_characters = target;
+	
+	print("SENTENCE END");
 
 func skip():
 	skipped = true;
@@ -242,7 +195,7 @@ func load_data(file_path):
 	#parses tect file to dictionary
 	var data_json = JSON.parse(text_json)
 	#checks to make sure it parsed correctly
-	print(data_json)
+#	print(data_json)
 	if data_json.error == OK:
 #		print("All is good")
 		pass

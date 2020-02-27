@@ -17,6 +17,8 @@ const Background_transitiosn = {"NONE":"NONE", "FADE":"FADE", "BLACK":"BLACK"}
 # when the text appears on the screen (sentence per sentence basis)
 const SoundEffect = {"NONE":"NONE", "DING":"DING", "THWACK":"THWACK", "WHACK":"WHACK"}
 
+const CLASS_DIRECTORY = "res://VisualNovel/PageClasses/"
+
 signal user_input
 
 const DEFAULT_SENTENCE_DELAY = 0.5;
@@ -41,43 +43,5 @@ static func merge_dir(target, patch):
 	
 	
 static func deserialize(json_object):
-	match json_object["type"]:
-		"Page": 
-			return Page.new(
-				json_object["id"], 
-				json_object["next_id"]
-			);
-		"ContentPage":
-			var sentences = [];
-			for sentence in json_object["content"] :
-				sentences.push_back(Sentence.new(sentence["content"], sentence["speed"], sentence["sound"]));
-				
-			return ContentPage.new(
-				json_object["id"], 
-				json_object["next_id"],
-				sentences, 
-				json_object["character"], 
-				json_object["expression"], 
-				json_object["transition"], 
-				json_object["background"], 
-				json_object["speed"]
-		#		json_object["music"]
-		#		json_object["questions"]
-			);
-		"GameStartPage":
-			return GameStartPage.new(
-				json_object["id"], 
-				json_object["next_id"],
-				json_object["game_dir"]
-			);
-		"GameEndPage":
-			return GameEndPage.new(
-				json_object["id"], 
-				json_object["next_id"]
-			);
-		"EndPage":
-			return EndPage.new(
-				json_object["id"], 
-				json_object["next_id"]
-			);
+	return load(CLASS_DIRECTORY + json_object["type"] + ".gd").new(json_object);
 		

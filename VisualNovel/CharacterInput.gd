@@ -66,14 +66,14 @@ func get_data():
 		character_expression = expression_buttons.get_pressed_button().text
 		
 	# GET THE NAME OF THE CHARACTER HERE	
-		
+	character_name = VNGlobal.CharacterNames[character];
 		
 		
 	return {
 		"character": character,
 		"transition": character_transition, 
 		"expression": character_expression,
-		"character name": charcter_name
+		"character_name": character_name
 	};
 	
 func load_data(character, character_expression, character_transition):
