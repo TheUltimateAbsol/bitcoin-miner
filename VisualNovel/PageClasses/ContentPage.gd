@@ -22,7 +22,26 @@ func _init(xid=0,
 	xmusic=VNGlobal.Music.NONE, 
 	xquestions=[]).(xid, xnext_id):
 		
-#	._init_custom(id, next_id);
+#	THIS DESERIALIZES THE CLASS FROM A JSON TABLE
+#	Note: Normally to do this, we would just make a separate
+#   static function that acts like a constructor, returning a new instance
+#   However, 3.1.2 currently doesn't allow for cyclic dependencies, so this
+#   is our next best option :/
+	if typeof(xid) == TYPE_DICTIONARY:
+		var json_object = xid
+		var sentences = [];
+		for sentence in json_object["content"] :
+			sentences.push_back(Sentence.new(sentence["content"], sentence["speed"], sentence["sound"]));
+		
+		xcontent = sentences
+		xcharacter = json_object["character"]
+		xexpression = json_object["expression"]
+		xtransition = json_object["transition"]
+		xbackground = json_object["background"]
+		xspeed = json_object["speed"]
+#		xmusic = json_object["music"]
+#		xquestions = json_object["questions"]
+		
 	content = xcontent;
 	character = xcharacter;
 	speed = xspeed;

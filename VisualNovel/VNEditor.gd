@@ -3,23 +3,92 @@ extends Control
 # parse buttons
 onready var preview_btn = $Panel/HBoxContainer/Layout/preview_btn
 onready var update_btn = $Panel/HBoxContainer/Layout/update_btn
-onready var reader = $Panel/HBoxContainer/Control/VNReader
+onready var reader = $Panel/HBoxContainer/VNReaderBox/VNReader
 onready var insert_btn = $Panel/HBoxContainer/VBoxContainer/HBoxContainer/New
 
+#short reference names
 onready var idInput = $Panel/HBoxContainer/Layout/IdInput
 onready var sentenceInput = $Panel/HBoxContainer/Layout/SentenceInput
 onready var sceneInput = $Panel/HBoxContainer/Layout/SceneInput
 onready var characterInput = $Panel/HBoxContainer/Layout/CharacterInput
 onready var directoryInput = $Panel/HBoxContainer/Layout/DirectoryInput
-
 onready var LinkBar = $Panel/HBoxContainer/VBoxContainer/ScrollContainer/LinkBar
 
-enum {CONTENT_PAGE, GAME_START_PAGE, GAME_END_PAGE, END_PAGE}
+const VNReaderClass = preload("res://VisualNovel/VNReader.tscn");
+#Used to identify input types
+enum Inputs {ID, SENTENCE, SCENE, CHARACTER, PREVIEW, DIRECTORY}
 
-var data_json
-var save_data : Array
-var current_index = -1;
+var data_json #This is what we read in from a file. Honestly, I'm not sure why it's here
+var save_data : Array #Our save data
+var current_index = -1; #This says what page is currently selected
 
+# IMPORTANT -- PLEASE READ
+# Update this dictionary when you have a new type of page to edit
+# Dependencies dictate what inputs will be used and read when the page is edited
+# classNode is a link to the actual class (given by classname)
+var classes = {
+	"ContentPage": {
+		"dependencies": [Inputs.ID, Inputs.SENTENCE, Inputs.SCENE, Inputs.CHARACTER, Inputs.PREVIEW],
+		"classNode": ContentPage,
+	},
+	"GameStartPage": {
+		"dependencies": [Inputs.ID, Inputs.DIRECTORY, Inputs.PREVIEW],
+		"classNode": GameStartPage
+	},
+	"GameEndPage": {
+		"dependencies": [Inputs.ID, Inputs.PREVIEW],
+		"classNode": GameEndPage
+	},
+	"EndPage": {
+		"dependencies": [Inputs.ID, Inputs.PREVIEW],
+		"classNode": EndPage
+	}
+}
+
+# Renders the given input into the editor given the page_data
+func load_input(input, page_data):
+	match(input):
+		Inputs.ID:
+			idInput.show();
+			idInput.load_data(page_data["id"], page_data["next_id"]);
+		Inputs.SENTENCE:
+			sentenceInput.show()
+			sentenceInput.load_data(page_data["content"]);
+		Inputs.SCENE:
+			sceneInput.show()
+			sceneInput.load_data(page_data["music"], page_data["background"], page_data["scene_transition"]);
+		Inputs.CHARACTER:
+			characterInput.show()
+			characterInput.load_data(page_data["character"], page_data["background"], page_data["scene_transition"]);
+		Inputs.DIRECTORY:
+			directoryInput.show();
+			directoryInput.load_data(page_data["game_dir"]);
+		Inputs.PREVIEW:
+			preview_btn.show();
+		_:
+			push_error("INVALID INPUT");
+			
+# Reads data from the given input, then saves it into page_data
+func read_input(input, page_data):
+	match (input):
+		Inputs.ID:
+			VNGlobal.merge_dir(page_data, idInput.get_data());
+		Inputs.SENTENCE:
+			VNGlobal.merge_dir(page_data, sentenceInput.get_data());
+		Inputs.SCENE:
+			VNGlobal.merge_dir(page_data, sceneInput.get_data());
+		Inputs.CHARACTER:
+			VNGlobal.merge_dir(page_data, characterInput.get_data());
+		Inputs.DIRECTORY:
+			VNGlobal.merge_dir(page_data, directoryInput.get_data());
+		Inputs.PREVIEW:
+			pass;
+		_:
+			push_error("INVALID INPUT");
+			
+# This function hides all rendered inputs and displays new ones according to 
+# the current index
+# Useful for changing the display when a new linkbaritem is selected
 func update_options():
 	idInput.hide();
 	sentenceInput.hide()
@@ -32,51 +101,19 @@ func update_options():
 	if current_index == -1:
 		return
 	
-	#if a content page
-	match (save_data[current_index].type):
-		"ContentPage":
-			idInput.show();
-			sentenceInput.show()
-			sceneInput.show()
-			characterInput.show()
-			preview_btn.show();
-			
-			var page_data = save_data[current_index];
-			idInput.load_data(page_data["id"], page_data["next_id"]);
-			sentenceInput.load_data(page_data["content"]);
-			sceneInput.load_data(page_data["music"], page_data["background"], page_data["scene_transition"]);
-			characterInput.load_data(page_data["character"], page_data["background"], page_data["scene_transition"]);
-		
-		"GameStartPage":
-			idInput.show();
-			directoryInput.show();
-			update_btn.show();
-			
-			var page_data = save_data[current_index];
-			idInput.load_data(page_data["id"], page_data["next_id"]);
-			directoryInput.load_data(page_data["game_dir"]);
-		
-		"GameEndPage":
-			idInput.show();
-			update_btn.show();
-			
-			var page_data = save_data[current_index];
-			idInput.load_data(page_data["id"], page_data["next_id"]);
-		"EndPage":
-			var page_data = save_data[current_index];
-			idInput.show();
-			update_btn.show();
-			idInput.load_data(page_data["id"], page_data["next_id"]);
-			
-			
+	#load page content
+	var page_data = save_data[current_index];
+	var page_class = classes[page_data.type];
+
+	for input in page_class.dependencies:
+		load_input(input, page_data);
 			
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	insert_btn.get_popup().add_item("ContentPage", CONTENT_PAGE);
-	insert_btn.get_popup().add_item("GameStartPage", GAME_START_PAGE);
-	insert_btn.get_popup().add_item("GameEndPage", GAME_END_PAGE);
-	insert_btn.get_popup().add_item("EndPage", END_PAGE);
+#	Populate the "Insert" button with possible insertable items
+	for i in range(classes.keys().size()):
+		insert_btn.get_popup().add_item(classes.keys()[i], i);
 	insert_btn.get_popup().connect("id_pressed", self, "insert");
 
 	load_from_json();
@@ -84,30 +121,21 @@ func _ready():
 
 func preview_scene():
 	update_page()
+#	Note: we delete the reader and re-instance it so that the typing does not go all funky-wunky
+	var temp = reader.duplicate();
+	reader.queue_free();
+	reader = temp
+	$Panel/HBoxContainer/VNReaderBox.add_child(reader);
 	reader.play_json(save_data[current_index])
 		
-# gets the ids for the page and the id of the page that will follow it
+# Reads data from the currently rendered inputs, and saves it to save_data
+# Then refreshes LinkBar to display correctly
 func update_page():
-	var page_data={};
+	var page_class = classes[save_data[current_index].type];
+	var page_data = page_class.classNode.new().serialize();
 	
-	match (save_data[current_index].type):
-		"ContentPage":
-			page_data=ContentPage.new().serialize();
-			VNGlobal.merge_dir(page_data, idInput.get_data());
-			VNGlobal.merge_dir(page_data, sentenceInput.get_data());
-			VNGlobal.merge_dir(page_data, sceneInput.get_data());
-			VNGlobal.merge_dir(page_data, characterInput.get_data());
-		"GameStartPage":
-			page_data=GameStartPage.new().serialize();
-			VNGlobal.merge_dir(page_data, idInput.get_data());
-			VNGlobal.merge_dir(page_data, directoryInput.get_data());
-		"GameEndPage":
-			page_data=GameStartPage.new().serialize();
-			VNGlobal.merge_dir(page_data, idInput.get_data());
-		"GameEndPage":
-			page_data=GameStartPage.new().serialize();
-			VNGlobal.merge_dir(page_data, idInput.get_data());
-			
+	for input in page_class.dependencies:
+		read_input(input, page_data);
 		
 	save_data[current_index] = page_data;
 	
@@ -115,6 +143,7 @@ func update_page():
 	LinkBar.load_data(save_data);
 	LinkBar.select(current_index);
 
+# Fetches data from a JSON file
 func load_from_json():
 	var new_dict
 	var dir = Directory.new()
@@ -145,6 +174,7 @@ func load_from_json():
 	save_data = data_json.result
 	LinkBar.load_data(save_data);
 
+# Writes save_data to a json file, and creates a backup too
 func save_json():
 	var dir = Directory.new()
 	var file = File.new()
@@ -160,34 +190,33 @@ func save_json():
 	new_file.close();
 	$SnackBar.activate("Successfully Saved!");
 
+#Exit button
 func _on_Button_pressed():
 	get_tree().quit()
 
+#Alert a message to the screen
 func alert(message):
 	$SnackBar.activate(message);
 
+#Called when a new LinkBarItem (page) is clicked
+#Updates the display
 func on_selected(index):
 	if index != current_index:
 		current_index = index;
 		update_options();
 		
+#Adds a new Page to the list of pages and updates the screen
 func insert(id):
 	var last_index = save_data.size();
-				
-	match (id):
-		CONTENT_PAGE:
-			save_data.push_back(ContentPage.new(last_index, last_index+1).serialize());
-		GAME_START_PAGE:
-			save_data.push_back(GameStartPage.new(last_index, last_index+1).serialize());
-		GAME_END_PAGE:
-			save_data.push_back(GameEndPage.new(last_index, last_index+1).serialize());
-		END_PAGE:
-			save_data.push_back(EndPage.new(last_index, last_index+1).serialize());
+#	This is a stupid way that allows us to use the Dictionary as if it was an array
+#   Finds the class dictated by the order which the items were put in (key array order)
+#   Then creates a new item and pushes it back
+	save_data.push_back(classes[classes.keys()[id]].classNode.new(last_index, last_index+1).serialize())
 			
 	LinkBar.load_data(save_data);
 	LinkBar.select(current_index);
 
-	
+#Deletes a Page from the list of pages, then updates the screen
 func delete():
 	if save_data.size() == 0: return;
 	if current_index == -1: return;
@@ -199,6 +228,7 @@ func delete():
 	update_options();
 	
 #A is before B
+#Helper function for the up and down functions
 func _adjacent_swap(before, afer):
 	#Remove the target
 	var temp = save_data[afer];
@@ -221,6 +251,7 @@ func _adjacent_swap(before, afer):
 		elif item.next_id == victim_id:
 			item.next_id = new_victim_id;
 
+#Called when up is pressed. Moves current page up
 func up():
 	if current_index == -1 or current_index == -0 : return;
 	
@@ -231,7 +262,8 @@ func up():
 	LinkBar.load_data(save_data);
 	LinkBar.select(current_index);
 	update_options();
-	
+
+#Called when down is pressed. Moves current page down
 func down():
 	if current_index == -1 or current_index == save_data.size()-1 : return;
 	

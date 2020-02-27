@@ -27,12 +27,12 @@ _global_script_classes=[ {
 "base": "Page",
 "class": "ContentPage",
 "language": "GDScript",
-"path": "res://VisualNovel/ContentPage.gd"
+"path": "res://VisualNovel/PageClasses/ContentPage.gd"
 }, {
 "base": "MetaPage",
 "class": "EndPage",
 "language": "GDScript",
-"path": "res://VisualNovel/EndPage.gd"
+"path": "res://VisualNovel/PageClasses/EndPage.gd"
 }, {
 "base": "Node2D",
 "class": "Enemy",
@@ -42,12 +42,12 @@ _global_script_classes=[ {
 "base": "MetaPage",
 "class": "GameEndPage",
 "language": "GDScript",
-"path": "res://VisualNovel/GameEndPage.gd"
+"path": "res://VisualNovel/PageClasses/GameEndPage.gd"
 }, {
 "base": "MetaPage",
 "class": "GameStartPage",
 "language": "GDScript",
-"path": "res://VisualNovel/GameStartPage.gd"
+"path": "res://VisualNovel/PageClasses/GameStartPage.gd"
 }, {
 "base": "Node",
 "class": "JumpTrajectory",
@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "Page",
 "class": "MetaPage",
 "language": "GDScript",
-"path": "res://VisualNovel/MetaPage.gd"
+"path": "res://VisualNovel/PageClasses/MetaPage.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Miner",
@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Page",
 "language": "GDScript",
-"path": "res://VisualNovel/Page.gd"
+"path": "res://VisualNovel/PageClasses/Page.gd"
 }, {
 "base": "TileMap",
 "class": "PathMap",
