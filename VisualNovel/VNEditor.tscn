@@ -1,19 +1,20 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://VisualNovel/VNEditor.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/LinkBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://VisualNovel/IdInput.gd" type="Script" id=3]
 [ext_resource path="res://VisualNovel/SentenceInput.gd" type="Script" id=4]
-[ext_resource path="res://VisualNovel/SceneInput.gd" type="Script" id=5]
-[ext_resource path="res://VisualNovel/CharacterInput.gd" type="Script" id=6]
-[ext_resource path="res://VisualNovel/DirectoryInput.gd" type="Script" id=7]
-[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=8]
-[ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=9]
-[ext_resource path="res://VisualNovel/SnackBar.gd" type="Script" id=10]
+[ext_resource path="res://VisualNovel/QuestionInput.gd" type="Script" id=5]
+[ext_resource path="res://VisualNovel/SceneInput.gd" type="Script" id=6]
+[ext_resource path="res://VisualNovel/CharacterInput.gd" type="Script" id=7]
+[ext_resource path="res://VisualNovel/DirectoryInput.gd" type="Script" id=8]
+[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=9]
+[ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://VisualNovel/SnackBar.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
-font_data = ExtResource( 9 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0.0470588, 0.301961, 1 )
@@ -84,12 +85,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+editor/display_folded = true
 margin_right = 185.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer"]
-editor/display_folded = true
 margin_right = 185.0
 margin_bottom = 20.0
 alignment = 1
@@ -248,12 +249,79 @@ margin_top = 92.0
 margin_right = 466.0
 margin_bottom = 92.0
 
-[node name="SceneInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
+[node name="QuestionInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 margin_top = 216.0
 margin_right = 480.0
-margin_bottom = 244.0
+margin_bottom = 339.0
 script = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 473.0
+margin_bottom = 116.0
+
+[node name="question_info" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
+margin_right = 466.0
+margin_bottom = 14.0
+text = "Question Info (if page is Queston)"
+align = 1
+
+[node name="question_txt" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
+margin_top = 18.0
+margin_right = 466.0
+margin_bottom = 42.0
+alignment = 1
+
+[node name="question_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
+margin_left = 192.0
+margin_right = 250.0
+margin_bottom = 24.0
+expand_to_text_length = true
+placeholder_text = "Enter A sentence"
+
+[node name="add_question" type="Button" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
+margin_left = 254.0
+margin_right = 274.0
+margin_bottom = 24.0
+text = "+"
+
+[node name="question_info2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
+margin_top = 46.0
+margin_right = 466.0
+margin_bottom = 70.0
+alignment = 1
+
+[node name="next_id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_info2"]
+margin_left = 181.0
+margin_right = 239.0
+margin_bottom = 24.0
+align = 1
+placeholder_text = "Next_id"
+
+[node name="sound_menu" type="OptionButton" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_info2"]
+margin_left = 243.0
+margin_right = 284.0
+margin_bottom = 24.0
+
+[node name="questions_lable" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
+margin_top = 74.0
+margin_right = 466.0
+margin_bottom = 105.0
+text = "Answers:
+"
+
+[node name="question_list" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
+margin_top = 109.0
+margin_right = 466.0
+margin_bottom = 109.0
+
+[node name="SceneInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
+editor/display_folded = true
+margin_top = 343.0
+margin_right = 480.0
+margin_bottom = 371.0
+script = ExtResource( 6 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/SceneInput"]
 margin_left = 7.0
@@ -295,10 +363,11 @@ text = "Scene Transitions"
 align = 1
 
 [node name="CharacterInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 248.0
+editor/display_folded = true
+margin_top = 375.0
 margin_right = 480.0
-margin_bottom = 300.0
-script = ExtResource( 6 )
+margin_bottom = 427.0
+script = ExtResource( 7 )
 
 [node name="character_layout" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput"]
 margin_left = 7.0
@@ -360,10 +429,10 @@ margin_bottom = 38.0
 
 [node name="DirectoryInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 editor/display_folded = true
-margin_top = 304.0
+margin_top = 431.0
 margin_right = 480.0
-margin_bottom = 360.0
-script = ExtResource( 7 )
+margin_bottom = 487.0
+script = ExtResource( 8 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/DirectoryInput"]
 margin_left = 7.0
@@ -385,15 +454,15 @@ size_flags_horizontal = 3
 placeholder_text = "Enter a File Directory..."
 
 [node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_top = 364.0
+margin_top = 491.0
 margin_right = 480.0
-margin_bottom = 384.0
+margin_bottom = 511.0
 text = "Update & Preview Scene"
 
 [node name="update_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_top = 388.0
+margin_top = 515.0
 margin_right = 480.0
-margin_bottom = 408.0
+margin_bottom = 535.0
 text = "Update Scene"
 
 [node name="VNReaderBox" type="Control" parent="Panel/HBoxContainer"]
@@ -403,7 +472,7 @@ margin_bottom = 1440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VNReader" parent="Panel/HBoxContainer/VNReaderBox" instance=ExtResource( 8 )]
+[node name="VNReader" parent="Panel/HBoxContainer/VNReaderBox" instance=ExtResource( 9 )]
 margin_bottom = 1440.0
 rect_scale = Vector2( 0.5, 0.5 )
 size_flags_horizontal = 9
@@ -436,7 +505,7 @@ text = "SAVE"
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 
 [node name="Panel" type="Panel" parent="SnackBar"]
 anchor_right = 1.0
@@ -458,6 +527,7 @@ anims/Activate = SubResource( 3 )
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Down" to="." method="down"]
 [connection signal="selected" from="Panel/HBoxContainer/VBoxContainer/ScrollContainer/LinkBar" to="." method="on_selected"]
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_txt/add_sentence" to="Panel/HBoxContainer/Layout/SentenceInput" method="add_sentence"]
+[connection signal="pressed" from="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt/add_question" to="Panel/HBoxContainer/Layout/QuestionInput" method="add_sentence"]
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/preview_btn" to="." method="preview_scene"]
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/update_btn" to="." method="update_page"]
 [connection signal="pressed" from="Exit" to="." method="_on_Button_pressed"]

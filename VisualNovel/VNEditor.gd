@@ -12,11 +12,12 @@ onready var sentenceInput = $Panel/HBoxContainer/Layout/SentenceInput
 onready var sceneInput = $Panel/HBoxContainer/Layout/SceneInput
 onready var characterInput = $Panel/HBoxContainer/Layout/CharacterInput
 onready var directoryInput = $Panel/HBoxContainer/Layout/DirectoryInput
+onready var questionInput = $Panel/HBoxContainer/Layout/QuestionInput
 onready var LinkBar = $Panel/HBoxContainer/VBoxContainer/ScrollContainer/LinkBar
 
 const VNReaderClass = preload("res://VisualNovel/VNReader.tscn");
 #Used to identify input types
-enum Inputs {ID, SENTENCE, SCENE, CHARACTER, PREVIEW, DIRECTORY}
+enum Inputs {ID, SENTENCE, SCENE, CHARACTER, PREVIEW, DIRECTORY, QUESTION}
 
 var data_json #This is what we read in from a file. Honestly, I'm not sure why it's here
 var save_data : Array #Our save data
@@ -42,6 +43,10 @@ var classes = {
 	"EndPage": {
 		"dependencies": [Inputs.ID, Inputs.PREVIEW],
 		"classNode": EndPage
+	},
+	"QuestionPage": {
+		"dependencies" : [Inputs.ID, Inputs.SENTENCE, Inputs.SCENE, Inputs.CHARACTER, Inputs.PREVIEW, Inputs.QUESTION],
+		"classNode": QuestionPage
 	}
 }
 
@@ -65,6 +70,9 @@ func load_input(input, page_data):
 			directoryInput.load_data(page_data["game_dir"]);
 		Inputs.PREVIEW:
 			preview_btn.show();
+		Inputs.QUESTION:
+			questionInput.show();
+			#questionInput.load_data();
 		_:
 			push_error("INVALID INPUT");
 			
@@ -83,6 +91,8 @@ func read_input(input, page_data):
 			VNGlobal.merge_dir(page_data, directoryInput.get_data());
 		Inputs.PREVIEW:
 			pass;
+		Inputs.QUESTION:
+			VNGlobal.merge_dir(page_data, sentenceInput.get_data());
 		_:
 			push_error("INVALID INPUT");
 			
@@ -97,6 +107,7 @@ func update_options():
 	directoryInput.hide();
 	preview_btn.hide();
 	update_btn.hide();
+	questionInput.hide();
 		
 	if current_index == -1:
 		return
@@ -115,6 +126,8 @@ func _ready():
 	for i in range(classes.keys().size()):
 		insert_btn.get_popup().add_item(classes.keys()[i], i);
 	insert_btn.get_popup().connect("id_pressed", self, "insert");
+	
+	
 
 	load_from_json();
 	update_options()
@@ -142,6 +155,7 @@ func update_page():
 	#Update the navbar in case of "Prev" being changed
 	LinkBar.load_data(save_data);
 	LinkBar.select(current_index);
+
 
 # Fetches data from a JSON file
 func load_from_json():
