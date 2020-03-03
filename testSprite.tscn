@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://testSprite.gd" type="Script" id=1]
+[ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite"]
+position = Vector2( 355.314, 551.477 )
+z_index = 4096
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+pause_mode = 2
+margin_left = -178.0
+margin_top = -370.0
+margin_right = 145.0
+margin_bottom = -75.0
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "OHM NOM NOM YUMMY INPUT"
+align = 1
+valign = 1
+autowrap = true

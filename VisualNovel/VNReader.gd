@@ -227,9 +227,32 @@ func skip():
 	letter_timer.force_end();
 	delay_timer.force_end();
 
+func list_files_in_directory(path):
+    var files = []
+    var dir = Directory.new()
+    dir.open(path)
+    dir.list_dir_begin()
+
+    while true:
+        var file = dir.get_next()
+        if file == "":
+            break
+        elif not file.begins_with("."):
+            files.append(file)
+
+    dir.list_dir_end()
+
+    return files
+
 func load_data(file_path):	
 	var file = File.new()
-	file.open("res://VisualNovel/data.json", 3)
+	for filename in list_files_in_directory("res://VisualNovel/"):
+		print(filename);
+	print("File exists: ");
+	print(file.file_exists("res://VisualNovel/data.json"));
+	var err = file.open("res://VisualNovel/data.json", 1)
+	if err:
+		push_error("Error " + str(err))
 	#converts the json file to a text file
 	var text_json = file.get_as_text()
 	file.close()
