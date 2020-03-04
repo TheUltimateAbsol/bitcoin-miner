@@ -5,21 +5,20 @@ extends Node
 
 signal swipe_canceled(start_position)
 
-export(float, 1.0, 1.5) var max_diagonal_slope: = 1.3
+export(float, 0, 1) var min_swipe_distance = 50
 
 onready var timer: Timer = $SwipeTimeout
 var swipe_start_position: = Vector2()
 
-
 func _unhandled_input(event: InputEvent) -> void:
-	print("INPUT");
 	if not event is InputEventMouseButton:
 		return
 	if event.pressed:
 		_start_detection(event.position)
-		print("STAERT");
 	elif not timer.is_stopped():
 		_end_detection(event.position)
+	elif timer.is_stopped():
+		_touch_detection();
 
 
 func _start_detection(position: Vector2) -> void:
@@ -30,13 +29,16 @@ func _start_detection(position: Vector2) -> void:
 
 func _end_detection(position: Vector2) -> void:
 	timer.stop()
-	var direction: Vector2 = (position - swipe_start_position).normalized()
-	# Swipe angle is too steep
-	if abs(direction.x) + abs(direction.y) >= max_diagonal_slope:
+	
+#	End early if the swipe isn't big enough
+	if (position - swipe_start_position).length() < min_swipe_distance:
+		_touch_detection();
 		return
+	
+	var direction: Vector2 = (position - swipe_start_position).normalized()
 	print("Ending detection ", direction);
 
-	var swipe: = InputEventSwipe.new()
+	var swipe = InputEventSwipe.new()
 	if abs(direction.x) > abs(direction.y):
 		swipe.direction = Vector2(-sign(direction.x), 0.0)
 	else:
@@ -44,5 +46,11 @@ func _end_detection(position: Vector2) -> void:
 	Input.parse_input_event(swipe)
 
 
+func _touch_detection():
+	var tap = InputEventTap.new()
+	Input.parse_input_event(tap)
+
 func _on_Timer_timeout() -> void:
 	emit_signal('swipe_canceled', swipe_start_position)
+	
+	

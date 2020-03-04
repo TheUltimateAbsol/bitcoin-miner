@@ -142,6 +142,7 @@ modulate = Color( 0.0941176, 0.188235, 0.188235, 1 )
 margin_top = 52.0
 margin_right = 160.0
 margin_bottom = 60.0
+mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]

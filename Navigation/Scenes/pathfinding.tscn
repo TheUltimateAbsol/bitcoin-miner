@@ -525,12 +525,13 @@ texture = ExtResource( 2 )
 
 [node name="Startup" type="Node2D" parent="."]
 pause_mode = 1
+editor/display_folded = true
 z_index = 11
 
 [node name="Panel" type="Panel" parent="Startup"]
 margin_right = 160.0
 margin_bottom = 144.0
-mouse_filter = 1
+mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
 [node name="Sprite2" type="Sprite" parent="Startup"]
@@ -561,7 +562,6 @@ z_index = 10
 texture = ExtResource( 7 )
 
 [node name="Label" type="Sprite" parent="QuickTimeEvent"]
-editor/display_folded = true
 position = Vector2( 80, 76 )
 z_index = 10
 texture = ExtResource( 8 )
@@ -599,6 +599,7 @@ anims/Activate = SubResource( 5 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="QuickTimeEvent/AnimationPlayer"]
 
 [node name="GameOver" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Background" type="Sprite" parent="GameOver"]
 visible = false
@@ -611,7 +612,6 @@ visible = false
 margin_top = 39.0
 margin_right = 160.0
 margin_bottom = 53.0
-mouse_filter = 1
 theme = ExtResource( 11 )
 text = "GAME OVER"
 align = 1
@@ -624,6 +624,7 @@ anims/GameOver = ExtResource( 12 )
 stream = ExtResource( 13 )
 
 [node name="LevelComplete" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 14 )
 
 [node name="Background" type="Sprite" parent="LevelComplete"]
@@ -645,7 +646,6 @@ margin_left = -161.0
 margin_top = 15.0
 margin_right = -1.0
 margin_bottom = 41.0
-mouse_filter = 1
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.0941176, 0.188235, 0.188235, 1 )
 text = "LEVEL COMPLETE"
@@ -656,7 +656,6 @@ margin_left = 160.0
 margin_top = 14.0
 margin_right = 319.999
 margin_bottom = 40.0
-mouse_filter = 1
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "LEVEL COMPLETE"
@@ -685,21 +684,25 @@ margin_left = 33.0
 margin_top = 41.0
 margin_right = 121.0
 margin_bottom = 106.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelComplete/HBoxContainer2"]
 margin_right = 48.0
 margin_bottom = 65.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelComplete/HBoxContainer2/VBoxContainer"]
 margin_right = 48.0
 margin_bottom = 26.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelComplete/HBoxContainer2/VBoxContainer/HBoxContainer"]
 margin_right = 28.0
 margin_bottom = 26.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Label2" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -721,6 +724,7 @@ text = "TIME  "
 margin_left = 28.0
 margin_right = 48.0
 margin_bottom = 26.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
@@ -742,6 +746,7 @@ text = "BONUS"
 margin_top = 26.0
 margin_right = 48.0
 margin_bottom = 52.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer/VBoxContainer"]
@@ -763,6 +768,7 @@ text = "INVENTORY"
 margin_left = 48.0
 margin_right = 88.0
 margin_bottom = 65.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Enemy" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
@@ -813,6 +819,7 @@ text = "        "
 align = 2
 
 [node name="OldLevelComplete" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="WinDropper" type="Node2D" parent="OldLevelComplete"]
 position = Vector2( 160, 0 )
@@ -825,6 +832,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="LevelLoadout" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Current" type="Node2D" parent="LevelLoadout"]
 position = Vector2( 0, 8 )
@@ -849,7 +857,6 @@ margin_left = -19.0
 margin_top = -24.0
 margin_right = 21.0
 margin_bottom = -10.0
-mouse_filter = 1
 theme = ExtResource( 11 )
 text = "LEVEL UP!"
 align = 1
@@ -864,7 +871,6 @@ margin_left = -19.0
 margin_top = -24.0
 margin_right = 21.0
 margin_bottom = -10.0
-mouse_filter = 1
 theme = ExtResource( 11 )
 text = "REVIVE!"
 align = 1
@@ -904,10 +910,10 @@ margin_top = 9.0
 margin_right = 13.0
 margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="pause_menu" parent="Pause" instance=ExtResource( 26 )]
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

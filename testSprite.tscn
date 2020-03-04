@@ -8,6 +8,7 @@ size = 40
 font_data = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite"]
+pause_mode = 2
 position = Vector2( 355.314, 551.477 )
 z_index = 4096
 script = ExtResource( 1 )

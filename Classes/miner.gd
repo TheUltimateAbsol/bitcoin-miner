@@ -289,8 +289,8 @@ func attack(node : Node, signal_name : String):
 	node.connect(signal_name, self, "stop_attack", [], CONNECT_ONESHOT);
 	
 func stop_attack():
-#	attack = false;
-	state = MIDATTACKING;
+	attack = false;
+	state = WAITING;
 
 func duck_action(node : Node, signal_name : String):
 	down = true;
@@ -319,7 +319,6 @@ func quick_duck():
 func stop_duck():
 	down = false;
 	state = WAITING;
-	print("FSDA")
 	
 func follow_path(path):
 #	print("starting walk")
@@ -390,7 +389,9 @@ func _physics_process(delta):
 				if ducking: 
 					getUp(); 
 					ducking = false;
-				else: idle(); 
+				else: 
+					if not state == MIDATTACKING:
+						idle(); 
 
 	if on_floor and down:
 		velocity.x = 0;
@@ -445,20 +446,15 @@ func _physics_process(delta):
 		reset_input();
 		emit_signal("target_reached")
 		
-	#CHEAP TRICK
-	if state == MIDATTACKING2:
-		state = WAITING
-		attack = false;
-		
 	if state == MIDATTACKING:
-		state = MIDATTACKING2;
+		state = WAITING
 
 func is_waiting():
 	return (state == WAITING)
 	
 ##May also correspond to an upwards jump
 func can_attack():
-	return (state == WAITING)
+	return (state == WAITING || state == MIDATTACKING)
 	
 func freeze():
 	frozen= true

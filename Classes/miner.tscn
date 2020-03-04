@@ -1,13 +1,13 @@
 [gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Classes/miner.gd" type="Script" id=1]
-[ext_resource path="res://PlayerSprites/Miner_Bat.png" type="Texture" id=2]
+[ext_resource path="res://PlayerSprites/Miner Axe.png" type="Texture" id=2]
 [ext_resource path="res://PlayerSprites/Miner_Hurt.png" type="Texture" id=3]
 [ext_resource path="res://PlayerSprites/Miner_Duck_1.png" type="Texture" id=4]
 [ext_resource path="res://PlayerSprites/jump.png" type="Texture" id=5]
 [ext_resource path="res://PlayerSprites/protagonist-death_2.0.png" type="Texture" id=6]
 [ext_resource path="res://PlayerSprites/Ending_1.png" type="Texture" id=7]
-[ext_resource path="res://PlayerSprites/Miner Axe.png" type="Texture" id=8]
+[ext_resource path="res://PlayerSprites/Miner_Bat.png" type="Texture" id=8]
 [ext_resource path="res://PlayerSprites/Miner_Axe_2.png" type="Texture" id=9]
 [ext_resource path="res://PlayerSprites/Player_Walk.png" type="Texture" id=10]
 [ext_resource path="res://PlayerSprites/Miner Compress.png" type="Texture" id=11]
@@ -436,7 +436,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=8]
 length = 0.7
-loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
 tracks/0/interp = 1
@@ -471,7 +471,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 8 ) ]
+"values": [ ExtResource( 2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite:frame")
@@ -480,9 +480,9 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.5, 0.6 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.5, 0.65 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 1, 2, 3, 4, 5, 6 ]
 }
 tracks/4/type = "value"
@@ -512,10 +512,9 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=9]
 resource_name = "Mine2"
 length = 0.8
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
 tracks/0/interp = 1
@@ -550,7 +549,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 2 ) ]
+"values": [ ExtResource( 8 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite:frame")
@@ -591,10 +590,9 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=10]
 resource_name = "Mine3"
 length = 0.8
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:hframes")
 tracks/0/interp = 1
@@ -670,7 +668,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=11]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -722,10 +720,10 @@ tracks/3/keys = {
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 5, 15 )
 
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id=13]
 
 [node name="Miner" type="KinematicBody2D" groups=[
 "player",
@@ -736,8 +734,8 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 offset = Vector2( 2, 0 )
-vframes = 3
-hframes = 3
+vframes = 4
+hframes = 2
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -749,9 +747,9 @@ anims/GetUp = SubResource( 5 )
 anims/Jump = SubResource( 6 )
 "anims/Level Complete" = SubResource( 7 )
 anims/Mine = SubResource( 8 )
-anims/Mine2 = SubResource( 14 )
-anims/Mine3 = SubResource( 13 )
-anims/Walk = SubResource( 15 )
+anims/Mine2 = SubResource( 9 )
+anims/Mine3 = SubResource( 10 )
+anims/Walk = SubResource( 11 )
 
 [node name="Offset Checker" type="Sprite" parent="."]
 visible = false
@@ -759,13 +757,13 @@ texture = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
-shape = SubResource( 16 )
+shape = SubResource( 12 )
 disabled = true
 
 [node name="MiningHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiningHitbox"]
 position = Vector2( 22, 0 )
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 disabled = true
 [connection signal="area_entered" from="MiningHitbox" to="." method="_on_MiningHitbox_area_entered"]
