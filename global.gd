@@ -2,7 +2,7 @@ extends Node
 
 var num_bots = 0;
 enum NavPointTypes {NONE, PLATFORM, LEFT_EDGE, RIGHT_EDGE, SOLO}
-enum CommandTypes {IDLE, MOVE, MINE, DUCK}
+enum CommandTypes {IDLE, MOVE, MINE, DUCK, JUMP}
 
 var numremaining = 1
 var numtotal = 1

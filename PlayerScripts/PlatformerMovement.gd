@@ -208,6 +208,7 @@ func get_command():
 	var right_input = Input.is_action_pressed("right")
 	var down_input = Input.is_action_pressed("down")
 	var jump_input = Input.is_action_pressed("jump")
+	if (jump_input): print("jumping");
 	var attack_input = Input.is_action_pressed("attack")
 	
 	attack_buffers.pop_front();
@@ -253,6 +254,9 @@ func get_command():
 		elif down_input:
 			main.duck_action(self, "cancel_duck");
 			connect("cancel_duck", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			new_command(Global.CommandTypes.DUCK)
+		elif jump_input:
+			main.do_jump();
 			new_command(Global.CommandTypes.DUCK)
 #		else:
 #			new_command(Global.CommandTypes.IDLE);
