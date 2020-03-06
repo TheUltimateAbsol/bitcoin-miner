@@ -58,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			if sign(event.direction.y) == 1:
 				print("received up")
-				fake_click("up");
+				fake_click("jump");
 			else:
 				print("received down")
 				fake_click("down");
