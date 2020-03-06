@@ -1,8 +1,5 @@
 extends Control
 
-onready var game = $PanelContainer/Panel/Node2D
-onready var game_container = $PanelContainer
-
 onready var game_logic = $Game/PanelContainer/Panel/Node2D/Viewport/Game
 
 enum {VN, GAME, BOTH}
@@ -14,8 +11,6 @@ func _ready():
 
 func update_size():
 	var margin_size = 40;
-	print(game);
-	print(game_container);
 	var scale = int(($Game/PanelContainer.rect_size.x - margin_size)/160);
 	$Game/PanelContainer/Panel/Node2D.stretch_shrink = scale;
 	#$PanelContainer/Panel/Node2D.rect_min_size = scale*Vector2(160, 144);
@@ -80,3 +75,8 @@ func _on_VNReader_end_game():
 
 func _on_Game_room_cleared():
 	$VN/VSplitContainer/VSplitContainer/VNReader.next_page();
+
+
+func _on_Button_pressed():
+	print("ASD");
+	VNGlobal.fire_user_input();

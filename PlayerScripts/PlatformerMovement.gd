@@ -17,6 +17,7 @@ var dead = false;
 
 var attack_buffers = [false, false, false, false, false];
 signal cancel_attack
+signal cancel_duck
 #This is just an alias
 onready var main : KinematicBody2D = $Miner
 
@@ -194,6 +195,7 @@ func _on_pause_menu_unpause():
 	
 	
 func new_command(type, path=[]):
+	print("command ", type);
 	var new =  Command.new(type, path)
 	add_child(new);
 	main_command.link(new);
@@ -207,6 +209,7 @@ func get_command():
 	var right_input = Input.is_action_pressed("right")
 	var down_input = Input.is_action_pressed("down")
 	var jump_input = Input.is_action_pressed("jump")
+	if (jump_input): print("jumping");
 	var attack_input = Input.is_action_pressed("attack")
 	
 	attack_buffers.pop_front();
@@ -216,6 +219,9 @@ func get_command():
 	
 	if not attack_input and (left_input or right_input or down_input):
 		emit_signal("cancel_attack");
+		
+	if not down_input and (left_input or right_input or attack_input or jump_input):
+		emit_signal("cancel_duck");
 	
 	if main.can_attack():
 		if (attack_input):
@@ -247,9 +253,13 @@ func get_command():
 				main.connect("path_traversed", self, "update_section", [RIGHT], CONNECT_ONESHOT) 
 				new_command(Global.CommandTypes.MOVE, middle_to_right)
 		elif down_input:
-			main.duck_action(InputEventHandler, "released_down");
-			InputEventHandler.connect("released_down", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			main.duck_action(self, "cancel_duck");
+			connect("cancel_duck", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
 			new_command(Global.CommandTypes.DUCK)
+		elif jump_input:
+			main.do_jump();
+			main.connect("jump_ended", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			new_command(Global.CommandTypes.JUMP)
 #		else:
 #			new_command(Global.CommandTypes.IDLE);
 

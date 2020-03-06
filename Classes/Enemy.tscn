@@ -68,4 +68,5 @@ margin_left = -6.93286
 margin_top = 44.248
 margin_right = -6.93286
 margin_bottom = 44.248
+mouse_filter = 2
 [connection signal="damaged" from="EnemyHurtbox" to="." method="_on_EnemyHurtbox_damaged"]

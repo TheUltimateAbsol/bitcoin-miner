@@ -5,12 +5,11 @@ export (Vector2) var gameoverOffset = Vector2(0,0)
 
 func _ready():
 	._ready();
-	#vulnerable = false;
 	
 func game_over():
 	if anim_state != ANIM_DYING:
 		anim_state = ANIM_DYING
-		_reset();
+		_anim_reset();
 		set_offset(gameoverOffset)
 		sprite.texture = gameoverSprite
 		anim.play("Game Over")

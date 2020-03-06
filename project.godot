@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "AnimatedMiner",
+"language": "GDScript",
+"path": "res://Classes/AnimatedMiner.gd"
+}, {
 "base": "Enemy",
 "class": "AttackingEnemy",
 "language": "GDScript",
@@ -49,6 +54,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://VisualNovel/PageClasses/GameStartPage.gd"
 }, {
+"base": "InputEventAction",
+"class": "InputEventSwipe",
+"language": "GDScript",
+"path": "res://TouchInput/InputEventSwipe.gd"
+}, {
+"base": "InputEventAction",
+"class": "InputEventTap",
+"language": "GDScript",
+"path": "res://TouchInput/InputEventTap.gd"
+}, {
 "base": "Node",
 "class": "JumpTrajectory",
 "language": "GDScript",
@@ -59,7 +74,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://VisualNovel/PageClasses/MetaPage.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "AnimatedMiner",
 "class": "Miner",
 "language": "GDScript",
 "path": "res://Classes/miner.gd"
@@ -105,6 +120,7 @@ _global_script_classes=[ {
 "path": "res://VisualNovel/VNlinkbarItem.gd"
 } ]
 _global_script_class_icons={
+"AnimatedMiner": "",
 "AttackingEnemy": "",
 "Command": "",
 "CommandActor": "",
@@ -113,6 +129,8 @@ _global_script_class_icons={
 "Enemy": "",
 "GameEndPage": "",
 "GameStartPage": "",
+"InputEventSwipe": "",
+"InputEventTap": "",
 "JumpTrajectory": "",
 "MetaPage": "",
 "Miner": "",
@@ -143,15 +161,20 @@ VNGlobal="*res://VisualNovel/VNGlobal.gd"
 window/size/width=720
 window/size/height=1440
 window/size/resizable=false
-window/size/fullscreen=true
 window/size/test_width=360
 window/size/test_height=720
+window/handheld/orientation="portrait"
+window/stretch/mode="viewport"
 window/pixel=true
 
 [global]
 
 "pixel snap"=true
 size=false
+etc=false
+"import etc"=true
+"Impport Etc"=true
+ETC=false
 
 [input]
 
@@ -189,6 +212,7 @@ attack={
 [rendering]
 
 quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
 
 [size]
 

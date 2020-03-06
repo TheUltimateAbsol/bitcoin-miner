@@ -531,6 +531,7 @@ z_index = 11
 [node name="Panel" type="Panel" parent="Startup"]
 margin_right = 160.0
 margin_bottom = 144.0
+mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
 [node name="Sprite2" type="Sprite" parent="Startup"]
@@ -546,7 +547,6 @@ pause_mode = 2
 stream = ExtResource( 4 )
 
 [node name="QuickTimeEvent" type="Node2D" parent="."]
-editor/display_folded = true
 visible = false
 script = ExtResource( 5 )
 
@@ -562,7 +562,6 @@ z_index = 10
 texture = ExtResource( 7 )
 
 [node name="Label" type="Sprite" parent="QuickTimeEvent"]
-editor/display_folded = true
 position = Vector2( 80, 76 )
 z_index = 10
 texture = ExtResource( 8 )
@@ -685,21 +684,25 @@ margin_left = 33.0
 margin_top = 41.0
 margin_right = 121.0
 margin_bottom = 106.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelComplete/HBoxContainer2"]
 margin_right = 48.0
 margin_bottom = 65.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelComplete/HBoxContainer2/VBoxContainer"]
 margin_right = 48.0
 margin_bottom = 26.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelComplete/HBoxContainer2/VBoxContainer/HBoxContainer"]
 margin_right = 28.0
 margin_bottom = 26.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Label2" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -721,6 +724,7 @@ text = "TIME  "
 margin_left = 28.0
 margin_right = 48.0
 margin_bottom = 26.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer2"]
@@ -742,6 +746,7 @@ text = "BONUS"
 margin_top = 26.0
 margin_right = 48.0
 margin_bottom = 52.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer/VBoxContainer"]
@@ -763,6 +768,7 @@ text = "INVENTORY"
 margin_left = 48.0
 margin_right = 88.0
 margin_bottom = 65.0
+mouse_filter = 2
 custom_constants/separation = 0
 
 [node name="Enemy" type="Label" parent="LevelComplete/HBoxContainer2/VBoxContainer3"]
@@ -840,10 +846,8 @@ anims/SceneSwitch = ExtResource( 19 )
 [node name="Miners" type="Node2D" parent="."]
 
 [node name="Miner" parent="." instance=ExtResource( 20 )]
-editor/display_folded = true
 
 [node name="Node2D" type="Node2D" parent="Miner"]
-editor/display_folded = true
 visible = false
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -16 )
@@ -858,7 +862,6 @@ text = "LEVEL UP!"
 align = 1
 
 [node name="Revive" type="Node2D" parent="Miner"]
-editor/display_folded = true
 visible = false
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -16 )
@@ -876,7 +879,6 @@ align = 1
 z_index = 10
 
 [node name="DecoratorAnimations" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="LevelUp" type="AnimationPlayer" parent="DecoratorAnimations"]
 anims/Level_Up = SubResource( 11 )
@@ -894,7 +896,6 @@ pause_mode = 2
 stream = ExtResource( 24 )
 
 [node name="Pause" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="pause_button" parent="Pause" instance=ExtResource( 25 )]
 visible = false
@@ -909,8 +910,10 @@ margin_top = 9.0
 margin_right = 13.0
 margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
+mouse_filter = 2
 
 [node name="pause_menu" parent="Pause" instance=ExtResource( 26 )]
+mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
