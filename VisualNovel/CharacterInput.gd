@@ -65,8 +65,12 @@ func get_data():
 	else:
 		character_expression = expression_buttons.get_pressed_button().text
 		
-	# GET THE NAME OF THE CHARACTER HERE	
-	character_name = VNGlobal.CharacterNames[character];
+	# GET THE NAME OF THE CHARACTER HERE
+	if name_menu.get_selected_id() == null:
+		character_name = VNGlobal.CharacterNames[character]
+	else:
+		var name = name_menu.get_selected_id()
+		character_name = VNGlobal.CharacterNames[name_menu.get_item_text(name)]
 		
 		
 	return {

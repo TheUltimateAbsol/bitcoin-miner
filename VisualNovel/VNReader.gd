@@ -39,6 +39,7 @@ var backgrounds = {
 	VNGlobal.Backgrounds.CLASSROOM : preload("Backgrounds/classroom_angle.png"),
 	VNGlobal.Backgrounds.NONE : preload("Backgrounds/none.png")
 }
+		
 	
 var CHAR_WAIT = 1.0/20
 var data_json
@@ -144,6 +145,67 @@ func display_page(page:Page):
 	elif page is EndPage:
 		print("ENDING");
 		$Conclusion/AnimationPlayer.play("Activate");
+	elif page is QuestionPage:
+		npc.hide()
+		textlabel.text = ""
+		textlabel.set_visible_characters(0);
+		
+		if page.character == VNGlobal.Characters.NONE: 
+			npc.texture = null;
+		else:
+			if expressions[page.character][page.expression] == null:
+				npc.texture = expressions[VNGlobal.SIMON]["DEFAULT"]
+			else:
+				npc.texture = expressions[page.character][page.expression]
+				var nameID = page.character
+				nameLabel.text = VNGlobal.CharacterNames[nameID]
+		
+		
+		#var file2Check = File.new()
+		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
+		npc.show()
+		match page.transition:
+			VNGlobal.Transitions.NONE:
+				transition.play("appear")
+				yield(transition, "animation_finished")
+			VNGlobal.Transitions.FLASH: #think ace attorny
+				# MAKE TRANSITION
+				transition.play("appear")
+				yield(transition, "animation_finished")
+			VNGlobal.Transitions.FADE:
+				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
+				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
+				transition.play("fade in")
+				yield(transition, "animation_finished")
+	#			yield(transition, "animation_finished")
+			VNGlobal.Transitions.SLIDE_RIGHT:
+				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
+				transition.play("slide_from_right")
+				yield(transition, "animation_finished")
+	#			pass
+			VNGlobal.Transitions.SLIDE_LEFT:
+				# MAKE TRANSITION
+				transition.play("slide_from_left")
+				yield(transition, "animation_finished")
+			
+		if page.background != VNGlobal.Backgrounds.SAME:
+			if backgrounds[page.background] == null:
+				$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
+			else:
+				$Control/Background.texture = backgrounds[page.background];
+	# else involves being able to reference previous pages
+	
+		for sentence in page.content:
+			prepend_sentence(sentence);
+		textlabel.set_visible_characters(0);
+		
+		for sentence in page.content:
+			var func_pointer = write_sentence(sentence)
+			if func_pointer:
+				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
+		
+		
+		
 		
 	state = WAITING
 

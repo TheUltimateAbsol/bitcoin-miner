@@ -1,7 +1,9 @@
 extends Page
 
-class_name ContentPage
+class_name QuestionPage
 
+
+var answers #array of strings + id leadsa	
 var content #array of Sentences
 var character
 var speed 
@@ -9,7 +11,7 @@ var transition
 var expression
 var music
 var background
-#var questions #array of strings + id leadsa	
+
 
 func _init(xid=0, 
 	xnext_id=0, 
@@ -19,8 +21,8 @@ func _init(xid=0,
 	xtransition=VNGlobal.Transitions.NONE, 
 	xbackground=VNGlobal.Backgrounds.NONE,
 	xspeed=1, 
-	xmusic=VNGlobal.Music.NONE):
-	#xquestions=[]).(xid, xnext_id):
+	xmusic=VNGlobal.Music.NONE, 
+	xanswers=[]).(xid, xnext_id):
 		
 #	THIS DESERIALIZES THE CLASS FROM A JSON TABLE
 #	Note: Normally to do this, we would just make a separate
@@ -40,7 +42,7 @@ func _init(xid=0,
 		xbackground = json_object["background"]
 		xspeed = json_object["speed"]
 #		xmusic = json_object["music"]
-#		xquestions = json_object["questions"]
+		xanswers = json_object["answers"]
 		
 	content = xcontent;
 	character = xcharacter;
@@ -49,8 +51,8 @@ func _init(xid=0,
 	expression = xexpression
 	music = xmusic
 	background = xbackground
-	#questions = xquestions
-	
+	answers = xanswers
+
 func serialize():
 	return VNGlobal.merge_dir(.serialize(), {
 		"content": content,
@@ -60,6 +62,7 @@ func serialize():
 		"expression": expression,
 		"music": music,
 		"background": background,
-		#"questions": questions,
-		"type" : "ContentPage"
+		"answers": answers,
+		"type" : "QuestionPage"
 	});
+	

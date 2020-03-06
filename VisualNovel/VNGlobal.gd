@@ -16,6 +16,7 @@ const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOM":"CLASSROOM"}
 const Background_transitiosn = {"NONE":"NONE", "FADE":"FADE", "BLACK":"BLACK"}
 # when the text appears on the screen (sentence per sentence basis)
 const SoundEffect = {"NONE":"NONE", "DING":"DING", "THWACK":"THWACK", "WHACK":"WHACK"}
+#const PageTypes = {"ContentPage":"ContentPage", "GameStartPage":"GameStartPage", "GameEndPage":"GameEndPage",  "EndPage":"EndPage"}
 
 const CLASS_DIRECTORY = "res://VisualNovel/PageClasses/"
 
