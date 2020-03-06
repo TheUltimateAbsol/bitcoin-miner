@@ -177,6 +177,7 @@ window/size/test_width=360
 window/size/test_height=720
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 window/pixel=true
 
 [global]

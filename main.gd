@@ -38,6 +38,7 @@ func _on_VNReader_end_game():
 
 
 func _on_Game_room_cleared():
+	print("room cleared");
 	$VNReader.next_page();
 
 

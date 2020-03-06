@@ -24,14 +24,25 @@ var state = UNSET;
 
 var expressions = {
 	VNGlobal.Characters.SIMON : {
-		VNGlobal.Expressions.DEFAULT :  preload("Characters/BoyeNeutral.png"),
-		VNGlobal.Expressions.HAPPY : preload("Characters/BoyeSmile.png"),
-		VNGlobal.Expressions.SAD : preload("Characters/BoyeFrown.png")
+		VNGlobal.Expressions.DEFAULT :  preload("Characters/BoyeNeutral.png")
 	},
 	VNGlobal.Characters.ANNA : {
-		VNGlobal.Expressions.DEFAULT :  preload("Characters/verylegit.png"),
-		VNGlobal.Expressions.HAPPY :  preload("Characters/verylegit.png"),
-		VNGlobal.Expressions.SAD :  preload("Characters/verylegit.png")
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/anna fina_.png")
+	},
+	VNGlobal.Characters.CLAIRE : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Claire final.png")
+	},
+	VNGlobal.Characters.JACK : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Jack Final.png")
+	},
+	VNGlobal.Characters.CHAD : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Chad final.png")
+	},
+	VNGlobal.Characters.JUNE : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/nannndkkad.png")
+	},
+	VNGlobal.Characters.SHAUN : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/shaun finalll.png")
 	}
 }
 
@@ -86,10 +97,10 @@ func display_page(page:Page):
 		if page.character == VNGlobal.Characters.NONE: 
 			npc.texture = null;
 		else:
-			if expressions[page.character][page.expression] == null:
-				npc.texture = expressions[VNGlobal.SIMON]["DEFAULT"]
+			if expressions[page.character][VNGlobal.Expressions.DEFAULT] == null:
+				npc.texture = "";
 			else:
-				npc.texture = expressions[page.character][page.expression]
+				npc.texture = expressions[page.character][VNGlobal.Expressions.DEFAULT]
 				var nameID = page.character
 				nameLabel.text = VNGlobal.CharacterNames[nameID]
 		

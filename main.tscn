@@ -27,7 +27,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -720, -1440 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "toBoth"
 tracks/0/type = "value"
 tracks/0/path = NodePath("VNReader:rect_size")
@@ -66,7 +66,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 length = 3.0
 loop = true
 tracks/0/type = "value"
@@ -97,6 +97,7 @@ tracks/1/keys = {
 [node name="main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_clip_content = true
 mouse_filter = 2
 script = ExtResource( 1 )
 
@@ -110,10 +111,8 @@ texture = ExtResource( 2 )
 [node name="Panel" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -72.0
-margin_top = -144.0
-margin_right = 648.0
-margin_bottom = 1296.0
+margin_right = 1440.0
+margin_bottom = 2880.0
 texture = ExtResource( 3 )
 stretch_mode = 2
 
@@ -124,7 +123,7 @@ autoplay = "New Anim"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 pause_mode = 2
-anims/toBoth = SubResource( 4 )
+anims/toBoth = SubResource( 2 )
 
 [node name="SwipeDetector" parent="." instance=ExtResource( 4 )]
 
@@ -132,10 +131,11 @@ anims/toBoth = SubResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Control" type="Control" parent="."]
+editor/display_folded = true
 margin_left = -202.124
-margin_top = 1495.33
+margin_top = 838.833
 margin_right = 862.876
-margin_bottom = 3329.34
+margin_bottom = 2672.84
 
 [node name="GamePanel" type="ViewportContainer" parent="Control"]
 margin_left = 240.161
@@ -173,12 +173,13 @@ texture = ExtResource( 7 )
 
 [node name="VNReader" parent="." instance=ExtResource( 8 )]
 pause_mode = 2
+margin_bottom = 900.0
 autoplay = true
 
 [node name="Control2" type="Control" parent="VNReader"]
 pause_mode = 2
 editor/display_folded = true
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.25 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -204,7 +205,7 @@ stretch_mode = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VNReader/Control2"]
 pause_mode = 2
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 5 )
+"anims/New Anim" = SubResource( 3 )
 [connection signal="room_cleared" from="Control/GamePanel/Viewport/Game" to="." method="_on_Game_room_cleared"]
 [connection signal="end_game" from="VNReader" to="." method="_on_VNReader_end_game"]
 [connection signal="start_game" from="VNReader" to="." method="_on_VNReader_start_game"]

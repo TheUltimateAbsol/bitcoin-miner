@@ -6,6 +6,8 @@ const NUM_DIGITS = 15;
 
 var skip = false;
 
+signal score_display_ended
+
 func activate(miner: Miner):
 	$Background.visible = true;
 	
@@ -48,16 +50,26 @@ func activate(miner: Miner):
 	
 	InputEventHandler.connect("released_attack", self, "skip", [], CONNECT_ONESHOT);
 	$AnimationPlayer.play("DisplayScores");
-	yield($AnimationPlayer, "animation_finished")
+	print("displaying scores");
+	$AnimationPlayer.connect("animation_finished", self, "onScoreEnd", [], CONNECT_ONESHOT);
+	yield(self, "score_display_ended")
+	$AnimationPlayer.disconnect("animation_finished", self, "onScoreEnd");
 	
+	print("waiting for attack")
 	yield(InputEventHandler, "released_attack")
+	print("emitting signal")
 	get_parent().emit_signal("room_cleared");
 	
+	
+func onScoreEnd():
+	emit_signal("score_display_ended");
+		
 func skip():
 	print("SKIP");
 	skip = true;
 	$AnimationPlayer.seek($AnimationPlayer.current_animation_length, true);
 	$AnimationPlayer.stop();
+	emit_signal("score_display_ended")
 	
 func roll(path : NodePath):
 	var label : Label = get_node(path);

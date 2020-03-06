@@ -547,6 +547,7 @@ pause_mode = 2
 stream = ExtResource( 4 )
 
 [node name="QuickTimeEvent" type="Node2D" parent="."]
+editor/display_folded = true
 visible = false
 script = ExtResource( 5 )
 
@@ -624,7 +625,6 @@ anims/GameOver = ExtResource( 12 )
 stream = ExtResource( 13 )
 
 [node name="LevelComplete" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 14 )
 
 [node name="Background" type="Sprite" parent="LevelComplete"]
