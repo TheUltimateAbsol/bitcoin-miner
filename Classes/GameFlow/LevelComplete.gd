@@ -34,7 +34,7 @@ func activate(miner: Miner):
 	
 	miner.flip_towards($Path2D.curve.get_point_position(0));
 	miner.freeze();
-	miner.walk();
+	miner.walk_anim();
 	
 	$Path2D.curve.add_point(miner.position, Vector2(0,0), Vector2(0,0), 0);
 	$Path2D/PathFollow2D/RemoteTransform2D.set_remote_node(miner.get_path());
@@ -42,7 +42,7 @@ func activate(miner: Miner):
 	$AnimationPlayer.play("Activate");
 	yield($AnimationPlayer, "animation_finished");
 	miner.flip(true);
-	miner.level_complete();
+	miner.level_complete_anim();
 	$AnimationPlayer.play("FlashText");
 	yield($AnimationPlayer, "animation_finished")
 	

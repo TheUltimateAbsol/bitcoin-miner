@@ -107,3 +107,8 @@ position = Vector2( 81, 116 )
 position = Vector2( 144, 120 )
 
 [node name="Reminder" parent="." instance=ExtResource( 4 )]
+
+[node name="Label" parent="Reminder" index="1"]
+text = "Swipe to Move, Tap to Mine"
+
+[editable path="Reminder"]

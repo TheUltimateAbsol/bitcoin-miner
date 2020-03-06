@@ -195,6 +195,7 @@ func _on_pause_menu_unpause():
 	
 	
 func new_command(type, path=[]):
+	print("command ", type);
 	var new =  Command.new(type, path)
 	add_child(new);
 	main_command.link(new);
@@ -257,7 +258,8 @@ func get_command():
 			new_command(Global.CommandTypes.DUCK)
 		elif jump_input:
 			main.do_jump();
-			new_command(Global.CommandTypes.DUCK)
+			main.connect("jump_ended", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			new_command(Global.CommandTypes.JUMP)
 #		else:
 #			new_command(Global.CommandTypes.IDLE);
 

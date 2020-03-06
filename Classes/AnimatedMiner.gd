@@ -11,6 +11,7 @@ export (Texture) var miningSprite3 = preload("res://PlayerSprites/Miner_Axe_2.pn
 export (Texture) var duckingSprite = preload("res://PlayerSprites/Miner_Duck_1.png")
 export (Texture) var dyingSprite = preload("res://PlayerSprites/Miner_Hurt.png");
 export (Texture) var levelCompleteSprite = preload("res://PlayerSprites/Ending_1.png");
+export (Texture) var airAttackSprite = preload("res://PlayerSprites/air_attack_3.0.png");
 
 export (Vector2) var idleOffset = Vector2(0,0)
 export (Vector2) var jumpingOffset = Vector2(0,0)
@@ -19,10 +20,10 @@ export (Vector2) var miningOffset = Vector2(2, -1)
 export (Vector2) var duckingOffset = Vector2(1,0)
 export (Vector2) var dyingOffset = Vector2(0,0)
 export (Vector2) var levelCompleteOffset = Vector2(-6,-11)
-
+export (Vector2) var airAttackOffset = Vector2(0,0)
 
 #Dictates player animation states
-enum {ANIM_WALKING, ANIM_IDLE, ANIM_MINING, ANIM_JUMPING, ANIM_FALLING, ANIM_DUCKING, ANIM_DYING}
+enum {ANIM_WALKING, ANIM_IDLE, ANIM_MINING, ANIM_JUMPING, ANIM_FALLING, ANIM_DUCKING, ANIM_DYING, ANIM_AIR_ATTACK}
 var anim_state = ANIM_IDLE
 
 onready var sprite = $Sprite
@@ -138,6 +139,17 @@ func jump_anim():
 		sprite.texture = jumpingSprite
 		anim.play("Jump");
 		
+#Player action that starts a air attack
+#If player is already in this state, nothing happens
+func air_attack_anim():
+	if anim_state == ANIM_DYING: return
+	if anim_state != ANIM_AIR_ATTACK:
+		anim_state = ANIM_AIR_ATTACK
+		_anim_reset()
+		set_offset(airAttackOffset);
+		sprite.texture = airAttackSprite
+		anim.play("Air Attack");
+		
 #Player action that starts a falling motion
 #If player is already in this state, nothing happens
 func fall_anim():
@@ -201,6 +213,7 @@ func _anim_reset():
 	$CollisionShape2D.shape.extents = Vector2(5, 15);
 	$CollisionShape2D.position = Vector2(0, 1);
 	$MiningHitbox/CollisionShape2D.set_deferred("disabled", true)
+	$MiningHitbox/AirAttack.set_deferred("disabled", true)
 	#print("reset");
 
 #PATCH FOR TAP MINING:

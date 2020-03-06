@@ -38,7 +38,10 @@ func do_command(type, must_wait, path):
 				bot.attack(command, "force_end_signal")
 				yield(command, "force_end_signal");
 			Global.CommandTypes.JUMP:
-				bot.jump();
+#				Start a timer
+#				Connect the timer to the command for wait time updates
+#				Wait for the timer to timeout, or for the jump to end
+				bot.do_jump();
 				yield(bot, "jump_ended");
 			
 	emit_signal("finished_command");

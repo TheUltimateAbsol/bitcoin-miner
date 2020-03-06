@@ -14,6 +14,7 @@ var num_completed = 0;
 #signal event_completed
 signal command_completed
 signal force_end_signal
+signal next_set
 
 func _init(xtype, xpath=[]):
 	type = xtype
@@ -24,13 +25,6 @@ func perform_command(bot):
 	num_waiting+=1
 	var temp = num_waiting;
 	#END LOCK
-	
-	
-#	var asdf = Timer.new()
-#	asdf.wait_time = 0.25;
-#	add_child(asdf) #to process
-#	asdf.start() #to start
-#	yield(asdf, "timeout");
 		
 		
 	#Start timer
@@ -62,8 +56,11 @@ func perform_command(bot):
 		emit_signal("command_completed");
 	
 	if actor.dead: return null;
-
-	return next.perform_command(bot);
+	
+	if next == null:
+		return delay_next(bot);
+	else:
+		return next.perform_command(bot);
 
 
 #precondition: is linked to another node
@@ -77,5 +74,10 @@ func force_end():
 	
 func link(command : Command):
 	next = command;
+	emit_signal("next_set");
 	
+func delay_next(bot):
+	print("NOTE: BOT GOT AHEAD OF PLAYER");
+	yield(self, "next_set");
+	return next.perform_command(bot);
 	
