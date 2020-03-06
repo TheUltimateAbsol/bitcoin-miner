@@ -1,15 +1,19 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/classroom_angle.png" type="Texture" id=2]
 [ext_resource path="res://VisualNovel/Characters/BoyeSmile.png" type="Texture" id=3]
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=4]
 [ext_resource path="res://VisualNovel/slide_from_left.tres" type="Animation" id=5]
-[ext_resource path="res://dialogebox2.png" type="Texture" id=6]
-[ext_resource path="res://VisualNovel/Fonts/gloria_hallelujah/gloria_hallelujah.tres" type="DynamicFont" id=7]
-[ext_resource path="res://new_kiddofont.tres" type="DynamicFont" id=8]
-[ext_resource path="res://VisualNovel/Fonts/the_brandy/The Brandy.ttf" type="DynamicFontData" id=9]
-[ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=10]
+[ext_resource path="res://choiceA.png" type="Texture" id=6]
+[ext_resource path="res://new_kiddofont.tres" type="DynamicFont" id=7]
+[ext_resource path="res://choiceB.png" type="Texture" id=8]
+[ext_resource path="res://choiceC.png" type="Texture" id=9]
+[ext_resource path="res://choiceD.png" type="Texture" id=10]
+[ext_resource path="res://dialogebox2.png" type="Texture" id=11]
+[ext_resource path="res://VisualNovel/Fonts/gloria_hallelujah/gloria_hallelujah.tres" type="DynamicFont" id=12]
+[ext_resource path="res://VisualNovel/Fonts/the_brandy/The Brandy.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "appear"
@@ -55,6 +59,51 @@ tracks/0/keys = {
 "values": [ Vector2( 600, 0 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="Animation" id=9]
+resource_name = "arrow"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1028.37, 133.744 ), Vector2( 433.885, 131.159 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "arrow"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -298.212, 404.149 ), Vector2( 286.199, 351.552 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "arrow"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.99041, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -298.212, 404.149 ), Vector2( 1052.71, 480.064 ), Vector2( 286.199, 351.552 ) ]
+}
+
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0, 0, 0.647059 )
 
@@ -62,7 +111,7 @@ bg_color = Color( 0, 0, 0, 0.647059 )
 size = 109
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 9 )
+font_data = ExtResource( 13 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "Activate"
@@ -156,6 +205,7 @@ expand = true
 stretch_mode = 7
 
 [node name="NPC" type="TextureRect" parent="Control"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
@@ -176,6 +226,80 @@ position = Vector2( 359.483, 359.76 )
 scale = Vector2( 1.02262, 1.02666 )
 texture = ExtResource( 3 )
 
+[node name="Control2" type="Control" parent="Control"]
+anchor_right = 1.0
+margin_bottom = 964.0
+rect_clip_content = true
+
+[node name="choiceA" type="Sprite" parent="Control/Control2"]
+position = Vector2( 433.885, 131.159 )
+scale = Vector2( 1.04232, 1.14691 )
+texture = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="Control/Control2/choiceA"]
+margin_left = -174.289
+margin_top = -39.9307
+margin_right = 263.711
+margin_bottom = 16.0693
+rect_rotation = 3.5
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "bhj,vhy,jjvghhhhhh"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Control2/choiceA"]
+anims/arrow = SubResource( 9 )
+
+[node name="choiceB" type="Sprite" parent="Control/Control2"]
+position = Vector2( 286.199, 351.552 )
+scale = Vector2( 1.042, 1.147 )
+texture = ExtResource( 8 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Control/Control2/choiceB"]
+anims/arrow = SubResource( 10 )
+
+[node name="Label" type="Label" parent="Control/Control2/choiceB"]
+margin_left = -248.4
+margin_top = -10.1818
+margin_right = 165.6
+margin_bottom = 45.8182
+rect_rotation = -3.5
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "jikb,guok,vygil,hjmv "
+
+[node name="choiceC" type="Sprite" parent="Control/Control2"]
+position = Vector2( 467.366, 581.42 )
+scale = Vector2( 1.042, 1.147 )
+texture = ExtResource( 9 )
+
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="Control/Control2/choiceC"]
+anims/arrow = SubResource( 11 )
+
+[node name="Label" type="Label" parent="Control/Control2/choiceC"]
+margin_left = -172.076
+margin_top = -15.5258
+margin_right = 260.924
+margin_bottom = 40.4742
+rect_rotation = -7.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "hjfctdcloyhbv"
+
+[node name="choiceD" type="Sprite" parent="Control/Control2"]
+position = Vector2( 278.042, 818.816 )
+scale = Vector2( 1.042, 1.147 )
+texture = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="Control/Control2/choiceD"]
+margin_left = -245.0
+margin_top = -71.0
+margin_right = 180.0
+margin_bottom = -15.0
+rect_rotation = 8.5
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "gggggggggggghhhhhhh"
+
 [node name="Control" type="Control" parent="Control"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -190,7 +314,7 @@ rect_clip_content = true
 [node name="Sprite" type="Sprite" parent="Control/Control"]
 position = Vector2( 374.392, 262.305 )
 scale = Vector2( 1.9168, 1.90427 )
-texture = ExtResource( 6 )
+texture = ExtResource( 11 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Control"]
 anchor_left = 0.5
@@ -221,7 +345,7 @@ margin_right = 24.4839
 margin_bottom = 63.6613
 rect_min_size = Vector2( 478, 257 )
 rect_rotation = -2.0
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 12 )
 text = "aaaaaaaaaaaaaaaaaaaaaaaaa "
 autowrap = true
 percent_visible = 0.0
@@ -232,7 +356,7 @@ margin_top = -130.189
 margin_right = 92.0172
 margin_bottom = -70.1891
 rect_rotation = 35.0
-custom_fonts/font = ExtResource( 8 )
+custom_fonts/font = ExtResource( 7 )
 text = "Simon"
 align = 1
 valign = 1
@@ -282,7 +406,7 @@ emitting = false
 amount = 50
 lifetime = 1.56
 local_coords = false
-texture = ExtResource( 10 )
+texture = ExtResource( 14 )
 gravity = Vector2( 0, 200 )
 angular_velocity = 313.55
 angular_velocity_random = 0.61
