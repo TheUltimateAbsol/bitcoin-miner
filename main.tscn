@@ -1,129 +1,97 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
-[ext_resource path="res://UI/Backgrounds/footer_lodyas.png" type="Texture" id=2]
-[ext_resource path="res://UI/9slice.png" type="Texture" id=3]
-[ext_resource path="res://Navigation/Scenes/pathfinding.tscn" type="PackedScene" id=4]
-[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=5]
-[ext_resource path="res://TouchInput/SwipeDetector.tscn" type="PackedScene" id=6]
-[ext_resource path="res://DontEatMyInput.gd" type="Script" id=7]
+[ext_resource path="res://VisualNovel/border.png" type="Texture" id=2]
+[ext_resource path="res://VisualNovel/Backgrounds/y-so-serious.png" type="Texture" id=3]
+[ext_resource path="res://TouchInput/SwipeDetector.tscn" type="PackedScene" id=4]
+[ext_resource path="res://DontEatMyInput.gd" type="Script" id=5]
+[ext_resource path="res://Navigation/Scenes/pathfinding.tscn" type="PackedScene" id=6]
+[ext_resource path="res://VisualNovel/gameboy.png" type="Texture" id=7]
+[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=8]
 
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 1200, 1200 )
-
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 57, 54 )
-margin_left = 13.1045
-margin_right = 13.4562
-margin_top = 13.2368
-margin_bottom = 13.0658
-draw_center = false
-
-[sub_resource type="Animation" id=3]
-resource_name = "Both To Game"
+[sub_resource type="Animation" id=1]
+resource_name = "New Anim"
+length = 20.0
+loop = true
+step = 1.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("VN/VSplitContainer/VSplitContainer:split_offset")
+tracks/0/path = NodePath(".:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 20 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 720, 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Game:split_offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 2.79397e-007, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 720, 0 ]
+"values": [ Vector2( 0, 0 ), Vector2( -720, -1440 ) ]
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "Both to VN"
+resource_name = "toBoth"
 tracks/0/type = "value"
-tracks/0/path = NodePath("VN/VSplitContainer:split_offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.000501681, 0.999385 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0, 360 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("VN/VSplitContainer/VSplitContainer/VSplitContainer:split_offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0, 360 ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "VN to Game"
-tracks/0/type = "value"
-tracks/0/path = NodePath("VN/VSplitContainer:split_offset")
+tracks/0/path = NodePath("VNReader:rect_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ 360, 0 ]
+"values": [ Vector2( 720, 1440 ), Vector2( 720, 720 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("VN/VSplitContainer/VSplitContainer/VSplitContainer:split_offset")
+tracks/1/path = NodePath("Control:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ 360, 0 ]
+"values": [ Vector2( -202.124, 1495.33 ), Vector2( -202.124, 620 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("VN/VSplitContainer/VSplitContainer:split_offset")
+tracks/2/path = NodePath("VNReader/Control2:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( 2, 1 ),
 "update": 0,
-"values": [ 720, 0 ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Game:split_offset")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.999774 ),
+
+[sub_resource type="Animation" id=5]
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("border:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 720, 0 ]
+"values": [ Vector2( 0, 0 ), Vector2( -88, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("border2:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -176, 10 ), Vector2( 0, 10 ) ]
 }
 
 [node name="main" type="Control"]
@@ -132,41 +100,48 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
 
-[node name="Game" type="VSplitContainer" parent="."]
+[node name="border" type="TextureRect" parent="."]
+margin_left = -267.597
+margin_top = 871.541
+margin_right = -179.597
+margin_bottom = 947.541
+texture = ExtResource( 2 )
+
+[node name="Panel" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
-split_offset = 720
-dragger_visibility = 2
+margin_left = -72.0
+margin_top = -144.0
+margin_right = 648.0
+margin_bottom = 1296.0
+texture = ExtResource( 3 )
+stretch_mode = 2
 
-[node name="Panel3" type="Panel" parent="Game"]
-margin_right = 720.0
-margin_bottom = 720.0
-mouse_filter = 2
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel"]
+pause_mode = 2
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 1 )
 
-[node name="PanelContainer" type="PanelContainer" parent="Game"]
-margin_top = 720.0
-margin_right = 720.0
-margin_bottom = 1440.0
-mouse_filter = 2
-custom_styles/panel = SubResource( 1 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
+anims/toBoth = SubResource( 4 )
 
-[node name="Panel" type="PanelContainer" parent="Game/PanelContainer"]
-margin_left = 26.0
-margin_top = 58.0
-margin_right = 692.561
-margin_bottom = 660.303
-rect_min_size = Vector2( 160, 144 )
-mouse_filter = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-custom_styles/panel = SubResource( 2 )
+[node name="SwipeDetector" parent="." instance=ExtResource( 4 )]
 
-[node name="Node2D" type="ViewportContainer" parent="Game/PanelContainer/Panel"]
-margin_left = 13.1045
-margin_top = 13.2368
-margin_right = 653.104
-margin_bottom = 589.237
+[node name="Node" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Control" type="Control" parent="."]
+margin_left = -202.124
+margin_top = 1495.33
+margin_right = 862.876
+margin_bottom = 3329.34
+
+[node name="GamePanel" type="ViewportContainer" parent="Control"]
+margin_left = 240.161
+margin_top = 198.936
+margin_right = 880.161
+margin_bottom = 774.939
 rect_min_size = Vector2( 640, 576 )
 mouse_filter = 2
 size_flags_horizontal = 4
@@ -174,71 +149,62 @@ size_flags_vertical = 4
 stretch = true
 stretch_shrink = 4
 
-[node name="Viewport" type="Viewport" parent="Game/PanelContainer/Panel/Node2D"]
+[node name="Viewport" type="Viewport" parent="Control/GamePanel"]
 size = Vector2( 160, 144 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 
-[node name="Game" parent="Game/PanelContainer/Panel/Node2D/Viewport" instance=ExtResource( 4 )]
+[node name="Game" parent="Control/GamePanel/Viewport" instance=ExtResource( 6 )]
 editor/display_folded = true
 
-[node name="VN" type="VSplitContainer" parent="."]
+[node name="gameboy" type="Sprite" parent="Control/GamePanel/Viewport/Game"]
+position = Vector2( 456.508, 918.79 )
+texture = ExtResource( 7 )
+
+[node name="gameboy2" type="Sprite" parent="Control/GamePanel/Viewport/Game"]
+position = Vector2( 187.606, 1490.59 )
+texture = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="Control"]
+position = Vector2( 559.073, 908.72 )
+scale = Vector2( 3.06456, 3.01894 )
+texture = ExtResource( 7 )
+
+[node name="VNReader" parent="." instance=ExtResource( 8 )]
 pause_mode = 2
-editor/display_folded = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-dragger_visibility = 2
-
-[node name="VSplitContainer" type="VSplitContainer" parent="VN"]
-margin_right = 720.0
-margin_bottom = 1440.0
-mouse_filter = 2
-dragger_visibility = 2
-
-[node name="Panel2" type="Panel" parent="VN/VSplitContainer"]
-margin_right = 720.0
-mouse_filter = 2
-
-[node name="VSplitContainer" type="VSplitContainer" parent="VN/VSplitContainer"]
-margin_right = 720.0
-margin_bottom = 1440.0
-mouse_filter = 2
-split_offset = 720
-dragger_visibility = 2
-
-[node name="VNReader" parent="VN/VSplitContainer/VSplitContainer" instance=ExtResource( 5 )]
-margin_bottom = 1440.0
 autoplay = true
 
-[node name="VSplitContainer" type="VSplitContainer" parent="VN/VSplitContainer/VSplitContainer"]
-margin_top = 1440.0
-margin_right = 720.0
-margin_bottom = 1440.0
-mouse_filter = 2
-dragger_visibility = 2
-
-[node name="Panel" type="Panel" parent="VN/VSplitContainer/VSplitContainer/VSplitContainer"]
-margin_right = 720.0
-mouse_filter = 2
-
-[node name="Control" type="Control" parent="VN/VSplitContainer/VSplitContainer/VSplitContainer"]
-margin_right = 720.0
-margin_bottom = 720.0
-mouse_filter = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Control2" type="Control" parent="VNReader"]
 pause_mode = 2
-"anims/Both To Game" = SubResource( 3 )
-"anims/Both to VN" = SubResource( 4 )
-"anims/VN to Game" = SubResource( 5 )
+editor/display_folded = true
+modulate = Color( 1, 1, 1, 0 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -19.385
+margin_bottom = 77.615
 
-[node name="SwipeDetector" parent="." instance=ExtResource( 6 )]
+[node name="border" type="TextureRect" parent="VNReader/Control2"]
+modulate = Color( 0.792157, 0.792157, 0.792157, 1 )
+margin_left = -29.3333
+margin_right = 1482.66
+margin_bottom = 76.0
+texture = ExtResource( 2 )
+stretch_mode = 2
 
-[node name="Node" type="Node" parent="."]
-script = ExtResource( 7 )
-[connection signal="resized" from="Game" to="Game" method="update_size"]
-[connection signal="room_cleared" from="Game/PanelContainer/Panel/Node2D/Viewport/Game" to="." method="_on_Game_room_cleared"]
-[connection signal="end_game" from="VN/VSplitContainer/VSplitContainer/VNReader" to="." method="_on_VNReader_end_game"]
-[connection signal="start_game" from="VN/VSplitContainer/VSplitContainer/VNReader" to="." method="_on_VNReader_start_game"]
+[node name="border2" type="TextureRect" parent="VNReader/Control2"]
+margin_left = -117.333
+margin_top = 10.0
+margin_right = 1394.67
+margin_bottom = 86.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VNReader/Control2"]
+pause_mode = 2
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 5 )
+[connection signal="room_cleared" from="Control/GamePanel/Viewport/Game" to="." method="_on_Game_room_cleared"]
+[connection signal="end_game" from="VNReader" to="." method="_on_VNReader_end_game"]
+[connection signal="start_game" from="VNReader" to="." method="_on_VNReader_start_game"]

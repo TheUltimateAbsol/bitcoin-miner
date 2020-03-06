@@ -135,6 +135,8 @@ func _physics_process(delta):
 		DUCKING:
 			velocity.x = 0;
 			duck_anim();
+		DYING:
+			velocity.x = 0;
 			
 #	Purely visual
 	if not on_floor:

@@ -2,8 +2,8 @@ extends Control
 
 export (bool) var autoplay = false;
 
-onready var textlabel = get_node("Control/Control/MarginContainer/Control/TextLabel")
-onready var nameLabel = get_node("Control/Control/MarginContainer/Control/NameLabel")
+onready var textlabel = get_node("Control/Control/Control/TextLabel")
+onready var nameLabel = get_node("Control/Control/Control/NameLabel")
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
@@ -266,10 +266,10 @@ func list_files_in_directory(path):
 
 func load_data(file_path):	
 	var file = File.new()
-	for filename in list_files_in_directory("res://VisualNovel/"):
-		print(filename);
-	print("File exists: ");
-	print(file.file_exists("res://VisualNovel/data.json"));
+#	for filename in list_files_in_directory("res://VisualNovel/"):
+#		print(filename);
+#	print("File exists: ");
+#	print(file.file_exists("res://VisualNovel/data.json"));
 	var err = file.open("res://VisualNovel/data.json", 1)
 	if err:
 		push_error("Error " + str(err))
