@@ -92,6 +92,7 @@ func display_page(page:Page):
 	if page is ContentPage:
 		npc.hide()
 		textlabel.text = ""
+		nameLabel.text = ""
 		textlabel.set_visible_characters(0);
 		
 		if page.character == VNGlobal.Characters.NONE: 
@@ -174,36 +175,32 @@ func display_page(page:Page):
 		
 		#var file2Check = File.new()
 		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
-		npc.show()
-		match page.transition:
-			VNGlobal.Transitions.NONE:
-				transition.play("appear")
-				yield(transition, "animation_finished")
-			VNGlobal.Transitions.FLASH: #think ace attorny
-				# MAKE TRANSITION
-				transition.play("appear")
-				yield(transition, "animation_finished")
-			VNGlobal.Transitions.FADE:
-				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
-				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
-				transition.play("fade in")
-				yield(transition, "animation_finished")
-	#			yield(transition, "animation_finished")
-			VNGlobal.Transitions.SLIDE_RIGHT:
-				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
-				transition.play("slide_from_right")
-				yield(transition, "animation_finished")
-	#			pass
-			VNGlobal.Transitions.SLIDE_LEFT:
-				# MAKE TRANSITION
-				transition.play("slide_from_left")
-				yield(transition, "animation_finished")
-			
 		if page.background != VNGlobal.Backgrounds.SAME:
 			if backgrounds[page.background] == null:
 				$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
 			else:
 				$Control/Background.texture = backgrounds[page.background];
+		
+		npc.show()
+		match page.transition:
+			VNGlobal.Transitions.NONE:
+				transition.play("appear")
+			VNGlobal.Transitions.FLASH: #think ace attorny
+				# MAKE TRANSITION
+				transition.play("appear")
+			VNGlobal.Transitions.FADE:
+				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
+				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
+				transition.play("fade in")
+	#			yield(transition, "animation_finished")
+			VNGlobal.Transitions.SLIDE_RIGHT:
+				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
+				transition.play("slide_from_right")
+	#			pass
+			VNGlobal.Transitions.SLIDE_LEFT:
+				# MAKE TRANSITION
+				transition.play("slide_from_left")
+			
 	# else involves being able to reference previous pages
 	
 		for sentence in page.content:

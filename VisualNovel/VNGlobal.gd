@@ -8,7 +8,7 @@ extends Node
 #enum SoundEffect{NONE, DING, THWACK, WHACK} # when the text appears on the screen (sentence per sentence basis)
 
 const Characters = {"NONE":"NONE", "SIMON":"SIMON", "ANNA":"ANNA", "CLAIRE":"CLAIRE", "JACK":"JACK", "CHAD":"CHAD", "JUNE":"JUNE", "SHAUN":"SHAUN"} 
-const CharacterNames = {"NONE":"NONE", "SIMON":"Simon", "ANNA":"Anna", "TEACHER":"Teacher", "BELL":"Bell", "CLAIRE":"Claire", "JACK":"Jack", "CHAD":"Chad", "JUNE":"June", "SHAUN":"Shaun"} 
+const CharacterNames = {"NONE":"NONE", "SIMON":"Simon", "ANNA":"Anna", "TEACHER":"Teacher", "BELL":"Bell", "CLAIRE":"Claire", "JACK":"Jack", "CHAD":"Chad", "JUNE":"June", "SHAUN":"Shaun", "???":"???"} 
 const Transitions = {"NONE":"NONE", "FLASH":"FLASH", "FADE":"FADE", "SLIDE_RIGHT":"SLIDE_RIGHT", "SLIDE_LEFT":"SLIDE_LEFT"} #character
 const Expressions = {"DEFAULT":"DEFAULT", "HAPPY":"HAPPY", "SAD":"SAD"}
 const Music = {"SAME":"SAME", "NONE":"NONE", "SIMPLE":"SIMPLE", "SAD":"SAD"}

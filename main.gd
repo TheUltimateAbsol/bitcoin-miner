@@ -6,8 +6,7 @@ enum {VN, GAME, BOTH}
 var state = GAME;
 
 func _ready():
-	pass
-#	to_VN(true);
+	to_VN(true);
 #	update_size();
 
 func update_size():
@@ -20,6 +19,9 @@ func update_size():
 	
 func to_VN(instant=false):
 	$AnimationPlayer.play_backwards("toBoth");
+	if instant:
+		$AnimationPlayer.seek(0, true);
+		$AnimationPlayer.stop();
 	
 func to_Both(instant=false):
 	$AnimationPlayer.play("toBoth");

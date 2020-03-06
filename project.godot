@@ -173,10 +173,10 @@ VNGlobal="*res://VisualNovel/VNGlobal.gd"
 window/size/width=720
 window/size/height=1440
 window/size/resizable=false
-window/size/test_width=360
+window/size/fullscreen=true
+window/size/test_width=450
 window/size/test_height=720
 window/handheld/orientation="portrait"
-window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 window/pixel=true
 
