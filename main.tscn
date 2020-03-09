@@ -185,7 +185,6 @@ editor/display_folded = true
 
 [node name="VN" type="VSplitContainer" parent="."]
 pause_mode = 2
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -225,7 +224,6 @@ mouse_filter = 2
 
 [node name="Control" type="Control" parent="VN/VSplitContainer/VSplitContainer/VSplitContainer"]
 margin_right = 720.0
-margin_bottom = 720.0
 mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

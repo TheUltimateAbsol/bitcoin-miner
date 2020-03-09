@@ -8,6 +8,23 @@ onready var nameLabel = get_node("Control/Control/MarginContainer/Control/NameLa
 onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
 
+#answer arrow stuff
+onready var greenArrowAnimate = get_node("Control/Control2/choiceA/AnimationPlayer")
+onready var redArrowAnimate = get_node("Control/Control2/choiceB/AnimationPlayer2");
+onready var yellowArrowAnimate = get_node("Control/Control2/choiceC/AnimationPlayer3")
+onready var blueArrowAnimate = get_node("Control/Control2/choiceD/AnimationPlayer4")
+
+onready var greenArrowTxt = get_node("Control/Control2/choiceA/Label")
+onready var redArrowTxt = get_node("Control/Control2/choiceB/Label")
+onready var yellowArrowTxt = get_node("Control/Control2/choiceC/Label")
+onready var blueArrowTxt = get_node("Control/Control2/choiceD/Label")
+
+onready var greenArrow = get_node("Control/Control2/choiceA/Button")
+onready var redArrow = get_node("Control/Control2/choiceB/Button2")
+onready var yellowArrow = get_node("Control/Control2/choiceC/Button3")
+onready var blueArrow = get_node("Control/Control2/choiceD/Button4")
+
+#timer stuff
 onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
 onready var delay_timer : TimerRequest = TimerRequest.new($DelayTimer);
 
@@ -21,6 +38,12 @@ var save_data : Array;
 var tap_skip = true;
 var skipped = false;
 var state = UNSET;
+
+var greenPicked = false
+var redPicked = false
+var yellowPicked = false
+var bluePicked = false
+
 
 var expressions = {
 	VNGlobal.Characters.SIMON : {
@@ -48,6 +71,10 @@ func _ready():
 	textlabel.text = ""
 	nameLabel.text = ""
 	npc.texture = null
+	redArrowTxt.text = ""
+	greenArrowTxt.text = ""
+	blueArrowTxt.text = ""
+	yellowArrowTxt.text = ""
 	
 	VNGlobal.connect("user_input", self, "attempt_skip");
 	load_data("res://VisualNovel/data.json");
@@ -56,7 +83,7 @@ func _ready():
 
 func play():
 	for page in save_data:
-		if page is ContentPage:
+		if page is ContentPage or page is QuestionPage:
 			skipped = false;
 			var func_pointer = display_page(page)
 			
@@ -160,7 +187,6 @@ func display_page(page:Page):
 				var nameID = page.character
 				nameLabel.text = VNGlobal.CharacterNames[nameID]
 		
-		
 		#var file2Check = File.new()
 		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
 		npc.show()
@@ -194,6 +220,16 @@ func display_page(page:Page):
 			else:
 				$Control/Background.texture = backgrounds[page.background];
 	# else involves being able to reference previous pages
+		
+#		redArrowTxt.text = ""
+#		greenArrowTxt.text = ""
+#		blueArrowTxt.text = ""
+#		yellowArrowTxt.text = ""
+		
+		var useRed = false;
+		var useGreen = false;
+		var useYellow = false;
+		var useBlue = false;
 	
 		for sentence in page.content:
 			prepend_sentence(sentence);
@@ -204,9 +240,56 @@ func display_page(page:Page):
 			if func_pointer:
 				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
 		
+		var answerText
 		
-		
-		
+		for answer in page.answers:
+			print("we made it to answers")
+			answerText = answer.content
+			print(answerText)
+			if(redArrowTxt.text == ""):
+				redArrowTxt.text = answerText;
+#				print(redArrowTxt.text)
+				
+			elif (greenArrowTxt.text == ""):
+				greenArrowTxt.text = answerText;
+#				print(greenArrowTxt.text)
+				
+			elif (yellowArrowTxt.text == ""):
+				yellowArrowTxt.text = answerText;
+#				print(yellowArrowTxt.text)
+				
+			elif (blueArrowTxt.text == ""):
+				blueArrowTxt.text = answerText;
+#				print(blueArrowTxt.text)
+				
+			else:
+				print("no match")
+				
+		#print(redArrowTxt.text)
+				
+		if(redArrowTxt.text != ""):
+			useRed = true
+			
+		if(greenArrowTxt.text != ""):
+			useBlue = true
+			
+		if(yellowArrowTxt.text != ""):
+			useYellow = true
+			
+		if(yellowArrowTxt.text != ""):
+			useGreen = true
+			
+			
+		if(useGreen):
+			greenArrowAnimate.play("arrow")
+		if(useRed):
+			redArrowAnimate.play("arrow")
+		if(useYellow):
+			yellowArrowAnimate.play("arrow")
+		if(useBlue):
+			blueArrowAnimate.play("arrow")	
+	
+	
 	state = WAITING
 
 
@@ -306,6 +389,7 @@ func next_page():
 	emit_signal("goto_next_page");
 
 func attempt_skip():
+	
 	if tap_skip == false: return;
 	
 	match state:
@@ -315,3 +399,20 @@ func attempt_skip():
 			next_page();
 		UNSET:
 			pass;
+			
+
+
+func _on_Button4_pressed():
+	bluePicked = true
+
+
+func _on_Button3_pressed():
+	yellowPicked = true
+
+
+func _on_Button2_pressed():
+	redPicked = true
+
+
+func _on_Button_pressed():
+	greenPicked = true

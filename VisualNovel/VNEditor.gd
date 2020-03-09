@@ -92,7 +92,7 @@ func read_input(input, page_data):
 		Inputs.PREVIEW:
 			pass;
 		Inputs.QUESTION:
-			VNGlobal.merge_dir(page_data, sentenceInput.get_data());
+			VNGlobal.merge_dir(page_data, questionInput.get_data());
 		_:
 			push_error("INVALID INPUT");
 			

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/classroom_angle.png" type="Texture" id=2]
@@ -59,7 +59,7 @@ tracks/0/keys = {
 "values": [ Vector2( 600, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=4]
 resource_name = "arrow"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -73,9 +73,90 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1028.37, 133.744 ), Vector2( 433.885, 131.159 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=10]
-resource_name = "arrow"
+[sub_resource type="Animation" id=5]
+resource_name = "notSelected"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.541176, 0.368627, 0.368627, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 433.885, 131.159 ), Vector2( -318.056, 4.53674 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "notSelected_B"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.00885532, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 433.885, 131.159 ), Vector2( -310.264, 105.835 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "selected"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 433.885, 131.159 ), Vector2( 433.885, 131.159 ), Vector2( -318.056, 82.4581 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -88,8 +169,156 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( -298.212, 404.149 ), Vector2( 286.199, 351.552 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00845323 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=19]
+resource_name = "notSelected"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 286.199, 351.552 ), Vector2( 1032.3, 332.072 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "selected"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 286.199, 351.552 ), Vector2( 286.199, 351.552 ), Vector2( 1032.3, 332.072 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=7]
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.999794 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1032.3, 546.355 ), Vector2( 467.366, 581.42 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "notSelected"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 467.366, 581.42 ), Vector2( -321.588, 628.173 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "selected"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 467.366, 581.42 ), Vector2( 467.366, 581.42 ), Vector2( -321.588, 628.173 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=8]
 resource_name = "arrow"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -98,23 +327,90 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.99041, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.98609 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -298.212, 404.149 ), Vector2( 1052.71, 480.064 ), Vector2( 286.199, 351.552 ) ]
+"values": [ Vector2( -313.796, 762.587 ), Vector2( 270.615, 819.08 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="Animation" id=14]
+resource_name = "notSelected"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.00441135 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 270.615, 819.08 ), Vector2( 1043.98, 838.56 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "selected"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 270.615, 819.08 ), Vector2( 270.615, 819.08 ), Vector2( 1043.98, 838.56 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.00441135, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0, 0, 0, 0.647059 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=10]
 size = 109
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 13 )
 
-[sub_resource type="Animation" id=6]
-resource_name = "Activate"
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -176,10 +472,10 @@ tracks/4/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=7]
+[sub_resource type="CanvasItemMaterial" id=12]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0, 0.873469, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.412245, 0.412245, 0.412245, 1, 0, 0, 0, 1 )
 
@@ -236,6 +532,8 @@ margin_bottom = 964.0
 rect_clip_content = true
 
 [node name="choiceA" type="Sprite" parent="Control/Control2"]
+editor/display_folded = true
+visible = false
 position = Vector2( 433.885, 131.159 )
 scale = Vector2( 1.04232, 1.14691 )
 texture = ExtResource( 6 )
@@ -251,15 +549,38 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "bhj,vhy,jjvghhhhhh"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Control2/choiceA"]
-anims/arrow = SubResource( 9 )
+anims/arrow = SubResource( 4 )
+anims/notSelected = SubResource( 5 )
+anims/notSelected_B = SubResource( 15 )
+anims/selected = SubResource( 16 )
+
+[node name="Button" type="Button" parent="Control/Control2/choiceA"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -230.0
+margin_top = -52.0
+margin_right = 279.0
+margin_bottom = 19.0
+rect_rotation = 3.5
 
 [node name="choiceB" type="Sprite" parent="Control/Control2"]
+editor/display_folded = true
+visible = false
 position = Vector2( 286.199, 351.552 )
 scale = Vector2( 1.042, 1.147 )
 texture = ExtResource( 8 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Control/Control2/choiceB"]
-anims/arrow = SubResource( 10 )
+anims/arrow = SubResource( 6 )
+anims/notSelected = SubResource( 19 )
+anims/selected = SubResource( 17 )
+
+[node name="Button2" type="Button" parent="Control/Control2/choiceB"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -276.878
+margin_top = -17.5116
+margin_right = 232.122
+margin_bottom = 53.4884
+rect_rotation = -3.5
 
 [node name="Label" type="Label" parent="Control/Control2/choiceB"]
 margin_left = -248.4
@@ -272,12 +593,24 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "jikb,guok,vygil,hjmv "
 
 [node name="choiceC" type="Sprite" parent="Control/Control2"]
+editor/display_folded = true
+visible = false
 position = Vector2( 467.366, 581.42 )
 scale = Vector2( 1.042, 1.147 )
 texture = ExtResource( 9 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="Control/Control2/choiceC"]
-anims/arrow = SubResource( 11 )
+anims/arrow = SubResource( 7 )
+anims/notSelected = SubResource( 20 )
+anims/selected = SubResource( 18 )
+
+[node name="Button3" type="Button" parent="Control/Control2/choiceC"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -230.0
+margin_top = -17.0
+margin_right = 247.0
+margin_bottom = 54.0
+rect_rotation = -7.0
 
 [node name="Label" type="Label" parent="Control/Control2/choiceC"]
 margin_left = -172.076
@@ -290,9 +623,23 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "hjfctdcloyhbv"
 
 [node name="choiceD" type="Sprite" parent="Control/Control2"]
-position = Vector2( 278.042, 818.816 )
+visible = false
+position = Vector2( 270.615, 819.08 )
 scale = Vector2( 1.042, 1.147 )
 texture = ExtResource( 10 )
+
+[node name="AnimationPlayer4" type="AnimationPlayer" parent="Control/Control2/choiceD"]
+anims/arrow = SubResource( 8 )
+anims/notSelected = SubResource( 14 )
+anims/selected = SubResource( 21 )
+
+[node name="Button4" type="Button" parent="Control/Control2/choiceD"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -261.0
+margin_top = -79.0
+margin_right = 246.0
+margin_bottom = -8.0
+rect_rotation = 8.5
 
 [node name="Label" type="Label" parent="Control/Control2/choiceD"]
 margin_left = -245.0
@@ -305,6 +652,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "gggggggggggghhhhhhh"
 
 [node name="Control" type="Control" parent="Control"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -321,6 +669,7 @@ scale = Vector2( 1.9168, 1.90427 )
 texture = ExtResource( 11 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Control"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -383,6 +732,7 @@ wait_time = 0.2
 wait_time = 0.2
 
 [node name="Conclusion" type="Control" parent="."]
+editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -392,23 +742,23 @@ mouse_filter = 2
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 4 )
 mouse_filter = 2
+custom_styles/panel = SubResource( 9 )
 
 [node name="Label" type="Label" parent="Conclusion"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 10 )
 text = "The End"
 align = 1
 valign = 1
 percent_visible = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Conclusion"]
-anims/Activate = SubResource( 6 )
+anims/Activate = SubResource( 11 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Conclusion"]
-material = SubResource( 7 )
+material = SubResource( 12 )
 position = Vector2( -0.000645838, 398.088 )
 emitting = false
 amount = 50
@@ -419,4 +769,8 @@ gravity = Vector2( 0, 200 )
 angular_velocity = 313.55
 angular_velocity_random = 0.61
 scale_amount = 0.1
-color_ramp = SubResource( 8 )
+color_ramp = SubResource( 13 )
+[connection signal="pressed" from="Control/Control2/choiceA/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceB/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceC/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceD/Button4" to="." method="_on_Button4_pressed"]
