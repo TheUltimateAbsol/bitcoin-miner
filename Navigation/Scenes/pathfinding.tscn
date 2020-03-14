@@ -625,6 +625,7 @@ anims/GameOver = ExtResource( 12 )
 stream = ExtResource( 13 )
 
 [node name="LevelComplete" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 14 )
 
 [node name="Background" type="Sprite" parent="LevelComplete"]
@@ -846,6 +847,7 @@ anims/SceneSwitch = ExtResource( 19 )
 [node name="Miners" type="Node2D" parent="."]
 
 [node name="Miner" parent="." instance=ExtResource( 20 )]
+editor/display_folded = true
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 visible = false

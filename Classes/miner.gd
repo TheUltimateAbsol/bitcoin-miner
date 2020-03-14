@@ -7,9 +7,9 @@ const WALK_MAX_SPEED = 200
 const JUMP_SPEED = 200
 
 #Distance (in pixels) before it supposedly hits it's target when walking
-const WALK_TOLERANCE = 1
+const WALK_TOLERANCE = 2
 
-enum {WAITING, WALKING, JUMPING, FALLING, ATTACKING, DUCKING, DYING, MIDATTACKING, MIDATTACKING2}
+enum {WAITING, WALKING, JUMPING, FALLING, ATTACKING, DUCKING, DYING, MIDATTACKING, MIDATTACKING2, MIDAIR_ATTACKING}
 var is_facing_right = true;
 var state = WAITING;
 
@@ -23,6 +23,7 @@ var prev_jump_pressed = false
 signal target_reached
 signal path_traversed
 signal jump_ended
+signal midair_attack_ended
 signal died
 
 func reset_input():
@@ -47,17 +48,28 @@ func jump_to(end, xvelocity):
 	
 func attack(node : Node, signal_name : String):
 	state = ATTACKING;
-	node.connect(signal_name, self, "stop_attack", [], CONNECT_ONESHOT);
+	if not node.is_connected(signal_name, self, "stop_attack"):
+		node.connect(signal_name, self, "stop_attack", [], CONNECT_ONESHOT);
 	
 func do_jump():
 	state = JUMPING;
 	jump_velocity = Vector2(0, -JUMP_SPEED)
-	connect("jump_ended", self, "stop_jump", [], CONNECT_ONESHOT);
+#	disconnect("jump_ended", self, "stop_jump");
 	
-func stop_jump():
+func do_super_jump():
+	state = JUMPING;
+	jump_velocity = Vector2(0, -JUMP_SPEED-JUMP_SPEED)
+	
+func do_midair_attack():
+	state = MIDAIR_ATTACKING;
+#	jump_velocity = Vector2(0, -JUMP_SPEED)
+	connect("midair_attack_ended", self, "stop_jump", [], CONNECT_ONESHOT);
+	
+func stop_jump(time=0):
 	state = WAITING;
+
 	
-func stop_attack():
+func stop_attack(time=0):
 	state = WAITING;
 
 func duck_action(node : Node, signal_name : String):
@@ -65,17 +77,15 @@ func duck_action(node : Node, signal_name : String):
 	node.connect(signal_name, self, "stop_duck", [], CONNECT_ONESHOT);
 	
 func quick_duck():
-	print("QUICK DUCK");
 	state = DUCKING;
 
 	#UNSAFE
 	yield(anim, "animation_finished");
-	print ("QUICK DUCK STOP")
 	stop_duck();
 #	anim.connect("animation_finished", self, "stop_duck", [], CONNECT_ONESHOT);
 #	anim.connect("animation_changed", self, "cancel_duck", [], CONNECT_ONESHOT);
 
-func stop_duck():
+func stop_duck(time=0):
 	state = WAITING;
 	
 func follow_path(path):
@@ -89,7 +99,7 @@ func follow_path(path):
 	emit_signal("path_traversed");
 
 func damage():
-	if state == DUCKING: return false;
+	if state == DUCKING or state == MIDAIR_ATTACKING :return false;
 	if vulnerable == false: return false;
 	
 	reset_input();
@@ -126,6 +136,8 @@ func _physics_process(delta):
 			if (not on_floor) and velocity.y > 0:
 				state = FALLING
 				continue
+		MIDAIR_ATTACKING:
+			air_attack_anim();
 		ATTACKING:
 			velocity.x = 0;
 			if on_floor: mine_anim();
@@ -139,15 +151,15 @@ func _physics_process(delta):
 			velocity.x = 0;
 			
 #	Purely visual
-	if not on_floor:
+	if not on_floor and state != MIDAIR_ATTACKING:
 		if velocity.y < 0:
 			jump_anim()
 		else:
 			fall_anim();
 	
-	if (state == JUMPING and not prev_jump_pressed):
-		print(velocity);
-		print(jump_velocity);
+#	if (state == JUMPING and not prev_jump_pressed):
+#		print(velocity);
+#		print(jump_velocity);
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 			
 	# Integrate forces to velocity (gravity)
@@ -160,8 +172,11 @@ func _physics_process(delta):
 #	If we do this on a targeted jump, it will mess up the correction for undershooting
 #	TODO: FIX UNDERSHOT JUMPS
 	if state == FALLING and on_floor and target == null:
-		print("jump ended")
 		emit_signal("jump_ended");
+		stop_jump()
+		
+	if state == MIDAIR_ATTACKING and on_floor:
+		emit_signal("midair_attack_ended");
 	
 #	Check if we hit our targets
 	if target and abs(position.x - target.x) < WALK_TOLERANCE:
@@ -171,9 +186,14 @@ func _physics_process(delta):
 func is_waiting():
 	return (state == WAITING)
 	
-##May also correspond to an upwards jump
 func can_attack():
 	return (state == WAITING || state == MIDATTACKING)
+	
+func can_midair_attack():
+	return (state == JUMPING || state == FALLING) && (target == null)
+	
+func can_super_jump():
+	return (state == DUCKING && is_on_floor())
 	
 func freeze():
 	frozen= true

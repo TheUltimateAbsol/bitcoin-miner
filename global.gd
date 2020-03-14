@@ -3,7 +3,7 @@ extends Node
 var num_bots = 0;
 enum NavPointTypes {NONE, PLATFORM, LEFT_EDGE, RIGHT_EDGE, SOLO}
 enum PlayerNames {Simon, Anna, June, Chad, Shaun, Claire, Sophia, Jack}
-enum CommandTypes {IDLE, MOVE, MINE, DUCK, JUMP}
+enum CommandTypes {IDLE, MOVE, MINE, DUCK, JUMP, MIDAIR_ATTACK, SUPER_JUMP}
 
 var numremaining = 1
 var numtotal = 1

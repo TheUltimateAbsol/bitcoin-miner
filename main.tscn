@@ -1,31 +1,12 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://VisualNovel/Backgrounds/y-so-serious.png" type="Texture" id=1]
-[ext_resource path="res://main.gd" type="Script" id=2]
-[ext_resource path="res://VisualNovel/border.png" type="Texture" id=3]
-[ext_resource path="res://TouchInput/SwipeDetector.tscn" type="PackedScene" id=4]
-[ext_resource path="res://DontEatMyInput.gd" type="Script" id=5]
-[ext_resource path="res://Navigation/Scenes/pathfinding.tscn" type="PackedScene" id=6]
-[ext_resource path="res://VisualNovel/gameboy.png" type="Texture" id=7]
-[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=8]
-
-[sub_resource type="Animation" id=1]
-resource_name = "New Anim"
-length = 40.0
-loop = true
-step = 1.0
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 40 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -720, -1440 ) ]
-}
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://VisualNovel/border.png" type="Texture" id=2]
+[ext_resource path="res://TouchInput/SwipeDetector.tscn" type="PackedScene" id=3]
+[ext_resource path="res://DontEatMyInput.gd" type="Script" id=4]
+[ext_resource path="res://Navigation/Scenes/pathfinding.tscn" type="PackedScene" id=5]
+[ext_resource path="res://VisualNovel/gameboy.png" type="Texture" id=6]
+[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=2]
 resource_name = "toBoth"
@@ -99,20 +80,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="Panel" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 1440.0
-margin_bottom = 2880.0
-mouse_filter = 2
-texture = ExtResource( 1 )
-stretch_mode = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel"]
-pause_mode = 2
-autoplay = "New Anim"
-"anims/New Anim" = SubResource( 1 )
-
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -124,7 +91,7 @@ margin_bottom = 1440.0
 rect_min_size = Vector2( 720, 1440 )
 rect_clip_content = true
 mouse_filter = 2
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 
 [node name="border" type="TextureRect" parent="CenterContainer/main"]
 margin_left = -267.597
@@ -132,19 +99,18 @@ margin_top = 871.541
 margin_right = -179.597
 margin_bottom = 947.541
 mouse_filter = 2
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/main"]
 pause_mode = 2
 anims/toBoth = SubResource( 2 )
 
-[node name="SwipeDetector" parent="CenterContainer/main" instance=ExtResource( 4 )]
+[node name="SwipeDetector" parent="CenterContainer/main" instance=ExtResource( 3 )]
 
 [node name="Node" type="Node" parent="CenterContainer/main"]
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 
 [node name="Control" type="Control" parent="CenterContainer/main"]
-editor/display_folded = true
 margin_left = -202.124
 margin_top = 838.833
 margin_right = 862.876
@@ -168,23 +134,23 @@ handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 
-[node name="Game" parent="CenterContainer/main/Control/GamePanel/Viewport" instance=ExtResource( 6 )]
+[node name="Game" parent="CenterContainer/main/Control/GamePanel/Viewport" instance=ExtResource( 5 )]
 editor/display_folded = true
 
 [node name="gameboy" type="Sprite" parent="CenterContainer/main/Control/GamePanel/Viewport/Game"]
 position = Vector2( 456.508, 918.79 )
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 
 [node name="gameboy2" type="Sprite" parent="CenterContainer/main/Control/GamePanel/Viewport/Game"]
 position = Vector2( 187.606, 1490.59 )
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="CenterContainer/main/Control"]
 position = Vector2( 559.073, 908.72 )
 scale = Vector2( 3.06456, 3.01894 )
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 
-[node name="VNReader" parent="CenterContainer/main" instance=ExtResource( 8 )]
+[node name="VNReader" parent="CenterContainer/main" instance=ExtResource( 7 )]
 pause_mode = 2
 margin_bottom = 900.0
 autoplay = true
@@ -204,7 +170,7 @@ modulate = Color( 0.792157, 0.792157, 0.792157, 1 )
 margin_left = -29.3333
 margin_right = 1482.66
 margin_bottom = 76.0
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 stretch_mode = 2
 
 [node name="border2" type="TextureRect" parent="CenterContainer/main/VNReader/Control2"]
@@ -212,7 +178,7 @@ margin_left = -117.333
 margin_top = 10.0
 margin_right = 1394.67
 margin_bottom = 86.0
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 stretch_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/main/VNReader/Control2"]

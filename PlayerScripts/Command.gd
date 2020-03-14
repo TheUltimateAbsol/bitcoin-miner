@@ -4,6 +4,7 @@ class_name Command
 
 
 var must_wait = true
+var time_to_execute = 4096
 var type
 var path
 var next = null;
@@ -43,7 +44,7 @@ func perform_command(bot):
 	
 	var actor = CommandActor.new(bot, self);
 	#Wait if it needs waiting for completion
-	var func_pointer = actor.do_command(type, must_wait, path);
+	var func_pointer = actor.do_command(type, must_wait, path, time_to_execute);
 	
 	if func_pointer != null:
 		yield(actor, "finished_command") #Even if the miner dies, this will still activate
@@ -64,20 +65,20 @@ func perform_command(bot):
 
 
 #precondition: is linked to another node
-func force_end():
+func force_end(new_time_to_execute):
 	if next == null:
 		push_error("Command is not linked to next instruction but is ended!");
 		
 	must_wait = false;
-	emit_signal("force_end_signal");
-
+	time_to_execute = new_time_to_execute
+	emit_signal("force_end_signal", time_to_execute);
 	
 func link(command : Command):
 	next = command;
 	emit_signal("next_set");
 	
 func delay_next(bot):
-	print("NOTE: BOT GOT AHEAD OF PLAYER");
+#	print("NOTE: BOT GOT AHEAD OF PLAYER");
 	yield(self, "next_set");
 	return next.perform_command(bot);
 	
