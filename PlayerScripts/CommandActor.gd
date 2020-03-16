@@ -58,6 +58,22 @@ func do_command(type, must_wait, path, time_to_execute):
 			Global.CommandTypes.MIDAIR_ATTACK:
 				bot.do_midair_attack();
 				yield(bot, "midair_attack_ended");
+			Global.CommandTypes.GROUND_POUND:
+				bot.do_ground_pound();
+				yield(bot, "midair_attack_ended");
+			Global.CommandTypes.HANG:
+				if not must_wait: 
+					pass
+#					yield(bot.quick_duck(), "completed")
+				else:
+					bot.hang_action(command, "force_end_signal")
+					yield(command, "force_end_signal")
+			Global.CommandTypes.FALL:
+				bot.connect("jump_ended", self, "stop_timer")
+				timer.start(time_to_execute); #some bogus value
+				bot.do_fall();
+				yield(timer, "timeout");
+				bot.disconnect("jump_ended", self, "stop_timer")
 
 #	print("finished_command")
 	command.disconnect("force_end_signal", self, "set_timer");
@@ -65,6 +81,7 @@ func do_command(type, must_wait, path, time_to_execute):
 	timer.delete(); #Deletes both the real timer and the wrapper
 	
 func set_timer(time):
+	if time < 0: return
 	var time_elapsed = timer.time_elapsed()
 	var new_time = time - time_elapsed
 #	print("new time", new_time)

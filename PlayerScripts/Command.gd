@@ -70,7 +70,11 @@ func force_end(new_time_to_execute):
 		push_error("Command is not linked to next instruction but is ended!");
 		
 	must_wait = false;
-	time_to_execute = new_time_to_execute
+	#We use negative values to simply say
+	#"Please just let the command go all the way through
+	#No force ending"
+	if new_time_to_execute >= 0:
+		time_to_execute = new_time_to_execute
 	emit_signal("force_end_signal", time_to_execute);
 	
 func link(command : Command):

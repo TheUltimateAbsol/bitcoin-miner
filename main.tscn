@@ -8,7 +8,7 @@
 [ext_resource path="res://VisualNovel/gameboy.png" type="Texture" id=6]
 [ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=7]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "toBoth"
 tracks/0/type = "value"
 tracks/0/path = NodePath("VNReader:rect_size")
@@ -47,7 +47,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 3.0
 loop = true
 tracks/0/type = "value"
@@ -103,7 +103,7 @@ texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/main"]
 pause_mode = 2
-anims/toBoth = SubResource( 2 )
+anims/toBoth = SubResource( 1 )
 
 [node name="SwipeDetector" parent="CenterContainer/main" instance=ExtResource( 3 )]
 
@@ -112,9 +112,9 @@ script = ExtResource( 4 )
 
 [node name="Control" type="Control" parent="CenterContainer/main"]
 margin_left = -202.124
-margin_top = 838.833
+margin_top = 1495.33
 margin_right = 862.876
-margin_bottom = 2672.84
+margin_bottom = 3329.34
 
 [node name="GamePanel" type="ViewportContainer" parent="CenterContainer/main/Control"]
 margin_left = 240.161
@@ -152,13 +152,12 @@ texture = ExtResource( 6 )
 
 [node name="VNReader" parent="CenterContainer/main" instance=ExtResource( 7 )]
 pause_mode = 2
-margin_bottom = 900.0
 autoplay = true
 
 [node name="Control2" type="Control" parent="CenterContainer/main/VNReader"]
 pause_mode = 2
 editor/display_folded = true
-modulate = Color( 1, 1, 1, 0.25 )
+modulate = Color( 1, 1, 1, 0 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -184,7 +183,7 @@ stretch_mode = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/main/VNReader/Control2"]
 pause_mode = 2
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 3 )
+"anims/New Anim" = SubResource( 2 )
 [connection signal="room_cleared" from="CenterContainer/main/Control/GamePanel/Viewport/Game" to="CenterContainer/main" method="_on_Game_room_cleared"]
 [connection signal="end_game" from="CenterContainer/main/VNReader" to="CenterContainer/main" method="_on_VNReader_end_game"]
 [connection signal="start_game" from="CenterContainer/main/VNReader" to="CenterContainer/main" method="_on_VNReader_start_game"]

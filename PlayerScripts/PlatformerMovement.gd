@@ -20,6 +20,7 @@ var command_time = 0
 var attack_buffers = [false, false, false, false, false];
 signal cancel_attack
 signal cancel_duck
+signal cancel_hang
 #This is just an alias
 onready var main : KinematicBody2D = $Miner
 
@@ -147,7 +148,7 @@ func _ready():
 	add_child(main_command) # so its timer works
 	get_tree().paused = true;
 	
-	for i in range (20):
+	for i in range (1):
 		_on_ui_header_add_miner()
 
 	
@@ -199,12 +200,13 @@ func _on_pause_menu_unpause():
 	$Pause/pause_menu.hide()
 	
 	
-func new_command(type, path=[], time=0.0):
+func new_command(type, path=[], time=-1):
 	var new =  Command.new(type, path)
 	add_child(new);
 	main_command.link(new);
 	main_command.force_end(time);
 	main_command = new;
+	print("New command ", type)
 	
 func get_command():
 	if dead: return;
@@ -234,6 +236,7 @@ func get_command():
 #			InputEventHandler.connect("released_attack", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
 			connect("cancel_attack", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
 			new_command(Global.CommandTypes.MINE)
+		
 
 		
 	if main.is_waiting():
@@ -269,6 +272,26 @@ func get_command():
 #		else:
 #			new_command(Global.CommandTypes.IDLE);
 
+	#We have more code than just canceling since we want to act out of hang
+	if main.is_hanging():
+		if (left_input or jump_input or right_input):
+			command_time = OS.get_ticks_msec()
+			main.do_fall()
+			if not main.is_connected("jump_ended", self, "new_command"):
+				main.connect("jump_ended", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			new_command(Global.CommandTypes.FALL)
+			emit_signal("cancel_hang");
+		if (attack_input):
+			main.do_midair_attack()
+			if not main.is_connected("midair_attack_ended", self, "new_command"):
+				main.connect("midair_attack_ended", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			new_command(Global.CommandTypes.MIDAIR_ATTACK, [])
+		if (down_input):
+			main.do_ground_pound()
+			if not main.is_connected("midair_attack_ended", self, "new_command"):
+				main.connect("midair_attack_ended", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			new_command(Global.CommandTypes.GROUND_POUND, [])
+
 	if main.can_midair_attack():
 		if attack_input:
 			command_time = (OS.get_ticks_msec() - command_time)/1000.0
@@ -276,6 +299,12 @@ func get_command():
 			if not main.is_connected("midair_attack_ended", self, "new_command"):
 				main.connect("midair_attack_ended", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
 			new_command(Global.CommandTypes.MIDAIR_ATTACK, [], command_time)
+		elif down_input:
+			command_time = (OS.get_ticks_msec() - command_time)/1000.0
+			main.do_ground_pound()
+			if not main.is_connected("midair_attack_ended", self, "new_command"):
+				main.connect("midair_attack_ended", self, "new_command", [Global.CommandTypes.IDLE], CONNECT_ONESHOT);
+			new_command(Global.CommandTypes.GROUND_POUND, [], command_time)
 			
 	if main.can_super_jump():
 		if jump_input:
@@ -420,3 +449,8 @@ func start():
 	
 	$AudioStreamPlayer.play();
 	
+
+func _on_Miner_start_hang():
+	command_time = (OS.get_ticks_msec() - command_time)/1000.0
+	main.hang_action(self, "cancel_hang");
+	new_command(Global.CommandTypes.HANG, [], command_time)
