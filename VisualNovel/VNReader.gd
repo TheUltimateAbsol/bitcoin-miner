@@ -290,6 +290,7 @@ func display_page(page:Page):
 			blueArrowAnimate.play("arrow")	
 	
 	
+	
 	state = WAITING
 
 
