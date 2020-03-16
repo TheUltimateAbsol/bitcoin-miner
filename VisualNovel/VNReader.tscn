@@ -532,8 +532,7 @@ rect_clip_content = true
 script = ExtResource( 6 )
 
 [node name="choiceA" type="Sprite" parent="Control/Control2"]
-visible = false
-position = Vector2( 433.885, 131.159 )
+position = Vector2( 426.562, 130.91 )
 scale = Vector2( 1.04232, 1.14691 )
 texture = ExtResource( 7 )
 
@@ -562,7 +561,6 @@ margin_bottom = 19.0
 rect_rotation = 3.5
 
 [node name="choiceB" type="Sprite" parent="Control/Control2"]
-visible = false
 position = Vector2( 286.199, 351.552 )
 scale = Vector2( 1.042, 1.147 )
 texture = ExtResource( 9 )
@@ -591,7 +589,6 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "jikb,guok,vygil,hjmv "
 
 [node name="choiceC" type="Sprite" parent="Control/Control2"]
-visible = false
 position = Vector2( 467.366, 581.42 )
 scale = Vector2( 1.042, 1.147 )
 texture = ExtResource( 10 )
@@ -620,7 +617,6 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "hjfctdcloyhbv"
 
 [node name="choiceD" type="Sprite" parent="Control/Control2"]
-visible = false
 position = Vector2( 270.615, 819.08 )
 scale = Vector2( 1.042, 1.147 )
 texture = ExtResource( 11 )
@@ -767,6 +763,7 @@ angular_velocity = 313.55
 angular_velocity_random = 0.61
 scale_amount = 0.1
 color_ramp = SubResource( 21 )
+[connection signal="btn_pressed" from="Control/Control2" to="." method="_on_Control2_btn_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceA/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceA/Button" to="Control/Control2" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceB/Button2" to="." method="_on_Button2_pressed"]

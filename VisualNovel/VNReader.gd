@@ -24,6 +24,8 @@ onready var redArrow = get_node("Control/Control2/choiceB/Button2")
 onready var yellowArrow = get_node("Control/Control2/choiceC/Button3")
 onready var blueArrow = get_node("Control/Control2/choiceD/Button4")
 
+onready var arrowContainer = get_node("Control/Control2");
+
 #timer stuff
 onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
 onready var delay_timer : TimerRequest = TimerRequest.new($DelayTimer);
@@ -66,6 +68,7 @@ var backgrounds = {
 	
 var CHAR_WAIT = 1.0/20
 var data_json
+var arrow
 
 func _ready():
 	textlabel.text = ""
@@ -77,6 +80,7 @@ func _ready():
 	yellowArrowTxt.text = ""
 	
 	VNGlobal.connect("user_input", self, "attempt_skip");
+	arrowContainer.connect("btn_pressed", self, "display_page")
 	load_data("res://VisualNovel/data.json");
 	if autoplay:
 		play();
@@ -288,8 +292,9 @@ func display_page(page:Page):
 			yellowArrowAnimate.play("arrow")
 		if(useBlue):
 			blueArrowAnimate.play("arrow")	
-	
-	
+		
+	yield(arrowContainer, "btn_pressed")	
+		
 	
 	state = WAITING
 
@@ -417,3 +422,32 @@ func _on_Button2_pressed():
 
 func _on_Button_pressed():
 	greenPicked = true
+
+
+func _on_Control2_btn_pressed(btn):
+	match(btn):
+		"red":
+			redArrowAnimate.play("selected")
+			blueArrowAnimate.play("notSelected")
+			greenArrowAnimate.play("notSelected_B")
+			yellowArrowAnimate.play("notSelected")
+			yield(redArrowAnimate, "animation_finished")
+		"blue":
+			blueArrowAnimate.play("selected")
+			redArrowAnimate.play("notSelected")
+			greenArrowAnimate.play("notSelected_B")
+			yellowArrowAnimate.play("notSelected")
+			yield(blueArrowAnimate, "animation_finished")
+		"green":
+			greenArrowAnimate.play("selected")
+			redArrowAnimate.play("notSelected")
+			blueArrowAnimate.play("notSelected")
+			yellowArrowAnimate.play("notSelected")
+			yield(greenArrowAnimate, "animation_finished")
+		"yellow":
+			yellowArrowAnimate.play("selected")
+			redArrowAnimate.play("notSelected")
+			greenArrowAnimate.play("notSelected_B")
+			blueArrowAnimate.play("notSelected")
+			yield(yellowArrowAnimate, "animation_finished")
+		
