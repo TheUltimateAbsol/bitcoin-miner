@@ -115,7 +115,6 @@ func play():
 #
 	var endPage = false
 	while !endPage:
-		
 		skipped = false
 		for page in save_data:
 			if page.id != id: continue
@@ -130,7 +129,6 @@ func play():
 				
 				yield(self, "goto_next_page")
 				
-				id = page.next_id;
 			elif page is QuestionPage:
 				var func_pointer = display_page(page)
 				
@@ -140,13 +138,13 @@ func play():
 				state = WAITING
 				
 				yield(self, "goto_next_page")
-				
-				id = page.next_id;
 			elif page is EndPage:
 				display_page(page)
 				endPage = true
 			else:
 				display_page(page)
+			
+			id = page.next_id;
 			break
 
 
