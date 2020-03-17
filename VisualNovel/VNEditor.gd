@@ -183,7 +183,7 @@ func load_from_json():
 #    	print("Array") # prints 'hello'
 		pass
 	else:
-    	alert("JSON data is not an array")
+		alert("JSON data is not an array")
 
 	save_data = data_json.result
 	LinkBar.load_data(save_data);

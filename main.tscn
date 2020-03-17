@@ -135,7 +135,6 @@ usage = 0
 render_target_update_mode = 3
 
 [node name="Game" parent="CenterContainer/main/Control/GamePanel/Viewport" instance=ExtResource( 5 )]
-editor/display_folded = true
 
 [node name="gameboy" type="Sprite" parent="CenterContainer/main/Control/GamePanel/Viewport/Game"]
 position = Vector2( 456.508, 918.79 )
@@ -156,7 +155,6 @@ autoplay = true
 
 [node name="Control2" type="Control" parent="CenterContainer/main/VNReader"]
 pause_mode = 2
-editor/display_folded = true
 modulate = Color( 1, 1, 1, 0 )
 anchor_top = 1.0
 anchor_right = 1.0

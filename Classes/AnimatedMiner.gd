@@ -234,8 +234,8 @@ func set_offset(new : Vector2):
 
 #Function for dealing damage with axe; triggers enemy hurtbox
 func _on_MiningHitbox_area_entered(area):
-	 if area.is_in_group("enemy_hurtbox"):
-        area.take_damage(10)
+	if area.is_in_group("enemy_hurtbox"):
+		area.take_damage(10)
 
 #Resets the character to a "neutral" state
 #The location of the sprite is recentered
