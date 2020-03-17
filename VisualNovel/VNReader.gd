@@ -115,6 +115,8 @@ func play():
 #
 	var endPage = false
 	while !endPage:
+		
+		skipped = false
 		for page in save_data:
 			if page.id != id: continue
 			
@@ -145,6 +147,7 @@ func play():
 				endPage = true
 			else:
 				display_page(page)
+			break
 
 
 

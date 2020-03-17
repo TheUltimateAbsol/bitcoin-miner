@@ -474,6 +474,9 @@ margin_bottom = 1440.0
 rect_min_size = Vector2( 720, 720 )
 mouse_filter = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
@@ -730,11 +733,11 @@ angular_velocity_random = 0.61
 scale_amount = 0.1
 color_ramp = SubResource( 19 )
 [connection signal="btn_pressed" from="Control/Control2" to="." method="_on_Control2_btn_pressed"]
-[connection signal="pressed" from="Control/Control2/choiceA/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceA/Button" to="Control/Control2" method="_on_Button_pressed"]
-[connection signal="pressed" from="Control/Control2/choiceB/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceA/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceB/Button2" to="Control/Control2" method="_on_Button2_pressed"]
-[connection signal="pressed" from="Control/Control2/choiceC/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceB/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceC/Button3" to="Control/Control2" method="_on_Button3_pressed"]
-[connection signal="pressed" from="Control/Control2/choiceD/Button4" to="." method="_on_Button4_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceC/Button3" to="." method="_on_Button3_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceD/Button4" to="Control/Control2" method="_on_Button4_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceD/Button4" to="." method="_on_Button4_pressed"]
