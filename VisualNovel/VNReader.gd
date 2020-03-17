@@ -2,8 +2,8 @@ extends Control
 
 export (bool) var autoplay = false;
 
-onready var textlabel = get_node("Control/Control/Control/TextLabel")
-onready var nameLabel = get_node("Control/Control/Control/NameLabel")
+onready var textlabel = get_node("Control/Control/Node2D/Text")
+onready var nameLabel = get_node("Control/Control/Node2D/Name")
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
@@ -46,7 +46,7 @@ var redPicked = false
 var yellowPicked = false
 var bluePicked = false
 
-var id = 1;
+var id = 0;
 var btn_pressed = ""
 
 var expressions = {
@@ -116,34 +116,30 @@ func play():
 	var endPage = false
 	while !endPage:
 		for page in save_data:
+			if page.id != id: continue
+			
 			if page is ContentPage:
-				if page.id == id:
-					var func_pointer = display_page(page)
+				var func_pointer = display_page(page)
+				
+				if func_pointer:
+					yield(func_pointer, "completed")
 					
-					if func_pointer:
-						yield(func_pointer, "completeed")
-						
-					state = WAITING
-					
-					yield(self, "goto_next_page")
-					
-					id = page.next_id;
-				else:
-					pass
+				state = WAITING
+				
+				yield(self, "goto_next_page")
+				
+				id = page.next_id;
 			elif page is QuestionPage:
-				if page.id == id:
-					var func_pointer = display_page(page)
+				var func_pointer = display_page(page)
+				
+				if func_pointer:
+					yield(func_pointer, "completed")
 					
-					if func_pointer:
-						yield(func_pointer, "completeed")
-						
-					state = WAITING
-					
-					yield(self, "goto_next_page")
-					
-					id = page.next_id;
-				else:
-					pass
+				state = WAITING
+				
+				yield(self, "goto_next_page")
+				
+				id = page.next_id;
 			elif page is EndPage:
 				display_page(page)
 				endPage = true

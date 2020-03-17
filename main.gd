@@ -9,13 +9,13 @@ func _ready():
 	to_VN(true);
 #	update_size();
 
-func update_size():
-	var margin_size = 40;
-	var scale = int(($GamePanel.rect_size.x - margin_size)/160);
-	$GamePanel.stretch_shrink = scale;
-	#$PanelContainer/Panel/Node2D.rect_min_size = scale*Vector2(160, 144);
-	$GamePanel.rec_size = scale*Vector2(160, 144);
-	pass
+#func update_size():
+#	var margin_size = 40;
+#	var scale = int(($GamePanel.rect_size.x - margin_size)/160);
+#	$GamePanel.stretch_shrink = scale;
+#	#$PanelContainer/Panel/Node2D.rect_min_size = scale*Vector2(160, 144);
+#	$GamePanel.rec_size = scale*Vector2(160, 144);
+#	pass
 	
 func to_VN(instant=false):
 	$AnimationPlayer.play_backwards("toBoth");

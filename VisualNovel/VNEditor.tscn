@@ -85,7 +85,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
-editor/display_folded = true
 margin_right = 185.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
@@ -141,7 +140,6 @@ margin_bottom = 1440.0
 rect_min_size = Vector2( 480, 435 )
 
 [node name="IdInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_right = 480.0
 margin_bottom = 102.0
 script = ExtResource( 3 )
@@ -176,7 +174,6 @@ margin_right = 58.0
 margin_bottom = 88.0
 
 [node name="SentenceInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_top = 106.0
 margin_right = 480.0
 margin_bottom = 212.0
@@ -220,22 +217,22 @@ margin_bottom = 70.0
 alignment = 1
 
 [node name="sent_delay_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 150.0
-margin_right = 208.0
+margin_left = 156.0
+margin_right = 214.0
 margin_bottom = 24.0
 align = 1
 placeholder_text = "Delay"
 
 [node name="sent_speed_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 212.0
-margin_right = 270.0
+margin_left = 218.0
+margin_right = 276.0
 margin_bottom = 24.0
 align = 1
 placeholder_text = "Speed"
 
 [node name="sound_menu" type="OptionButton" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 274.0
-margin_right = 315.0
+margin_left = 280.0
+margin_right = 309.0
 margin_bottom = 24.0
 
 [node name="sentences_lable" type="Label" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer"]
@@ -293,15 +290,15 @@ margin_bottom = 70.0
 alignment = 1
 
 [node name="next_id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_info2"]
-margin_left = 181.0
-margin_right = 239.0
+margin_left = 187.0
+margin_right = 245.0
 margin_bottom = 24.0
 align = 1
 placeholder_text = "Next_id"
 
 [node name="sound_menu" type="OptionButton" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_info2"]
-margin_left = 243.0
-margin_right = 284.0
+margin_left = 249.0
+margin_right = 278.0
 margin_bottom = 24.0
 
 [node name="questions_lable" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
@@ -317,7 +314,6 @@ margin_right = 466.0
 margin_bottom = 109.0
 
 [node name="SceneInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_top = 343.0
 margin_right = 480.0
 margin_bottom = 371.0
@@ -363,7 +359,6 @@ text = "Scene Transitions"
 align = 1
 
 [node name="CharacterInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_top = 375.0
 margin_right = 480.0
 margin_bottom = 427.0
@@ -377,7 +372,6 @@ margin_bottom = 45.0
 columns = 4
 
 [node name="char_transition_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout"]
-editor/display_folded = true
 margin_right = 63.0
 margin_bottom = 38.0
 
@@ -388,7 +382,6 @@ text = "Transition"
 align = 1
 
 [node name="character_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout"]
-editor/display_folded = true
 margin_left = 67.0
 margin_right = 127.0
 margin_bottom = 38.0
@@ -400,7 +393,6 @@ text = "Character"
 align = 1
 
 [node name="expression_list" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/character_layout"]
-editor/display_folded = true
 margin_left = 131.0
 margin_right = 207.0
 margin_bottom = 38.0
@@ -428,7 +420,6 @@ margin_right = 45.0
 margin_bottom = 38.0
 
 [node name="DirectoryInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-editor/display_folded = true
 margin_top = 431.0
 margin_right = 480.0
 margin_bottom = 487.0

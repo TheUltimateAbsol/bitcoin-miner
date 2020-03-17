@@ -19,7 +19,7 @@ func _init(xid=0,
 	xtransition=VNGlobal.Transitions.NONE, 
 	xbackground=VNGlobal.Backgrounds.NONE,
 	xspeed=1, 
-	xmusic=VNGlobal.Music.NONE):
+	xmusic=VNGlobal.Music.NONE).(xid, xnext_id):
 	#xquestions=[]).(xid, xnext_id):
 		
 #	THIS DESERIALIZES THE CLASS FROM A JSON TABLE

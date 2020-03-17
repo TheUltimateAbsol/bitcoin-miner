@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/classroom_angle.png" type="Texture" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://choiceD.png" type="Texture" id=11]
 [ext_resource path="res://dialogebox2.png" type="Texture" id=12]
 [ext_resource path="res://VisualNovel/Fonts/gloria_hallelujah/gloria_hallelujah.tres" type="DynamicFont" id=13]
-[ext_resource path="res://VisualNovel/Fonts/the_brandy/The Brandy.ttf" type="DynamicFontData" id=14]
 [ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=15]
 
 [sub_resource type="Animation" id=1]
@@ -400,16 +399,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="StyleBoxFlat" id=17]
-bg_color = Color( 0, 0, 0, 0.647059 )
-
-[sub_resource type="DynamicFont" id=18]
-size = 109
-outline_size = 5
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 14 )
-
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=17]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -471,10 +461,10 @@ tracks/4/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=20]
+[sub_resource type="CanvasItemMaterial" id=18]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=21]
+[sub_resource type="Gradient" id=19]
 offsets = PoolRealArray( 0, 0.873469, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.412245, 0.412245, 0.412245, 1, 0, 0, 0, 1 )
 
@@ -505,7 +495,6 @@ stretch_mode = 7
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Background"]
 
 [node name="NPC" type="TextureRect" parent="Control"]
-editor/display_folded = true
 anchor_top = 0.3
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -530,10 +519,8 @@ anims/slide_from_right = SubResource( 3 )
 visible = false
 position = Vector2( 359.483, 359.76 )
 scale = Vector2( 1.02262, 1.02666 )
-texture = ExtResource( 6 )
 
 [node name="Control2" type="Control" parent="Control"]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 margin_bottom = 964.0
@@ -571,7 +558,6 @@ margin_bottom = 19.0
 rect_rotation = 3.5
 
 [node name="choiceB" type="Sprite" parent="Control/Control2"]
-editor/display_folded = true
 visible = false
 position = Vector2( 286.199, 351.552 )
 scale = Vector2( 1.042, 1.147 )
@@ -601,7 +587,6 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "jikb,guok,vygil,hjmv "
 
 [node name="choiceC" type="Sprite" parent="Control/Control2"]
-editor/display_folded = true
 visible = false
 position = Vector2( 467.366, 581.42 )
 scale = Vector2( 1.042, 1.147 )
@@ -631,7 +616,6 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "hjfctdcloyhbv"
 
 [node name="choiceD" type="Sprite" parent="Control/Control2"]
-editor/display_folded = true
 visible = false
 position = Vector2( 270.615, 819.08 )
 scale = Vector2( 1.042, 1.147 )
@@ -661,7 +645,6 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "gggggggggggghhhhhhh"
 
 [node name="Control" type="Control" parent="Control"]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.9
 anchor_right = 0.5
@@ -670,59 +653,38 @@ margin_left = -360.0
 margin_top = -365.6
 margin_right = 363.0
 rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Sprite" type="Sprite" parent="Control/Control"]
+[node name="Node2D" type="Node2D" parent="Control/Control"]
+
+[node name="Sprite" type="Sprite" parent="Control/Control/Node2D"]
 position = Vector2( 374.392, 262.305 )
 scale = Vector2( 1.9168, 1.90427 )
 texture = ExtResource( 12 )
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/Control"]
-editor/display_folded = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -267.0
-margin_top = -115.0
-margin_right = 267.0
-margin_bottom = 115.0
-mouse_filter = 2
-custom_constants/margin_right = 20
-custom_constants/margin_top = 10
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 10
-
-[node name="Control" type="Control" parent="Control/Control/MarginContainer"]
-margin_left = 20.0
-margin_top = 10.0
-margin_right = 514.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="TextLabel" type="Label" parent="Control/Control/Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 40.4839
-margin_top = 16.6613
-margin_right = 24.4839
-margin_bottom = 63.6613
-rect_min_size = Vector2( 478, 257 )
-rect_rotation = -2.0
+[node name="Text" type="Label" parent="Control/Control/Node2D"]
+margin_left = 107.0
+margin_top = 179.0
+margin_right = 652.0
+margin_bottom = 431.0
 custom_fonts/font = ExtResource( 13 )
-text = "aaaaaaaaaaaaaaaaaaaaaaaaa "
 autowrap = true
-percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="NameLabel" type="Label" parent="Control/Control/Control"]
-margin_left = -40.9828
-margin_top = -130.189
-margin_right = 92.0172
-margin_bottom = -70.1891
-rect_rotation = 35.0
+[node name="Name" type="Label" parent="Control/Control/Node2D"]
+margin_left = 52.1528
+margin_top = 23.0134
+margin_right = 233.153
+margin_bottom = 97.0134
+rect_rotation = 32.2
 custom_fonts/font = ExtResource( 8 )
-text = "Simon"
-align = 1
-valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="Control"]
 visible = false
@@ -740,7 +702,6 @@ wait_time = 0.2
 wait_time = 0.2
 
 [node name="Conclusion" type="Control" parent="."]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -751,18 +712,12 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-anchor_right = 1.0
-custom_fonts/font = SubResource( 18 )
-text = "The End"
-align = 1
-valign = 1
-percent_visible = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Conclusion"]
-anims/Activate = SubResource( 19 )
+anims/Activate = SubResource( 17 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Conclusion"]
-material = SubResource( 20 )
+material = SubResource( 18 )
 position = Vector2( -0.000645838, 398.088 )
 emitting = false
 amount = 50
@@ -773,7 +728,7 @@ gravity = Vector2( 0, 200 )
 angular_velocity = 313.55
 angular_velocity_random = 0.61
 scale_amount = 0.1
-color_ramp = SubResource( 21 )
+color_ramp = SubResource( 19 )
 [connection signal="btn_pressed" from="Control/Control2" to="." method="_on_Control2_btn_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceA/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceA/Button" to="Control/Control2" method="_on_Button_pressed"]
