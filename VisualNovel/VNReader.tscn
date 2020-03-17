@@ -532,6 +532,8 @@ rect_clip_content = true
 script = ExtResource( 6 )
 
 [node name="choiceA" type="Sprite" parent="Control/Control2"]
+editor/display_folded = true
+visible = false
 position = Vector2( 426.562, 130.91 )
 scale = Vector2( 1.04232, 1.14691 )
 texture = ExtResource( 7 )
@@ -561,6 +563,8 @@ margin_bottom = 19.0
 rect_rotation = 3.5
 
 [node name="choiceB" type="Sprite" parent="Control/Control2"]
+editor/display_folded = true
+visible = false
 position = Vector2( 286.199, 351.552 )
 scale = Vector2( 1.042, 1.147 )
 texture = ExtResource( 9 )
@@ -589,6 +593,8 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "jikb,guok,vygil,hjmv "
 
 [node name="choiceC" type="Sprite" parent="Control/Control2"]
+editor/display_folded = true
+visible = false
 position = Vector2( 467.366, 581.42 )
 scale = Vector2( 1.042, 1.147 )
 texture = ExtResource( 10 )
@@ -617,6 +623,8 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "hjfctdcloyhbv"
 
 [node name="choiceD" type="Sprite" parent="Control/Control2"]
+editor/display_folded = true
+visible = false
 position = Vector2( 270.615, 819.08 )
 scale = Vector2( 1.042, 1.147 )
 texture = ExtResource( 11 )

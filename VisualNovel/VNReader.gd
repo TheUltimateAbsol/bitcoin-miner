@@ -46,6 +46,8 @@ var redPicked = false
 var yellowPicked = false
 var bluePicked = false
 
+var id = 1;
+var btn_pressed = ""
 
 var expressions = {
 	VNGlobal.Characters.SIMON : {
@@ -86,20 +88,53 @@ func _ready():
 		play();
 
 func play():
-	for page in save_data:
-		if page is ContentPage or page is QuestionPage:
-			skipped = false;
-			var func_pointer = display_page(page)
-			
-			if func_pointer:
-				yield(func_pointer, "completed");
-				
-			state = WAITING;
-			yield(self, "goto_next_page");
-			
-		elif page is MetaPage:
-			display_page(page)
-			
+#	for page in save_data:
+#		if page is ContentPage or page is QuestionPage:
+#			skipped = false;
+#			var func_pointer = display_page(page)
+#
+#			if func_pointer:
+#				yield(func_pointer, "completed");
+#
+#			state = WAITING;
+#			yield(self, "goto_next_page");
+#
+#		elif page is MetaPage:
+#			display_page(page)
+#
+	var endPage = false
+	while !endPage:
+		for page in save_data:
+			if page is ContentPage:
+				if page.id == id:
+					var func_pointer = display_page(page)
+					
+					if func_pointer:
+						yield(func_pointer, "completeed")
+						
+					state = WAITING
+					
+					yield(self, "goto_next_page")
+					
+					id = page.next_id;
+				else:
+					pass
+			elif page is QuestionPage:
+				if page.id == id:
+					var func_pointer = display_page(page)
+					
+					if func_pointer:
+						yield(func_pointer, "completeed")
+						
+					state = WAITING
+					
+					yield(self, "goto_next_page")
+					
+					id = page.next_id;
+				else:
+					pass
+
+
 
 func play_json(json_data : Dictionary):
 	display_page(VNGlobal.deserialize(json_data));
@@ -291,9 +326,19 @@ func display_page(page:Page):
 		if(useYellow):
 			yellowArrowAnimate.play("arrow")
 		if(useBlue):
-			blueArrowAnimate.play("arrow")	
+			blueArrowAnimate.play("arrow")
 		
-	yield(arrowContainer, "btn_pressed")	
+		yield(arrowContainer, "btn_pressed")
+		
+		match btn_pressed:
+			"green":
+				id = page.answers[0].next_id
+			"red":
+				id = page.answers[1].next_id
+			"yellow":
+				id = page.answers[2].next_id
+			"blue":
+				id = page.answers[3].next_id
 		
 	
 	state = WAITING
@@ -450,4 +495,4 @@ func _on_Control2_btn_pressed(btn):
 			greenArrowAnimate.play("notSelected_B")
 			blueArrowAnimate.play("notSelected")
 			yield(yellowArrowAnimate, "animation_finished")
-		
+	btn_pressed = btn
