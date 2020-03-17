@@ -532,7 +532,6 @@ rect_clip_content = true
 script = ExtResource( 6 )
 
 [node name="choiceA" type="Sprite" parent="Control/Control2"]
-editor/display_folded = true
 visible = false
 position = Vector2( 426.562, 130.91 )
 scale = Vector2( 1.04232, 1.14691 )

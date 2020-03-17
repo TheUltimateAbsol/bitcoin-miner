@@ -133,6 +133,11 @@ func play():
 					id = page.next_id;
 				else:
 					pass
+			elif page is EndPage:
+				display_page(page)
+				endPage = true
+			else:
+				display_page(page)
 
 
 
