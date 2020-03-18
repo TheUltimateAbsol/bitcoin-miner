@@ -235,8 +235,26 @@ func delete():
 	if save_data.size() == 0: return;
 	if current_index == -1: return;
 	
+	var old_id = save_data[current_index].id
+	var old_next = save_data[current_index].next_id
+	
 	save_data.remove(current_index);
 	current_index = -1;
+	
+	#TODO: implement switching of question related ids
+	
+	#Fix the the gap caused by the removed item 
+	for item in save_data:
+		if item.next_id == old_id:
+			item.next_id = old_next;
+	
+	#Decrease all ids that were higher than the deleted one
+	for item in save_data:
+		if item.id > old_id:
+			item.id-=1
+		if item.next_id > old_id:
+			item.next_id-=1
+			
 	
 	LinkBar.load_data(save_data);
 	update_options();
@@ -258,6 +276,8 @@ func _adjacent_swap(before, afer):
 	#Update ids and all depentencies
 	save_data[before].id = new_actor_id
 	save_data[afer].id = new_victim_id
+	
+	#TODO: Make sure this updates with the question class
 	
 	for item in save_data:
 		if item.next_id == actor_id:
