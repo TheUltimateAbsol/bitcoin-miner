@@ -19,10 +19,9 @@ onready var add_question_btn = $VBoxContainer/question_txt/add_question
 
 func add_sentence():
 	var question_text = question_txt_input.get_text()
-	var next_id = next_id_input.get_text()
+	var next_id_text = next_id_input.get_text()
 	
-	
-	answers.push_back(Answer.new(question_text, next_id).serialize())
+	answers.push_back(Answer.new(question_text, next_id_text).serialize())
 	
 	sentence_display()
 	

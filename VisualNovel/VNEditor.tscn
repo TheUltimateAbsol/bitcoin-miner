@@ -82,6 +82,9 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 anchor_right = 1.0
@@ -525,3 +528,5 @@ anims/Activate = SubResource( 3 )
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/update_btn" to="." method="update_page"]
 [connection signal="pressed" from="Exit" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Save" to="." method="save_json"]
+
+[editable path="Panel/HBoxContainer/VNReaderBox/VNReader"]
