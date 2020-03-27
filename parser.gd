@@ -39,21 +39,27 @@ func _ready():
 				if(info[i+x].substr(item, 2) == QUESTION_ANS):
 					
 					answers.push_back(info[i+x])
-					x += 1
+
 				elif(info[i+x].substr(item, 2) == GAME_ACTION):
 					isQuestion = false;
 				elif(info[i+x].substr(item, 2) == COMMENT):
-					content.push_back(info[i+x])
-				else:
 					pass
+				if (info[i+x] == " "):
+					pass
+				else:
+					content.push_back(info[i+x])
+				
+				x += 1
 			answerSets.push_back(answers);
 			i += x
 			continue
 		else:
 #			print(line)
+			content.push_back(info[i])
 			continue;
 
 	print (answerSets)
+	print (content)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass\
@@ -75,4 +81,4 @@ func load_text_file(path):
 #		print(item)
 	
 	return newText
-	
+	 
