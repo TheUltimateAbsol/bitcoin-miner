@@ -1,0 +1,433 @@
+//WGuidelines
+//Italicized Text - stage direction
+//See outline for summary of each section
+//Any line or paragraph starting with “//” will be omitted from the parser
+//Any line or paragraph starting with “##” will be treated as a question answer choice
+//Any line or paragraph starting with “@@” will be treated as an in-game action
+//Intro
+
+Simon, [internal]: Wake up already. Bad enough you have to drag your rag and bones up before the sun, but you can’t afford to fall asleep. Hmph. This is your life now. You can’t remember the day EV came to town.
+//Homeroom
+
+Simon, [internal]: I’m early to homeroom, as usual. The chalkboard was poorly cleaned over the weekend. Mr. Johnson still isn’t here yet, either. Hm, what’s that on my desk?
+
+//Pan to letter. Prompt player to press any key to open the letter. Letter opens.
+
+//Letter
+
+Letter: “Salutations Simon Miller,
+
+Congratulations! Since becoming the corporate sponsor of Asilo High School, we here at EV have been committed to the ideals of a progressive education to prepare our students for life beyond school. As such, we are happy to inform you that you are cordially invited to EV’s spring gala, this Friday at seven pm. This gala will mark the grand unveiling project Elysium, EV’s latest venture and sure to be the talk of the town. This event will be an excellent opportunity for networking and mentorship and we hope you will be able to attend.
+
+Best wishes,
+H. Quin”
+
+//June Discussion
+
+June: You got one too?
+
+Simon: Eep!
+
+Simon falls down
+
+June: Just drop dead at stranger danger, I can respect that.
+
+June stretches out her hand.
+
+//Choice 1
+
+June: Need a hand?
+
+//CHOICE:
+
+	##Accept:
+
+		June: Alright, big guy. Up you go.
+		Simon: Thanks.
+		// JUNE +1.
+
+	##Reject:
+
+		Simon: I’m fine.
+		June: uh-huh, sure you are.
+		// June -1.
+@@End Choices
+
+June: My name’s June, June Hanenburg. Sorry about the heart attack.
+
+Simon: It’s cool. My name’s Simon. What’s the deal with these letters?
+
+June: Well it says “You are cordially invited”, so I think it might be an invitation.
+
+Simon: Yeah, I figured that, but why did we get invited?
+
+June: I dunno. I know that creep hanson kid got one, but he likes to tell everyone how “connected” he is. I think I saw Shaun ranting about it earlier, but honestly there's always a fifty - fifty chance some “imperialist pigs” will set him off.
+
+//Choice 2
+
+June: A better question is, why did YOU get one?
+
+// OKAY, I’m not actually sure if this something people might be interested but I think we may be able to introduce some player-chosen backstory for the MC depending on how they answer this question.
+
+//CHOICE: 
+	## resentful
+	Simon: They owe me.
+
+	## privileged
+	Simon: It would be weird if they didn’t.
+	## third option, my brain is still waking up.
+	Simon: If I’m on the list, it can’t be that big a deal.
+
+@@End Choices
+
+//Claire Introduction
+
+//Bell Rings
+
+Mr. Johnson: Alright class, settle down. Class? Excuse me- ugh - JOHN WICK IS AN OVERRATED MOVIE!
+
+Class: GASP!
+
+Mr. Johnson: I know, but shock commentary was the only way to get your attention. 
+
+Mr. Johnson: Now then, class, I would like to introduce you all to our new student.
+
+Mr. Johnson: CLAIRE! CLAIRE, YOU CAN COME IN NOW!
+
+//Enter Claire. She is embarrased - humiliated. Mr. Johnson is oblivious.
+
+Mr. Johnson: Alright, Claire. Just stand here at the front where everyone can see you. That’s good.
+
+// Claire is at the front of the class
+// beat
+
+Mr. Johnson: Well, introduce yourself. We’re WAITtting.
+
+Claire: H-hi E-everyone. My - My name is … gulp… Claire Omerta. I’m - I’m new here.
+
+// beat
+
+Mr. Johnson: Do you have any interests you want to share? Like TYping?
+
+Claire: No.
+
+// beat
+
+June: Typing for fun?
+
+Mr. Johnson: I heard that! I’ll have you know I won the California State Championship for Typing in High School!
+
+June: And you survived high school?
+
+Mr. Johnson: Well, no, not really. It was a constant haze of running and hiding from the lesser evolved cro-magnon alpha males. Incidentally most of them went on to have successful political careers. 
+
+Mr. Johnson: Hold on a second. CLAIRE, are you still up here? Go take your seat!
+
+// Claire takes her seat
+
+June, apologetic, To Claire: Sorry!
+//Period 1 - History
+replacing the question with something more contextual
+Mining time 1, MC meets Harlequin through the bitcoin miner
+
+@@BEGIN MINING
+
+MR. JOHNSON: The Emancipation Proclamation was an executive order from President Lincoln in 1863. It was a document that abolished slavery in all Confederate states, but interestingly, not any Union states that were on his side but still practiced slavery. Although one thing was clear — the war was now about slavery as well. And since this made the Confederacy look like direct supporters of slavery, it also dramatically swayed foreign nations’ towards the Union. 
+
+JUNE: Hey, what are you doing!?
+
+@@END MINING
+
+SIMON: Huh? Nothing.
+
+JUNE: You’re not paying any attention, are you? This is history, do you realize how many lockers Mr. Johnson got stuffed in to teach us history?
+
+I shrug.
+
+SIMON: I definitely was, thanks.
+
+JUNE: Oh, really? Mr. Johnson, Simon can field the question!
+
+Mr. Johnson: Good Gracious, a volunteer! Alright, Simon, this is an easy one and therefore everyone will judge you if you answer wrong. 
+
+Mr. Johnson: Why did Lincoln give the Emancipation Proclamation?
+
+//Mining Attention Check
+
+C1: Boosting Union morale to fight (Correct) OR Reducing the numbers of the Confederate Army
+
+##Boosting
+SIMON: It gave the people in the Union hope. They wanted the fighting to stop, and the document inspired them to fight not only for reunification, but also for individual freedoms.
+
+MR. JOHNSON: Very good, Simon. Sappy, but good. June, no more pushing people in front of moving objects. (+1 Johnson)
+
+//June looks shocked.
+
+JUNE: B-b-but… he was playing a video game! In the middle of class!
+
+MR. JOHNSON: I’m a public school teacher in America. The only thing I can care about are the results.
+
+He rambles on for a bit longer but for June’s sanity I decide not to play and stare at the board blankly. The bell rings.
+
+JUNE: Hey, sorry for throwing you under the bus out there… I didn’t realize I was in the presence of some multitasking wizard. I won’t get on your case like that again. (+1 June)
+
+SIMON: Uh, yeah, sure. I’ll see you around, June.
+
+June: See ya around, Simon.
+
+##Reducing
+SIMON: Well, it said that slavery was abolished in the Confederacy, so some of the people in the Confederacy probably moved away to some of the Union states where there are slaves.
+
+Mr. Johnson sighs.
+
+MR. JOHNSON: No. No, Simon, that’s not … not even … Oy, somedays I wonder why I stick with this job. *dejected sigh* Let’s move on, class.
+
+I try to sink down into my chair as my face gets warmer and I feel the redness in my cheeks. I look to my left and I see June Hanenburg, who looks at me victoriously but trying to hide a bit of guilt.
+
+Mr. Johnson continues his lecture and I look straight forward for the rest of class, too embarrassed to see the class’s reaction. The bell rings.
+
+JUNE: You should really take more interest in history. You know people actually died to make it happen. *sigh* But I guess it’s not for everyone. 
+
+SIMON: You kinda threw me under the bus there. 
+
+June: This is Asilo now. C’est la vie. Be seeing you, Simon.
+
+// June leaves
+
+I try to fake a smile but I feel too awkward and dash out of there.
+@@End Choices
+//Interlude 1
+
+I make my way to the plain-looking hallway. Rows of blue lockers and the occasional water fountain are spaced out between doors leading to classrooms. Halfway to my next class, a boy and a girl arguing about something. I don’t recognize either of them.
+
+JACK: Foolish. Gift cards are currency in the same way cash is, therefore I should not have to tell someone when I pay with one.
+
+ELIZABETH: No no no. Because then it’s not 50/50. You’re paying less because the gift card isn’t your money. You should tell them about the gift card and pay half of the difference. It’s only fair.
+
+JACK: Not my money? It was given to me. Who’s money would it be then? It could only be mine.
+
+ELIZABETH: No, you didn’t earn it so it’s not yours. 
+
+She catches my not so subtle eavesdropping. In my defense, they were being quite loud and I wasn’t the only one who turned to see the spectacle.
+//Gift Card Question
+
+ELIZABETH: Hey, what do you think?
+
+##YOU’RE RIGHT
+
+SIMON: Well, if you are paying with a gift card, it’s not like you are paying with your own      money...
+
+ELIZABETH: See, I told you! He heard the whole thing and he agrees. That’s completely unbiased and you know it. (+1 for ELIZABETH)
+
+	JACK [sighing]: Whatever. You just aren’t seeing this logically. (no points for Jack)
+
+ELIZABETH [rolls eyes]: Yeah, okay, Jack. 
+
+SIMON: I didn’t mean for him to get mad like that, I just thought you were right.
+
+As Jack storms off, the girl looks directly at me to speak.
+
+ELIZABETH: Don’t listen to him, he always pouts when I’m right. I’m Elizabeth Hamilton.
+
+SIMON: Cool, I’m Simon Miller. Oh, I should probably get going. See you around, Elizabeth.
+
+She smiles and walks away. Suddenly I realize that I only have forty-five seconds to make it to the gym before P.E. starts since I stopped to chat. I quickly head in the direction of the gym.
+##HE’S RIGHT
+
+SIMON: I always thought gift cards were basically like cash...
+
+JACK: Finally, someone with common sense! (+1 for Jack)
+
+ELIZABETH: Yeah, yeah, you’re smart and I’m not. Thanks for the reminder once again, Einstein. (no points for Sam)
+
+JACK: It was just a friendly argument, Elizabeth. I just happened to be right. Again. 
+
+Elizabeth rolls her eyes and walks away. I feel a little guilty for escalating the situation.
+
+SIMON: I’m sorry if I made things worse, I just thought you were right.
+
+The boy waves dismissively and readjusts his glasses.
+
+BOY: She’ll be alright. I’m Jack Hanson, by the way.
+
+SIMON: And I’m Simon Miller. Huh, I just didn’t realize it was such a hot topic of debate. But anyway, I’ve gotta run, but I’ll see you around, Jack.
+
+JACK: Until next time, Simon.
+
+(It didn’t seem like the other girl took that situation very well. If I see her again, I might have to apologize for what I did…). I check the time to see I only have forty-five seconds for P.E.. Hurriedly, I speed-walk down the school halls as fast as I can.
+@@End Choices
+//Period 2
+//Summary: Simon is late to class because of the interlude. //Simon meets Shaun and Chad.
+
+You burst through the double doors to the gymnasium and a string of obscenities runs through your head as you see the rest of the class already assembled below you. Coach Warren peaks his head up and his face contorts into a demonic visage as his eyes narrow. 
+
+Coach Warren: MILLER!!! Ged your scrawny ass down here before I make the entire lot of you run suicides till the bell!
+
+Chad [offscreen, urgent]: For the love of god Simon, just do what he says!
+
+You feel your heart sink and the blood in your body grind to a halt. You hurry to the locker room and, despite the layers of concrete separating you from the class, you feel their stares and the threats of violence they make if you don’t hurry. 
+
+You stash your things in your locker and change into your gym clothes. The miner buzzes and you curse for the trouble it's caused. 
+
+You step out onto the gym floor and see Coach Warren glaring at you through narrow eye slits and his face turned up like a boar that wants to cut you to pieces.
+//Late Excuse Question
+
+Coach Warren: Reason yer late, Miller?
+
+//CHOICE:
+
+	##Lie:
+		Simon: I was … uh … studying.
+		// CHAD + 1;
+		// SHAUN - 1;
+
+	##Tell the truth:
+
+		Simon: I was … gulp … playing a game.
+		// CHAD - 1;
+		// SHAUN + 1;
+@@End Choices
+
+
+Coach Warren: Today’s words of wisdom are from Machiavelli. “It's better to be feared than loved.” You best remember that, boy.
+
+Shaun: I keep telling you, Man whore is not an acceptable profession.
+
+Chad: First off, we’re called gigolos.
+
+Shaun: You can’t say we if you’re not actually one of them.
+
+Chad: Second off, I get to choose how and whom I spend my nights.
+
+Shaun: No, you know what your problem is.
+
+Chad: I set back the Chad rights movement every other night.
+
+Shaun: No, you’re letting everyone else tell you how you should be.
+
+Chad: I’m sorry, man. What kind of person do you want me to be?
+//Lunch
+Anna intro, Mining time 2, Harlequin attempts to remove MC from server
+App: Remaining balance: [INSERT HOW MUCH MC EARNED MINING]
+
+I go to the cafeteria, brown lunch bag in hand. Shoot, I forgot to get a drink. I walk over to a vending machine and swipe my credit card. A soda pops out and my phone pings with a notification… my phone must be acting up. It says my available balance now has thousands of dollars in there! Something’s really weird here. I should call the bank later, I guess.
+
+I scan the tables but can’t recognize anyone from earlier. There’s an empty table, and one with a girl who looks zoned out.
+//Seating Choice
+
+(Where do I sit...?)
+
+C5: Alone. or With the girl.
+
+##ALONE
+	
+SIMON: I’ve got some mining to do anyway…
+
+	I decide to have some privacy today and pull out the Miner.
+
+@@MINING START
+@@MINING END
+
+SIMON: Oh wait, I totally forgot to eat!
+
+I open the lunch bag, but my sandwich is missing. (Did I forgot to pack one today? I could have sworn there was a sandwich.)
+
+I look up and notice that the girl from the other table is now sitting across from me with a blank stare.
+
+SIMON: Hey, I didn’t see you there. I’m Simon. What’s your name?
+
+She smiles with a mischievous look.
+
+GIRL: Anna. Anna Wilson. Looking for this?
+
+SIMON: Wha- my sandwich! How did you get that?
+
+She seemed to think about how she was going to answer that.
+
+ANNA: You must have dropped it, I guess.
+
+SIMON: Right… Well, thanks for picking it up for me, Anna.
+
+ANNA: Sure thing, Simon. It was very nice meeting you.
+
+She walks away and I can’t help but feel a little confused.
+
+(Guess I should eat this sandwich before it’s “dropped” again…)
+##WITH THE GIRL
+
+SIMON: (Looks like she could use a friend.)
+
+	I plop down in the red chair beside her. She comes off surprised.
+
+SIMON: You looked like you could use some company.
+
+She smiles sweetly at the gesture.
+
+GIRL: Hey, I’m Anna Wilson. Nice to meet you, Simon.
+
+SIMON: How did you know my name?
+
+ANNA: We have a History class together. Don’t worry, I won’t be offended if you don’t remember. I’m just glad we’ve met now.
+
+SIMON: Me too, Anna. Hey, do you mind if I play my game here? We can still talk if you want
+
+ANNA: Sure!
+
+@@MINING START
+
+ANNA: I just moved into this area recently. Not many people have actually wanted to talk to me. Guess I just give off bad vibes or something. I don’t know. I think I’m pretty nice. I think my parents would say that about me too. Well, at least I’ve made one friend, and you seem pretty nice, too. I think we’re going to be great friends! (if you need more of this let me know)
+
+@@MINING END
+
+SIMON: Well, I think it’s time to get going. It was nice talking to you, Anna.
+
+ANNA: You too, Simon. See ya!
+
+//Interlude 2
+We have nothing here as of now
+
+//Period 3 - Comp Sci
+//Summary: Mining time 3, MC gains access to Harlequin's secure //server
+
+
+
+//Period 4 - AP Physics
+
+Jack: Elizabeth, where are you going?
+
+Elizabeth: To work with the smart kids.
+
+Chad: Wesa Smart oneses. Wesa goeseses ta Harvard. Come on man back me up here.
+
+Shaun: Olé. 
+//Dismissal
+//Summary: The MC heads home. They have the choice to get on the //bus or talk to Jack Hanson.
+//
+//If the MC gets on the bus they will have the opportunity to //meet Claire.
+//
+//If the MC talks to Jack, they will miss the bus. Christopher //Hanson will interrupt their conversation and offer to drive //the MC home.
+
+Jack: Just admit that you cheated!
+
+Shaun: Whhyy?
+
+Jack: Because of the honor code!
+
+Shaun: No, why are you accusing me of cheating?
+Jack: Because someone that skips school shouldn’t do better than me!
+
+Shaun: Uh-huh.
+
+Shaun Pushes Jack into Simon.
+
+Shaun: Chupa un puerco, imperialisto. 
+
+Exit Shaun.
+//After School
+//Summary: The MC has a choice to go to the beach, go into Town, //or stay home.
+//
+//Before bed, Mining time 4, MC gains access to Ea-ville's plan //to destroy the world via Harlequin's server. Harlequin ejects //the MC and vows revenge
+
+
+
+//CUT TO BLACK
