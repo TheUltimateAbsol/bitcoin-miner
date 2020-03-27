@@ -2,8 +2,8 @@ extends Control
 
 export (bool) var autoplay = false;
 
-onready var textlabel = get_node("Control/Control/MarginContainer/Control/TextLabel")
-onready var nameLabel = get_node("Control/Control/MarginContainer/Control/NameLabel")
+onready var textlabel = get_node("Control/Control/Node2D/Text")
+onready var nameLabel = get_node("Control/Control/Node2D/Name")
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
@@ -46,19 +46,30 @@ var redPicked = false
 var yellowPicked = false
 var bluePicked = false
 
-var id = 1;
+var id = 0;
 var btn_pressed = ""
 
 var expressions = {
 	VNGlobal.Characters.SIMON : {
-		VNGlobal.Expressions.DEFAULT :  preload("Characters/BoyeNeutral.png"),
-		VNGlobal.Expressions.HAPPY : preload("Characters/BoyeSmile.png"),
-		VNGlobal.Expressions.SAD : preload("Characters/BoyeFrown.png")
+		VNGlobal.Expressions.DEFAULT :  preload("Characters/BoyeNeutral.png")
 	},
 	VNGlobal.Characters.ANNA : {
-		VNGlobal.Expressions.DEFAULT :  preload("Characters/verylegit.png"),
-		VNGlobal.Expressions.HAPPY :  preload("Characters/verylegit.png"),
-		VNGlobal.Expressions.SAD :  preload("Characters/verylegit.png")
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/anna fina_.png")
+	},
+	VNGlobal.Characters.CLAIRE : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Claire final.png")
+	},
+	VNGlobal.Characters.JACK : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Jack Final.png")
+	},
+	VNGlobal.Characters.CHAD : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Chad final.png")
+	},
+	VNGlobal.Characters.JUNE : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/nannndkkad.png")
+	},
+	VNGlobal.Characters.SHAUN : {
+		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/shaun finalll.png")
 	}
 }
 
@@ -104,40 +115,37 @@ func play():
 #
 	var endPage = false
 	while !endPage:
+		skipped = false
 		for page in save_data:
+			if page.id != id: continue
+			
 			if page is ContentPage:
-				if page.id == id:
-					var func_pointer = display_page(page)
+				var func_pointer = display_page(page)
+				
+				if func_pointer:
+					yield(func_pointer, "completed")
 					
-					if func_pointer:
-						yield(func_pointer, "completeed")
-						
-					state = WAITING
-					
-					yield(self, "goto_next_page")
-					
-					id = page.next_id;
-				else:
-					pass
+				state = WAITING
+				
+				yield(self, "goto_next_page")
+				
 			elif page is QuestionPage:
-				if page.id == id:
-					var func_pointer = display_page(page)
+				var func_pointer = display_page(page)
+				
+				if func_pointer:
+					yield(func_pointer, "completed")
 					
-					if func_pointer:
-						yield(func_pointer, "completeed")
-						
-					state = WAITING
-					
-					yield(self, "goto_next_page")
-					
-					id = page.next_id;
-				else:
-					pass
+				state = WAITING
+				
+				yield(self, "goto_next_page")
 			elif page is EndPage:
 				display_page(page)
 				endPage = true
 			else:
 				display_page(page)
+			
+			id = page.next_id;
+			break
 
 
 
@@ -152,15 +160,16 @@ func display_page(page:Page):
 	if page is ContentPage:
 		npc.hide()
 		textlabel.text = ""
+		nameLabel.text = ""
 		textlabel.set_visible_characters(0);
 		
 		if page.character == VNGlobal.Characters.NONE: 
 			npc.texture = null;
 		else:
-			if expressions[page.character][page.expression] == null:
-				npc.texture = expressions[VNGlobal.SIMON]["DEFAULT"]
+			if expressions[page.character][VNGlobal.Expressions.DEFAULT] == null:
+				npc.texture = "";
 			else:
-				npc.texture = expressions[page.character][page.expression]
+				npc.texture = expressions[page.character][VNGlobal.Expressions.DEFAULT]
 				var nameID = page.character
 				nameLabel.text = VNGlobal.CharacterNames[nameID]
 		
@@ -233,36 +242,32 @@ func display_page(page:Page):
 		
 		#var file2Check = File.new()
 		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
-		npc.show()
-		match page.transition:
-			VNGlobal.Transitions.NONE:
-				transition.play("appear")
-				yield(transition, "animation_finished")
-			VNGlobal.Transitions.FLASH: #think ace attorny
-				# MAKE TRANSITION
-				transition.play("appear")
-				yield(transition, "animation_finished")
-			VNGlobal.Transitions.FADE:
-				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
-				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
-				transition.play("fade in")
-				yield(transition, "animation_finished")
-	#			yield(transition, "animation_finished")
-			VNGlobal.Transitions.SLIDE_RIGHT:
-				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
-				transition.play("slide_from_right")
-				yield(transition, "animation_finished")
-	#			pass
-			VNGlobal.Transitions.SLIDE_LEFT:
-				# MAKE TRANSITION
-				transition.play("slide_from_left")
-				yield(transition, "animation_finished")
-			
 		if page.background != VNGlobal.Backgrounds.SAME:
 			if backgrounds[page.background] == null:
 				$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
 			else:
 				$Control/Background.texture = backgrounds[page.background];
+		
+		npc.show()
+		match page.transition:
+			VNGlobal.Transitions.NONE:
+				transition.play("appear")
+			VNGlobal.Transitions.FLASH: #think ace attorny
+				# MAKE TRANSITION
+				transition.play("appear")
+			VNGlobal.Transitions.FADE:
+				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
+				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
+				transition.play("fade in")
+	#			yield(transition, "animation_finished")
+			VNGlobal.Transitions.SLIDE_RIGHT:
+				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
+				transition.play("slide_from_right")
+	#			pass
+			VNGlobal.Transitions.SLIDE_LEFT:
+				# MAKE TRANSITION
+				transition.play("slide_from_left")
+			
 	# else involves being able to reference previous pages
 		
 #		redArrowTxt.text = ""
@@ -387,28 +392,28 @@ func skip():
 	delay_timer.force_end();
 
 func list_files_in_directory(path):
-    var files = []
-    var dir = Directory.new()
-    dir.open(path)
-    dir.list_dir_begin()
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
 
-    while true:
-        var file = dir.get_next()
-        if file == "":
-            break
-        elif not file.begins_with("."):
-            files.append(file)
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
 
-    dir.list_dir_end()
+	dir.list_dir_end()
 
-    return files
+	return files
 
 func load_data(file_path):	
 	var file = File.new()
-	for filename in list_files_in_directory("res://VisualNovel/"):
-		print(filename);
-	print("File exists: ");
-	print(file.file_exists("res://VisualNovel/data.json"));
+#	for filename in list_files_in_directory("res://VisualNovel/"):
+#		print(filename);
+#	print("File exists: ");
+#	print(file.file_exists("res://VisualNovel/data.json"));
 	var err = file.open("res://VisualNovel/data.json", 1)
 	if err:
 		push_error("Error " + str(err))
@@ -431,7 +436,7 @@ func load_data(file_path):
 #    	print("Array") # prints 'hello'
 		pass
 	else:
-    	print("JSON data is not an array")
+		print("JSON data is not an array")
 		
 	save_data = data_json.result
 	

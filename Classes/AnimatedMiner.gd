@@ -23,7 +23,7 @@ export (Vector2) var levelCompleteOffset = Vector2(-6,-11)
 export (Vector2) var airAttackOffset = Vector2(0,0)
 
 #Dictates player animation states
-enum {ANIM_WALKING, ANIM_IDLE, ANIM_MINING, ANIM_JUMPING, ANIM_FALLING, ANIM_DUCKING, ANIM_DYING, ANIM_AIR_ATTACK}
+enum {ANIM_WALKING, ANIM_IDLE, ANIM_MINING, ANIM_JUMPING, ANIM_FALLING, ANIM_DUCKING, ANIM_DYING, ANIM_AIR_ATTACK, ANIM_HANGING, ANIM_GROUND_POUND}
 var anim_state = ANIM_IDLE
 
 onready var sprite = $Sprite
@@ -45,6 +45,14 @@ func idle_anim(force_reset=false):
 	sprite.texture = idleSprite
 	sprite.frame = 0;
 	#print("idle")
+	
+func hang_anim():
+	if anim_state == ANIM_HANGING: return
+	_anim_reset()
+	set_offset(idleOffset)
+	sprite.texture = idleSprite
+	sprite.frame = 0;
+	anim_state = ANIM_HANGING
 	
 func die_anim():
 	if anim_state != ANIM_DYING:
@@ -119,12 +127,18 @@ func mine_anim():
 		match choice:
 			0:
 				sprite.texture = miningSprite;
+				sprite.hframes = 2
+				sprite.vframes = 4
 				anim.play("Mine");
 			1:
 				sprite.texture = miningSprite2;
+				sprite.hframes = 3
+				sprite.vframes = 3
 				anim.play("Mine2");
 			2:
 				sprite.texture = miningSprite3;
+				sprite.hframes = 3
+				sprite.vframes = 3
 				anim.play("Mine3");
 		
 #Player action that starts a jump motion (only rises up)
@@ -146,9 +160,30 @@ func air_attack_anim():
 	if anim_state != ANIM_AIR_ATTACK:
 		anim_state = ANIM_AIR_ATTACK
 		_anim_reset()
+		sprite.hframes = 3
+		sprite.vframes = 4
 		set_offset(airAttackOffset);
 		sprite.texture = airAttackSprite
 		anim.play("Air Attack");
+		
+#Player action that starts a air attack
+#If player is already in this state, nothing happens
+func ground_pound_anim():
+	if anim_state == ANIM_GROUND_POUND: return
+	anim_state = ANIM_GROUND_POUND
+	_anim_reset()
+	set_offset(idleOffset)
+	sprite.texture = idleSprite
+	sprite.frame = 0;
+#	if anim_state == ANIM_DYING: return
+#	if anim_state != ANIM_GROUND_POUND:
+#		anim_state = ANIM_GROUND_POUND
+#		_anim_reset()
+#		sprite.hframes = 3
+#		sprite.vframes = 4
+#		set_offset(airAttackOffset);
+#		sprite.texture = airAttackSprite
+#		anim.play("Air Attack");
 		
 #Player action that starts a falling motion
 #If player is already in this state, nothing happens
@@ -199,8 +234,8 @@ func set_offset(new : Vector2):
 
 #Function for dealing damage with axe; triggers enemy hurtbox
 func _on_MiningHitbox_area_entered(area):
-	 if area.is_in_group("enemy_hurtbox"):
-        area.take_damage(10)
+	if area.is_in_group("enemy_hurtbox"):
+		area.take_damage(10)
 
 #Resets the character to a "neutral" state
 #The location of the sprite is recentered
@@ -210,8 +245,8 @@ func _anim_reset():
 	sprite.vframes = 1
 	sprite.hframes = 1
 	set_offset(Vector2(0,0))
-	$CollisionShape2D.shape.extents = Vector2(5, 15);
-	$CollisionShape2D.position = Vector2(0, 1);
+#	$CollisionShape2D.shape.extents = Vector2(5, 15);
+#	$CollisionShape2D.position = Vector2(0, 1);
 	$MiningHitbox/CollisionShape2D.set_deferred("disabled", true)
 	$MiningHitbox/AirAttack.set_deferred("disabled", true)
 	#print("reset");

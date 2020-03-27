@@ -1,0 +1,313 @@
+[
+    {
+        "background": "SAME",
+        "character": "NONE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "(not this again...)",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 0.7
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 0,
+        "music": "NONE",
+        "next_id": 4,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "game_dir": "res://Stages/Levels/Level1/",
+        "id": 1,
+        "next_id": 32,
+        "type": "GameStartPage"
+    },
+    {
+        "background": "SAME",
+        "character": "NONE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "MR. JOHNSON:",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 0.7
+            },
+            {
+                "content": "The Emancipation Proclamation was an executive order from President Lincoln in 1863.",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 0.7
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 3,
+        "music": "NONE",
+        "next_id": 4,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "SAME",
+        "character": "NONE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "It was a document that abolished slavery in all Confederate states,",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "however not any Union states that were on his side but still practiced slavery.",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 3,
+        "music": "NONE",
+        "next_id": 4,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "SAME",
+        "character": "NONE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "Although one thing was clear —-",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "the war was now about slavery as well.",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 3,
+        "music": "NONE",
+        "next_id": 4,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "id": 32,
+        "next_id": 32,
+        "type": "GameEndPage"
+    },
+    {
+        "background": "SAME",
+        "character": "JUNE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "Hey,",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "what are you doing!?",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 4,
+        "music": "NONE",
+        "next_id": 4,
+        "scene_transition": "FADE",
+        "speed": 1,
+        "transition": "FADE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "SAME",
+        "character": "NONE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "Huh?",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "Nothing.",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 2,
+        "music": "NONE",
+        "next_id": -13,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "SAME",
+        "character": "JUNE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "You’re not paying any attention,",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "are you?",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "This is history,",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "what could possibly be more important than history?",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 2,
+        "music": "NONE",
+        "next_id": -13,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "SAME",
+        "character": "NONE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "*shrug*",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 2,
+        "music": "NONE",
+        "next_id": -13,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "SAME",
+        "character": "NONE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "... I definitely was paying attention,",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "thanks.",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 2,
+        "music": "NONE",
+        "next_id": -13,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "transition": "NONE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "SAME",
+        "character": "JUNE",
+        "character_name": "Simon",
+        "content": [
+            {
+                "content": "Oh, really?",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "Why did Lincoln give the Emancipation Proclamation,",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            },
+            {
+                "content": "then?",
+                "delay": 0.5,
+                "sound": "DING",
+                "speed": 1
+            }
+        ],
+        "expression": "DEFAULT",
+        "id": 2,
+        "music": "NONE",
+        "next_id": -13,
+        "scene_transition": "FADE",
+        "speed": 1,
+        "transition": "FADE",
+        "type": "ContentPage"
+    },
+    {
+        "background": "NONE",
+        "character": "NONE",
+        "content": [],
+        "expression": "DEFAULT",
+        "id": 0,
+        "music": "NONE",
+        "next_id": -13,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "type": "ContentPage"
+    },
+    {
+        "background": "NONE",
+        "character": "NONE",
+        "content": [],
+        "expression": "DEFAULT",
+        "id": 0,
+        "music": "NONE",
+        "next_id": -13,
+        "scene_transition": "NONE",
+        "speed": 1,
+        "type": "ContentPage"
+    }
+]

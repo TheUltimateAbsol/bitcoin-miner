@@ -547,6 +547,7 @@ pause_mode = 2
 stream = ExtResource( 4 )
 
 [node name="QuickTimeEvent" type="Node2D" parent="."]
+editor/display_folded = true
 visible = false
 script = ExtResource( 5 )
 
@@ -846,6 +847,7 @@ anims/SceneSwitch = ExtResource( 19 )
 [node name="Miners" type="Node2D" parent="."]
 
 [node name="Miner" parent="." instance=ExtResource( 20 )]
+editor/display_folded = true
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 visible = false
@@ -919,6 +921,7 @@ mouse_filter = 2
 pause_mode = 2
 stream = ExtResource( 27 )
 [connection signal="animation_finished" from="QuickTimeEvent/AnimationPlayer" to="QuickTimeEvent" method="QTE_anim_handler"]
+[connection signal="start_hang" from="Miner" to="." method="_on_Miner_start_hang"]
 [connection signal="add_miner" from="ui_header" to="." method="_on_ui_header_add_miner"]
 [connection signal="revive" from="ui_header" to="." method="revive"]
 [connection signal="pressed" from="Pause/Pause" to="." method="_on_Pause_pressed"]
