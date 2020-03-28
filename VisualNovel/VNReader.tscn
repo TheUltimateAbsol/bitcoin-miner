@@ -201,7 +201,7 @@ margin_bottom = 480.0
 
 [node name="Arrow" parent="Control/AnswerBox/B" index="1"]
 self_modulate = Color( 0.839216, 0.172549, 0.101961, 1 )
-position = Vector2( 266.094, 133.974 )
+position = Vector2( -306.25, 142.635 )
 rotation = 3.13408
 scale = Vector2( 1, -1 )
 
@@ -227,7 +227,7 @@ margin_bottom = 684.0
 
 [node name="Arrow" parent="Control/AnswerBox/C" index="1"]
 self_modulate = Color( 0.847059, 0.890196, 0.0627451, 1 )
-position = Vector2( 453.728, 120.853 )
+position = Vector2( 1021.71, 49.7751 )
 rotation = -0.139626
 
 [node name="Node2D" parent="Control/AnswerBox/C" index="2"]
@@ -239,7 +239,7 @@ margin_bottom = 888.0
 
 [node name="Arrow" parent="Control/AnswerBox/D" index="1"]
 self_modulate = Color( 0.180392, 0.737255, 0.811765, 1 )
-position = Vector2( 266.603, 117.587 )
+position = Vector2( -298.55, 26.7297 )
 rotation = -2.96182
 scale = Vector2( 1, -1 )
 

@@ -45,7 +45,7 @@ var classes = {
 		"classNode": EndPage
 	},
 	"QuestionPage": {
-		"dependencies" : [Inputs.ID, Inputs.SENTENCE, Inputs.SCENE, Inputs.CHARACTER, Inputs.PREVIEW, Inputs.QUESTION],
+		"dependencies" : [Inputs.ID, Inputs.QUESTION, Inputs.PREVIEW],
 		"classNode": QuestionPage
 	}
 }
@@ -254,7 +254,16 @@ func delete():
 			item.id-=1
 		if item.next_id > old_id:
 			item.next_id-=1
-			
+		
+	#Now do the exact same thing for all answer choices
+	for item in save_data:
+		if item.get("answers"):
+			for answer in item["answers"]:
+				if answer.next_id == old_id:
+					answer.next_id = old_next;
+			for answer in item["answers"]:
+				if answer.next_id > old_id:
+					answer.next_id-=1
 	
 	LinkBar.load_data(save_data);
 	update_options();
@@ -277,13 +286,20 @@ func _adjacent_swap(before, afer):
 	save_data[before].id = new_actor_id
 	save_data[afer].id = new_victim_id
 	
-	#TODO: Make sure this updates with the question class
-	
 	for item in save_data:
 		if item.next_id == actor_id:
 			item.next_id = new_actor_id;
 		elif item.next_id == victim_id:
 			item.next_id = new_victim_id;
+			
+	# Do the exact same thing for the answers
+	for item in save_data:
+		if item.get("answers"):
+			for answer in item["answers"]:
+				if answer.next_id == actor_id:
+					answer.next_id = new_actor_id;
+				elif answer.next_id == victim_id:
+					answer.next_id = new_victim_id;
 
 #Called when up is pressed. Moves current page up
 func up():

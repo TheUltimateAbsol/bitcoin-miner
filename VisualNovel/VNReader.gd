@@ -110,14 +110,17 @@ func play():
 					
 				state = WAITING
 				
-				yield(self, "goto_next_page")
+#				No yielding because we already do so waiting for an answer
+#				yield(self, "goto_next_page")
 			elif page is EndPage:
 				display_page(page)
 				endPage = true
 			else:
 				display_page(page)
 			
-			id = page.next_id;
+#			Because we already handled it
+			if not page is QuestionPage:
+				id = page.next_id;
 			break
 
 
@@ -199,57 +202,6 @@ func display_page(page:Page):
 		print("ENDING");
 		$Conclusion/AnimationPlayer.play("Activate");
 	elif page is QuestionPage:
-		npc.hide()
-		textlabel.text = ""
-		textlabel.set_visible_characters(0);
-		
-		if page.character == VNGlobal.Characters.NONE: 
-			npc.texture = null;
-		else:
-			if expressions[page.character][page.expression] == null:
-				npc.texture = expressions[VNGlobal.SIMON]["DEFAULT"]
-			else:
-				npc.texture = expressions[page.character][page.expression]
-				var nameID = page.character
-				nameLabel.text = VNGlobal.CharacterNames[nameID]
-		
-		#var file2Check = File.new()
-		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
-		if page.background != VNGlobal.Backgrounds.SAME:
-			if backgrounds[page.background] == null:
-				$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
-			else:
-				$Control/Background.texture = backgrounds[page.background];
-		
-		npc.show()
-		match page.transition:
-			VNGlobal.Transitions.NONE:
-				transition.play("appear")
-			VNGlobal.Transitions.FLASH: #think ace attorny
-				# MAKE TRANSITION
-				transition.play("appear")
-			VNGlobal.Transitions.FADE:
-				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
-				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
-				transition.play("fade in")
-	#			yield(transition, "animation_finished")
-			VNGlobal.Transitions.SLIDE_RIGHT:
-				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
-				transition.play("slide_from_right")
-	#			pass
-			VNGlobal.Transitions.SLIDE_LEFT:
-				# MAKE TRANSITION
-				transition.play("slide_from_left")
-	
-		for sentence in page.content:
-			prepend_sentence(sentence);
-		textlabel.set_visible_characters(0);
-		
-		for sentence in page.content:
-			var func_pointer = write_sentence(sentence)
-			if func_pointer:
-				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
-		
 		answerBox.visible = true
 		answerBox.reset()
 		for answer in page.answers:
@@ -257,6 +209,7 @@ func display_page(page:Page):
 			
 		answerBox.get_answer()
 		yield(answerBox, "has_result")
+		print(answerBox.result);
 		id = answerBox.result
 		
 		answerBox.visible = false

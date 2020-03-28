@@ -13,13 +13,12 @@ func _ready():
 
 # Sentence data
 onready var question_txt_input = $VBoxContainer/question_txt/question_input
-onready var next_id_input = $VBoxContainer/question_info2/next_id_input
-#onready var sentence_speed_input = $VBoxContainer/sentence_info2/sent_speed_input
+onready var next_id_input = $VBoxContainer/question_txt/next_id_input
 onready var add_question_btn = $VBoxContainer/question_txt/add_question
 
 func add_sentence():
 	var question_text = question_txt_input.get_text()
-	var next_id_text = next_id_input.get_text()
+	var next_id_text = next_id_input.value
 	
 	answers.push_back(Answer.new(question_text, next_id_text).serialize())
 	

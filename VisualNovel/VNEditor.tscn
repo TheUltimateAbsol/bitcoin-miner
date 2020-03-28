@@ -157,26 +157,26 @@ margin_right = 473.0
 margin_bottom = 95.0
 
 [node name="id" type="Label" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
-margin_right = 58.0
+margin_right = 74.0
 margin_bottom = 14.0
 size_flags_vertical = 5
 text = "ID"
 
 [node name="id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
 margin_top = 18.0
-margin_right = 58.0
+margin_right = 74.0
 margin_bottom = 42.0
 editable = false
 
 [node name="Next_id" type="Label" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
 margin_top = 46.0
-margin_right = 58.0
+margin_right = 74.0
 margin_bottom = 60.0
 text = "Next ID"
 
-[node name="next_id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
+[node name="next_id_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
 margin_top = 64.0
-margin_right = 58.0
+margin_right = 74.0
 margin_bottom = 88.0
 
 [node name="SentenceInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
@@ -255,14 +255,14 @@ margin_bottom = 92.0
 [node name="QuestionInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 margin_top = 216.0
 margin_right = 480.0
-margin_bottom = 339.0
+margin_bottom = 311.0
 script = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 116.0
+margin_bottom = 88.0
 
 [node name="question_info" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
 margin_right = 466.0
@@ -277,52 +277,40 @@ margin_bottom = 42.0
 alignment = 1
 
 [node name="question_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
-margin_left = 192.0
-margin_right = 250.0
+margin_left = 153.0
+margin_right = 211.0
 margin_bottom = 24.0
 expand_to_text_length = true
 placeholder_text = "Enter A sentence"
 
+[node name="next_id_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
+margin_left = 215.0
+margin_right = 289.0
+margin_bottom = 24.0
+align = 1
+
 [node name="add_question" type="Button" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
-margin_left = 254.0
-margin_right = 274.0
+margin_left = 293.0
+margin_right = 313.0
 margin_bottom = 24.0
 text = "+"
 
-[node name="question_info2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
+[node name="questions_lable" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
 margin_top = 46.0
 margin_right = 466.0
-margin_bottom = 70.0
-alignment = 1
-
-[node name="next_id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_info2"]
-margin_left = 187.0
-margin_right = 245.0
-margin_bottom = 24.0
-align = 1
-placeholder_text = "Next_id"
-
-[node name="sound_menu" type="OptionButton" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_info2"]
-margin_left = 249.0
-margin_right = 278.0
-margin_bottom = 24.0
-
-[node name="questions_lable" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
-margin_top = 74.0
-margin_right = 466.0
-margin_bottom = 105.0
+margin_bottom = 77.0
 text = "Answers:
 "
 
 [node name="question_list" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
-margin_top = 109.0
+margin_top = 81.0
 margin_right = 466.0
-margin_bottom = 109.0
+margin_bottom = 81.0
 
 [node name="SceneInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 343.0
+margin_top = 315.0
 margin_right = 480.0
-margin_bottom = 371.0
+margin_bottom = 343.0
 script = ExtResource( 6 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/SceneInput"]
@@ -365,9 +353,9 @@ text = "Scene Transitions"
 align = 1
 
 [node name="CharacterInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 375.0
+margin_top = 347.0
 margin_right = 480.0
-margin_bottom = 427.0
+margin_bottom = 399.0
 script = ExtResource( 7 )
 
 [node name="character_layout" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput"]
@@ -426,9 +414,9 @@ margin_right = 45.0
 margin_bottom = 38.0
 
 [node name="DirectoryInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 431.0
+margin_top = 403.0
 margin_right = 480.0
-margin_bottom = 487.0
+margin_bottom = 459.0
 script = ExtResource( 8 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/DirectoryInput"]
@@ -451,15 +439,15 @@ size_flags_horizontal = 3
 placeholder_text = "Enter a File Directory..."
 
 [node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_top = 491.0
+margin_top = 463.0
 margin_right = 480.0
-margin_bottom = 511.0
+margin_bottom = 483.0
 text = "Update & Preview Scene"
 
 [node name="update_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_top = 515.0
+margin_top = 487.0
 margin_right = 480.0
-margin_bottom = 535.0
+margin_bottom = 507.0
 text = "Update Scene"
 
 [node name="VNReaderBox" type="Control" parent="Panel/HBoxContainer"]

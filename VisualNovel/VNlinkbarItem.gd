@@ -6,8 +6,8 @@ class_name VNlinkbarItem
 # var a = 2
 # var b = "text"
 #var type
-var id
-var next
+var id: int
+var next: int
 var clicked = false
 var index = -1;
 #var text
@@ -36,12 +36,21 @@ func _init():
 #populate the data when it's instanced.
 #There's probably a better way, but this is the only correct way I know of
 	
+#data is an arbitrary dictionary with optional values
 func populate(data, question_num=0):
 	#We do this only for the sake of highlighting later
-	next = data.get("next_id"); #The "get" command will return null if it is empty
+	next = int(data["next_id"]); #The "get" command will return null if it is empty
 	#We do this because this information might be important on click
-	id = data.get("id");
+	if (data.get("id") or data.get("id") == 0):
+		id = int(data["id"])
+	else:
+		id = -1;
+		
+	#Questions should not have a default choice, so we hide it
+	if data.get("type") == "QuestionPage":
+		next = -2;
 	
+	#If an id exists (i.e. is a page, not a question answer, list a number)
 	if data.get("id") or data.get("id") == 0:
 		display_id.text = str(data.get("id")).pad_zeros(4) + ":";
 	else:
@@ -50,9 +59,9 @@ func populate(data, question_num=0):
 	match data.get("type"):
 		"Page": display_type.text= " - ";
 		"ContentPage": display_type.text= " + ";
+		"QuestionPage": display_type.text= " ? ";
 		"GameStartPage": display_type.text= " > ";
 		"GameEndPage": display_type.text= " # ";
-		"questions": display_type.text= " ? ";
 		"control": display_type.text= " * ";
 		"EndPage": display_type.text= " X ";
 #		Match an answer; has no type
@@ -64,6 +73,8 @@ func populate(data, question_num=0):
 			if data.get("content").size() > 0:
 #				print(data.get("content")[0]);
 				display_text.text = str(data.get("content")[0].get("content"))
+		elif typeof(data.get("content")) == TYPE_STRING:
+			display_text.text = data.get("content")
 		#Then some code here to set the text preview
 	elif data.get("comment"):
 		display_text.text = data.get("comment");
@@ -91,13 +102,12 @@ func _gui_input(event):
 				
 func select():
 	var children = get_parent().get_children()
-	print(theme);
-	set_deferred("theme", selectedStyle)
-	
 	get_parent().on_selected(index);
 	
 	for item in children:
-		if item.id == next:
+		if item.index == index:
+			item.theme = selectedStyle;
+		elif item.id == next:
 			item.theme = nextStyle
 		elif item.next == id:
 			item.theme = previousStyle
