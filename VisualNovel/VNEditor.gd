@@ -334,4 +334,6 @@ func import(pages:Array):
 	update_options()
 
 func _on_Import_pressed():
+	$ImportMenu.reset();
 	$ImportMenu.visible = true
+	

@@ -82,16 +82,16 @@ font_data = ExtResource( 10 )
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 30
 extra_spacing_top = 10
 extra_spacing_bottom = 10
 font_data = ExtResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.290196, 0.67451, 0.266667, 1 )
 
 [node name="Control" type="Control"]
@@ -654,7 +654,7 @@ margin_right = 620.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 6 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer"]
 margin_right = 620.0
@@ -741,15 +741,15 @@ alignment = 1
 margin_left = 174.0
 margin_right = 306.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "Cancel"
 
 [node name="Submit" type="Button" parent="ImportMenu/VBoxContainer/MarginContainer2/HBoxContainer"]
 margin_left = 406.0
 margin_right = 546.0
 margin_bottom = 57.0
-custom_styles/normal = SubResource( 7 )
-custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "IMPORT!"
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Import" to="." method="_on_Import_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Delete" to="." method="delete"]
