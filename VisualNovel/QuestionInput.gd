@@ -47,6 +47,6 @@ func delete_sentence(index):
 func get_data():
 	return {"answers":answers};
 	
-func load_data(sentences_input : Array, answers : Array):
-	answers = sentences_input;
+func load_data(xanswers : Array):
+	answers = xanswers;
 	sentence_display();

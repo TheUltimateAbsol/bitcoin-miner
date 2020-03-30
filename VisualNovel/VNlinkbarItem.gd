@@ -84,6 +84,8 @@ func populate(data, question_num=0):
 		display_text.text = "<GAME END>";
 	elif data.get("type") == "EndPage":
 		display_text.text = "<END>";
+	elif data.get("type") == "QuestionPage":
+		display_text.text = "<QUESTION>"
 		
 		
 #display_text.visible_characters = 20

@@ -72,7 +72,7 @@ func load_input(input, page_data):
 			preview_btn.show();
 		Inputs.QUESTION:
 			questionInput.show();
-			#questionInput.load_data();
+			questionInput.load_data(page_data["answers"]);
 		_:
 			push_error("INVALID INPUT");
 			
