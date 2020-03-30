@@ -45,7 +45,7 @@ var classes = {
 		"classNode": EndPage
 	},
 	"QuestionPage": {
-		"dependencies" : [Inputs.ID, Inputs.SENTENCE, Inputs.SCENE, Inputs.CHARACTER, Inputs.PREVIEW, Inputs.QUESTION],
+		"dependencies" : [Inputs.ID, Inputs.QUESTION, Inputs.PREVIEW],
 		"classNode": QuestionPage
 	}
 }
@@ -235,8 +235,35 @@ func delete():
 	if save_data.size() == 0: return;
 	if current_index == -1: return;
 	
+	var old_id = save_data[current_index].id
+	var old_next = save_data[current_index].next_id
+	
 	save_data.remove(current_index);
 	current_index = -1;
+	
+	#TODO: implement switching of question related ids
+	
+	#Fix the the gap caused by the removed item 
+	for item in save_data:
+		if item.next_id == old_id:
+			item.next_id = old_next;
+	
+	#Decrease all ids that were higher than the deleted one
+	for item in save_data:
+		if item.id > old_id:
+			item.id-=1
+		if item.next_id > old_id:
+			item.next_id-=1
+		
+	#Now do the exact same thing for all answer choices
+	for item in save_data:
+		if item.get("answers"):
+			for answer in item["answers"]:
+				if answer.next_id == old_id:
+					answer.next_id = old_next;
+			for answer in item["answers"]:
+				if answer.next_id > old_id:
+					answer.next_id-=1
 	
 	LinkBar.load_data(save_data);
 	update_options();
@@ -264,6 +291,15 @@ func _adjacent_swap(before, afer):
 			item.next_id = new_actor_id;
 		elif item.next_id == victim_id:
 			item.next_id = new_victim_id;
+			
+	# Do the exact same thing for the answers
+	for item in save_data:
+		if item.get("answers"):
+			for answer in item["answers"]:
+				if answer.next_id == actor_id:
+					answer.next_id = new_actor_id;
+				elif answer.next_id == victim_id:
+					answer.next_id = new_victim_id;
 
 #Called when up is pressed. Moves current page up
 func up():

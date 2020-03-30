@@ -7,24 +7,7 @@ onready var nameLabel = get_node("Control/Control/Node2D/Name")
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
 onready var transition = get_node("Control/NPC/AnimationPlayer")
-
-#answer arrow stuff
-onready var greenArrowAnimate = get_node("Control/Control2/choiceA/AnimationPlayer")
-onready var redArrowAnimate = get_node("Control/Control2/choiceB/AnimationPlayer2");
-onready var yellowArrowAnimate = get_node("Control/Control2/choiceC/AnimationPlayer3")
-onready var blueArrowAnimate = get_node("Control/Control2/choiceD/AnimationPlayer4")
-
-onready var greenArrowTxt = get_node("Control/Control2/choiceA/Label")
-onready var redArrowTxt = get_node("Control/Control2/choiceB/Label")
-onready var yellowArrowTxt = get_node("Control/Control2/choiceC/Label")
-onready var blueArrowTxt = get_node("Control/Control2/choiceD/Label")
-
-onready var greenArrow = get_node("Control/Control2/choiceA/Button")
-onready var redArrow = get_node("Control/Control2/choiceB/Button2")
-onready var yellowArrow = get_node("Control/Control2/choiceC/Button3")
-onready var blueArrow = get_node("Control/Control2/choiceD/Button4")
-
-onready var arrowContainer = get_node("Control/Control2");
+onready var answerBox = $Control/AnswerBox
 
 #timer stuff
 onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
@@ -40,11 +23,6 @@ var save_data : Array;
 var tap_skip = true;
 var skipped = false;
 var state = UNSET;
-
-var greenPicked = false
-var redPicked = false
-var yellowPicked = false
-var bluePicked = false
 
 var id = 0;
 var btn_pressed = ""
@@ -81,19 +59,14 @@ var backgrounds = {
 	
 var CHAR_WAIT = 1.0/20
 var data_json
-var arrow
 
 func _ready():
 	textlabel.text = ""
 	nameLabel.text = ""
 	npc.texture = null
-	redArrowTxt.text = ""
-	greenArrowTxt.text = ""
-	blueArrowTxt.text = ""
-	yellowArrowTxt.text = ""
+	answerBox.visible = false
 	
 	VNGlobal.connect("user_input", self, "attempt_skip");
-	arrowContainer.connect("btn_pressed", self, "display_page")
 	load_data("res://VisualNovel/data.json");
 	if autoplay:
 		play();
@@ -137,14 +110,17 @@ func play():
 					
 				state = WAITING
 				
-				yield(self, "goto_next_page")
+#				No yielding because we already do so waiting for an answer
+#				yield(self, "goto_next_page")
 			elif page is EndPage:
 				display_page(page)
 				endPage = true
 			else:
 				display_page(page)
 			
-			id = page.next_id;
+#			Because we already handled it
+			if not page is QuestionPage:
+				id = page.next_id;
 			break
 
 
@@ -226,130 +202,18 @@ func display_page(page:Page):
 		print("ENDING");
 		$Conclusion/AnimationPlayer.play("Activate");
 	elif page is QuestionPage:
-		npc.hide()
-		textlabel.text = ""
-		textlabel.set_visible_characters(0);
-		
-		if page.character == VNGlobal.Characters.NONE: 
-			npc.texture = null;
-		else:
-			if expressions[page.character][page.expression] == null:
-				npc.texture = expressions[VNGlobal.SIMON]["DEFAULT"]
-			else:
-				npc.texture = expressions[page.character][page.expression]
-				var nameID = page.character
-				nameLabel.text = VNGlobal.CharacterNames[nameID]
-		
-		#var file2Check = File.new()
-		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
-		if page.background != VNGlobal.Backgrounds.SAME:
-			if backgrounds[page.background] == null:
-				$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
-			else:
-				$Control/Background.texture = backgrounds[page.background];
-		
-		npc.show()
-		match page.transition:
-			VNGlobal.Transitions.NONE:
-				transition.play("appear")
-			VNGlobal.Transitions.FLASH: #think ace attorny
-				# MAKE TRANSITION
-				transition.play("appear")
-			VNGlobal.Transitions.FADE:
-				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
-				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
-				transition.play("fade in")
-	#			yield(transition, "animation_finished")
-			VNGlobal.Transitions.SLIDE_RIGHT:
-				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
-				transition.play("slide_from_right")
-	#			pass
-			VNGlobal.Transitions.SLIDE_LEFT:
-				# MAKE TRANSITION
-				transition.play("slide_from_left")
-			
-	# else involves being able to reference previous pages
-		
-#		redArrowTxt.text = ""
-#		greenArrowTxt.text = ""
-#		blueArrowTxt.text = ""
-#		yellowArrowTxt.text = ""
-		
-		var useRed = false;
-		var useGreen = false;
-		var useYellow = false;
-		var useBlue = false;
-	
-		for sentence in page.content:
-			prepend_sentence(sentence);
-		textlabel.set_visible_characters(0);
-		
-		for sentence in page.content:
-			var func_pointer = write_sentence(sentence)
-			if func_pointer:
-				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
-		
-		var answerText
-		
+		answerBox.visible = true
+		answerBox.reset()
 		for answer in page.answers:
-			print("we made it to answers")
-			answerText = answer.content
-			print(answerText)
-			if(redArrowTxt.text == ""):
-				redArrowTxt.text = answerText;
-#				print(redArrowTxt.text)
-				
-			elif (greenArrowTxt.text == ""):
-				greenArrowTxt.text = answerText;
-#				print(greenArrowTxt.text)
-				
-			elif (yellowArrowTxt.text == ""):
-				yellowArrowTxt.text = answerText;
-#				print(yellowArrowTxt.text)
-				
-			elif (blueArrowTxt.text == ""):
-				blueArrowTxt.text = answerText;
-#				print(blueArrowTxt.text)
-				
-			else:
-				print("no match")
-				
-		#print(redArrowTxt.text)
-				
-		if(redArrowTxt.text != ""):
-			useRed = true
+			answerBox.add_answer(answer.content, answer.next_id)
 			
-		if(greenArrowTxt.text != ""):
-			useBlue = true
-			
-		if(yellowArrowTxt.text != ""):
-			useYellow = true
-			
-		if(yellowArrowTxt.text != ""):
-			useGreen = true
-			
-			
-		if(useGreen):
-			greenArrowAnimate.play("arrow")
-		if(useRed):
-			redArrowAnimate.play("arrow")
-		if(useYellow):
-			yellowArrowAnimate.play("arrow")
-		if(useBlue):
-			blueArrowAnimate.play("arrow")
+		answerBox.get_answer()
+		yield(answerBox, "has_result")
+		print(answerBox.result);
+		id = answerBox.result
 		
-		yield(arrowContainer, "btn_pressed")
-		
-		match btn_pressed:
-			"green":
-				id = page.answers[0].next_id
-			"red":
-				id = page.answers[1].next_id
-			"yellow":
-				id = page.answers[2].next_id
-			"blue":
-				id = page.answers[3].next_id
-		
+		answerBox.visible = false
+		print(id)
 	
 	state = WAITING
 
@@ -460,49 +324,3 @@ func attempt_skip():
 			next_page();
 		UNSET:
 			pass;
-			
-
-
-func _on_Button4_pressed():
-	bluePicked = true
-
-
-func _on_Button3_pressed():
-	yellowPicked = true
-
-
-func _on_Button2_pressed():
-	redPicked = true
-
-
-func _on_Button_pressed():
-	greenPicked = true
-
-
-func _on_Control2_btn_pressed(btn):
-	match(btn):
-		"red":
-			redArrowAnimate.play("selected")
-			blueArrowAnimate.play("notSelected")
-			greenArrowAnimate.play("notSelected_B")
-			yellowArrowAnimate.play("notSelected")
-			yield(redArrowAnimate, "animation_finished")
-		"blue":
-			blueArrowAnimate.play("selected")
-			redArrowAnimate.play("notSelected")
-			greenArrowAnimate.play("notSelected_B")
-			yellowArrowAnimate.play("notSelected")
-			yield(blueArrowAnimate, "animation_finished")
-		"green":
-			greenArrowAnimate.play("selected")
-			redArrowAnimate.play("notSelected")
-			blueArrowAnimate.play("notSelected")
-			yellowArrowAnimate.play("notSelected")
-			yield(greenArrowAnimate, "animation_finished")
-		"yellow":
-			yellowArrowAnimate.play("selected")
-			redArrowAnimate.play("notSelected")
-			greenArrowAnimate.play("notSelected_B")
-			blueArrowAnimate.play("notSelected")
-			yield(yellowArrowAnimate, "animation_finished")
-	btn_pressed = btn

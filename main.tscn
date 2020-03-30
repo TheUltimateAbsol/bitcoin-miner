@@ -115,6 +115,9 @@ margin_left = -202.124
 margin_top = 1495.33
 margin_right = 862.876
 margin_bottom = 3329.34
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GamePanel" type="ViewportContainer" parent="CenterContainer/main/Control"]
 margin_left = 240.161
