@@ -288,3 +288,14 @@ func down():
 	LinkBar.load_data(save_data);
 	LinkBar.select(current_index);
 	update_options();
+
+func import(pages:Array):
+	save_data = pages
+	
+	current_index = -1;
+	LinkBar.load_data(save_data);
+	LinkBar.select(current_index);
+	update_options()
+
+func _on_Import_pressed():
+	$ImportMenu.visible = true

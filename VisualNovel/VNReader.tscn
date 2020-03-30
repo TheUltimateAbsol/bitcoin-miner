@@ -733,11 +733,11 @@ angular_velocity_random = 0.61
 scale_amount = 0.1
 color_ramp = SubResource( 19 )
 [connection signal="btn_pressed" from="Control/Control2" to="." method="_on_Control2_btn_pressed"]
-[connection signal="pressed" from="Control/Control2/choiceA/Button" to="Control/Control2" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceA/Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="Control/Control2/choiceB/Button2" to="Control/Control2" method="_on_Button2_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceA/Button" to="Control/Control2" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceB/Button2" to="." method="_on_Button2_pressed"]
-[connection signal="pressed" from="Control/Control2/choiceC/Button3" to="Control/Control2" method="_on_Button3_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceB/Button2" to="Control/Control2" method="_on_Button2_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceC/Button3" to="." method="_on_Button3_pressed"]
-[connection signal="pressed" from="Control/Control2/choiceD/Button4" to="Control/Control2" method="_on_Button4_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceC/Button3" to="Control/Control2" method="_on_Button3_pressed"]
 [connection signal="pressed" from="Control/Control2/choiceD/Button4" to="." method="_on_Button4_pressed"]
+[connection signal="pressed" from="Control/Control2/choiceD/Button4" to="Control/Control2" method="_on_Button4_pressed"]
