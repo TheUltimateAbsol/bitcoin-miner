@@ -11,7 +11,7 @@ func _init(xtimer):
 	timer.connect("timeout", self, "on_timeout");
 	
 func set_time(wait_time):
-	timer.wait_time = wait_time;
+	timer.wait_time = wait_time + 0.0001;
 	
 func get_wait_time():
 	return timer.get_wait_time()

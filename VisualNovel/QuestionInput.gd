@@ -1,4 +1,4 @@
-extends PanelContainer
+extends InputBase
 
 var answers = [];
 #var content = []
@@ -23,6 +23,7 @@ func add_sentence():
 	answers.push_back(Answer.new(question_text, next_id_text).serialize())
 	
 	sentence_display()
+	update();
 	
 	
 func sentence_display():
@@ -34,19 +35,32 @@ func sentence_display():
 	for i in range(answers.size()):
 		var prompt = answers[i];
 		var new_prompt = questionLabel.instance()
-		new_prompt.set_text(prompt.content);
-		new_prompt.set_id(prompt.next_id)
 		question_list.add_child(new_prompt)
-		
-		new_prompt.connect("delete", self, "delete_sentence", [i]);
+		new_prompt.set_data(prompt.content, prompt.next_id);
 
-func delete_sentence(index):
+		new_prompt.connect("delete", self, "delete_answer", [i]);
+		new_prompt.connect("updated", self, "update_answer", [i]);
+
+func delete_answer(index):
 	answers.remove(index)
 	sentence_display()
+	update();
+	
+func update_answer(index):
+#	We cheat here since # children = # answers
+	answers[index].next_id = question_list.get_child(index).next_id;
+	sentence_display();
+	update();
 	
 func get_data():
 	return {"answers":answers};
 	
-func load_data(xanswers : Array):
-	answers = xanswers;
+func load_data(page_data):
+	answers = page_data.answers;
 	sentence_display();
+
+
+func _on_question_input_text_entered(new_text):
+	add_sentence();
+
+

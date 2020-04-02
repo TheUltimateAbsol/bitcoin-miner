@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
-[ext_resource path="res://VisualNovel/Backgrounds/classroom_angle.png" type="Texture" id=2]
+[ext_resource path="res://VisualNovel/Backgrounds/ClassroomB.png" type="Texture" id=2]
 [ext_resource path="res://VisualNovel/Characters/Jack Final.png" type="Texture" id=3]
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=4]
 [ext_resource path="res://VisualNovel/slide_from_left.tres" type="Animation" id=5]
@@ -12,8 +12,45 @@
 [ext_resource path="res://VisualNovel/Fonts/gloria_hallelujah/gloria_hallelujah.tres" type="DynamicFont" id=13]
 [ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=15]
 
-[sub_resource type="Animation" id=1]
-resource_name = "appear"
+[sub_resource type="Shader" id=1]
+code = "
+shader_type canvas_item;
+
+uniform float outline_width = 2.0;
+uniform vec4 outline_color: hint_color;
+
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	vec2 ps = TEXTURE_PIXEL_SIZE;
+	float a;
+	float maxa = col.a;
+	float mina = col.a;
+
+	a = texture(TEXTURE, UV + vec2(0.0, -outline_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(0.0, outline_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(-outline_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(outline_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	COLOR = mix(col, outline_color, maxa - mina);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/outline_width = 6.0
+shader_param/outline_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="Animation" id=3]
 length = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -40,9 +77,9 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
 tracks/0/interp = 1
@@ -56,7 +93,7 @@ tracks/0/keys = {
 "values": [ Vector2( 600, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -118,10 +155,10 @@ tracks/4/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=5]
+[sub_resource type="CanvasItemMaterial" id=7]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.873469, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.412245, 0.412245, 0.412245, 1, 0, 0, 0, 1 )
 
@@ -155,11 +192,12 @@ stretch_mode = 7
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Background"]
 
 [node name="NPC" type="TextureRect" parent="Control"]
+material = SubResource( 2 )
 anchor_top = 0.3
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -338.0
-margin_top = -107.0
+margin_top = -187.0
 margin_right = 363.0
 margin_bottom = 141.0
 mouse_filter = 2
@@ -167,13 +205,16 @@ size_flags_vertical = 3
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/NPC"]
-anims/appear = SubResource( 1 )
+anims/appear = SubResource( 3 )
 "anims/fade in" = ExtResource( 4 )
-anims/flash = SubResource( 2 )
+anims/flash = SubResource( 4 )
 anims/slide_from_left = ExtResource( 5 )
-anims/slide_from_right = SubResource( 3 )
+anims/slide_from_right = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Control"]
 visible = false
@@ -326,10 +367,10 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Conclusion"]
-anims/Activate = SubResource( 4 )
+anims/Activate = SubResource( 6 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Conclusion"]
-material = SubResource( 5 )
+material = SubResource( 7 )
 position = Vector2( -0.000645838, 398.088 )
 emitting = false
 amount = 50
@@ -340,7 +381,7 @@ gravity = Vector2( 0, 200 )
 angular_velocity = 313.55
 angular_velocity_random = 0.61
 scale_amount = 0.1
-color_ramp = SubResource( 6 )
+color_ramp = SubResource( 8 )
 [connection signal="pressed" from="Control/AnswerBox/A" to="Control/AnswerBox" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/AnswerBox/B" to="Control/AnswerBox" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/AnswerBox/C" to="Control/AnswerBox" method="_on_Button_pressed"]

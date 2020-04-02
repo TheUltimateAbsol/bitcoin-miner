@@ -3,20 +3,24 @@ extends Node
 class_name Sentence
 
 var content : String
-var sound
-var speed
-var delay : float
+var effect : String
+var speed : String
+var delay : String
 
-func _init(xcontent, xdelay=VNGlobal.DEFAULT_SENTENCE_DELAY, xsound= VNGlobal.SoundEffect.NONE, xspeed=1.0):
+func _init(xcontent, 
+	xspeed=VNGlobal.SentenceSpeeds.NORMAL,
+	xdelay=VNGlobal.DelayLengths.DEFAULT, 
+	xeffect= VNGlobal.Effects.NONE):
+		
 	content = xcontent;
-	sound = xsound;
+	effect = xeffect;
 	speed = xspeed;
-	delay = xdelay
+	delay = xdelay;
 	
 func serialize():
 	return {
 		"content" : content, 
 		"delay": delay, 
 		"speed" : speed, 
-		"sound" : sound
+		"effect" : effect
 	};

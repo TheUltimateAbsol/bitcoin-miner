@@ -64,6 +64,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://VisualNovel/PageClasses/GameStartPage.gd"
 }, {
+"base": "Page",
+"class": "ImageTogglePage",
+"language": "GDScript",
+"path": "res://VisualNovel/PageClasses/ImageTogglePage.gd"
+}, {
+"base": "PanelContainer",
+"class": "InputBase",
+"language": "GDScript",
+"path": "res://VisualNovel/InputBase.gd"
+}, {
 "base": "InputEventAction",
 "class": "InputEventSwipe",
 "language": "GDScript",
@@ -129,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://VisualNovel/TimerRequest.gd"
 }, {
+"base": "Page",
+"class": "TransitionPage",
+"language": "GDScript",
+"path": "res://VisualNovel/PageClasses/TransitionPage.gd"
+}, {
 "base": "Panel",
 "class": "VNlinkbarItem",
 "language": "GDScript",
@@ -146,6 +161,8 @@ _global_script_class_icons={
 "Enemy": "",
 "GameEndPage": "",
 "GameStartPage": "",
+"ImageTogglePage": "",
+"InputBase": "",
 "InputEventSwipe": "",
 "InputEventTap": "",
 "JumpTrajectory": "",
@@ -159,6 +176,7 @@ _global_script_class_icons={
 "QuestionPage": "",
 "Sentence": "",
 "TimerRequest": "",
+"TransitionPage": "",
 "VNlinkbarItem": ""
 }
 

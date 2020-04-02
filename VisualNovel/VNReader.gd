@@ -1,5 +1,20 @@
 extends Control
 
+const SENTENCE_SPEEDS = {
+	VNGlobal.SentenceSpeeds.DEFAULT : 1.0,
+	VNGlobal.SentenceSpeeds.FAST : 2.0,
+	VNGlobal.SentenceSpeeds.SLOW : 0.5
+}
+
+const DELAY_LENGTHS = {
+	VNGlobal.DelayLengths.DEFAULT : 0.3,
+	VNGlobal.DelayLengths.SHORT : .1,
+	VNGlobal.DelayLengths.LONG : 1,
+	VNGlobal.DelayLengths.NONE : 0.0
+}
+
+const CHAR_WAIT = 1.0/25
+
 export (bool) var autoplay = false;
 
 onready var textlabel = get_node("Control/Control/Node2D/Text")
@@ -57,7 +72,6 @@ var backgrounds = {
 }
 		
 	
-var CHAR_WAIT = 1.0/20
 var data_json
 
 func _ready():
@@ -139,50 +153,41 @@ func display_page(page:Page):
 		nameLabel.text = ""
 		textlabel.set_visible_characters(0);
 		
-		if page.character == VNGlobal.Characters.NONE: 
+		if page.character_image == VNGlobal.Characters.NONE: 
 			npc.texture = null;
 		else:
-			if expressions[page.character][VNGlobal.Expressions.DEFAULT] == null:
+			if expressions[page.character_image][VNGlobal.Expressions.DEFAULT] == null:
 				npc.texture = "";
 			else:
-				npc.texture = expressions[page.character][VNGlobal.Expressions.DEFAULT]
-				var nameID = page.character
-				nameLabel.text = VNGlobal.CharacterNames[nameID]
+				npc.texture = expressions[page.character_image][VNGlobal.Expressions.DEFAULT]
 		
 		
 		#var file2Check = File.new()
 		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
 		npc.show()
-		match page.transition:
-			VNGlobal.Transitions.NONE:
+		match page.character_transition:
+			VNGlobal.CharacterTransitions.NONE:
 				transition.play("appear")
 				yield(transition, "animation_finished")
-			VNGlobal.Transitions.FLASH: #think ace attorny
+			VNGlobal.CharacterTransitions.FLASH: #think ace attorny
 				# MAKE TRANSITION
 				transition.play("appear")
 				yield(transition, "animation_finished")
-			VNGlobal.Transitions.FADE:
+			VNGlobal.CharacterTransitions.FADE:
 				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
 				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
 				transition.play("fade in")
 				yield(transition, "animation_finished")
 	#			yield(transition, "animation_finished")
-			VNGlobal.Transitions.SLIDE_RIGHT:
+			VNGlobal.CharacterTransitions.SLIDE_RIGHT:
 				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
 				transition.play("slide_from_right")
 				yield(transition, "animation_finished")
 	#			pass
-			VNGlobal.Transitions.SLIDE_LEFT:
+			VNGlobal.CharacterTransitions.SLIDE_LEFT:
 				# MAKE TRANSITION
 				transition.play("slide_from_left")
 				yield(transition, "animation_finished")
-			
-		if page.background != VNGlobal.Backgrounds.SAME:
-			if backgrounds[page.background] == null:
-				$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
-			else:
-				$Control/Background.texture = backgrounds[page.background];
-	# else involves being able to reference previous pages
 	
 		for sentence in page.content:
 			prepend_sentence(sentence);
@@ -229,8 +234,10 @@ func count_printable(string:String):
 
 func write_sentence (sentence):
 	var target = textlabel.get_visible_characters() + count_printable(sentence.content);
+	var speed = SENTENCE_SPEEDS[sentence.speed];
 
-	letter_timer.set_time(CHAR_WAIT/sentence.speed);
+	print(sentence.speed, CHAR_WAIT/speed);
+	letter_timer.set_time(CHAR_WAIT/speed);
 	letter_timer.start();
 	
 	for i in range(count_printable(sentence.content)):
@@ -240,7 +247,7 @@ func write_sentence (sentence):
 	letter_timer.stop();
 
 	if (skipped == false):
-		delay_timer.set_time(VNGlobal.DEFAULT_SENTENCE_DELAY); 
+		delay_timer.set_time(DELAY_LENGTHS[sentence.delay]); 
 		delay_timer.start();
 		yield(delay_timer, "timeout");
 		delay_timer.stop();

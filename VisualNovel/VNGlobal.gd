@@ -8,21 +8,21 @@ extends Node
 #enum SoundEffect{NONE, DING, THWACK, WHACK} # when the text appears on the screen (sentence per sentence basis)
 
 const Characters = {"NONE":"NONE", "SIMON":"SIMON", "ANNA":"ANNA", "CLAIRE":"CLAIRE", "JACK":"JACK", "CHAD":"CHAD", "JUNE":"JUNE", "SHAUN":"SHAUN"} 
-const CharacterNames = {"NONE":"NONE", "SIMON":"Simon", "ANNA":"Anna", "TEACHER":"Teacher", "BELL":"Bell", "CLAIRE":"Claire", "JACK":"Jack", "CHAD":"Chad", "JUNE":"June", "SHAUN":"Shaun", "???":"???"} 
-const Transitions = {"NONE":"NONE", "FLASH":"FLASH", "FADE":"FADE", "SLIDE_RIGHT":"SLIDE_RIGHT", "SLIDE_LEFT":"SLIDE_LEFT"} #character
+#const CharacterNames = {"NONE":"NONE", "SIMON":"Simon", "ANNA":"Anna", "TEACHER":"Teacher", "BELL":"Bell", "CLAIRE":"Claire", "JACK":"Jack", "CHAD":"Chad", "JUNE":"June", "SHAUN":"Shaun", "???":"???"} 
+const CharacterTransitions = {"NONE":"NONE", "FLASH":"FLASH", "FADE":"FADE", "SLIDE_RIGHT":"SLIDE_RIGHT", "SLIDE_LEFT":"SLIDE_LEFT"} #character
 const Expressions = {"DEFAULT":"DEFAULT", "HAPPY":"HAPPY", "SAD":"SAD"}
 const Music = {"SAME":"SAME", "NONE":"NONE", "SIMPLE":"SIMPLE", "SAD":"SAD"}
 const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOM":"CLASSROOM"}
-const Background_transitiosn = {"NONE":"NONE", "FADE":"FADE", "BLACK":"BLACK"}
+const SceneTransitions = {"NONE":"NONE", "FADE":"FADE", "BLACK":"BLACK"}
 # when the text appears on the screen (sentence per sentence basis)
-const SoundEffect = {"NONE":"NONE", "DING":"DING", "THWACK":"THWACK", "WHACK":"WHACK"}
-#const PageTypes = {"ContentPage":"ContentPage", "GameStartPage":"GameStartPage", "GameEndPage":"GameEndPage",  "EndPage":"EndPage"}
+const Effects = {"NONE":"NONE", "DING":"DING", "THWACK":"THWACK", "WHACK":"WHACK"}
+const SentenceSpeeds = {"DEFAULT": "DEFAULT", "FAST":"FAST", "SLOW":"SLOW"}
+const DelayLengths = {"DEFAULT": "DEFAULT", "NONE":"NONE", "SHORT":"SHORT", "LONG":"LONG"}
+const Images = {"LETTER":"LETTER"}
 
 const CLASS_DIRECTORY = "res://VisualNovel/PageClasses/"
 
 signal user_input
-
-const DEFAULT_SENTENCE_DELAY = 0.5;
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS

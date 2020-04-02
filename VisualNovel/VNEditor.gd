@@ -1,8 +1,6 @@
 extends Control
 
 # parse buttons
-onready var preview_btn = $Panel/HBoxContainer/Layout/preview_btn
-onready var update_btn = $Panel/HBoxContainer/Layout/update_btn
 onready var reader = $Panel/HBoxContainer/VNReaderBox/VNReader
 onready var insert_btn = $Panel/HBoxContainer/VBoxContainer/HBoxContainer/New
 
@@ -13,11 +11,14 @@ onready var sceneInput = $Panel/HBoxContainer/Layout/SceneInput
 onready var characterInput = $Panel/HBoxContainer/Layout/CharacterInput
 onready var directoryInput = $Panel/HBoxContainer/Layout/DirectoryInput
 onready var questionInput = $Panel/HBoxContainer/Layout/QuestionInput
+onready var speakerInput = $Panel/HBoxContainer/Layout/SpeakerInput
+onready var imageInput = $Panel/HBoxContainer/Layout/ImageToggleInput
+onready var transitionInput = $Panel/HBoxContainer/Layout/TransitionInput
 onready var LinkBar = $Panel/HBoxContainer/VBoxContainer/ScrollContainer/LinkBar
 
 const VNReaderClass = preload("res://VisualNovel/VNReader.tscn");
 #Used to identify input types
-enum Inputs {ID, SENTENCE, SCENE, CHARACTER, PREVIEW, DIRECTORY, QUESTION}
+enum Inputs {ID, SENTENCE, SCENE, CHARACTER, DIRECTORY, QUESTION, SPEAKER, TRANSITION, IMAGE}
 
 var data_json #This is what we read in from a file. Honestly, I'm not sure why it's here
 var save_data : Array #Our save data
@@ -29,85 +30,74 @@ var current_index = -1; #This says what page is currently selected
 # classNode is a link to the actual class (given by classname)
 var classes = {
 	"ContentPage": {
-		"dependencies": [Inputs.ID, Inputs.SENTENCE, Inputs.SCENE, Inputs.CHARACTER, Inputs.PREVIEW],
+		"dependencies": [Inputs.ID, Inputs.SENTENCE, Inputs.CHARACTER, Inputs.SPEAKER],
 		"classNode": ContentPage,
 	},
 	"GameStartPage": {
-		"dependencies": [Inputs.ID, Inputs.DIRECTORY, Inputs.PREVIEW],
+		"dependencies": [Inputs.ID, Inputs.DIRECTORY],
 		"classNode": GameStartPage
 	},
 	"GameEndPage": {
-		"dependencies": [Inputs.ID, Inputs.PREVIEW],
+		"dependencies": [Inputs.ID],
 		"classNode": GameEndPage
 	},
 	"EndPage": {
-		"dependencies": [Inputs.ID, Inputs.PREVIEW],
+		"dependencies": [Inputs.ID],
 		"classNode": EndPage
 	},
 	"QuestionPage": {
-		"dependencies" : [Inputs.ID, Inputs.QUESTION, Inputs.PREVIEW],
+		"dependencies" : [Inputs.ID, Inputs.QUESTION],
 		"classNode": QuestionPage
-	}
+	},
+	"TransitionPage": {
+		"dependencies" : [Inputs.ID, Inputs.TRANSITION],
+		"classNode": TransitionPage
+	},
+	"ImageTogglePage": {
+		"dependencies" : [Inputs.ID, Inputs.IMAGE],
+		"classNode": ImageTogglePage
+	},
 }
 
-# Renders the given input into the editor given the page_data
-func load_input(input, page_data):
-	match(input):
+func type_to_input(input_type):
+	match(input_type):
 		Inputs.ID:
-			idInput.show();
-			idInput.load_data(page_data["id"], page_data["next_id"]);
+			return idInput;
 		Inputs.SENTENCE:
-			sentenceInput.show()
-			sentenceInput.load_data(page_data["content"]);
+			return sentenceInput;
 		Inputs.SCENE:
-			sceneInput.show()
-			sceneInput.load_data(page_data["music"], page_data["background"], page_data["scene_transition"]);
+			return sceneInput;
 		Inputs.CHARACTER:
-			characterInput.show()
-			characterInput.load_data(page_data["character"], page_data["background"], page_data["scene_transition"]);
+			return characterInput
 		Inputs.DIRECTORY:
-			directoryInput.show();
-			directoryInput.load_data(page_data["game_dir"]);
-		Inputs.PREVIEW:
-			preview_btn.show();
+			return directoryInput
 		Inputs.QUESTION:
-			questionInput.show();
-			questionInput.load_data(page_data["answers"]);
+			return questionInput;
+		Inputs.SPEAKER:
+			return speakerInput;
+		Inputs.TRANSITION:
+			return transitionInput;
+		Inputs.IMAGE:
+			return imageInput;
 		_:
-			push_error("INVALID INPUT");
+			push_error("INVALID INPUT " + String(input_type))
+			return null;
+
+# Renders the given input into the editor given the page_data
+func load_input(input_type, page_data):
+	type_to_input(input_type).load_data(page_data)
+	type_to_input(input_type).show();
 			
 # Reads data from the given input, then saves it into page_data
-func read_input(input, page_data):
-	match (input):
-		Inputs.ID:
-			VNGlobal.merge_dir(page_data, idInput.get_data());
-		Inputs.SENTENCE:
-			VNGlobal.merge_dir(page_data, sentenceInput.get_data());
-		Inputs.SCENE:
-			VNGlobal.merge_dir(page_data, sceneInput.get_data());
-		Inputs.CHARACTER:
-			VNGlobal.merge_dir(page_data, characterInput.get_data());
-		Inputs.DIRECTORY:
-			VNGlobal.merge_dir(page_data, directoryInput.get_data());
-		Inputs.PREVIEW:
-			pass;
-		Inputs.QUESTION:
-			VNGlobal.merge_dir(page_data, questionInput.get_data());
-		_:
-			push_error("INVALID INPUT");
+func read_input(input_type, page_data):
+	VNGlobal.merge_dir(page_data, type_to_input(input_type).get_data());
 			
 # This function hides all rendered inputs and displays new ones according to 
 # the current index
 # Useful for changing the display when a new linkbaritem is selected
 func update_options():
-	idInput.hide();
-	sentenceInput.hide()
-	sceneInput.hide()
-	characterInput.hide()
-	directoryInput.hide();
-	preview_btn.hide();
-	update_btn.hide();
-	questionInput.hide();
+	for child in $Panel/HBoxContainer/Layout.get_children():
+		child.hide();
 		
 	if current_index == -1:
 		return
@@ -126,11 +116,13 @@ func _ready():
 	for i in range(classes.keys().size()):
 		insert_btn.get_popup().add_item(classes.keys()[i], i);
 	insert_btn.get_popup().connect("id_pressed", self, "insert");
-	
-	
 
 	load_from_json();
 	update_options()
+	
+#	Connect all changed events from the inputs
+	for input in $Panel/HBoxContainer/Layout.get_children():
+		input.connect("changed", self, "update_page");
 
 func preview_scene():
 	update_page()
