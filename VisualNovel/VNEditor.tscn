@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://VisualNovel/VNEditor.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/LinkBar.tscn" type="PackedScene" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=9]
 [ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://VisualNovel/SnackBar.gd" type="Script" id=11]
+[ext_resource path="res://parser.tscn" type="PackedScene" id=12]
+[ext_resource path="res://VisualNovel/ImportMenu.gd" type="Script" id=13]
+[ext_resource path="res://VisualNovel/ErrorLink.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -71,26 +74,52 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="DynamicFont" id=4]
+size = 30
+extra_spacing_top = 10
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 10 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
+extra_spacing_top = 10
+extra_spacing_bottom = 10
+font_data = ExtResource( 10 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.290196, 0.67451, 0.266667, 1 )
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_right = 185.0
+margin_right = 245.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer"]
-margin_right = 185.0
+margin_right = 245.0
 margin_bottom = 20.0
 alignment = 1
 
@@ -100,27 +129,33 @@ margin_bottom = 20.0
 text = "New"
 flat = false
 
-[node name="Delete" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Import" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 44.0
-margin_right = 99.0
+margin_right = 100.0
+margin_bottom = 20.0
+text = "Import"
+
+[node name="Delete" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 104.0
+margin_right = 159.0
 margin_bottom = 20.0
 text = "Delete"
 
 [node name="Up" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 103.0
-margin_right = 133.0
+margin_left = 163.0
+margin_right = 193.0
 margin_bottom = 20.0
 text = "Up"
 
 [node name="Down" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 137.0
-margin_right = 185.0
+margin_left = 197.0
+margin_right = 245.0
 margin_bottom = 20.0
 text = "Down"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/VBoxContainer"]
 margin_top = 24.0
-margin_right = 185.0
+margin_right = 245.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -128,14 +163,14 @@ size_flags_vertical = 3
 [node name="LinkBar" parent="Panel/HBoxContainer/VBoxContainer/ScrollContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 185.0
+margin_right = 245.0
 margin_bottom = 700.0
 rect_min_size = Vector2( 185, 700 )
 size_flags_horizontal = 3
 
 [node name="Layout" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_left = 189.0
-margin_right = 669.0
+margin_left = 249.0
+margin_right = 729.0
 margin_bottom = 1440.0
 rect_min_size = Vector2( 480, 435 )
 
@@ -151,26 +186,26 @@ margin_right = 473.0
 margin_bottom = 95.0
 
 [node name="id" type="Label" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
-margin_right = 58.0
+margin_right = 74.0
 margin_bottom = 14.0
 size_flags_vertical = 5
 text = "ID"
 
 [node name="id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
 margin_top = 18.0
-margin_right = 58.0
+margin_right = 74.0
 margin_bottom = 42.0
 editable = false
 
 [node name="Next_id" type="Label" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
 margin_top = 46.0
-margin_right = 58.0
+margin_right = 74.0
 margin_bottom = 60.0
 text = "Next ID"
 
-[node name="next_id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
+[node name="next_id_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
 margin_top = 64.0
-margin_right = 58.0
+margin_right = 74.0
 margin_bottom = 88.0
 
 [node name="SentenceInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
@@ -249,14 +284,14 @@ margin_bottom = 92.0
 [node name="QuestionInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 margin_top = 216.0
 margin_right = 480.0
-margin_bottom = 339.0
+margin_bottom = 311.0
 script = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 116.0
+margin_bottom = 88.0
 
 [node name="question_info" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
 margin_right = 466.0
@@ -271,52 +306,40 @@ margin_bottom = 42.0
 alignment = 1
 
 [node name="question_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
-margin_left = 192.0
-margin_right = 250.0
+margin_left = 153.0
+margin_right = 211.0
 margin_bottom = 24.0
 expand_to_text_length = true
 placeholder_text = "Enter A sentence"
 
+[node name="next_id_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
+margin_left = 215.0
+margin_right = 289.0
+margin_bottom = 24.0
+align = 1
+
 [node name="add_question" type="Button" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
-margin_left = 254.0
-margin_right = 274.0
+margin_left = 293.0
+margin_right = 313.0
 margin_bottom = 24.0
 text = "+"
 
-[node name="question_info2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
+[node name="questions_lable" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
 margin_top = 46.0
 margin_right = 466.0
-margin_bottom = 70.0
-alignment = 1
-
-[node name="next_id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_info2"]
-margin_left = 187.0
-margin_right = 245.0
-margin_bottom = 24.0
-align = 1
-placeholder_text = "Next_id"
-
-[node name="sound_menu" type="OptionButton" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_info2"]
-margin_left = 249.0
-margin_right = 278.0
-margin_bottom = 24.0
-
-[node name="questions_lable" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
-margin_top = 74.0
-margin_right = 466.0
-margin_bottom = 105.0
+margin_bottom = 77.0
 text = "Answers:
 "
 
 [node name="question_list" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
-margin_top = 109.0
+margin_top = 81.0
 margin_right = 466.0
-margin_bottom = 109.0
+margin_bottom = 81.0
 
 [node name="SceneInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 343.0
+margin_top = 315.0
 margin_right = 480.0
-margin_bottom = 371.0
+margin_bottom = 343.0
 script = ExtResource( 6 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/SceneInput"]
@@ -359,9 +382,9 @@ text = "Scene Transitions"
 align = 1
 
 [node name="CharacterInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 375.0
+margin_top = 347.0
 margin_right = 480.0
-margin_bottom = 427.0
+margin_bottom = 399.0
 script = ExtResource( 7 )
 
 [node name="character_layout" type="GridContainer" parent="Panel/HBoxContainer/Layout/CharacterInput"]
@@ -420,9 +443,9 @@ margin_right = 45.0
 margin_bottom = 38.0
 
 [node name="DirectoryInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 431.0
+margin_top = 403.0
 margin_right = 480.0
-margin_bottom = 487.0
+margin_bottom = 459.0
 script = ExtResource( 8 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/DirectoryInput"]
@@ -445,20 +468,20 @@ size_flags_horizontal = 3
 placeholder_text = "Enter a File Directory..."
 
 [node name="preview_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_top = 491.0
+margin_top = 463.0
 margin_right = 480.0
-margin_bottom = 511.0
+margin_bottom = 483.0
 text = "Update & Preview Scene"
 
 [node name="update_btn" type="Button" parent="Panel/HBoxContainer/Layout"]
-margin_top = 515.0
+margin_top = 487.0
 margin_right = 480.0
-margin_bottom = 535.0
+margin_bottom = 507.0
 text = "Update Scene"
 
 [node name="VNReaderBox" type="Control" parent="Panel/HBoxContainer"]
-margin_left = 673.0
-margin_right = 720.0
+margin_left = 733.0
+margin_right = 733.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -512,6 +535,223 @@ valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SnackBar"]
 anims/Activate = SubResource( 3 )
+
+[node name="ImportMenu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="ImportMenu"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -310.0
+margin_top = -46.0
+margin_right = 310.0
+margin_bottom = 46.0
+dialog_text = "Proceed with import?
+This will replace any existing pages in the editor.
+(Any errored-lines will be skipped.)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Parser" parent="ImportMenu" instance=ExtResource( 12 )]
+
+[node name="Panel" type="Panel" parent="ImportMenu"]
+modulate = Color( 1, 1, 1, 0.878431 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ImportMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ImportMenu/VBoxContainer"]
+margin_right = 720.0
+margin_bottom = 41.0
+custom_fonts/font = SubResource( 4 )
+text = "IMPORT MENU"
+align = 1
+
+[node name="Label2" type="Label" parent="ImportMenu/VBoxContainer"]
+margin_top = 45.0
+margin_right = 720.0
+margin_bottom = 61.0
+custom_fonts/font = SubResource( 5 )
+text = "(WARNING: This deletes the current save data)"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ImportMenu/VBoxContainer"]
+margin_top = 65.0
+margin_right = 720.0
+margin_bottom = 1199.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 50
+custom_constants/margin_top = 5
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="ImportMenu/VBoxContainer/MarginContainer"]
+margin_left = 50.0
+margin_top = 5.0
+margin_right = 670.0
+margin_bottom = 1129.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/function_color = Color( 1, 1, 1, 1 )
+custom_colors/number_color = Color( 1, 1, 1, 1 )
+text = "Enter your text here..."
+syntax_highlighting = true
+show_line_numbers = true
+
+[node name="ErrorPanel" type="MarginContainer" parent="ImportMenu/VBoxContainer"]
+margin_top = 1203.0
+margin_right = 720.0
+margin_bottom = 1321.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 0
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ImportMenu/VBoxContainer/ErrorPanel"]
+margin_left = 50.0
+margin_right = 670.0
+margin_bottom = 118.0
+
+[node name="Label" type="Label" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer"]
+margin_right = 620.0
+margin_bottom = 14.0
+text = "There were errors with the import:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer"]
+margin_top = 18.0
+margin_right = 620.0
+margin_bottom = 118.0
+rect_min_size = Vector2( 0, 100 )
+scroll_horizontal_enabled = false
+
+[node name="PanelContainer" type="PanelContainer" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer"]
+margin_right = 620.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 6 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer"]
+margin_right = 620.0
+margin_bottom = 100.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 615.0
+margin_bottom = 95.0
+
+[node name="Control" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 610.0
+margin_bottom = 14.0
+
+[node name="Control2" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 610.0
+margin_bottom = 32.0
+
+[node name="Control3" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 36.0
+margin_right = 610.0
+margin_bottom = 50.0
+
+[node name="Control4" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 54.0
+margin_right = 610.0
+margin_bottom = 68.0
+
+[node name="Control5" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 72.0
+margin_right = 610.0
+margin_bottom = 86.0
+
+[node name="SuccessPanel" type="MarginContainer" parent="ImportMenu/VBoxContainer"]
+margin_top = 1325.0
+margin_right = 720.0
+margin_bottom = 1339.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 0
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ImportMenu/VBoxContainer/SuccessPanel"]
+modulate = Color( 0, 0.811765, 1, 1 )
+margin_left = 50.0
+margin_right = 670.0
+margin_bottom = 14.0
+text = "No errors occured in the import"
+
+[node name="MarginContainer2" type="MarginContainer" parent="ImportMenu/VBoxContainer"]
+margin_top = 1343.0
+margin_right = 720.0
+margin_bottom = 1440.0
+custom_constants/margin_top = 20
+custom_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ImportMenu/VBoxContainer/MarginContainer2"]
+margin_top = 20.0
+margin_right = 720.0
+margin_bottom = 77.0
+custom_constants/separation = 100
+alignment = 1
+
+[node name="Cancel" type="Button" parent="ImportMenu/VBoxContainer/MarginContainer2/HBoxContainer"]
+margin_left = 174.0
+margin_right = 306.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 7 )
+text = "Cancel"
+
+[node name="Submit" type="Button" parent="ImportMenu/VBoxContainer/MarginContainer2/HBoxContainer"]
+margin_left = 406.0
+margin_right = 546.0
+margin_bottom = 57.0
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
+text = "IMPORT!"
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Import" to="." method="_on_Import_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Delete" to="." method="delete"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Up" to="." method="up"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Down" to="." method="down"]
@@ -522,3 +762,8 @@ anims/Activate = SubResource( 3 )
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/update_btn" to="." method="update_page"]
 [connection signal="pressed" from="Exit" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Save" to="." method="save_json"]
+[connection signal="confirmed" from="ImportMenu/ConfirmationDialog" to="ImportMenu" method="_on_ConfirmationDialog_confirmed"]
+[connection signal="pressed" from="ImportMenu/VBoxContainer/MarginContainer2/HBoxContainer/Cancel" to="ImportMenu" method="_on_Cancel_pressed"]
+[connection signal="pressed" from="ImportMenu/VBoxContainer/MarginContainer2/HBoxContainer/Submit" to="ImportMenu" method="_on_Submit_pressed"]
+
+[editable path="Panel/HBoxContainer/VNReaderBox/VNReader"]

@@ -23,11 +23,12 @@ func load_data(my_data: Array):
 		message.index = i;
 		
 		#Add question options if they exist.
-		if item.get("type") == "questions":
-			for i in range(item["questions"].size()):
+		if item.get("type") == "QuestionPage":
+			for j in range(item["answers"].size()):
 				var question = LinkItem.instance()
 				add_child(question);
-				question.populate(item["questions"][i],i);
+				question.populate(item["answers"][j],j);
+				question.index = i;
 				
 func on_selected(index):
 	emit_signal("selected", index);

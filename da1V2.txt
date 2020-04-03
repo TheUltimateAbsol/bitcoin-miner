@@ -6,6 +6,7 @@
 //Any line or paragraph starting with “@@” will be treated as an in-game action
 //Intro
 
+
 Simon, [internal]: Wake up already. Bad enough you have to drag your rag and bones up before the sun, but you can’t afford to fall asleep. Hmph. This is your life now. You can’t remember the day EV came to town.
 //Homeroom
 
@@ -431,3 +432,4 @@ Exit Shaun.
 
 
 //CUT TO BLACK
+
