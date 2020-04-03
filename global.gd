@@ -11,6 +11,9 @@ var numcoin = 0
 var numseconds = 0;
 var numenemies = 0;
 
+var minersbought = 0;
+var minercost = 0;
+
 enum NavLinkTypes {NONE, FLOOR, JUMP, FALL}
 
 func update_header(input_remaining, input_total, input_coin):

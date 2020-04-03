@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/Dark sharp cave.png" type="Texture" id=2]
@@ -10,23 +10,25 @@
 [ext_resource path="res://UI/Sprites/Inner Circle.png" type="Texture" id=8]
 [ext_resource path="res://Style/DEFAULT_TEXT.tres" type="Theme" id=9]
 [ext_resource path="res://Style/m3x6.ttf" type="DynamicFontData" id=10]
-[ext_resource path="res://Style/IMPACT_TEXT.tres" type="Theme" id=11]
-[ext_resource path="res://Classes/GameFlowAnimations/GameOver.tres" type="Animation" id=12]
-[ext_resource path="res://Sounds/sfx_sounds_negative1.wav" type="AudioStream" id=13]
-[ext_resource path="res://Classes/GameFlow/LevelComplete.gd" type="Script" id=14]
-[ext_resource path="res://Stages/Backgrounds/background.png" type="Texture" id=15]
-[ext_resource path="res://Stages/Backgrounds/Light Background.png" type="Texture" id=16]
-[ext_resource path="res://Sounds/253096_8_bit_Victory.wav" type="AudioStream" id=17]
-[ext_resource path="res://Classes/GameFlowAnimations/WinSpawner.tres" type="Animation" id=18]
-[ext_resource path="res://Classes/GameFlowAnimations/SceneSwitch.tres" type="Animation" id=19]
-[ext_resource path="res://Classes/Player.tscn" type="PackedScene" id=20]
-[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Sounds/sfx_sounds_powerup16.wav" type="AudioStream" id=22]
-[ext_resource path="res://Sounds/sfx_sounds_damage1.wav" type="AudioStream" id=23]
-[ext_resource path="res://Sounds/sfx_sounds_powerup7.wav" type="AudioStream" id=24]
-[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=25]
-[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Sounds/3-21 Giron -HEAT UP- [8bit].wav" type="AudioStream" id=27]
+[ext_resource path="res://UI/Sprites/pause_button_background.png" type="Texture" id=11]
+[ext_resource path="res://" type="Theme" id=12]
+[ext_resource path="res://Style/IMPACT_TEXT.tres" type="Theme" id=13]
+[ext_resource path="res://Classes/GameFlowAnimations/GameOver.tres" type="Animation" id=14]
+[ext_resource path="res://Sounds/sfx_sounds_negative1.wav" type="AudioStream" id=15]
+[ext_resource path="res://Classes/GameFlow/LevelComplete.gd" type="Script" id=16]
+[ext_resource path="res://Stages/Backgrounds/background.png" type="Texture" id=17]
+[ext_resource path="res://Stages/Backgrounds/Light Background.png" type="Texture" id=18]
+[ext_resource path="res://Sounds/253096_8_bit_Victory.wav" type="AudioStream" id=19]
+[ext_resource path="res://Classes/GameFlowAnimations/WinSpawner.tres" type="Animation" id=20]
+[ext_resource path="res://Classes/GameFlowAnimations/SceneSwitch.tres" type="Animation" id=21]
+[ext_resource path="res://Classes/Player.tscn" type="PackedScene" id=22]
+[ext_resource path="res://UI/Scenes/ui_header.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Sounds/sfx_sounds_powerup16.wav" type="AudioStream" id=24]
+[ext_resource path="res://Sounds/sfx_sounds_damage1.wav" type="AudioStream" id=25]
+[ext_resource path="res://Sounds/sfx_sounds_powerup7.wav" type="AudioStream" id=26]
+[ext_resource path="res://UI/Scenes/pause_button.tscn" type="PackedScene" id=27]
+[ext_resource path="res://UI/Scenes/pause_menu.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Sounds/3-21 Giron -HEAT UP- [8bit].wav" type="AudioStream" id=29]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.878431, 0.941176, 0.909804, 1 )
@@ -115,6 +117,10 @@ Label/constants/shadow_offset_y = 1
 Label/fonts/font = null
 Label/styles/normal = null
 
+[sub_resource type="CanvasItemMaterial" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
 [sub_resource type="Animation" id=5]
 length = 2.1
 tracks/0/type = "value"
@@ -194,7 +200,7 @@ tracks/1/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 17 )
+"stream": ExtResource( 19 )
 } ],
 "times": PoolRealArray( 1 )
 }
@@ -327,7 +333,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.6, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1e-005, 1 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1e-05, 1 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Curve2D" id=10]
@@ -382,7 +388,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 22 )
+"stream": ExtResource( 24 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -446,7 +452,7 @@ tracks/4/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 23 )
+"stream": ExtResource( 25 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -510,7 +516,7 @@ tracks/4/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 24 )
+"stream": ExtResource( 26 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -547,7 +553,6 @@ pause_mode = 2
 stream = ExtResource( 4 )
 
 [node name="QuickTimeEvent" type="Node2D" parent="."]
-editor/display_folded = true
 visible = false
 script = ExtResource( 5 )
 
@@ -557,7 +562,6 @@ z_index = -1
 texture = ExtResource( 6 )
 
 [node name="Circle" type="Sprite" parent="QuickTimeEvent"]
-visible = false
 position = Vector2( 80, 76 )
 z_index = 10
 texture = ExtResource( 7 )
@@ -573,7 +577,7 @@ margin_top = -26.0
 margin_right = 20.0
 margin_bottom = -12.0
 theme = ExtResource( 9 )
-text = "PRESS"
+text = "BUY MINERS"
 align = 1
 
 [node name="Label3" type="Label" parent="QuickTimeEvent/Label"]
@@ -582,7 +586,7 @@ margin_top = 9.0
 margin_right = 20.0
 margin_bottom = 23.0
 theme = ExtResource( 9 )
-text = "IN TIME!"
+text = "0 BITCOIN!"
 align = 1
 
 [node name="Label2" type="Label" parent="QuickTimeEvent/Label"]
@@ -593,6 +597,20 @@ margin_bottom = 15.0
 theme = SubResource( 4 )
 text = "'F'"
 align = 1
+
+[node name="doneButton" type="Sprite" parent="QuickTimeEvent/Label"]
+position = Vector2( -65, 61 )
+texture = ExtResource( 11 )
+
+[node name="Button" type="Button" parent="QuickTimeEvent/Label/doneButton"]
+material = SubResource( 14 )
+margin_left = -13.0
+margin_top = -8.0
+margin_right = 13.0
+margin_bottom = 5.0
+theme = ExtResource( 12 )
+custom_styles/normal = SubResource( 15 )
+text = "Done"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="QuickTimeEvent"]
 anims/Activate = SubResource( 5 )
@@ -613,32 +631,32 @@ visible = false
 margin_top = 39.0
 margin_right = 160.0
 margin_bottom = 53.0
-theme = ExtResource( 11 )
+theme = ExtResource( 13 )
 text = "GAME OVER"
 align = 1
 percent_visible = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
-anims/GameOver = ExtResource( 12 )
+anims/GameOver = ExtResource( 14 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameOver/AnimationPlayer"]
-stream = ExtResource( 13 )
+stream = ExtResource( 15 )
 
 [node name="LevelComplete" type="Node" parent="."]
 editor/display_folded = true
-script = ExtResource( 14 )
+script = ExtResource( 16 )
 
 [node name="Background" type="Sprite" parent="LevelComplete"]
 visible = false
 position = Vector2( 80, 72 )
 z_index = -1
-texture = ExtResource( 15 )
+texture = ExtResource( 17 )
 
 [node name="Container" type="Sprite" parent="LevelComplete"]
 visible = false
 position = Vector2( 80, 30 )
 scale = Vector2( 0.0280609, 1 )
-texture = ExtResource( 16 )
+texture = ExtResource( 18 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 160, 20 )
 
@@ -826,7 +844,7 @@ editor/display_folded = true
 position = Vector2( 160, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OldLevelComplete"]
-anims/WinSpawner = ExtResource( 18 )
+anims/WinSpawner = ExtResource( 20 )
 
 [node name="Timer" type="Timer" parent="OldLevelComplete"]
 wait_time = 0.1
@@ -842,12 +860,23 @@ position = Vector2( 0, 8 )
 position = Vector2( 0, 144 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LevelLoadout"]
-anims/SceneSwitch = ExtResource( 19 )
+anims/SceneSwitch = ExtResource( 21 )
 
 [node name="Miners" type="Node2D" parent="."]
 
-[node name="Miner" parent="." instance=ExtResource( 20 )]
+[node name="Miner" parent="." instance=ExtResource( 22 )]
 editor/display_folded = true
+miningSprite2 = null
+miningSprite3 = null
+dyingSprite = null
+levelCompleteSprite = null
+idleOffset = null
+jumpingOffset = null
+walkingOffset = null
+miningOffset = null
+dyingOffset = null
+levelCompleteOffset = null
+gameoverSprite = null
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 visible = false
@@ -859,7 +888,7 @@ margin_left = -19.0
 margin_top = -24.0
 margin_right = 21.0
 margin_bottom = -10.0
-theme = ExtResource( 11 )
+theme = ExtResource( 13 )
 text = "LEVEL UP!"
 align = 1
 
@@ -873,11 +902,11 @@ margin_left = -19.0
 margin_top = -24.0
 margin_right = 21.0
 margin_bottom = -10.0
-theme = ExtResource( 11 )
+theme = ExtResource( 13 )
 text = "REVIVE!"
 align = 1
 
-[node name="ui_header" parent="." instance=ExtResource( 21 )]
+[node name="ui_header" parent="." instance=ExtResource( 23 )]
 z_index = 10
 
 [node name="DecoratorAnimations" type="Node" parent="."]
@@ -887,7 +916,7 @@ anims/Level_Up = SubResource( 11 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DecoratorAnimations/LevelUp"]
 pause_mode = 2
-stream = ExtResource( 22 )
+stream = ExtResource( 24 )
 
 [node name="Revive" type="AnimationPlayer" parent="DecoratorAnimations"]
 anims/Fail = SubResource( 12 )
@@ -895,11 +924,11 @@ anims/Success = SubResource( 13 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DecoratorAnimations/Revive"]
 pause_mode = 2
-stream = ExtResource( 24 )
+stream = ExtResource( 26 )
 
 [node name="Pause" type="Node" parent="."]
 
-[node name="pause_button" parent="Pause" instance=ExtResource( 25 )]
+[node name="pause_button" parent="Pause" instance=ExtResource( 27 )]
 visible = false
 position = Vector2( 14, 14 )
 
@@ -914,14 +943,14 @@ margin_bottom = 29.0
 rect_scale = Vector2( 2.16, 0.520002 )
 mouse_filter = 2
 
-[node name="pause_menu" parent="Pause" instance=ExtResource( 26 )]
+[node name="pause_menu" parent="Pause" instance=ExtResource( 28 )]
 mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
-stream = ExtResource( 27 )
+stream = ExtResource( 29 )
+[connection signal="pressed" from="QuickTimeEvent/Label/doneButton/Button" to="QuickTimeEvent" method="_on_Button_pressed"]
 [connection signal="animation_finished" from="QuickTimeEvent/AnimationPlayer" to="QuickTimeEvent" method="QTE_anim_handler"]
-[connection signal="start_hang" from="Miner" to="." method="_on_Miner_start_hang"]
 [connection signal="add_miner" from="ui_header" to="." method="_on_ui_header_add_miner"]
 [connection signal="revive" from="ui_header" to="." method="revive"]
 [connection signal="pressed" from="Pause/Pause" to="." method="_on_Pause_pressed"]

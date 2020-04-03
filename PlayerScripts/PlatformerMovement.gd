@@ -24,6 +24,8 @@ signal cancel_hang
 #This is just an alias
 onready var main : KinematicBody2D = $Miner
 
+var totalMinerCost = 0
+var minersBought = 0
 
 enum {LEFT, MIDDLE, RIGHT}
 var section = LEFT;
@@ -395,7 +397,7 @@ func revive():
 	if result:
 		$DecoratorAnimations/Revive.play("Success");
 		$Miner.vulnerable = false #This is so we don't have the player die until all are lost
-		var num_to_add = Global.numtotal - Global.numremaining
+		var num_to_add = Global.minersbought;
 		$ui_header.update_data(Global.numtotal, Global.numtotal, Global.numcoin);
 		for i in range(num_to_add):
 			var new_miner = Miner.instance();
