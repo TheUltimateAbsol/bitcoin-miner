@@ -1,0 +1,217 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://transition.gd" type="Script" id=1]
+[ext_resource path="res://VisualNovel/Backgrounds/classroom_front.png" type="Texture" id=2]
+[ext_resource path="res://VisualNovel/textures/gradient_lr.png" type="Texture" id=3]
+[ext_resource path="res://effect.gd" type="Script" id=4]
+[ext_resource path="res://VisualNovel/scene_lable.png" type="Texture" id=5]
+[ext_resource path="res://VisualNovel/Fonts/gloria_hallelujah/gloria_hallelujah.tres" type="DynamicFont" id=6]
+[ext_resource path="res://PlayerSprites/happy.png" type="Texture" id=7]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float cutoff : hint_range(0, 1.0);
+uniform sampler2D filter : hint_albeto;
+
+
+void fragment(){
+//	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
+//	COLOR.r = 1.0;
+	float value = texture(filter, UV).r;
+//	vec4 tex = texture(filter, SCREEN_UV);
+	//was tex.r
+	if(value > cutoff){
+		COLOR = vec4(COLOR.rgb, 0.0);
+	}else{
+		COLOR = vec4(COLOR.rgb, 1.0);
+	}
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/cutoff = 0.0
+shader_param/filter = ExtResource( 3 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "New Anim"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 290.7, 120.65 ), Vector2( 290.7, 120.65 ), Vector2( 1053.13, 120.65 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( -0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "fade_away"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "new label"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -936.268, 0 ), Vector2( -936.268, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "old label"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 1006.55, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("..:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -0.000610352
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+texture = ExtResource( 2 )
+expand = true
+
+[node name="effect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 290.7, 120.65 )
+texture = ExtResource( 5 )
+normal_map = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="arrow" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0.2 )
+margin_right = 39.9999
+margin_bottom = 40.0
+
+[node name="scene_arrow" type="TextureRect" parent="arrow"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 541.0
+margin_bottom = 200.0
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="arrow/scene_arrow"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -210.576
+margin_top = -21.3123
+margin_right = 124.424
+margin_bottom = 19.6877
+rect_rotation = -0.75
+custom_fonts/font = ExtResource( 6 )
+text = "xdjtgmb xfryfkhmnv "
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="arrow/scene_arrow"]
+"anims/New Anim" = SubResource( 5 )
+anims/fade_away = SubResource( 6 )
+"anims/new label" = SubResource( 4 )
+"anims/old label" = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="arrow/scene_arrow"]
+position = Vector2( 488.753, 107.557 )
+scale = Vector2( 0.318559, 0.331486 )
+texture = ExtResource( 7 )
