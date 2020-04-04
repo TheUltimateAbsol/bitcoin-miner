@@ -1,15 +1,19 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/ClassroomB.png" type="Texture" id=2]
-[ext_resource path="res://VisualNovel/Characters/Jack Final.png" type="Texture" id=3]
+[ext_resource path="res://VisualNovel/Characters/Expressions/anna/angry.png" type="Texture" id=3]
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=4]
 [ext_resource path="res://VisualNovel/slide_from_left.tres" type="Animation" id=5]
 [ext_resource path="res://VisualNovel/AnswerBox.gd" type="Script" id=6]
 [ext_resource path="res://VisualNovel/AnswerButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://new_kiddofont.tres" type="DynamicFont" id=8]
+[ext_resource path="res://VisualNovel/KIdDOS-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://VisualNovel/image_background.png" type="Texture" id=9]
+[ext_resource path="res://VisualNovel/Images/Letter.png" type="Texture" id=10]
+[ext_resource path="res://thought_front.png" type="Texture" id=11]
 [ext_resource path="res://dialogebox2.png" type="Texture" id=12]
 [ext_resource path="res://VisualNovel/Fonts/gloria_hallelujah/gloria_hallelujah.tres" type="DynamicFont" id=13]
+[ext_resource path="res://thought_back.png" type="Texture" id=14]
 [ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=15]
 
 [sub_resource type="Shader" id=1]
@@ -47,7 +51,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/outline_width = 6.0
+shader_param/outline_width = 3.0
 shader_param/outline_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="Animation" id=3]
@@ -93,7 +97,110 @@ tracks/0/keys = {
 "values": [ Vector2( 600, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="DynamicFont" id=6]
+size = 59
+extra_spacing_char = -5
+extra_spacing_space = -1
+font_data = ExtResource( 8 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Entrance"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ 16.4, -5.7, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 166.157, -130.911 ), Vector2( -45.3154, 30.2104 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Idle"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("thought_back:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.5, 5 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 511.433, 211.488 ), Vector2( 241.977, 217.863 ), Vector2( 511.433, 211.488 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("thought_front:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.5, 5 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 228.68, 222.987 ), Vector2( 517.081, 230.483 ), Vector2( 228.68, 222.987 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Entrance"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( -55.79, 184.107 ), Vector2( -8.36853, 64.1586 ) ]
+}
+
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -155,12 +262,89 @@ tracks/4/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=7]
+[sub_resource type="CanvasItemMaterial" id=11]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0, 0.873469, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.412245, 0.412245, 0.412245, 1, 0, 0, 0, 1 )
+
+[sub_resource type="Animation" id=13]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 379.04, 497.065 ), Vector2( 107, 151 ) ]
+}
+
+[sub_resource type="Shader" id=14]
+code = "
+shader_type canvas_item;
+
+uniform float outline_width = 2.0;
+uniform vec4 outline_color: hint_color;
+
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	vec2 ps = TEXTURE_PIXEL_SIZE;
+	float a;
+	float maxa = col.a;
+	float mina = col.a;
+
+	a = texture(TEXTURE, UV + vec2(0.0, -outline_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(0.0, outline_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(-outline_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(outline_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	COLOR = mix(col, outline_color, maxa - mina);
+}"
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 14 )
+shader_param/outline_width = 2.0
+shader_param/outline_color = Color( 0.407843, 0.407843, 0.407843, 1 )
 
 [node name="VNReader" type="Control"]
 margin_right = 720.0
@@ -242,7 +426,7 @@ margin_bottom = 480.0
 
 [node name="Arrow" parent="Control/AnswerBox/B" index="1"]
 self_modulate = Color( 0.839216, 0.172549, 0.101961, 1 )
-position = Vector2( -306.25, 142.635 )
+position = Vector2( 266.093, 133.974 )
 rotation = 3.13408
 scale = Vector2( 1, -1 )
 
@@ -262,17 +446,23 @@ align = 2
 [node name="Node2D" parent="Control/AnswerBox/B" index="2"]
 scale = Vector2( -1, 1 )
 
+[node name="PathFollow2D" parent="Control/AnswerBox/B/Node2D/Path2D" index="0"]
+position = Vector2( 163.797, 125.604 )
+
 [node name="C" parent="Control/AnswerBox" instance=ExtResource( 7 )]
 margin_top = 484.0
 margin_bottom = 684.0
 
 [node name="Arrow" parent="Control/AnswerBox/C" index="1"]
 self_modulate = Color( 0.847059, 0.890196, 0.0627451, 1 )
-position = Vector2( 1021.71, 49.7751 )
+position = Vector2( 453.728, 120.853 )
 rotation = -0.139626
 
 [node name="Node2D" parent="Control/AnswerBox/C" index="2"]
 rotation = -0.139626
+
+[node name="PathFollow2D" parent="Control/AnswerBox/C/Node2D/Path2D" index="0"]
+position = Vector2( 163.797, 125.604 )
 
 [node name="D" parent="Control/AnswerBox" instance=ExtResource( 7 )]
 margin_top = 688.0
@@ -280,7 +470,7 @@ margin_bottom = 888.0
 
 [node name="Arrow" parent="Control/AnswerBox/D" index="1"]
 self_modulate = Color( 0.180392, 0.737255, 0.811765, 1 )
-position = Vector2( -298.55, 26.7297 )
+position = Vector2( 266.603, 117.587 )
 rotation = -2.96182
 scale = Vector2( 1, -1 )
 
@@ -297,6 +487,9 @@ align = 2
 rotation = 0.174533
 scale = Vector2( -1, 1 )
 
+[node name="PathFollow2D" parent="Control/AnswerBox/D/Node2D/Path2D" index="0"]
+position = Vector2( 163.797, 125.604 )
+
 [node name="Control" type="Control" parent="Control"]
 anchor_left = 0.5
 anchor_top = 0.9
@@ -305,39 +498,80 @@ anchor_bottom = 1.0
 margin_left = -360.0
 margin_top = -365.6
 margin_right = 363.0
-rect_clip_content = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Node2D" type="Node2D" parent="Control/Control"]
+[node name="Dialogue" type="Node2D" parent="Control/Control"]
 
-[node name="Sprite" type="Sprite" parent="Control/Control/Node2D"]
-position = Vector2( 374.392, 262.305 )
-scale = Vector2( 1.9168, 1.90427 )
+[node name="Sprite" type="Sprite" parent="Control/Control/Dialogue"]
+position = Vector2( 453.693, 208.789 )
+scale = Vector2( 2.5, 2.75 )
 texture = ExtResource( 12 )
 
-[node name="Text" type="Label" parent="Control/Control/Node2D"]
-margin_left = 107.0
-margin_top = 179.0
-margin_right = 652.0
-margin_bottom = 431.0
+[node name="Text" type="Label" parent="Control/Control/Dialogue"]
+margin_left = 128.0
+margin_top = 102.0
+margin_right = 653.0
+margin_bottom = 531.0
+rect_rotation = -3.0
 custom_fonts/font = ExtResource( 13 )
+text = "asdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdf asdf asdf asdf asdfsad"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Name" type="Label" parent="Control/Control/Node2D"]
-margin_left = 52.1528
-margin_top = 23.0134
-margin_right = 233.153
-margin_bottom = 97.0134
-rect_rotation = 32.2
-custom_fonts/font = ExtResource( 8 )
+[node name="Name" type="Label" parent="Control/Control/Dialogue"]
+margin_left = 37.8649
+margin_top = -20.9455
+margin_right = 267.865
+margin_bottom = 53.0545
+rect_rotation = -2.1
+custom_fonts/font = SubResource( 6 )
+text = "June"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Control/Dialogue"]
+anims/Entrance = SubResource( 7 )
+
+[node name="Thought" type="Node2D" parent="Control/Control"]
+visible = false
+modulate = Color( 0, 0, 0, 0 )
+position = Vector2( -55.79, 184.107 )
+rotation = 0.0959931
+
+[node name="Idle" type="AnimationPlayer" parent="Control/Control/Thought"]
+autoplay = "Idle"
+anims/Idle = SubResource( 8 )
+
+[node name="thought_back" type="Sprite" parent="Control/Control/Thought"]
+position = Vector2( 511.433, 211.488 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 14 )
+
+[node name="thought_front" type="Sprite" parent="Control/Control/Thought"]
+position = Vector2( 228.68, 222.987 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 11 )
+
+[node name="Text" type="Label" parent="Control/Control/Thought"]
+margin_left = 55.9241
+margin_top = -7.16931
+margin_right = 708.924
+margin_bottom = 348.831
+custom_fonts/font = ExtResource( 13 )
+text = "asdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdf asdf asdf asdf asdfsad"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Control/Thought"]
+anims/Entrance = SubResource( 9 )
 
 [node name="Panel" type="Panel" parent="Control"]
 visible = false
@@ -367,10 +601,10 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Conclusion"]
-anims/Activate = SubResource( 6 )
+anims/Activate = SubResource( 10 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Conclusion"]
-material = SubResource( 7 )
+material = SubResource( 11 )
 position = Vector2( -0.000645838, 398.088 )
 emitting = false
 amount = 50
@@ -381,7 +615,40 @@ gravity = Vector2( 0, 200 )
 angular_velocity = 313.55
 angular_velocity_random = 0.61
 scale_amount = 0.1
-color_ramp = SubResource( 8 )
+color_ramp = SubResource( 12 )
+
+[node name="PopupImage" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 0 )
+position = Vector2( 379.04, 497.065 )
+scale = Vector2( 1e-05, 1e-05 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PopupImage"]
+anims/Entrance = SubResource( 13 )
+
+[node name="Background" type="TextureRect" parent="PopupImage"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -0.5
+margin_right = 505.5
+margin_bottom = 640.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="TextureRect" parent="PopupImage/Background"]
+material = SubResource( 15 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 47.7833
+margin_top = 56.3917
+margin_right = -31.2167
+margin_bottom = -42.6083
+texture = ExtResource( 10 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Control/AnswerBox/A" to="Control/AnswerBox" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/AnswerBox/B" to="Control/AnswerBox" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/AnswerBox/C" to="Control/AnswerBox" method="_on_Button_pressed"]

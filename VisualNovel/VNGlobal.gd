@@ -7,15 +7,15 @@ extends Node
 #enum Backgrounds{SAME, NONE, CLASSROOM}
 #enum SoundEffect{NONE, DING, THWACK, WHACK} # when the text appears on the screen (sentence per sentence basis)
 
-const Characters = {"NONE":"NONE", "SIMON":"SIMON", "ANNA":"ANNA", "CLAIRE":"CLAIRE", "JACK":"JACK", "CHAD":"CHAD", "JUNE":"JUNE", "SHAUN":"SHAUN"} 
-#const CharacterNames = {"NONE":"NONE", "SIMON":"Simon", "ANNA":"Anna", "TEACHER":"Teacher", "BELL":"Bell", "CLAIRE":"Claire", "JACK":"Jack", "CHAD":"Chad", "JUNE":"June", "SHAUN":"Shaun", "???":"???"} 
+const Characters = {"NONE":"NONE", "ANNA":"ANNA", "CLAIRE":"CLAIRE", "JACK":"JACK", "CHAD":"CHAD", "JUNE":"JUNE", "SHAUN":"SHAUN", "ELIZABETH":"ELIZABETH"} 
+#const CharacterNames = {"NONE":"NONE", "SIMON":"Simon", "ANNA":"Anna", "CLAIRE":"Claire", "JACK":"Jack", "CHAD":"Chad", "JUNE":"June", "SHAUN":"Shaun", "???":"???"} 
 const CharacterTransitions = {"NONE":"NONE", "FLASH":"FLASH", "FADE":"FADE", "SLIDE_RIGHT":"SLIDE_RIGHT", "SLIDE_LEFT":"SLIDE_LEFT"} #character
-const Expressions = {"DEFAULT":"DEFAULT", "HAPPY":"HAPPY", "SAD":"SAD"}
-const Music = {"SAME":"SAME", "NONE":"NONE", "SIMPLE":"SIMPLE", "SAD":"SAD"}
-const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOM":"CLASSROOM"}
-const SceneTransitions = {"NONE":"NONE", "FADE":"FADE", "BLACK":"BLACK"}
+const Music = {"SAME":"SAME", "NONE":"NONE", "DEFAULT":"DEFAULT", "SUSPENSE":"SUSPENSE", "DESPAIR":"DESPAIR", "ENGAGING":"ENGAGING", "BOISTEROUS":"BOISTEROUS"}
+const Expressions = {"NORMAL":"NORMAL", "ANGRY":"ANGRY", "EMBARASSED":"EMBARASSED", "SAD":"SAD", "HAPPY":"HAPPY", "SHOCKED":"SHOCKED"}
+const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOMA":"CLASSROOMA", "CLASSROOMB":"CLASSROOMB", "HALLWAY":"HALLWAY", "GYMlOCKER":"GYMLOCKER", "BUS":"BUS", "BEACH":"BEACH", "CAFETERIA":"CAFETERIA", "BEDROOM":"BEDROOM"}
+const SceneTransitions = {"NONE":"NONE"}
 # when the text appears on the screen (sentence per sentence basis)
-const Effects = {"NONE":"NONE", "DING":"DING", "THWACK":"THWACK", "WHACK":"WHACK"}
+const Effects = {"NONE":"NONE"}
 const SentenceSpeeds = {"DEFAULT": "DEFAULT", "FAST":"FAST", "SLOW":"SLOW"}
 const DelayLengths = {"DEFAULT": "DEFAULT", "NONE":"NONE", "SHORT":"SHORT", "LONG":"LONG"}
 const Images = {"LETTER":"LETTER"}

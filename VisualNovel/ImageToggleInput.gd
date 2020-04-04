@@ -23,7 +23,7 @@ func get_data():
 	
 func load_data(page_data):
 	_string_select(image_list, page_data.image);
-	show_input.pressed = page_data.pressed
+	show_input.pressed = page_data.show
 
 func _on_show_input_toggled(button_pressed):
 	update();

@@ -8,7 +8,7 @@ var speed : String
 var delay : String
 
 func _init(xcontent, 
-	xspeed=VNGlobal.SentenceSpeeds.NORMAL,
+	xspeed=VNGlobal.SentenceSpeeds.DEFAULT,
 	xdelay=VNGlobal.DelayLengths.DEFAULT, 
 	xeffect= VNGlobal.Effects.NONE):
 		

@@ -17,24 +17,23 @@
 [ext_resource path="res://VisualNovel/SpeakerInput.gd" type="Script" id=15]
 [ext_resource path="res://VisualNovel/ImageToggleInput.gd" type="Script" id=16]
 
-[sub_resource type="DynamicFontData" id=9]
+[sub_resource type="DynamicFontData" id=1]
 font_path = "res://VisualNovel/KIdDOS-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=2]
 size = 70
 outline_size = 2
 outline_color = Color( 0.105882, 0.364706, 0, 1 )
-font_data = SubResource( 9 )
+font_data = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 64
 font_data = ExtResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0.0470588, 0.301961, 1 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "Activate"
+[sub_resource type="Animation" id=5]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:visible")
@@ -85,24 +84,24 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 30
 extra_spacing_top = 10
 font_data = ExtResource( 10 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=9]
 size = 30
 extra_spacing_top = 10
 extra_spacing_bottom = 10
 font_data = ExtResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.290196, 0.67451, 0.266667, 1 )
 
 [node name="Control" type="Control"]
@@ -693,7 +692,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 2.34668
 margin_bottom = 44.3467
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 2 )
 text = "Preview Scene"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -719,7 +718,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -178.0
 margin_top = -66.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "SAVE"
 
 [node name="SnackBar" type="Control" parent="."]
@@ -732,7 +731,7 @@ script = ExtResource( 11 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 30 )
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="Label" type="Label" parent="SnackBar/Panel"]
 anchor_right = 1.0
@@ -742,10 +741,9 @@ align = 1
 valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SnackBar"]
-anims/Activate = SubResource( 3 )
+anims/Activate = SubResource( 5 )
 
 [node name="ImportMenu" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 13 )
@@ -790,7 +788,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="ImportMenu/VBoxContainer"]
 margin_right = 720.0
 margin_bottom = 41.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 text = "IMPORT MENU"
 align = 1
 
@@ -798,7 +796,7 @@ align = 1
 margin_top = 45.0
 margin_right = 720.0
 margin_bottom = 61.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
 text = "(WARNING: This deletes the current save data)"
 align = 1
 
@@ -806,6 +804,7 @@ align = 1
 margin_top = 65.0
 margin_right = 720.0
 margin_bottom = 1199.0
+rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 50
@@ -825,14 +824,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/function_color = Color( 1, 1, 1, 1 )
 custom_colors/number_color = Color( 1, 1, 1, 1 )
-text = "Enter your text here..."
+text = "Enter your text here...aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 syntax_highlighting = true
 show_line_numbers = true
+wrap_enabled = true
 
 [node name="ErrorPanel" type="MarginContainer" parent="ImportMenu/VBoxContainer"]
 margin_top = 1203.0
 margin_right = 720.0
 margin_bottom = 1321.0
+rect_clip_content = true
 custom_constants/margin_right = 50
 custom_constants/margin_top = 0
 custom_constants/margin_left = 50
@@ -863,7 +864,7 @@ margin_right = 620.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 8 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer"]
 margin_right = 620.0
@@ -884,6 +885,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 610.0
 margin_bottom = 14.0
+percent_visible = 1.0
 
 [node name="Control2" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
@@ -891,6 +893,7 @@ anchor_bottom = 0.0
 margin_top = 18.0
 margin_right = 610.0
 margin_bottom = 32.0
+percent_visible = 1.0
 
 [node name="Control3" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
@@ -898,6 +901,7 @@ anchor_bottom = 0.0
 margin_top = 36.0
 margin_right = 610.0
 margin_bottom = 50.0
+percent_visible = 1.0
 
 [node name="Control4" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
@@ -905,6 +909,7 @@ anchor_bottom = 0.0
 margin_top = 54.0
 margin_right = 610.0
 margin_bottom = 68.0
+percent_visible = 1.0
 
 [node name="Control5" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
@@ -912,6 +917,7 @@ anchor_bottom = 0.0
 margin_top = 72.0
 margin_right = 610.0
 margin_bottom = 86.0
+percent_visible = 1.0
 
 [node name="SuccessPanel" type="MarginContainer" parent="ImportMenu/VBoxContainer"]
 margin_top = 1325.0
@@ -950,15 +956,15 @@ alignment = 1
 margin_left = 174.0
 margin_right = 306.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "Cancel"
 
 [node name="Submit" type="Button" parent="ImportMenu/VBoxContainer/MarginContainer2/HBoxContainer"]
 margin_left = 406.0
 margin_right = 546.0
 margin_bottom = 57.0
-custom_styles/normal = SubResource( 8 )
-custom_fonts/font = SubResource( 7 )
+custom_styles/normal = SubResource( 10 )
+custom_fonts/font = SubResource( 9 )
 text = "IMPORT!"
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Import" to="." method="_on_Import_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Delete" to="." method="delete"]

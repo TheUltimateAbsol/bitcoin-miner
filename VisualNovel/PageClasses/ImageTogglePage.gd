@@ -18,8 +18,8 @@ func _init(xid=0,
 	if typeof(xid) == TYPE_DICTIONARY:
 		var json_object = xid
 			
-		image=json_object.image
-		show = json_object.show
+		ximage=json_object.image
+		xshow = json_object.show
 		
 	image=ximage
 	show=xshow

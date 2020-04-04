@@ -13,7 +13,7 @@ func _init(xid=0,
 	xnext_id=0, 
 	xcontent=[], 
 	xcharacter_image=VNGlobal.Characters.NONE, 
-	xcharacter_expression=VNGlobal.Expressions.DEFAULT, 
+	xcharacter_expression=VNGlobal.Expressions.NORMAL, 
 	xcharacter_transition=VNGlobal.CharacterTransitions.NONE,
 	xspeaker_name="",
 	xis_thought = false).(xid, xnext_id):
@@ -40,8 +40,8 @@ func _init(xid=0,
 	character_image = xcharacter_image;
 	character_transition = xcharacter_transition
 	character_expression = xcharacter_expression
-	speaker_name = ""
-	is_thought = false
+	speaker_name = xspeaker_name
+	is_thought = xis_thought
 	
 func serialize():
 	return VNGlobal.merge_dir(.serialize(), {

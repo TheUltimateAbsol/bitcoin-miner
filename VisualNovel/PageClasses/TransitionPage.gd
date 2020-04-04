@@ -20,9 +20,9 @@ func _init(xid=0,
 	if typeof(xid) == TYPE_DICTIONARY:
 		var json_object = xid
 		
-		next_background= json_object.next_background
-		next_music = json_object.next_music
-		transition_type = json_object.transition_type;
+		xnext_background= json_object.next_background
+		xnext_music = json_object.next_music
+		xtransition_type = json_object.transition_type;
 		
 	next_background=xnext_background
 	next_music = xnext_music

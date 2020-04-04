@@ -7,7 +7,6 @@ onready var insert_btn = $Panel/HBoxContainer/VBoxContainer/HBoxContainer/New
 #short reference names
 onready var idInput = $Panel/HBoxContainer/Layout/IdInput
 onready var sentenceInput = $Panel/HBoxContainer/Layout/SentenceInput
-onready var sceneInput = $Panel/HBoxContainer/Layout/SceneInput
 onready var characterInput = $Panel/HBoxContainer/Layout/CharacterInput
 onready var directoryInput = $Panel/HBoxContainer/Layout/DirectoryInput
 onready var questionInput = $Panel/HBoxContainer/Layout/QuestionInput
@@ -65,8 +64,6 @@ func type_to_input(input_type):
 			return idInput;
 		Inputs.SENTENCE:
 			return sentenceInput;
-		Inputs.SCENE:
-			return sceneInput;
 		Inputs.CHARACTER:
 			return characterInput
 		Inputs.DIRECTORY:

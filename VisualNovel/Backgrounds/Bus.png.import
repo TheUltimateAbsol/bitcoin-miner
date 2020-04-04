@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bus.png-887e2635911655b50ed17c0541ac3587.stex"
+path="res://.import/bus.png-0132ad49fb3bebe9752ac8241a9b6bef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/Bus.png"
-dest_files=[ "res://.import/Bus.png-887e2635911655b50ed17c0541ac3587.stex" ]
+source_file="res://VisualNovel/Backgrounds/bus.png"
+dest_files=[ "res://.import/bus.png-0132ad49fb3bebe9752ac8241a9b6bef.stex" ]
 
 [params]
 

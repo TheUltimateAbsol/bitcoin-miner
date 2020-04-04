@@ -15,6 +15,7 @@ var question_num:int = 0; #counts 1, 2, ... not 0, 1, 2...
 var answer_num:int = 0; #counts 1, 2, ... not 0, 1, 2...
 var line_number = 0;
 var LABEL_ids = {}
+var last_character_image = "";
 
 var errors= []; #This is evaluated in the end
 
@@ -96,11 +97,76 @@ func parse_action(line:String):
 	return null
 			
 func parse_content(line:String):
+	var is_thought = false;
+	var speaker_name = "SIMON"
+	var character_image = VNGlobal.Characters.NONE;
+	var character_transition = VNGlobal.CharacterTransitions.NONE;
+	var character_expression = VNGlobal.Expressions.NORMAL;
+	
+	var parameters = []
 #	Get the name
 	if line.find(":") < 0:
-		return error_message("Syntax", line_number, "Dialogue line missing a colon");
-	var name:String = line.substr(0, line.find(":")).strip_edges();
-	line = line.substr(line.find(":") + 1).strip_edges()
+		is_thought = true;
+	else:
+		var name_line = line.substr(0, line.find(":")).strip_edges();
+		line = line.substr(line.find(":") + 1).strip_edges()
+	
+	#	Find character parameters, if any
+		if (name_line.find("[") > -1):
+			if (name_line.find("]") > -1):
+				parameters = name_line.substr(name_line.find("[") + 1, name_line.find("]")).split(",");
+				name_line = name_line.substr(0, name_line.find("[")).strip_edges();
+				for i in range(parameters.size()):
+					parameters[i] = parameters[i].strip_edges();
+#				TODO: FIX ERROR THAT WOULD RESULT IF "INTERNAL" WAS USED, CAUSING A SELF-SPEAKER IMAGE
+			else:
+				return error_message("Syntax", line_number, "Unmatched brackets")
+		
+		speaker_name = name_line.strip_edges();
+				
+#		If possible, match up the speaker to a character image 
+#		(since it's more likely that there will be a correlation between speaker and image)
+		for character in VNGlobal.Characters.values():
+			if character == speaker_name.to_upper():
+				character_image = character;
+
+#	Since simon doesn't appear on the screen
+	if speaker_name == "SIMON":
+		character_image = last_character_image
+	
+#	Handle the parameters
+	for parameter in parameters:
+		parameter = parameter.to_upper().strip_edges()
+		var sub_parameters = parameter.split(" ");
+		match(sub_parameters[0]):
+			"NORMAL":
+				character_expression = VNGlobal.Expressions.NORMAL;
+			"SAD":
+				character_expression = VNGlobal.Expressions.SAD
+			"SHOCKED":
+				character_expression = VNGlobal.Expressions.SHOCKED
+			"HAPPY":
+				character_expression = VNGlobal.Expressions.HAPPY
+			"ANGRY":
+				character_expression = VNGlobal.Expressions.ANGRY
+			"EMBARASSED":
+				character_expression = VNGlobal.Expressions.EMBARASSED
+			"TO":
+				var target_character = sub_parameters[1]
+				var char_found = false
+				for character in VNGlobal.Characters.values():
+					if character == target_character:
+						character_image = character;
+						char_found = true;
+						break
+				if not char_found:
+						return error_message("Logic", line_number, "Character " + target_character + " does not exist!")
+			"ALONE":
+				character_image = VNGlobal.Characters.NONE
+		
+#	TODO: RESET THIS WHEN A TRANSITION PAGE COMES UP
+	last_character_image = character_image
+	
 	
 #	Get the expression, if there is one
 	var expression:String = ""
@@ -146,7 +212,7 @@ func parse_content(line:String):
 			sentences.push_back(Sentence.new(fragment).serialize());
 		
 #		TODO: save more character info here
-		to_save.push_back(ContentPage.new(0, 0, sentences).serialize())
+		to_save.push_back(ContentPage.new(0, 0, sentences, character_image, character_expression, character_transition, speaker_name, is_thought).serialize())
 	
 #	Save the good pages
 	for page in to_save:
@@ -190,6 +256,7 @@ func parse(text):
 	line_number = 0;
 	errors= []
 	LABEL_ids = {}
+	last_character_image = "";
 
 	for ln in range(info.size()):
 		var line:String = info[ln].c_unescape();

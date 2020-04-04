@@ -17,12 +17,16 @@ const CHAR_WAIT = 1.0/25
 
 export (bool) var autoplay = false;
 
-onready var textlabel = get_node("Control/Control/Node2D/Text")
-onready var nameLabel = get_node("Control/Control/Node2D/Name")
+onready var dialogue_label = $Control/Control/Dialogue/Text
+onready var name_label = $Control/Control/Dialogue/Name
+onready var thought_label = $Control/Control/Thought/Text
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
-onready var transition = get_node("Control/NPC/AnimationPlayer")
+onready var transition_player = get_node("Control/NPC/AnimationPlayer")
 onready var answerBox = $Control/AnswerBox
+onready var background = $Control/Background
+onready var popup_image = $PopupImage
+onready var	popup_image_panel = $PopupImage/Background/Panel
 
 #timer stuff
 onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
@@ -33,6 +37,7 @@ enum {PLAYING, WAITING, UNSET}
 signal start_game
 signal end_game
 signal goto_next_page
+signal transition_finished
 
 var save_data : Array;
 var tap_skip = true;
@@ -41,44 +46,34 @@ var state = UNSET;
 
 var id = 0;
 var btn_pressed = ""
+#SAME":"SAME", "NONE":"NONE", "CLASSROOMA":"CLASSROOMA", "CLASSROOMB":"CLASSROOMB", "HALLWAY":"HALLWAY", "GYMlOCKER":"GYMLOCKER", "BUS":"BUS", "BEACH":"BEACH", "CAFETERIA":"CAFETERIA", "BEDROOM":"BEDROOM"}
 
-var expressions = {
-	VNGlobal.Characters.SIMON : {
-		VNGlobal.Expressions.DEFAULT :  preload("Characters/BoyeNeutral.png")
-	},
-	VNGlobal.Characters.ANNA : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/anna fina_.png")
-	},
-	VNGlobal.Characters.CLAIRE : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Claire final.png")
-	},
-	VNGlobal.Characters.JACK : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Jack Final.png")
-	},
-	VNGlobal.Characters.CHAD : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Chad final.png")
-	},
-	VNGlobal.Characters.JUNE : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/nannndkkad.png")
-	},
-	VNGlobal.Characters.SHAUN : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/shaun finalll.png")
-	}
-}
+var expressions = {}
+const backgrounds = {}
+const images = {}
 
-var backgrounds = {
-	VNGlobal.Backgrounds.CLASSROOM : preload("Backgrounds/classroom_angle.png"),
-	VNGlobal.Backgrounds.NONE : preload("Backgrounds/none.png")
-}
-		
-	
 var data_json
 
 func _ready():
-	textlabel.text = ""
-	nameLabel.text = ""
+	dialogue_label.text = ""
+	name_label.text = ""
+	thought_label.text = ""
 	npc.texture = null
 	answerBox.visible = false
+	
+	for key in VNGlobal.Characters.keys():
+		if key != VNGlobal.Characters.NONE:
+			expressions[key] = {}
+			for expression in VNGlobal.Expressions.keys():
+				expressions[key][expression] = load("res://VisualNovel/Characters/Expressions/"+String(key).to_lower()+ "/" + String(expression).to_lower()+".png")	
+	
+	for image in VNGlobal.Images.keys():
+		images[image] = load("res://VisualNovel/Images/"+String(image).to_lower()+".png")	
+	
+	for background in VNGlobal.Backgrounds.keys():
+		if background != VNGlobal.Backgrounds.SAME:
+			backgrounds[background] = load("res://VisualNovel/Backgrounds/"+String(background).to_lower()+".png")	
+	
 	
 	VNGlobal.connect("user_input", self, "attempt_skip");
 	load_data("res://VisualNovel/data.json");
@@ -129,6 +124,9 @@ func play():
 			elif page is EndPage:
 				display_page(page)
 				endPage = true
+			elif page is TransitionPage:
+				display_page(page);
+				yield(self, "transition_finished")
 			else:
 				display_page(page)
 			
@@ -149,52 +147,74 @@ func display_page(page:Page):
 	state = PLAYING;
 	if page is ContentPage:
 		npc.hide()
-		textlabel.text = ""
-		nameLabel.text = ""
-		textlabel.set_visible_characters(0);
 		
 		if page.character_image == VNGlobal.Characters.NONE: 
 			npc.texture = null;
 		else:
-			if expressions[page.character_image][VNGlobal.Expressions.DEFAULT] == null:
-				npc.texture = "";
-			else:
-				npc.texture = expressions[page.character_image][VNGlobal.Expressions.DEFAULT]
-		
+			npc.texture = expressions[page.character_image][page.character_expression]
 		
 		#var file2Check = File.new()
 		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
 		npc.show()
 		match page.character_transition:
 			VNGlobal.CharacterTransitions.NONE:
-				transition.play("appear")
-				yield(transition, "animation_finished")
+				pass;
 			VNGlobal.CharacterTransitions.FLASH: #think ace attorny
 				# MAKE TRANSITION
-				transition.play("appear")
-				yield(transition, "animation_finished")
+				transition_player.play("appear")
+				yield(transition_player, "animation_finished")
 			VNGlobal.CharacterTransitions.FADE:
 				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
 				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
-				transition.play("fade in")
-				yield(transition, "animation_finished")
+				transition_player.play("fade in")
+				yield(transition_player, "animation_finished")
 	#			yield(transition, "animation_finished")
 			VNGlobal.CharacterTransitions.SLIDE_RIGHT:
 				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
-				transition.play("slide_from_right")
-				yield(transition, "animation_finished")
+				transition_player.play("slide_from_right")
+				yield(transition_player, "animation_finished")
 	#			pass
 			VNGlobal.CharacterTransitions.SLIDE_LEFT:
 				# MAKE TRANSITION
-				transition.play("slide_from_left")
-				yield(transition, "animation_finished")
-	
+				transition_player.play("slide_from_left")
+				yield(transition_player, "animation_finished")
+		
+		var target_label:Label
+		if (page.is_thought):
+			target_label = thought_label;
+			dialogue_label.text = "" # This is so we can check for sequential speakers
+			name_label.text = ""
+			thought_label.text = ""
+			$Control/Control/Dialogue.hide();
+			
+#			If we weren't already thinking
+			if not $Control/Control/Thought.visible:
+				$Control/Control/Thought.show();
+				$Control/Control/Thought/AnimationPlayer.play("Entrance")
+				yield($Control/Control/Thought/AnimationPlayer, "animation_finished")
+				
+
+		else:
+			target_label = dialogue_label;
+			thought_label.text = "" # This is so we can check for sequential speakers
+			dialogue_label.text =""
+#			If we weren't talking or there's a new speaker
+			print(not $Control/Control/Dialogue.visible);
+			if not $Control/Control/Dialogue.visible or name_label.text != page.speaker_name:
+				$Control/Control/Dialogue.modulate = Color(0,0,0,0)
+				name_label.text = page.speaker_name
+				$Control/Control/Thought.hide();
+				$Control/Control/Dialogue.show();
+				$Control/Control/Dialogue/AnimationPlayer.play("Entrance")
+				yield($Control/Control/Dialogue/AnimationPlayer, "animation_finished")
+				
+			
 		for sentence in page.content:
-			prepend_sentence(sentence);
-		textlabel.set_visible_characters(0);
+			prepend_sentence(sentence, target_label);
+		target_label.set_visible_characters(0);
 		
 		for sentence in page.content:
-			var func_pointer = write_sentence(sentence)
+			var func_pointer = write_sentence(sentence, target_label)
 			if func_pointer:
 				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
 	elif page is GameStartPage:
@@ -219,12 +239,27 @@ func display_page(page:Page):
 		
 		answerBox.visible = false
 		print(id)
+	elif page is TransitionPage:
+		match (page.transition_type):
+			VNGlobal.SceneTransitions.NONE:
+				if page.next_background != VNGlobal.Backgrounds.SAME:
+					background.texture = backgrounds[page.next_background];
+				if page.next_music != VNGlobal.Music.SAME:
+					GlobalMusic.play_track(page.next_music);
+
+		emit_signal("transition_finished")
+	elif page is ImageTogglePage:
+		if page.show:
+			popup_image.get_node("Background/Panel").texture = images[page.image];
+			popup_image.get_node("AnimationPlayer").play("Entrance");
+		else:
+			popup_image.get_node("AnimationPlayer").play_backwards("Entrance");
 	
 	state = WAITING
 
 
-func prepend_sentence (sentence):
-	textlabel.text += sentence.content + " ";
+func prepend_sentence (sentence, target_label:Label):
+	target_label.text += sentence.content + " ";
 	
 func count_printable(string:String):
 	string = string.replace(" ", "");
@@ -232,8 +267,8 @@ func count_printable(string:String):
 	string = string.replace("\r", "");
 	return string.length();
 
-func write_sentence (sentence):
-	var target = textlabel.get_visible_characters() + count_printable(sentence.content);
+func write_sentence (sentence, target_label:Label):
+	var target = target_label.get_visible_characters() + count_printable(sentence.content);
 	var speed = SENTENCE_SPEEDS[sentence.speed];
 
 	print(sentence.speed, CHAR_WAIT/speed);
@@ -242,7 +277,7 @@ func write_sentence (sentence):
 	
 	for i in range(count_printable(sentence.content)):
 		if (skipped == false):
-			textlabel.visible_characters+=1;
+			target_label.visible_characters+=1;
 			yield(letter_timer, "timeout");
 	letter_timer.stop();
 
@@ -253,7 +288,7 @@ func write_sentence (sentence):
 		delay_timer.stop();
 
 	if (skipped):
-		textlabel.visible_characters = target;
+		target_label.visible_characters = target;
 	
 	print("SENTENCE END");
 

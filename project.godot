@@ -191,6 +191,7 @@ config/icon="res://icon.png"
 Global="*res://Global.gd"
 InputEventHandler="*res://InputEventHandler.gd"
 VNGlobal="*res://VisualNovel/VNGlobal.gd"
+GlobalMusic="*res://GlobalMusic.tscn"
 
 [display]
 
