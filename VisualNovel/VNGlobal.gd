@@ -8,8 +8,7 @@ extends Node
 #enum SoundEffect{NONE, DING, THWACK, WHACK} # when the text appears on the screen (sentence per sentence basis)
 
 const Characters = {"NONE":"NONE", "ANNA":"ANNA", "CLAIRE":"CLAIRE", "JACK":"JACK", "CHAD":"CHAD", "JUNE":"JUNE", "SHAUN":"SHAUN", "ELIZABETH":"ELIZABETH"} 
-#const CharacterNames = {"NONE":"NONE", "SIMON":"Simon", "ANNA":"Anna", "CLAIRE":"Claire", "JACK":"Jack", "CHAD":"Chad", "JUNE":"June", "SHAUN":"Shaun", "???":"???"} 
-const CharacterTransitions = {"NONE":"NONE", "FLASH":"FLASH", "FADE":"FADE", "SLIDE_RIGHT":"SLIDE_RIGHT", "SLIDE_LEFT":"SLIDE_LEFT"} #character
+const CharacterTransitions = {"DEFAULT":"DEFAULT"} #character
 const Music = {"SAME":"SAME", "NONE":"NONE", "DEFAULT":"DEFAULT", "SUSPENSE":"SUSPENSE", "DESPAIR":"DESPAIR", "ENGAGING":"ENGAGING", "BOISTEROUS":"BOISTEROUS"}
 const Expressions = {"NORMAL":"NORMAL", "ANGRY":"ANGRY", "EMBARASSED":"EMBARASSED", "SAD":"SAD", "HAPPY":"HAPPY", "SHOCKED":"SHOCKED"}
 const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOMA":"CLASSROOMA", "CLASSROOMB":"CLASSROOMB", "HALLWAY":"HALLWAY", "GYMlOCKER":"GYMLOCKER", "BUS":"BUS", "BEACH":"BEACH", "CAFETERIA":"CAFETERIA", "BEDROOM":"BEDROOM"}

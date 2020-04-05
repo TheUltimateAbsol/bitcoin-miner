@@ -25,6 +25,7 @@ margin_bottom = 727.0
 size_flags_horizontal = 3
 text = "asdfsafdasdfsdfasffdsfsad"
 valign = 1
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -22,7 +22,7 @@ onready var name_label = $Control/Control/Dialogue/Name
 onready var thought_label = $Control/Control/Thought/Text
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
-onready var transition_player = get_node("Control/NPC/AnimationPlayer")
+onready var NPCTransitionPlayer = $Control/NPC/AnimationPlayer
 onready var answerBox = $Control/AnswerBox
 onready var background = $Control/Background
 onready var popup_image = $PopupImage
@@ -43,6 +43,7 @@ var save_data : Array;
 var tap_skip = true;
 var skipped = false;
 var state = UNSET;
+var current_character = VNGlobal.Characters.NONE;
 
 var id = 0;
 var btn_pressed = ""
@@ -80,20 +81,13 @@ func _ready():
 	if autoplay:
 		play();
 
+func find_save_data_page(id):
+	for page in save_data:
+		if page.id == id:
+			return page;
+	return null;
+
 func play():
-#	for page in save_data:
-#		if page is ContentPage or page is QuestionPage:
-#			skipped = false;
-#			var func_pointer = display_page(page)
-#
-#			if func_pointer:
-#				yield(func_pointer, "completed");
-#
-#			state = WAITING;
-#			yield(self, "goto_next_page");
-#
-#		elif page is MetaPage:
-#			display_page(page)
 #
 	var endPage = false
 	while !endPage:
@@ -109,7 +103,13 @@ func play():
 					
 				state = WAITING
 				
-				yield(self, "goto_next_page")
+#				We don't need to wait if the next page is a questionpage
+				var next_page = find_save_data_page(page.next_id) 
+				if next_page != null and next_page is QuestionPage:
+					pass #skip question page waiting
+				else:
+					$Control/Control/Dialogue/NextArrow.visible = true;
+					yield(self, "goto_next_page")
 				
 			elif page is QuestionPage:
 				var func_pointer = display_page(page)
@@ -119,8 +119,8 @@ func play():
 					
 				state = WAITING
 				
-#				No yielding because we already do so waiting for an answer
-#				yield(self, "goto_next_page")
+#			No yielding because we already do so waiting for an answer
+#			yield(self, "goto_next_page")
 			elif page is EndPage:
 				display_page(page)
 				endPage = true
@@ -144,40 +144,35 @@ func play_json(json_data : Dictionary):
 func display_page(page:Page):
 	if state == PLAYING: return;
 	
+	$Control/Control/Dialogue/NextArrow.visible = false;
+	
 	state = PLAYING;
 	if page is ContentPage:
-		npc.hide()
+		
+#		Find the target character
+#		If it's not the same as last time, we transition into it
+		var is_new_character = false;
+		var target_image;
 		
 		if page.character_image == VNGlobal.Characters.NONE: 
-			npc.texture = null;
+			target_image = null;
 		else:
-			npc.texture = expressions[page.character_image][page.character_expression]
+			target_image = expressions[page.character_image][page.character_expression]
 		
-		#var file2Check = File.new()
-		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
+		if current_character != page.character_image and npc.visible:
+			is_new_character = true;
+#		if npc.texture != target_image and npc.visible:
+#			is_new_character = true;
+		
 		npc.show()
-		match page.character_transition:
-			VNGlobal.CharacterTransitions.NONE:
-				pass;
-			VNGlobal.CharacterTransitions.FLASH: #think ace attorny
-				# MAKE TRANSITION
-				transition_player.play("appear")
-				yield(transition_player, "animation_finished")
-			VNGlobal.CharacterTransitions.FADE:
-				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
-				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
-				transition_player.play("fade in")
-				yield(transition_player, "animation_finished")
-	#			yield(transition, "animation_finished")
-			VNGlobal.CharacterTransitions.SLIDE_RIGHT:
-				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
-				transition_player.play("slide_from_right")
-				yield(transition_player, "animation_finished")
-	#			pass
-			VNGlobal.CharacterTransitions.SLIDE_LEFT:
-				# MAKE TRANSITION
-				transition_player.play("slide_from_left")
-				yield(transition_player, "animation_finished")
+		
+		if not is_new_character:
+			npc.texture = target_image;
+		else:
+			current_character = page.character_image;
+			match page.character_transition:
+				VNGlobal.CharacterTransitions.DEFAULT:
+					NPCTransitionPlayer.queue_out_in("Fade In", "Fade In", target_image, true, false);
 		
 		var target_label:Label
 		if (page.is_thought):
@@ -217,6 +212,7 @@ func display_page(page:Page):
 			var func_pointer = write_sentence(sentence, target_label)
 			if func_pointer:
 				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
+		
 	elif page is GameStartPage:
 		emit_signal("start_game", page.game_dir);
 		tap_skip = false;

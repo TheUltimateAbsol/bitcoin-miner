@@ -14,7 +14,7 @@ func _init(xid=0,
 	xcontent=[], 
 	xcharacter_image=VNGlobal.Characters.NONE, 
 	xcharacter_expression=VNGlobal.Expressions.NORMAL, 
-	xcharacter_transition=VNGlobal.CharacterTransitions.NONE,
+	xcharacter_transition=VNGlobal.CharacterTransitions.DEFAULT,
 	xspeaker_name="",
 	xis_thought = false).(xid, xnext_id):
 		
