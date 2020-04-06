@@ -5,7 +5,7 @@ var answers = [];
 
 var next_id = 0
 
-onready var questionLabel = preload("question_Label.tscn");
+onready var questionLabel = preload("res://VisualNovel/Question_Label.tscn");
 onready var question_list = $VBoxContainer/question_list
 
 func _ready():

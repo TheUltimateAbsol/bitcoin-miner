@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/classroomb.png-48f2f0549a52e9bd9c01ca09912543fb.stex"
+path="res://.import/ClassroomB.png-a96b803706243e06c4fe1c97a8e0fbe4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/classroomb.png"
-dest_files=[ "res://.import/classroomb.png-48f2f0549a52e9bd9c01ca09912543fb.stex" ]
+source_file="res://VisualNovel/Backgrounds/ClassroomB.png"
+dest_files=[ "res://.import/ClassroomB.png-a96b803706243e06c4fe1c97a8e0fbe4.stex" ]
 
 [params]
 

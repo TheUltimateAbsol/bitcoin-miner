@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/letter.png-618effa0c5896d2055d9f6d8024eae32.stex"
+path="res://.import/Letter.png-4a81aa80053af465797c9017f1509ae1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Images/letter.png"
-dest_files=[ "res://.import/letter.png-618effa0c5896d2055d9f6d8024eae32.stex" ]
+source_file="res://VisualNovel/Images/Letter.png"
+dest_files=[ "res://.import/Letter.png-4a81aa80053af465797c9017f1509ae1.stex" ]
 
 [params]
 

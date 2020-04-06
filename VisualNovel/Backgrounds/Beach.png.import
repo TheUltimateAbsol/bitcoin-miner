@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/beach.png-f960849435d0ad6447cd721376df2b6a.stex"
+path="res://.import/Beach.png-a46dbbdf55a5ba032060660055bd8d85.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/beach.png"
-dest_files=[ "res://.import/beach.png-f960849435d0ad6447cd721376df2b6a.stex" ]
+source_file="res://VisualNovel/Backgrounds/Beach.png"
+dest_files=[ "res://.import/Beach.png-a46dbbdf55a5ba032060660055bd8d85.stex" ]
 
 [params]
 

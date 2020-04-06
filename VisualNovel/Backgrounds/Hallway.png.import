@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hallway.png-0948738cee954b4add368d058d0b7afb.stex"
+path="res://.import/Hallway.png-e734edcfb4c2be7384add7a34ffeddc3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/hallway.png"
-dest_files=[ "res://.import/hallway.png-0948738cee954b4add368d058d0b7afb.stex" ]
+source_file="res://VisualNovel/Backgrounds/Hallway.png"
+dest_files=[ "res://.import/Hallway.png-e734edcfb4c2be7384add7a34ffeddc3.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bedroom.png-1423cd103a3e7a787b8cc9a7df8478b3.stex"
+path="res://.import/Bedroom.png-1febebe657a386572cefeb431f84184f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/bedroom.png"
-dest_files=[ "res://.import/bedroom.png-1423cd103a3e7a787b8cc9a7df8478b3.stex" ]
+source_file="res://VisualNovel/Backgrounds/Bedroom.png"
+dest_files=[ "res://.import/Bedroom.png-1febebe657a386572cefeb431f84184f.stex" ]
 
 [params]
 
