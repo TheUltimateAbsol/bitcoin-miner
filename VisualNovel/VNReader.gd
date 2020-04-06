@@ -17,9 +17,10 @@ const CHAR_WAIT = 1.0/25
 
 export (bool) var autoplay = false;
 
-onready var dialogue_label = $Control/Control/Dialogue/Text
-onready var name_label = $Control/Control/Dialogue/Name
-onready var thought_label = $Control/Control/Thought/Text
+onready var dialogue_label = $Control/TextBoxes/Dialogue/Text
+onready var name_label = $Control/TextBoxes/Dialogue/Name
+onready var thought_label = $Control/TextBoxes/Thought/Text
+onready var text_boxes = $Control/TextBoxes
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
 onready var NPCTransitionPlayer = $Control/NPC/AnimationPlayer
@@ -108,7 +109,7 @@ func play():
 				if next_page != null and next_page is QuestionPage:
 					pass #skip question page waiting
 				else:
-					$Control/Control/Dialogue/NextArrow.visible = true;
+					$Control/Control/NextArrow.visible = true;
 					yield(self, "goto_next_page")
 				
 			elif page is QuestionPage:
@@ -144,7 +145,7 @@ func play_json(json_data : Dictionary):
 func display_page(page:Page):
 	if state == PLAYING: return;
 	
-	$Control/Control/Dialogue/NextArrow.visible = false;
+	$Control/TextBoxes/NextArrow.visible = false;
 	
 	state = PLAYING;
 	if page is ContentPage:
@@ -180,13 +181,13 @@ func display_page(page:Page):
 			dialogue_label.text = "" # This is so we can check for sequential speakers
 			name_label.text = ""
 			thought_label.text = ""
-			$Control/Control/Dialogue.hide();
+			$Control/TextBoxes/Dialogue.hide();
 			
 #			If we weren't already thinking
-			if not $Control/Control/Thought.visible:
-				$Control/Control/Thought.show();
-				$Control/Control/Thought/AnimationPlayer.play("Entrance")
-				yield($Control/Control/Thought/AnimationPlayer, "animation_finished")
+			if not $Control/TextBoxes/Thought.visible:
+				$Control/TextBoxes/Thought.show();
+				$Control/TextBoxes/Thought/AnimationPlayer.play("Entrance")
+				yield($Control/TextBoxes/Thought/AnimationPlayer, "animation_finished")
 				
 
 		else:
@@ -194,14 +195,14 @@ func display_page(page:Page):
 			thought_label.text = "" # This is so we can check for sequential speakers
 			dialogue_label.text =""
 #			If we weren't talking or there's a new speaker
-			print(not $Control/Control/Dialogue.visible);
-			if not $Control/Control/Dialogue.visible or name_label.text != page.speaker_name:
-				$Control/Control/Dialogue.modulate = Color(0,0,0,0)
+			print(not $Control/TextBoxes/Dialogue.visible);
+			if not $Control/TextBoxes/Dialogue.visible or name_label.text != page.speaker_name:
+				$Control/TextBoxes/Dialogue.modulate = Color(0,0,0,0)
 				name_label.text = page.speaker_name
-				$Control/Control/Thought.hide();
-				$Control/Control/Dialogue.show();
-				$Control/Control/Dialogue/AnimationPlayer.play("Entrance")
-				yield($Control/Control/Dialogue/AnimationPlayer, "animation_finished")
+				$Control/TextBoxes/Thought.hide();
+				$Control/TextBoxes/Dialogue.show();
+				$Control/TextBoxes/Dialogue/AnimationPlayer.play("Entrance")
+				yield($Control/TextBoxes/Dialogue/AnimationPlayer, "animation_finished")
 				
 			
 		for sentence in page.content:
@@ -267,15 +268,12 @@ func write_sentence (sentence, target_label:Label):
 	var target = target_label.get_visible_characters() + count_printable(sentence.content);
 	var speed = SENTENCE_SPEEDS[sentence.speed];
 
-	print(sentence.speed, CHAR_WAIT/speed);
-	letter_timer.set_time(CHAR_WAIT/speed);
-	letter_timer.start();
+	var wait_time = (CHAR_WAIT/speed) * count_printable(sentence.content);
+	text_boxes.set_target(target_label);
 	
-	for i in range(count_printable(sentence.content)):
-		if (skipped == false):
-			target_label.visible_characters+=1;
-			yield(letter_timer, "timeout");
-	letter_timer.stop();
+	if (skipped == false):
+		text_boxes.play(target, wait_time)
+		yield(text_boxes, "completed");
 
 	if (skipped == false):
 		delay_timer.set_time(DELAY_LENGTHS[sentence.delay]); 
@@ -292,6 +290,7 @@ func skip():
 	skipped = true;
 	letter_timer.force_end();
 	delay_timer.force_end();
+	text_boxes.force_end();
 
 func list_files_in_directory(path):
 	var files = []
