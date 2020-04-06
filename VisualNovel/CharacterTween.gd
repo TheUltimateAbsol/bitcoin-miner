@@ -17,12 +17,12 @@ func play(xtarget_value, time):
 	$CharacterTween.start();
 	
 func stop():
-	$CharacterTween.stop();
+	$CharacterTween.stop(target);
 	
 func force_end():
-	$CharacterTween.stop();
+	stop();
 	target.visible_characters = target_value;
 	emit_signal("completed")
 
-func _on_CharacterTween_tween_completed(object, key):
+func _on_CharacterTween_tween_completed(_object, _key):
 	emit_signal("completed");

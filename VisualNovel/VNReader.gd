@@ -109,7 +109,7 @@ func play():
 				if next_page != null and next_page is QuestionPage:
 					pass #skip question page waiting
 				else:
-					$Control/Control/NextArrow.visible = true;
+					$Control/TextBoxes/NextArrow.visible = true;
 					yield(self, "goto_next_page")
 				
 			elif page is QuestionPage:
