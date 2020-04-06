@@ -230,8 +230,6 @@ func delete():
 	save_data.remove(current_index);
 	current_index = -1;
 	
-	#TODO: implement switching of question related ids
-	
 	#Fix the the gap caused by the removed item 
 	for item in save_data:
 		if item.next_id == old_id:

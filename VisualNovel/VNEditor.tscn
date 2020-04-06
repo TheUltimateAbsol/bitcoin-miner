@@ -515,14 +515,14 @@ margin_bottom = 24.0
 [node name="TransitionInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 margin_top = 475.0
 margin_right = 480.0
-margin_bottom = 575.0
+margin_bottom = 603.0
 script = ExtResource( 6 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/TransitionInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 93.0
+margin_bottom = 121.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2"]
 margin_right = 466.0
@@ -590,10 +590,29 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 align = 1
 
+[node name="Row4" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2"]
+margin_top = 90.0
+margin_right = 466.0
+margin_bottom = 114.0
+custom_constants/separation = 15
+
+[node name="Label3" type="Label" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row4"]
+margin_top = 5.0
+margin_right = 225.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Next Scene Name (if any)"
+
+[node name="name_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row4"]
+margin_left = 240.0
+margin_right = 466.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
 [node name="ImageToggleInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 579.0
+margin_top = 607.0
 margin_right = 480.0
-margin_bottom = 635.0
+margin_bottom = 663.0
 script = ExtResource( 16 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/ImageToggleInput"]
@@ -650,9 +669,9 @@ margin_bottom = 24.0
 align = 1
 
 [node name="DirectoryInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 639.0
+margin_top = 667.0
 margin_right = 480.0
-margin_bottom = 695.0
+margin_bottom = 723.0
 script = ExtResource( 8 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/DirectoryInput"]
@@ -744,6 +763,7 @@ valign = 1
 anims/Activate = SubResource( 5 )
 
 [node name="ImportMenu" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 13 )
@@ -984,6 +1004,7 @@ text = "IMPORT!"
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row/background_input" to="Panel/HBoxContainer/Layout/TransitionInput" method="_on_background_input_item_selected"]
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row2/music_input" to="Panel/HBoxContainer/Layout/TransitionInput" method="_on_music_input_item_selected"]
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row3/transition_input" to="Panel/HBoxContainer/Layout/TransitionInput" method="_on_transition_input_item_selected"]
+[connection signal="text_changed" from="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row4/name_input" to="Panel/HBoxContainer/Layout/TransitionInput" method="_on_LineEdit_text_changed"]
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2/HBoxContainer/image_input" to="Panel/HBoxContainer/Layout/ImageToggleInput" method="_on_image_input_item_selected"]
 [connection signal="toggled" from="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2/HBoxContainer/HBoxContainer/show_input" to="Panel/HBoxContainer/Layout/ImageToggleInput" method="_on_show_input_toggled"]
 [connection signal="text_changed" from="Panel/HBoxContainer/Layout/DirectoryInput/GridContainer/directory_input" to="Panel/HBoxContainer/Layout/DirectoryInput" method="_on_directory_input_text_changed"]

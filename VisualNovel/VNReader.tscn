@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/ClassroomB.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://VisualNovel/NPCTransitioner.gd" type="Script" id=17]
 [ext_resource path="res://NextArrow.png" type="Texture" id=18]
 [ext_resource path="res://VisualNovel/CharacterTween.gd" type="Script" id=19]
+[ext_resource path="res://transition.tscn" type="PackedScene" id=20]
 
 [sub_resource type="Shader" id=1]
 code = "
@@ -118,13 +119,13 @@ tracks/0/keys = {
 "values": [ Vector2( 600, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 size = 59
 extra_spacing_char = -5
 extra_spacing_space = -1
 font_data = ExtResource( 8 )
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -152,7 +153,7 @@ tracks/1/keys = {
 "values": [ 30.0, -5.7, 0.0 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 length = 5.0
 loop = true
 tracks/0/type = "value"
@@ -180,7 +181,7 @@ tracks/1/keys = {
 "values": [ Vector2( 228.68, 222.987 ), Vector2( 517.081, 230.483 ), Vector2( 228.68, 222.987 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -207,8 +208,7 @@ tracks/1/keys = {
 "values": [ Vector2( -55.79, 184.107 ), Vector2( -8.36853, 64.1586 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "Idle"
+[sub_resource type="Animation" id=11]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -379,17 +379,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_clip_content = true
-mouse_filter = 2
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Background" type="TextureRect" parent="Control"]
+[node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -402,7 +392,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Background"]
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+mouse_filter = 2
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NPC" type="TextureRect" parent="Control"]
 material = SubResource( 2 )
@@ -571,7 +569,7 @@ margin_top = -573.253
 margin_right = -255.507
 margin_bottom = -499.253
 rect_rotation = -2.1
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 7 )
 text = "Elizabeth"
 align = 1
 __meta__ = {
@@ -579,7 +577,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/TextBoxes/Dialogue"]
-anims/Entrance = SubResource( 9 )
+anims/Entrance = SubResource( 8 )
 
 [node name="Thought" type="Node2D" parent="Control/TextBoxes"]
 visible = false
@@ -589,7 +587,7 @@ rotation = 0.0959931
 
 [node name="Idle" type="AnimationPlayer" parent="Control/TextBoxes/Thought"]
 autoplay = "Idle"
-anims/Idle = SubResource( 10 )
+anims/Idle = SubResource( 9 )
 
 [node name="thought_back" type="Sprite" parent="Control/TextBoxes/Thought"]
 position = Vector2( 511.433, 211.488 )
@@ -614,7 +612,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/TextBoxes/Thought"]
-anims/Entrance = SubResource( 11 )
+anims/Entrance = SubResource( 10 )
 
 [node name="NextArrow" type="Sprite" parent="Control/TextBoxes"]
 visible = false
@@ -629,7 +627,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/TextBoxes/NextArrow"]
 autoplay = "Idle"
-anims/Idle = SubResource( 7 )
+anims/Idle = SubResource( 11 )
 
 [node name="Panel" type="Panel" parent="Control"]
 visible = false
@@ -706,6 +704,10 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TransitionMask" parent="." instance=ExtResource( 20 )]
+margin_right = 1.00006
+margin_bottom = 0.00012207
 [connection signal="pressed" from="Control/AnswerBox/A" to="Control/AnswerBox" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/AnswerBox/B" to="Control/AnswerBox" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/AnswerBox/C" to="Control/AnswerBox" method="_on_Button_pressed"]

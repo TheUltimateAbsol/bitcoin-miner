@@ -25,9 +25,10 @@ onready var text_boxes = $Control/TextBoxes
 onready var npc = $Control/NPC
 onready var NPCTransitionPlayer = $Control/NPC/AnimationPlayer
 onready var answerBox = $Control/AnswerBox
-onready var background = $Control/Background
+onready var background = $Background
 onready var popup_image = $PopupImage
 onready var	popup_image_panel = $PopupImage/Background/Panel
+onready var transition_mask = $TransitionMask;
 
 #timer stuff
 onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
@@ -243,6 +244,30 @@ func display_page(page:Page):
 					background.texture = backgrounds[page.next_background];
 				if page.next_music != VNGlobal.Music.SAME:
 					GlobalMusic.play_track(page.next_music);
+			VNGlobal.SceneTransitions.SCENESWITCH:
+				transition_mask.transition_out();
+				yield(transition_mask, "transition_completed")
+				
+				if page.next_background != VNGlobal.Backgrounds.SAME:
+					background.texture = backgrounds[page.next_background];
+				if page.next_music != VNGlobal.Music.SAME:
+					GlobalMusic.play_track(page.next_music);
+					
+				transition_mask.transition_in(page.next_name);
+				yield(transition_mask, "transition_completed");
+				
+			VNGlobal.SceneTransitions.ENTRANCE:
+				transition_mask.transition_out();
+				yield(transition_mask, "transition_completed")
+				
+				if page.next_background != VNGlobal.Backgrounds.SAME:
+					background.texture = backgrounds[page.next_background];
+				if page.next_music != VNGlobal.Music.SAME:
+					GlobalMusic.play_track(page.next_music);
+					
+				transition_mask.transition_entrance(page.next_name)
+				yield(transition_mask, "transition_completed");
+				
 
 		emit_signal("transition_finished")
 	elif page is ImageTogglePage:

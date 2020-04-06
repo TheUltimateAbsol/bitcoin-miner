@@ -12,7 +12,7 @@ const CharacterTransitions = {"DEFAULT":"DEFAULT"} #character
 const Music = {"SAME":"SAME", "NONE":"NONE", "DEFAULT":"DEFAULT", "SUSPENSE":"SUSPENSE", "DESPAIR":"DESPAIR", "ENGAGING":"ENGAGING", "BOISTEROUS":"BOISTEROUS"}
 const Expressions = {"NORMAL":"NORMAL", "ANGRY":"ANGRY", "EMBARASSED":"EMBARASSED", "SAD":"SAD", "HAPPY":"HAPPY", "SHOCKED":"SHOCKED"}
 const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOMA":"CLASSROOMA", "CLASSROOMB":"CLASSROOMB", "HALLWAY":"HALLWAY", "GYMlOCKER":"GYMLOCKER", "BUS":"BUS", "BEACH":"BEACH", "CAFETERIA":"CAFETERIA", "BEDROOM":"BEDROOM"}
-const SceneTransitions = {"NONE":"NONE"}
+const SceneTransitions = {"NONE":"NONE", "SCENESWITCH":"SCENESWITCH", "ENTRANCE":"ENTRANCE"}
 # when the text appears on the screen (sentence per sentence basis)
 const Effects = {"NONE":"NONE"}
 const SentenceSpeeds = {"DEFAULT": "DEFAULT", "FAST":"FAST", "SLOW":"SLOW"}
