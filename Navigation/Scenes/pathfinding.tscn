@@ -327,7 +327,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.6, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1e-005, 1 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1e-05, 1 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Curve2D" id=10]
@@ -525,7 +525,6 @@ texture = ExtResource( 2 )
 
 [node name="Startup" type="Node2D" parent="."]
 pause_mode = 1
-editor/display_folded = true
 z_index = 11
 
 [node name="Panel" type="Panel" parent="Startup"]
@@ -547,7 +546,6 @@ pause_mode = 2
 stream = ExtResource( 4 )
 
 [node name="QuickTimeEvent" type="Node2D" parent="."]
-editor/display_folded = true
 visible = false
 script = ExtResource( 5 )
 
@@ -600,7 +598,6 @@ anims/Activate = SubResource( 5 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="QuickTimeEvent/AnimationPlayer"]
 
 [node name="GameOver" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Background" type="Sprite" parent="GameOver"]
 visible = false
@@ -625,7 +622,6 @@ anims/GameOver = ExtResource( 12 )
 stream = ExtResource( 13 )
 
 [node name="LevelComplete" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 14 )
 
 [node name="Background" type="Sprite" parent="LevelComplete"]
@@ -670,7 +666,6 @@ anims/FlashText = SubResource( 9 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LevelComplete/AnimationPlayer"]
 
 [node name="Path2D" type="Path2D" parent="LevelComplete"]
-editor/display_folded = true
 curve = SubResource( 10 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="LevelComplete/Path2D"]
@@ -820,7 +815,6 @@ text = "        "
 align = 2
 
 [node name="OldLevelComplete" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="WinDropper" type="Node2D" parent="OldLevelComplete"]
 position = Vector2( 160, 0 )
@@ -833,7 +827,6 @@ wait_time = 0.1
 autostart = true
 
 [node name="LevelLoadout" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Current" type="Node2D" parent="LevelLoadout"]
 position = Vector2( 0, 8 )
@@ -847,7 +840,6 @@ anims/SceneSwitch = ExtResource( 19 )
 [node name="Miners" type="Node2D" parent="."]
 
 [node name="Miner" parent="." instance=ExtResource( 20 )]
-editor/display_folded = true
 
 [node name="Node2D" type="Node2D" parent="Miner"]
 visible = false
