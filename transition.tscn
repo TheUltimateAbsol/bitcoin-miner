@@ -35,7 +35,7 @@ shader = SubResource( 1 )
 shader_param/cutoff = 0.0
 shader_param/filter = ExtResource( 3 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "fade_away"
 length = 0.7
 tracks/0/type = "value"
@@ -51,7 +51,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Path2D/PathFollow2D:offset")
@@ -90,7 +90,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("scene_arrow:modulate")
@@ -129,7 +129,7 @@ tracks/2/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=6]
 size = 41
 use_filter = true
 extra_spacing_bottom = -20
@@ -143,7 +143,6 @@ _data = {
 }
 
 [sub_resource type="Animation" id=8]
-resource_name = "Flip"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
@@ -174,6 +173,7 @@ tracks/1/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -0.000732422
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -185,6 +185,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 0.000793457
 margin_bottom = 0.00012207
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 4 )
 __meta__ = {
@@ -199,18 +200,19 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = true
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="arrow"]
-anims/fade_away = SubResource( 4 )
-"anims/new label" = SubResource( 5 )
-"anims/old label" = SubResource( 6 )
+anims/fade_away = SubResource( 3 )
+"anims/new label" = SubResource( 4 )
+"anims/old label" = SubResource( 5 )
 
 [node name="scene_arrow" type="Sprite" parent="arrow"]
-position = Vector2( 217.679, 97.6623 )
-rotation = -0.0833242
+position = Vector2( 217.68, 97.6621 )
+rotation = -0.083325
 texture = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="arrow/scene_arrow"]
@@ -223,7 +225,7 @@ margin_top = -138.211
 margin_right = -18.7967
 margin_bottom = -87.2105
 rect_rotation = -2.28465
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 6 )
 text = "xdjtgmb xfryfkhmnv "
 align = 1
 valign = 1
@@ -236,8 +238,8 @@ position = Vector2( 44.804, 40.908 )
 curve = SubResource( 7 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="arrow/Path2D"]
-position = Vector2( 172.875, 56.7542 )
-rotation = -0.135684
+position = Vector2( 172.876, 56.7541 )
+rotation = -0.135685
 offset = 616.42
 loop = false
 

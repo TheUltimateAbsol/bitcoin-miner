@@ -527,6 +527,7 @@ anchor_bottom = 1.0
 margin_left = -360.0
 margin_top = -365.6
 margin_right = 363.0
+mouse_filter = 2
 script = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -686,6 +687,7 @@ anchor_right = 0.5
 margin_left = -0.5
 margin_right = 505.5
 margin_bottom = 640.0
+mouse_filter = 2
 texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -699,6 +701,7 @@ margin_left = 47.7833
 margin_top = 56.3917
 margin_right = -31.2167
 margin_bottom = -42.6083
+mouse_filter = 2
 texture = ExtResource( 10 )
 stretch_mode = 6
 __meta__ = {

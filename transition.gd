@@ -17,6 +17,9 @@ func _ready():
 	mask.hide();
 	arrow_node.modulate = Color(0,0,0,0);
 	sceneLabelTxt.text = ""
+#	transition_out()
+#	yield(self, "transition_completed")
+#	transition_in("asdf");
 
 func transition_out():
 	mask.show();

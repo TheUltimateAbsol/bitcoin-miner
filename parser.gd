@@ -205,7 +205,7 @@ func parse_content(line:String):
 	speaker_name = speaker_name.capitalize();
 
 #	Since simon doesn't appear on the screen
-	if speaker_name == "SIMON":
+	if speaker_name.to_upper() == "SIMON":
 		character_image = last_character_image
 	
 #	Handle the parameters
@@ -429,7 +429,7 @@ func parse(text):
 	line_number = 0;
 	errors= []
 	LABEL_ids = {}
-	last_character_image = "";
+	last_character_image = VNGlobal.Characters.NONE;
 
 	for ln in range(info.size()):
 		var line:String = info[ln].c_unescape();
