@@ -536,7 +536,6 @@ texture = ExtResource( 2 )
 
 [node name="Startup" type="Node2D" parent="."]
 pause_mode = 1
-editor/display_folded = true
 z_index = 11
 
 [node name="Panel" type="Panel" parent="Startup"]
@@ -626,7 +625,6 @@ custom_styles/normal = SubResource( 7 )
 text = "Done"
 
 [node name="GameOver" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Background" type="Sprite" parent="GameOver"]
 visible = false
@@ -846,7 +844,6 @@ text = "        "
 align = 2
 
 [node name="OldLevelComplete" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="WinDropper" type="Node2D" parent="OldLevelComplete"]
 position = Vector2( 160, 0 )
@@ -859,7 +856,6 @@ wait_time = 0.1
 autostart = true
 
 [node name="LevelLoadout" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Current" type="Node2D" parent="LevelLoadout"]
 position = Vector2( 0, 8 )

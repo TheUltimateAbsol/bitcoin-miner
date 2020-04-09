@@ -3,5 +3,7 @@
 [ext_resource path="res://VisualNovel/KIdDOS-Regular.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 46
+size = 71
+extra_spacing_char = -5
+extra_spacing_space = -1
 font_data = ExtResource( 1 )

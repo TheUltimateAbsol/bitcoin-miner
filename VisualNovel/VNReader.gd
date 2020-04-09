@@ -1,13 +1,34 @@
 extends Control
 
+const SENTENCE_SPEEDS = {
+	VNGlobal.SentenceSpeeds.DEFAULT : 1.0,
+	VNGlobal.SentenceSpeeds.FAST : 2.0,
+	VNGlobal.SentenceSpeeds.SLOW : 0.5
+}
+
+const DELAY_LENGTHS = {
+	VNGlobal.DelayLengths.DEFAULT : 0.3,
+	VNGlobal.DelayLengths.SHORT : .1,
+	VNGlobal.DelayLengths.LONG : 1,
+	VNGlobal.DelayLengths.NONE : 0.0
+}
+
+const CHAR_WAIT = 1.0/25
+
 export (bool) var autoplay = false;
 
-onready var textlabel = get_node("Control/Control/Node2D/Text")
-onready var nameLabel = get_node("Control/Control/Node2D/Name")
+onready var dialogue_label = $Control/TextBoxes/Dialogue/Text
+onready var name_label = $Control/TextBoxes/Dialogue/Name
+onready var thought_label = $Control/TextBoxes/Thought/Text
+onready var text_boxes = $Control/TextBoxes
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
-onready var transition = get_node("Control/NPC/AnimationPlayer")
+onready var NPCTransitionPlayer = $Control/NPC/AnimationPlayer
 onready var answerBox = $Control/AnswerBox
+onready var background = $Background
+onready var popup_image = $PopupImage
+onready var	popup_image_panel = $PopupImage/Background/Panel
+onready var transition_mask = $TransitionMask;
 
 #timer stuff
 onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
@@ -18,73 +39,57 @@ enum {PLAYING, WAITING, UNSET}
 signal start_game
 signal end_game
 signal goto_next_page
+signal transition_finished
 
 var save_data : Array;
 var tap_skip = true;
 var skipped = false;
 var state = UNSET;
+var current_character = VNGlobal.Characters.NONE;
 
 var id = 0;
 var btn_pressed = ""
+#SAME":"SAME", "NONE":"NONE", "CLASSROOMA":"CLASSROOMA", "CLASSROOMB":"CLASSROOMB", "HALLWAY":"HALLWAY", "GYMlOCKER":"GYMLOCKER", "BUS":"BUS", "BEACH":"BEACH", "CAFETERIA":"CAFETERIA", "BEDROOM":"BEDROOM"}
 
-var expressions = {
-	VNGlobal.Characters.SIMON : {
-		VNGlobal.Expressions.DEFAULT :  preload("Characters/BoyeNeutral.png")
-	},
-	VNGlobal.Characters.ANNA : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/anna fina_.png")
-	},
-	VNGlobal.Characters.CLAIRE : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Claire final.png")
-	},
-	VNGlobal.Characters.JACK : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Jack Final.png")
-	},
-	VNGlobal.Characters.CHAD : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/Chad final.png")
-	},
-	VNGlobal.Characters.JUNE : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/nannndkkad.png")
-	},
-	VNGlobal.Characters.SHAUN : {
-		VNGlobal.Expressions.DEFAULT :  preload("res://VisualNovel/Characters/shaun finalll.png")
-	}
-}
+var expressions = {}
+const backgrounds = {}
+const images = {}
 
-var backgrounds = {
-	VNGlobal.Backgrounds.CLASSROOM : preload("Backgrounds/classroom_angle.png"),
-	VNGlobal.Backgrounds.NONE : preload("Backgrounds/none.png")
-}
-		
-	
-var CHAR_WAIT = 1.0/20
 var data_json
 
 func _ready():
-	textlabel.text = ""
-	nameLabel.text = ""
+	dialogue_label.text = ""
+	name_label.text = ""
+	thought_label.text = ""
 	npc.texture = null
 	answerBox.visible = false
+	
+	for key in VNGlobal.Characters.keys():
+		if key != VNGlobal.Characters.NONE:
+			expressions[key] = {}
+			for expression in VNGlobal.Expressions.keys():
+				expressions[key][expression] = load("res://VisualNovel/Characters/Expressions/"+String(key).to_lower()+ "/" + String(expression).to_lower()+".png")	
+	
+	for image in VNGlobal.Images.keys():
+		images[image] = load("res://VisualNovel/Images/"+String(image).to_lower()+".png")	
+	
+	for background in VNGlobal.Backgrounds.keys():
+		if background != VNGlobal.Backgrounds.SAME:
+			backgrounds[background] = load("res://VisualNovel/Backgrounds/"+String(background).to_lower()+".png")	
+	
 	
 	VNGlobal.connect("user_input", self, "attempt_skip");
 	load_data("res://VisualNovel/data.json");
 	if autoplay:
 		play();
 
+func find_save_data_page(id):
+	for page in save_data:
+		if page.id == id:
+			return page;
+	return null;
+
 func play():
-#	for page in save_data:
-#		if page is ContentPage or page is QuestionPage:
-#			skipped = false;
-#			var func_pointer = display_page(page)
-#
-#			if func_pointer:
-#				yield(func_pointer, "completed");
-#
-#			state = WAITING;
-#			yield(self, "goto_next_page");
-#
-#		elif page is MetaPage:
-#			display_page(page)
 #
 	var endPage = false
 	while !endPage:
@@ -100,7 +105,13 @@ func play():
 					
 				state = WAITING
 				
-				yield(self, "goto_next_page")
+#				We don't need to wait if the next page is a questionpage
+				var next_page = find_save_data_page(page.next_id) 
+				if next_page != null and next_page is QuestionPage:
+					pass #skip question page waiting
+				else:
+					$Control/TextBoxes/NextArrow.visible = true;
+					yield(self, "goto_next_page")
 				
 			elif page is QuestionPage:
 				var func_pointer = display_page(page)
@@ -110,11 +121,14 @@ func play():
 					
 				state = WAITING
 				
-#				No yielding because we already do so waiting for an answer
-#				yield(self, "goto_next_page")
+#			No yielding because we already do so waiting for an answer
+#			yield(self, "goto_next_page")
 			elif page is EndPage:
 				display_page(page)
 				endPage = true
+			elif page is TransitionPage:
+				display_page(page);
+				yield(self, "transition_finished")
 			else:
 				display_page(page)
 			
@@ -132,66 +146,75 @@ func play_json(json_data : Dictionary):
 func display_page(page:Page):
 	if state == PLAYING: return;
 	
+	$Control/TextBoxes/NextArrow.visible = false;
+	
 	state = PLAYING;
 	if page is ContentPage:
-		npc.hide()
-		textlabel.text = ""
-		nameLabel.text = ""
-		textlabel.set_visible_characters(0);
 		
-		if page.character == VNGlobal.Characters.NONE: 
-			npc.texture = null;
+#		Find the target character
+#		If it's not the same as last time, we transition into it
+		var is_new_character = false;
+		var target_image;
+		
+		if page.character_image == VNGlobal.Characters.NONE: 
+			target_image = null;
 		else:
-			if expressions[page.character][VNGlobal.Expressions.DEFAULT] == null:
-				npc.texture = "";
-			else:
-				npc.texture = expressions[page.character][VNGlobal.Expressions.DEFAULT]
-				var nameID = page.character
-				nameLabel.text = VNGlobal.CharacterNames[nameID]
+			target_image = expressions[page.character_image][page.character_expression]
 		
+		if current_character != page.character_image and npc.visible:
+			is_new_character = true;
+#		if npc.texture != target_image and npc.visible:
+#			is_new_character = true;
 		
-		#var file2Check = File.new()
-		#var doFileExists = file2Check.file_exists(PATH_2_FILE):
 		npc.show()
-		match page.transition:
-			VNGlobal.Transitions.NONE:
-				transition.play("appear")
-				yield(transition, "animation_finished")
-			VNGlobal.Transitions.FLASH: #think ace attorny
-				# MAKE TRANSITION
-				transition.play("appear")
-				yield(transition, "animation_finished")
-			VNGlobal.Transitions.FADE:
-				$Control/NPC.modulate = Color(0,0,0,0); #Prevents flashing of sprite
-				#transition.add_animation("fade in", transition.get_animation("fade in")) #wHAT IS THIS LINE?
-				transition.play("fade in")
-				yield(transition, "animation_finished")
-	#			yield(transition, "animation_finished")
-			VNGlobal.Transitions.SLIDE_RIGHT:
-				#transition.add_animation("slide_from_right", transition.get_animation("slide_from_right"))
-				transition.play("slide_from_right")
-				yield(transition, "animation_finished")
-	#			pass
-			VNGlobal.Transitions.SLIDE_LEFT:
-				# MAKE TRANSITION
-				transition.play("slide_from_left")
-				yield(transition, "animation_finished")
+		
+		if not is_new_character:
+			npc.texture = target_image;
+		else:
+			current_character = page.character_image;
+			match page.character_transition:
+				VNGlobal.CharacterTransitions.DEFAULT:
+					NPCTransitionPlayer.queue_out_in("Fade In", "Fade In", target_image, true, false);
+		
+		var target_label:Label
+		if (page.is_thought):
+			target_label = thought_label;
+			dialogue_label.text = "" # This is so we can check for sequential speakers
+			name_label.text = ""
+			thought_label.text = ""
+			$Control/TextBoxes/Dialogue.hide();
 			
-		if page.background != VNGlobal.Backgrounds.SAME:
-			if backgrounds[page.background] == null:
-				$Control/Background.texture = backgrounds[VNGlobal.Backgrounds.CLASSROOM];
-			else:
-				$Control/Background.texture = backgrounds[page.background];
-	# else involves being able to reference previous pages
-	
+#			If we weren't already thinking
+			if not $Control/TextBoxes/Thought.visible:
+				$Control/TextBoxes/Thought.show();
+				$Control/TextBoxes/Thought/AnimationPlayer.play("Entrance")
+				yield($Control/TextBoxes/Thought/AnimationPlayer, "animation_finished")
+				
+
+		else:
+			target_label = dialogue_label;
+			thought_label.text = "" # This is so we can check for sequential speakers
+			dialogue_label.text =""
+#			If we weren't talking or there's a new speaker
+			print(not $Control/TextBoxes/Dialogue.visible);
+			if not $Control/TextBoxes/Dialogue.visible or name_label.text != page.speaker_name:
+				$Control/TextBoxes/Dialogue.modulate = Color(0,0,0,0)
+				name_label.text = page.speaker_name
+				$Control/TextBoxes/Thought.hide();
+				$Control/TextBoxes/Dialogue.show();
+				$Control/TextBoxes/Dialogue/AnimationPlayer.play("Entrance")
+				yield($Control/TextBoxes/Dialogue/AnimationPlayer, "animation_finished")
+				
+			
 		for sentence in page.content:
-			prepend_sentence(sentence);
-		textlabel.set_visible_characters(0);
+			prepend_sentence(sentence, target_label);
+		target_label.set_visible_characters(0);
 		
 		for sentence in page.content:
-			var func_pointer = write_sentence(sentence)
+			var func_pointer = write_sentence(sentence, target_label)
 			if func_pointer:
 				yield(func_pointer, "completed"); #tells program to wait on everything until this function finishes/this happens
+		
 	elif page is GameStartPage:
 		emit_signal("start_game", page.game_dir);
 		tap_skip = false;
@@ -214,12 +237,51 @@ func display_page(page:Page):
 		
 		answerBox.visible = false
 		print(id)
+	elif page is TransitionPage:
+		match (page.transition_type):
+			VNGlobal.SceneTransitions.NONE:
+				if page.next_background != VNGlobal.Backgrounds.SAME:
+					background.texture = backgrounds[page.next_background];
+				if page.next_music != VNGlobal.Music.SAME:
+					GlobalMusic.play_track(page.next_music);
+			VNGlobal.SceneTransitions.SCENESWITCH:
+				transition_mask.transition_out();
+				yield(transition_mask, "transition_completed")
+				
+				if page.next_background != VNGlobal.Backgrounds.SAME:
+					background.texture = backgrounds[page.next_background];
+				if page.next_music != VNGlobal.Music.SAME:
+					GlobalMusic.play_track(page.next_music);
+					
+				transition_mask.transition_in(page.next_name);
+				yield(transition_mask, "transition_completed");
+				
+			VNGlobal.SceneTransitions.ENTRANCE:
+				transition_mask.transition_out();
+				yield(transition_mask, "transition_completed")
+				
+				if page.next_background != VNGlobal.Backgrounds.SAME:
+					background.texture = backgrounds[page.next_background];
+				if page.next_music != VNGlobal.Music.SAME:
+					GlobalMusic.play_track(page.next_music);
+					
+				transition_mask.transition_entrance(page.next_name)
+				yield(transition_mask, "transition_completed");
+				
+
+		emit_signal("transition_finished")
+	elif page is ImageTogglePage:
+		if page.show:
+			popup_image.get_node("Background/Panel").texture = images[page.image];
+			popup_image.get_node("AnimationPlayer").play("Entrance");
+		else:
+			popup_image.get_node("AnimationPlayer").play_backwards("Entrance");
 	
 	state = WAITING
 
 
-func prepend_sentence (sentence):
-	textlabel.text += sentence.content + " ";
+func prepend_sentence (sentence, target_label:Label):
+	target_label.text += sentence.content + " ";
 	
 func count_printable(string:String):
 	string = string.replace(" ", "");
@@ -227,26 +289,25 @@ func count_printable(string:String):
 	string = string.replace("\r", "");
 	return string.length();
 
-func write_sentence (sentence):
-	var target = textlabel.get_visible_characters() + count_printable(sentence.content);
+func write_sentence (sentence, target_label:Label):
+	var target = target_label.get_visible_characters() + count_printable(sentence.content);
+	var speed = SENTENCE_SPEEDS[sentence.speed];
 
-	letter_timer.set_time(CHAR_WAIT/sentence.speed);
-	letter_timer.start();
+	var wait_time = (CHAR_WAIT/speed) * count_printable(sentence.content);
+	text_boxes.set_target(target_label);
 	
-	for i in range(count_printable(sentence.content)):
-		if (skipped == false):
-			textlabel.visible_characters+=1;
-			yield(letter_timer, "timeout");
-	letter_timer.stop();
+	if (skipped == false):
+		text_boxes.play(target, wait_time)
+		yield(text_boxes, "completed");
 
 	if (skipped == false):
-		delay_timer.set_time(VNGlobal.DEFAULT_SENTENCE_DELAY); 
+		delay_timer.set_time(DELAY_LENGTHS[sentence.delay]); 
 		delay_timer.start();
 		yield(delay_timer, "timeout");
 		delay_timer.stop();
 
 	if (skipped):
-		textlabel.visible_characters = target;
+		target_label.visible_characters = target;
 	
 	print("SENTENCE END");
 
@@ -254,6 +315,7 @@ func skip():
 	skipped = true;
 	letter_timer.force_end();
 	delay_timer.force_end();
+	text_boxes.force_end();
 
 func list_files_in_directory(path):
 	var files = []

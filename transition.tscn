@@ -1,0 +1,266 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://transition.gd" type="Script" id=1]
+[ext_resource path="res://VisualNovel/textures/gradient_lr.png" type="Texture" id=3]
+[ext_resource path="res://effect.gd" type="Script" id=4]
+[ext_resource path="res://VisualNovel/scene_lable.png" type="Texture" id=5]
+[ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer_Bold.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://PlayerSprites/protagonist-kun.png" type="Texture" id=7]
+[ext_resource path="res://PlayerSprites/happy_small.png" type="Texture" id=8]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float cutoff : hint_range(0, 1.0);
+uniform sampler2D filter : hint_albeto;
+
+
+void fragment(){
+//	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
+//	COLOR.r = 1.0;
+	float value = texture(filter, UV).r;
+//	vec4 tex = texture(filter, SCREEN_UV);
+	//was tex.r
+	if(value > cutoff){
+		COLOR = vec4(COLOR.rgb, 0.0);
+	}else{
+		COLOR = vec4(COLOR.rgb, 1.0);
+	}
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/cutoff = 0.0
+shader_param/filter = ExtResource( 3 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_away"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, 616.42 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("scene_arrow:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("scene_arrow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Path2D/PathFollow2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 0.5, 1 ),
+"update": 0,
+"values": [ 616.42, 616.42, 1500.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=9]
+size = 41
+use_filter = true
+extra_spacing_bottom = -20
+extra_spacing_char = -1
+extra_spacing_space = -20
+font_data = ExtResource( 6 )
+
+[sub_resource type="Curve2D" id=7]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -439.77, 140.396, 0, 0, 0, 0, 1329.04, -101.092 )
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Flip"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 5, 5 ), Vector2( 1e-05, 5 ), Vector2( 5, 5 ) ]
+}
+
+[node name="TransitionMask" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -0.000732422
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="effect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.000793457
+margin_bottom = 0.00012207
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="arrow" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="arrow"]
+anims/fade_away = SubResource( 4 )
+"anims/new label" = SubResource( 5 )
+"anims/old label" = SubResource( 6 )
+
+[node name="scene_arrow" type="Sprite" parent="arrow"]
+position = Vector2( 217.679, 97.6623 )
+rotation = -0.0833242
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="arrow/scene_arrow"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -548.797
+margin_top = -138.211
+margin_right = -18.7967
+margin_bottom = -87.2105
+rect_rotation = -2.28465
+custom_fonts/font = SubResource( 9 )
+text = "xdjtgmb xfryfkhmnv "
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Path2D" type="Path2D" parent="arrow"]
+position = Vector2( 44.804, 40.908 )
+curve = SubResource( 7 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="arrow/Path2D"]
+position = Vector2( 172.875, 56.7542 )
+rotation = -0.135684
+offset = 616.42
+loop = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="arrow/Path2D/PathFollow2D"]
+rotation = 0.0523599
+remote_path = NodePath("../../../scene_arrow")
+update_scale = false
+
+[node name="Control" type="Control" parent="arrow"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -719.999
+margin_top = -1440.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="arrow/Control"]
+position = Vector2( 613.698, 1300.66 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="arrow/Control/Sprite"]
+anims/Flip = SubResource( 8 )
