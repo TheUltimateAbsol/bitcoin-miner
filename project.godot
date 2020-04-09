@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "AnimatedMiner",
+"language": "GDScript",
+"path": "res://Classes/AnimatedMiner.gd"
+}, {
 "base": "Node",
 "class": "Answer",
 "language": "GDScript",
@@ -79,7 +84,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://VisualNovel/PageClasses/MetaPage.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "AnimatedMiner",
 "class": "Miner",
 "language": "GDScript",
 "path": "res://Classes/miner.gd"
@@ -130,6 +135,7 @@ _global_script_classes=[ {
 "path": "res://VisualNovel/VNlinkbarItem.gd"
 } ]
 _global_script_class_icons={
+"AnimatedMiner": "",
 "Answer": "",
 "AnswerButton": "",
 "AttackingEnemy": "",
@@ -224,10 +230,6 @@ literally_every_button={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
  ]
 }
-
-[rendering]
-
-quality/driver/driver_name="GLES2"
 
 [size]
 
