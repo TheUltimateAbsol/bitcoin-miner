@@ -5,17 +5,17 @@
 [ext_resource path="res://VisualNovel/IdInput.gd" type="Script" id=3]
 [ext_resource path="res://VisualNovel/SentenceInput.gd" type="Script" id=4]
 [ext_resource path="res://VisualNovel/QuestionInput.gd" type="Script" id=5]
-[ext_resource path="res://VisualNovel/TransitionInput.gd" type="Script" id=6]
-[ext_resource path="res://VisualNovel/CharacterInput.gd" type="Script" id=7]
-[ext_resource path="res://VisualNovel/DirectoryInput.gd" type="Script" id=8]
-[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=9]
-[ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=10]
-[ext_resource path="res://VisualNovel/SnackBar.gd" type="Script" id=11]
-[ext_resource path="res://parser.tscn" type="PackedScene" id=12]
-[ext_resource path="res://VisualNovel/ImportMenu.gd" type="Script" id=13]
-[ext_resource path="res://VisualNovel/ErrorLink.tscn" type="PackedScene" id=14]
-[ext_resource path="res://VisualNovel/SpeakerInput.gd" type="Script" id=15]
-[ext_resource path="res://VisualNovel/ImageToggleInput.gd" type="Script" id=16]
+[ext_resource path="res://VisualNovel/CharacterInput.gd" type="Script" id=6]
+[ext_resource path="res://VisualNovel/SpeakerInput.gd" type="Script" id=7]
+[ext_resource path="res://VisualNovel/TransitionInput.gd" type="Script" id=8]
+[ext_resource path="res://VisualNovel/ImageToggleInput.gd" type="Script" id=9]
+[ext_resource path="res://VisualNovel/DirectoryInput.gd" type="Script" id=10]
+[ext_resource path="res://VisualNovel/VNReader.tscn" type="PackedScene" id=11]
+[ext_resource path="res://VisualNovel/Fonts/f25_bank_printer/F25_Bank_Printer.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://VisualNovel/SnackBar.gd" type="Script" id=13]
+[ext_resource path="res://VisualNovel/ImportMenu.gd" type="Script" id=14]
+[ext_resource path="res://parser.tscn" type="PackedScene" id=15]
+[ext_resource path="res://VisualNovel/ErrorLink.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://VisualNovel/KIdDOS-Regular.ttf"
@@ -28,7 +28,7 @@ font_data = SubResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 64
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0.0470588, 0.301961, 1 )
@@ -87,10 +87,10 @@ tracks/3/keys = {
 [sub_resource type="DynamicFont" id=6]
 size = 30
 extra_spacing_top = 10
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=7]
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
@@ -99,7 +99,7 @@ bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
 size = 30
 extra_spacing_top = 10
 extra_spacing_bottom = 10
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.290196, 0.67451, 0.266667, 1 )
@@ -247,43 +247,43 @@ custom_constants/separation = 15
 alignment = 1
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 36.0
+margin_left = 18.0
 margin_top = 3.0
-margin_right = 79.0
+margin_right = 61.0
 margin_bottom = 17.0
 text = "Speed:"
 
 [node name="sent_speed_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 94.0
-margin_right = 162.0
+margin_left = 76.0
+margin_right = 156.0
 margin_bottom = 20.0
 text = "Speed"
 align = 1
 
 [node name="Label2" type="Label" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 177.0
+margin_left = 171.0
 margin_top = 3.0
-margin_right = 217.0
+margin_right = 211.0
 margin_bottom = 17.0
 text = "Delay:"
 
 [node name="sent_delay_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 232.0
-margin_right = 297.0
+margin_left = 226.0
+margin_right = 303.0
 margin_bottom = 20.0
 text = "Delay"
 align = 1
 
 [node name="Label3" type="Label" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 312.0
+margin_left = 318.0
 margin_top = 3.0
-margin_right = 351.0
+margin_right = 357.0
 margin_bottom = 17.0
 text = "Effect:"
 
 [node name="sound_menu" type="OptionButton" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 366.0
-margin_right = 430.0
+margin_left = 372.0
+margin_right = 448.0
 margin_bottom = 20.0
 text = "Effect"
 
@@ -377,7 +377,7 @@ margin_bottom = 81.0
 margin_top = 311.0
 margin_right = 480.0
 margin_bottom = 411.0
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterInput"]
 margin_left = 7.0
@@ -455,7 +455,7 @@ align = 1
 margin_top = 415.0
 margin_right = 480.0
 margin_bottom = 471.0
-script = ExtResource( 15 )
+script = ExtResource( 7 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/SpeakerInput"]
 margin_left = 7.0
@@ -516,7 +516,7 @@ margin_bottom = 24.0
 margin_top = 475.0
 margin_right = 480.0
 margin_bottom = 603.0
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/TransitionInput"]
 margin_left = 7.0
@@ -613,7 +613,7 @@ size_flags_horizontal = 3
 margin_top = 607.0
 margin_right = 480.0
 margin_bottom = 663.0
-script = ExtResource( 16 )
+script = ExtResource( 9 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/ImageToggleInput"]
 margin_left = 7.0
@@ -672,7 +672,7 @@ align = 1
 margin_top = 667.0
 margin_right = 480.0
 margin_bottom = 723.0
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/DirectoryInput"]
 margin_left = 7.0
@@ -700,7 +700,7 @@ margin_bottom = 1440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VNReader" parent="Panel/HBoxContainer/VNReaderBox" instance=ExtResource( 9 )]
+[node name="VNReader" parent="Panel/HBoxContainer/VNReaderBox" instance=ExtResource( 11 )]
 rect_scale = Vector2( 0.5, 0.5 )
 size_flags_horizontal = 9
 size_flags_vertical = 0
@@ -744,7 +744,7 @@ text = "SAVE"
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 11 )
+script = ExtResource( 13 )
 
 [node name="Panel" type="Panel" parent="SnackBar"]
 anchor_right = 1.0
@@ -766,7 +766,7 @@ anims/Activate = SubResource( 5 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 13 )
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -788,7 +788,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Parser" parent="ImportMenu" instance=ExtResource( 12 )]
+[node name="Parser" parent="ImportMenu" instance=ExtResource( 15 )]
 
 [node name="Panel" type="Panel" parent="ImportMenu"]
 modulate = Color( 1, 1, 1, 0.878431 )
@@ -900,14 +900,14 @@ margin_top = 5.0
 margin_right = 615.0
 margin_bottom = 95.0
 
-[node name="Control" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 610.0
 margin_bottom = 14.0
 percent_visible = 1.0
 
-[node name="Control2" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control2" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
@@ -915,7 +915,7 @@ margin_right = 610.0
 margin_bottom = 32.0
 percent_visible = 1.0
 
-[node name="Control3" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control3" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 36.0
@@ -923,7 +923,7 @@ margin_right = 610.0
 margin_bottom = 50.0
 percent_visible = 1.0
 
-[node name="Control4" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control4" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 54.0
@@ -931,7 +931,7 @@ margin_right = 610.0
 margin_bottom = 68.0
 percent_visible = 1.0
 
-[node name="Control5" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control5" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 72.0

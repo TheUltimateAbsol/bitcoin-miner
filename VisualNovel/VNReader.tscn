@@ -5,20 +5,20 @@
 [ext_resource path="res://VisualNovel/Characters/Expressions/anna/angry.png" type="Texture" id=3]
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=4]
 [ext_resource path="res://VisualNovel/slide_from_left.tres" type="Animation" id=5]
-[ext_resource path="res://VisualNovel/AnswerBox.gd" type="Script" id=6]
-[ext_resource path="res://VisualNovel/AnswerButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://VisualNovel/KIdDOS-Regular.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://VisualNovel/image_background.png" type="Texture" id=9]
-[ext_resource path="res://VisualNovel/Images/Letter.png" type="Texture" id=10]
-[ext_resource path="res://thought_front.png" type="Texture" id=11]
-[ext_resource path="res://dialogebox2.png" type="Texture" id=12]
-[ext_resource path="res://VisualNovel/Fonts/gloria_hallelujah/gloria_hallelujah.tres" type="DynamicFont" id=13]
+[ext_resource path="res://VisualNovel/NPCTransitioner.gd" type="Script" id=6]
+[ext_resource path="res://VisualNovel/AnswerBox.gd" type="Script" id=7]
+[ext_resource path="res://VisualNovel/AnswerButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://VisualNovel/CharacterTween.gd" type="Script" id=9]
+[ext_resource path="res://dialogebox2.png" type="Texture" id=10]
+[ext_resource path="res://VisualNovel/Fonts/gloria_hallelujah/gloria_hallelujah.tres" type="DynamicFont" id=11]
+[ext_resource path="res://NameBubble.png" type="Texture" id=12]
+[ext_resource path="res://VisualNovel/KIdDOS-Regular.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://thought_back.png" type="Texture" id=14]
-[ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=15]
-[ext_resource path="res://NameBubble.png" type="Texture" id=16]
-[ext_resource path="res://VisualNovel/NPCTransitioner.gd" type="Script" id=17]
-[ext_resource path="res://NextArrow.png" type="Texture" id=18]
-[ext_resource path="res://VisualNovel/CharacterTween.gd" type="Script" id=19]
+[ext_resource path="res://thought_front.png" type="Texture" id=15]
+[ext_resource path="res://NextArrow.png" type="Texture" id=16]
+[ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=17]
+[ext_resource path="res://VisualNovel/image_background.png" type="Texture" id=18]
+[ext_resource path="res://VisualNovel/Images/Letter.png" type="Texture" id=19]
 [ext_resource path="res://transition.tscn" type="PackedScene" id=20]
 
 [sub_resource type="Shader" id=1]
@@ -123,7 +123,7 @@ tracks/0/keys = {
 size = 59
 extra_spacing_char = -5
 extra_spacing_space = -1
-font_data = ExtResource( 8 )
+font_data = ExtResource( 13 )
 
 [sub_resource type="Animation" id=8]
 length = 0.3
@@ -316,7 +316,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 2, 1 ),
 "update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1e-005, 1e-005 ), Vector2( 1, 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath(".:position")
@@ -427,7 +427,7 @@ anims/appear = SubResource( 4 )
 anims/flash = SubResource( 5 )
 anims/slide_from_left = ExtResource( 5 )
 anims/slide_from_right = SubResource( 6 )
-script = ExtResource( 17 )
+script = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="Control"]
 visible = false
@@ -440,16 +440,16 @@ margin_top = -48.7005
 margin_bottom = 915.3
 rect_clip_content = true
 alignment = 1
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="A" parent="Control/AnswerBox" instance=ExtResource( 7 )]
+[node name="A" parent="Control/AnswerBox" instance=ExtResource( 8 )]
 margin_top = 76.0
 margin_bottom = 276.0
 
-[node name="B" parent="Control/AnswerBox" instance=ExtResource( 7 )]
+[node name="B" parent="Control/AnswerBox" instance=ExtResource( 8 )]
 margin_top = 280.0
 margin_bottom = 480.0
 
@@ -460,9 +460,7 @@ rotation = 3.13408
 scale = Vector2( 1, -1 )
 
 [node name="Label" parent="Control/AnswerBox/B/Arrow" index="0"]
-anchor_left = -0.034
 anchor_top = 0.003
-anchor_right = -0.034
 anchor_bottom = 0.003
 margin_left = 236.8
 margin_top = -41.3076
@@ -478,7 +476,7 @@ scale = Vector2( -1, 1 )
 [node name="PathFollow2D" parent="Control/AnswerBox/B/Node2D/Path2D" index="0"]
 position = Vector2( 163.797, 125.604 )
 
-[node name="C" parent="Control/AnswerBox" instance=ExtResource( 7 )]
+[node name="C" parent="Control/AnswerBox" instance=ExtResource( 8 )]
 margin_top = 484.0
 margin_bottom = 684.0
 
@@ -493,7 +491,7 @@ rotation = -0.139626
 [node name="PathFollow2D" parent="Control/AnswerBox/C/Node2D/Path2D" index="0"]
 position = Vector2( 163.797, 125.604 )
 
-[node name="D" parent="Control/AnswerBox" instance=ExtResource( 7 )]
+[node name="D" parent="Control/AnswerBox" instance=ExtResource( 8 )]
 margin_top = 688.0
 margin_bottom = 888.0
 
@@ -527,7 +525,7 @@ anchor_bottom = 1.0
 margin_left = -360.0
 margin_top = -365.6
 margin_right = 363.0
-script = ExtResource( 19 )
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -542,7 +540,7 @@ rotation = 0.523599
 [node name="Sprite" type="Sprite" parent="Control/TextBoxes/Dialogue"]
 position = Vector2( -101.17, -384.341 )
 scale = Vector2( 2.5, 2.75 )
-texture = ExtResource( 12 )
+texture = ExtResource( 10 )
 
 [node name="Text" type="Label" parent="Control/TextBoxes/Dialogue"]
 margin_left = -426.863
@@ -550,7 +548,7 @@ margin_top = -491.13
 margin_right = 98.1367
 margin_bottom = -62.1298
 rect_rotation = -3.0
-custom_fonts/font = ExtResource( 13 )
+custom_fonts/font = ExtResource( 11 )
 text = "asdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdasdf asdf asd fasdf asdf asdf as"
 autowrap = true
 __meta__ = {
@@ -561,7 +559,7 @@ __meta__ = {
 position = Vector2( -371.871, -547.052 )
 rotation = -0.0366519
 scale = Vector2( 1.6273, 1.77683 )
-texture = ExtResource( 16 )
+texture = ExtResource( 12 )
 
 [node name="Name" type="Label" parent="Control/TextBoxes/Dialogue"]
 margin_left = -485.507
@@ -597,14 +595,14 @@ texture = ExtResource( 14 )
 [node name="thought_front" type="Sprite" parent="Control/TextBoxes/Thought"]
 position = Vector2( 228.68, 222.987 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 11 )
+texture = ExtResource( 15 )
 
 [node name="Text" type="Label" parent="Control/TextBoxes/Thought"]
 margin_left = 55.9241
 margin_top = -7.16931
 margin_right = 708.924
 margin_bottom = 348.831
-custom_fonts/font = ExtResource( 13 )
+custom_fonts/font = ExtResource( 11 )
 text = "asdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdf asdf asdf asdf asdfsad"
 autowrap = true
 __meta__ = {
@@ -619,7 +617,7 @@ visible = false
 position = Vector2( 675, 442.288 )
 rotation = -0.0523599
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 18 )
+texture = ExtResource( 16 )
 __meta__ = {
 "_editor_description_": "
 		"
@@ -665,7 +663,7 @@ emitting = false
 amount = 50
 lifetime = 1.56
 local_coords = false
-texture = ExtResource( 15 )
+texture = ExtResource( 17 )
 gravity = Vector2( 0, 200 )
 angular_velocity = 313.55
 angular_velocity_random = 0.61
@@ -675,7 +673,7 @@ color_ramp = SubResource( 14 )
 [node name="PopupImage" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 0 )
 position = Vector2( 379.04, 497.065 )
-scale = Vector2( 1e-05, 1e-05 )
+scale = Vector2( 1e-005, 1e-005 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PopupImage"]
 anims/Entrance = SubResource( 15 )
@@ -686,7 +684,7 @@ anchor_right = 0.5
 margin_left = -0.5
 margin_right = 505.5
 margin_bottom = 640.0
-texture = ExtResource( 9 )
+texture = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -699,7 +697,7 @@ margin_left = 47.7833
 margin_top = 56.3917
 margin_right = -31.2167
 margin_bottom = -42.6083
-texture = ExtResource( 10 )
+texture = ExtResource( 19 )
 stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
