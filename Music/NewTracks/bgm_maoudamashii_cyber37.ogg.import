@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bgm_maoudamashii_cyber37.ogg-a9317ec1187c7dd3e1b9f9c9726ae902.oggstr"
+
+[deps]
+
+source_file="res://Music/NewTracks/bgm_maoudamashii_cyber37.ogg"
+dest_files=[ "res://.import/bgm_maoudamashii_cyber37.ogg-a9317ec1187c7dd3e1b9f9c9726ae902.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

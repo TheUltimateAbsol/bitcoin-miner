@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bgm_maoudamashii_8bit20.ogg-f02a5d2ac4df2250c066b3721dcf6e41.oggstr"
+
+[deps]
+
+source_file="res://Music/NewTracks/bgm_maoudamashii_8bit20.ogg"
+dest_files=[ "res://.import/bgm_maoudamashii_8bit20.ogg-f02a5d2ac4df2250c066b3721dcf6e41.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

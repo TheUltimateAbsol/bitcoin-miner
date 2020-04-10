@@ -10,7 +10,7 @@ extends Node
 const Characters = {"NONE":"NONE", "ANNA":"ANNA", "CLAIRE":"CLAIRE", "JACK":"JACK", "CHAD":"CHAD", "JUNE":"JUNE", "SHAUN":"SHAUN", "ELIZABETH":"ELIZABETH"} 
 const CharacterTransitions = {"DEFAULT":"DEFAULT"} #character
 const Music = {"SAME":"SAME", "NONE":"NONE", "DEFAULT":"DEFAULT", "SUSPENSE":"SUSPENSE", "DESPAIR":"DESPAIR", "ENGAGING":"ENGAGING", "BOISTEROUS":"BOISTEROUS"}
-const Expressions = {"NORMAL":"NORMAL", "ANGRY":"ANGRY", "EMBARASSED":"EMBARASSED", "SAD":"SAD", "HAPPY":"HAPPY", "SHOCKED":"SHOCKED"}
+const Expressions = {"NORMAL":"NORMAL", "ANGRY":"ANGRY", "EMBARRASSED":"EMBARRASSED", "SAD":"SAD", "HAPPY":"HAPPY", "SHOCKED":"SHOCKED"}
 const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOMA":"CLASSROOMA", "CLASSROOMB":"CLASSROOMB", "HALLWAY":"HALLWAY", "GYMlOCKER":"GYMLOCKER", "BUS":"BUS", "BEACH":"BEACH", "CAFETERIA":"CAFETERIA", "BEDROOM":"BEDROOM"}
 const SceneTransitions = {"NONE":"NONE", "SCENESWITCH":"SCENESWITCH", "ENTRANCE":"ENTRANCE"}
 # when the text appears on the screen (sentence per sentence basis)
@@ -18,9 +18,11 @@ const Effects = {"NONE":"NONE"}
 const SentenceSpeeds = {"DEFAULT": "DEFAULT", "FAST":"FAST", "SLOW":"SLOW"}
 const DelayLengths = {"DEFAULT": "DEFAULT", "NONE":"NONE", "SHORT":"SHORT", "LONG":"LONG"}
 const Images = {"LETTER":"LETTER"}
+const CheckTypes = {"GREATERTHAN":"GREATERTHAN", "GREATERTHANEQ":"GREATERTHANEQ", "LESSTHAN":"LESSTHAN", "LESSTHANEQ":"LESSTHANEQ", "EQUAL":"EQUAL", "NOT":"NOT"}
+const CheckTypeSymbols = {"GREATERTHAN":">", "GREATERTHANEQ":">=", "LESSTHAN":"<", "LESSTHANEQ":"<=", "EQUAL":"=", "NOT":"!="}
+const ReverseCheckTypeSymbols = {">":"GREATERTHAN", ">=":"GREATERTHANEQ", "<":"LESSTHAN", "<=":"LESSTHANEQ", "=":"EQUAL", "!=":"NOT"}
 
 const CLASS_DIRECTORY = "res://VisualNovel/PageClasses/"
-
 signal user_input
 
 func _ready():

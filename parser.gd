@@ -18,6 +18,7 @@ var line_number = 0;
 var LABEL_ids = {}
 var last_character_image = "";
 
+
 var errors= []; #This is evaluated in the end
 
 func count_string_instances(line:String, target:String):
@@ -25,6 +26,12 @@ func count_string_instances(line:String, target:String):
 	searcher.compile(target);
 	return searcher.search_all(line).size()
 	
+	
+func string_to_bool(param:String)->bool:
+	param = param.to_upper().strip_edges();
+	if param == "TRUE":
+		return true;
+	return false;
 #
 #func find_all(line:String, target:String)->Array:
 #	var instances = [];
@@ -85,6 +92,7 @@ func new_LABEL(id: String):
 	return temp;
 	
 func LABEL_to_int(id: String) -> int:
+	id = id.to_upper();
 	if not LABEL_ids.keys().has(id):
 		LABEL_ids[id] = -(LABEL_ids.size() +1)
 	return LABEL_ids[id];
@@ -127,7 +135,7 @@ func parse_action(line:String):
 			var error = check_args(parameters, 1, "SHOW IMAGE")
 			if error: return error;
 			
-			var image = parameters[0];
+			var image = parameters[0].to_upper();
 			error = check_value(image, VNGlobal.Images.values(), "SHOW IMAGE")
 			if error: return error;
 						
@@ -144,6 +152,89 @@ func parse_action(line:String):
 			var error = check_args(parameters, 1, "LABEL")
 			if error: return error;
 			pages.push_back(new_LABEL(parameters[0]));
+		"BRANCH ON FLAG":
+			var error = check_args(parameters, 2, "BRANCH ON FLAG")
+			if error: return error;
+			
+			var page:FlagBranchPage = FlagBranchPage.new();
+			page.target_id = LABEL_to_int(parameters[0]);
+			page.flag = parameters[1]
+			pages.push_back(page.serialize());
+		"BRANCH ON RELATIONSHIP":
+			var error = check_args(parameters, 4, "BRANCH ON RELATIONSHIP")
+			if error: return error;
+			
+			var page:RelationshipBranchPage = RelationshipBranchPage.new();
+			var target_id = LABEL_to_int(parameters[0]);
+			var character = parameters[1].to_upper();
+			var check_type = parameters[2].to_upper();
+			var value = int(parameters[3]);
+			
+			error = check_value(character, VNGlobal.Characters.values(), "BRANCH ON RELATIONSHIP")
+			if error: return error;
+			error = check_value(check_type, VNGlobal.CheckTypeSymbols.values(), "BRANCH ON RELATIONSHIP")
+			if error: return error;
+			
+			page.target_id = target_id;
+			page.character = character;
+			page.check_type = VNGlobal.ReverseCheckTypeSymbols[check_type];
+			page.value = value;
+			
+			pages.push_back(page.serialize());
+		"SET FLAG":
+			var error1 = check_args(parameters, 1, "SET FLAG")
+			var error2 = check_args(parameters, 2, "SET FLAG")
+			if error1: if error2: return error2;
+			
+			var page:SetFlagPage = SetFlagPage.new();
+			page.flag = parameters[0];
+			if not error2: page.value = string_to_bool(parameters[1]);
+			pages.push_back(page.serialize());
+		"INCREMENT RELATIONSHIP":
+			var error1 = check_args(parameters, 1, "INCREMENT RELATIONSHIP")
+			var error2 = check_args(parameters, 2, "INCREMENT RELATIONSHIP")
+			if error1: if error2: return error2;
+			
+			var page:IncrementRelationshipPage = IncrementRelationshipPage.new();
+			var character = parameters[0].to_upper()
+			var value = page.value;
+			
+			if not error2:
+				value = int(parameters[1])
+			
+			var error = check_value(character, VNGlobal.Characters.values(), "INCREMENT RELATIONSHIP")
+			if error: return error;
+			
+			page.character = character;
+			page.value = value;
+			pages.push_back(page.serialize());
+		"TRANSITION":
+			var error3 = check_args(parameters, 3, "TRANSITION")
+			var error4 = check_args(parameters, 4, "TRANSITION")
+			if error3: if error4: return error4;
+			
+			var page:TransitionPage = TransitionPage.new()
+			var next_background:String = parameters[0].to_upper()
+			var next_music:String = parameters[1].to_upper()
+			var transition_type:String = parameters[2].to_upper()
+			var next_name:String = page.next_name
+			
+			if not error4:
+				next_name = parameters[3];
+			
+			var error = check_value(next_background, VNGlobal.Backgrounds.values(), "TRANSITION")
+			if error: return error;
+			error = check_value(next_music, VNGlobal.Music.values(), "TRANSITION")
+			if error: return error;
+			error = check_value(transition_type, VNGlobal.SceneTransitions.values(), "TRANSITION")
+			if error: return error;
+			
+			page.next_background = next_background;
+			page.next_music = next_music;
+			page.transition_type = transition_type;
+			page.next_name = next_name;
+			
+			pages.push_back(page.serialize());
 		"MINING START":
 			var error = check_args(parameters, 0, "BEGIN MINING")
 			if error: return error;
@@ -225,8 +316,8 @@ func parse_content(line:String):
 				character_expression = VNGlobal.Expressions.HAPPY
 			"ANGRY":
 				character_expression = VNGlobal.Expressions.ANGRY
-			"EMBARASSED":
-				character_expression = VNGlobal.Expressions.EMBARASSED
+			"EMBARRASSED":
+				character_expression = VNGlobal.Expressions.EMBARRASSED
 			"TO":
 				var target_character = sub_parameters[1]
 				var char_found = false
@@ -501,6 +592,8 @@ func parse(text):
 #	Resolve all symbolic links
 	for key in id_map.keys():
 		find_and_replace(pages, "next_id", key, id_map[key])
+	for key in id_map.keys():
+		find_and_replace(pages, "target_id", key, id_map[key])
 
 func load_text_file(path):
 	var f = File.new()

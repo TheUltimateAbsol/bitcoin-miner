@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bgm_maoudamashii_acoustic26.ogg-65138eea8c40635539a5d576bec8f782.oggstr"
+
+[deps]
+
+source_file="res://Music/NewTracks/bgm_maoudamashii_acoustic26.ogg"
+dest_files=[ "res://.import/bgm_maoudamashii_acoustic26.ogg-65138eea8c40635539a5d576bec8f782.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

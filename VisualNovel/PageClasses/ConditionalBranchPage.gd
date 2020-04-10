@@ -13,7 +13,7 @@ func _init(xid=0, xnext_id=0, xtarget_id=0).(xid, xnext_id):
 #   is our next best option :/
 	if typeof(xid) == TYPE_DICTIONARY:
 		var json_object = xid
-		xtarget_id = xid.target_id
+		xtarget_id = json_object.target_id
 		
 	target_id = xtarget_id;
 	

@@ -36,6 +36,8 @@ alignment = 2
 margin_left = 458.0
 margin_right = 532.0
 margin_bottom = 1440.0
+max_value = 100000.0
+allow_greater = true
 
 [node name="Close" type="Button" parent="HBoxContainer/HBoxContainer"]
 margin_left = 536.0

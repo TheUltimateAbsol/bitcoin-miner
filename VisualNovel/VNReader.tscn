@@ -56,7 +56,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/outline_width = 3.0
+shader_param/outline_width = 0.0
 shader_param/outline_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="Animation" id=3]
@@ -536,9 +536,7 @@ __meta__ = {
 [node name="CharacterTween" type="Tween" parent="Control/TextBoxes"]
 
 [node name="Dialogue" type="Node2D" parent="Control/TextBoxes"]
-modulate = Color( 0, 0, 0, 0 )
 position = Vector2( 554.863, 593.13 )
-rotation = 0.523599
 
 [node name="Sprite" type="Sprite" parent="Control/TextBoxes/Dialogue"]
 position = Vector2( -101.17, -384.341 )

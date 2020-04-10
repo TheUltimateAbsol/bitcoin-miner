@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://VisualNovel/Characters/Expressions/anna/angry.png" type="Texture" id=1]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( -25.8469, -82.7099 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 440.625, 132.902 )
+offset = Vector2( -443.625, -68.9029 )
+polygon = PoolVector2Array( 151.996, 110.255, 59.997, 223.254, 157.996, 431.251, 570.992, 195.254, 443.993, 47.2554 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2( 766.296, 157.457 )
+offset = Vector2( -443.625, -68.9029 )
+polygon = PoolVector2Array( 151.996, 110.255, 59.997, 223.254, 157.996, 431.251, 570.992, 195.254, 443.993, 47.2554 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 290.872, 638.249 )
+texture = ExtResource( 1 )
+mode = 2

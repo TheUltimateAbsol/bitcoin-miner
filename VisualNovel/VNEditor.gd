@@ -7,17 +7,25 @@ onready var insert_btn = $Panel/HBoxContainer/VBoxContainer/HBoxContainer/New
 #short reference names
 onready var idInput = $Panel/HBoxContainer/Layout/IdInput
 onready var sentenceInput = $Panel/HBoxContainer/Layout/SentenceInput
-onready var characterInput = $Panel/HBoxContainer/Layout/CharacterInput
+onready var characterImageInput = $Panel/HBoxContainer/Layout/CharacterImageInput
 onready var directoryInput = $Panel/HBoxContainer/Layout/DirectoryInput
 onready var questionInput = $Panel/HBoxContainer/Layout/QuestionInput
 onready var speakerInput = $Panel/HBoxContainer/Layout/SpeakerInput
 onready var imageInput = $Panel/HBoxContainer/Layout/ImageToggleInput
 onready var transitionInput = $Panel/HBoxContainer/Layout/TransitionInput
+onready var checkTypeInput = $Panel/HBoxContainer/Layout/CheckTypeInput
+onready var intValueInput = $Panel/HBoxContainer/Layout/IntValueInput
+onready var boolValueInput = $Panel/HBoxContainer/Layout/BoolValueInput
+onready var characterInput = $Panel/HBoxContainer/Layout/CharacterInput
+onready var targetIdInput = $Panel/HBoxContainer/Layout/TargetIdInput
+onready var flagInput = $Panel/HBoxContainer/Layout/FlagInput
 onready var LinkBar = $Panel/HBoxContainer/VBoxContainer/ScrollContainer/LinkBar
 
 const VNReaderClass = preload("res://VisualNovel/VNReader.tscn");
 #Used to identify input types
-enum Inputs {ID, SENTENCE, SCENE, CHARACTER, DIRECTORY, QUESTION, SPEAKER, TRANSITION, IMAGE}
+enum Inputs {ID, SENTENCE, SCENE, CHARACTER_IMAGE, CHARACTER, 
+	DIRECTORY, QUESTION, SPEAKER, TRANSITION, IMAGE,
+	INT_VALUE, BOOL_VALUE, CHECK_TYPE, TARGET_ID, FLAG}
 
 var data_json #This is what we read in from a file. Honestly, I'm not sure why it's here
 var save_data : Array #Our save data
@@ -29,7 +37,7 @@ var current_index = -1; #This says what page is currently selected
 # classNode is a link to the actual class (given by classname)
 var classes = {
 	"ContentPage": {
-		"dependencies": [Inputs.ID, Inputs.SENTENCE, Inputs.CHARACTER, Inputs.SPEAKER],
+		"dependencies": [Inputs.ID, Inputs.SENTENCE, Inputs.CHARACTER_IMAGE, Inputs.SPEAKER],
 		"classNode": ContentPage,
 	},
 	"GameStartPage": {
@@ -56,6 +64,22 @@ var classes = {
 		"dependencies" : [Inputs.ID, Inputs.IMAGE],
 		"classNode": ImageTogglePage
 	},
+	"IncrementRelationshipPage":{
+		"dependencies" : [Inputs.ID, Inputs.INT_VALUE, Inputs.CHARACTER],
+		"classNode": IncrementRelationshipPage
+	},
+	"RelationshipBranchPage":{
+		"dependencies" : [Inputs.ID, Inputs.INT_VALUE, Inputs.CHARACTER, Inputs.CHECK_TYPE, Inputs.TARGET_ID],
+		"classNode": RelationshipBranchPage
+	},
+	"FlagBranchPage":{
+		"dependencies" : [Inputs.ID, Inputs.FLAG, Inputs.TARGET_ID, Inputs.FLAG],
+		"classNode": FlagBranchPage
+	},
+	"SetFlagPage":{
+		"dependencies" : [Inputs.ID, Inputs.FLAG, Inputs.BOOL_VALUE],
+		"classNode": SetFlagPage
+	},
 }
 
 func type_to_input(input_type):
@@ -64,8 +88,8 @@ func type_to_input(input_type):
 			return idInput;
 		Inputs.SENTENCE:
 			return sentenceInput;
-		Inputs.CHARACTER:
-			return characterInput
+		Inputs.CHARACTER_IMAGE:
+			return characterImageInput
 		Inputs.DIRECTORY:
 			return directoryInput
 		Inputs.QUESTION:
@@ -76,6 +100,18 @@ func type_to_input(input_type):
 			return transitionInput;
 		Inputs.IMAGE:
 			return imageInput;
+		Inputs.INT_VALUE:
+			return intValueInput;
+		Inputs.BOOL_VALUE:
+			return boolValueInput;
+		Inputs.CHECK_TYPE:
+			return checkTypeInput;
+		Inputs.TARGET_ID:
+			return targetIdInput;
+		Inputs.FLAG:
+			return flagInput;
+		Inputs.CHARACTER:
+			return characterInput
 		_:
 			push_error("INVALID INPUT " + String(input_type))
 			return null;
@@ -241,6 +277,16 @@ func delete():
 			item.id-=1
 		if item.next_id > old_id:
 			item.next_id-=1
+			
+#	Do the exact same thing for target ids
+	for item in save_data:
+		if item.get("target_id"):
+			if item.target_id == old_id:
+				item.target_id = old_next;
+	for item in save_data:
+		if item.get("target_id"):
+			if item.target_id > old_id:
+				item.target_id -=1;
 		
 	#Now do the exact same thing for all answer choices
 	for item in save_data:
@@ -278,6 +324,14 @@ func _adjacent_swap(before, afer):
 			item.next_id = new_actor_id;
 		elif item.next_id == victim_id:
 			item.next_id = new_victim_id;
+			
+#	Update target ids
+	for item in save_data:
+		if item.get("target_id"):
+			if item.target_id == actor_id:
+				item.target_id = new_actor_id;
+			elif item.target_id == victim_id:
+				item.target_id = new_victim_id;
 			
 	# Do the exact same thing for the answers
 	for item in save_data:

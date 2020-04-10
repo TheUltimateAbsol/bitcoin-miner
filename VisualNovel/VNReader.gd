@@ -57,12 +57,18 @@ const images = {}
 
 var data_json
 
-func _ready():
+func reset_dialogue():
 	dialogue_label.text = ""
 	name_label.text = ""
 	thought_label.text = ""
 	npc.texture = null
 	answerBox.visible = false
+	current_character = VNGlobal.Characters.NONE;
+	$Control/TextBoxes/Thought.hide();
+	$Control/TextBoxes/Dialogue.hide();
+
+func _ready():
+	reset_dialogue()
 	
 	for key in VNGlobal.Characters.keys():
 		if key != VNGlobal.Characters.NONE:
@@ -127,14 +133,21 @@ func play():
 				display_page(page)
 				endPage = true
 			elif page is TransitionPage:
-				display_page(page);
-				yield(self, "transition_finished")
+				var func_pointer = display_page(page);
+				if func_pointer:
+					yield(func_pointer, "completed")
 			else:
 				display_page(page)
 			
 #			Because we already handled it
 			if not page is QuestionPage:
 				id = page.next_id;
+			
+			
+			if page is ConditionalBranchPage:
+				if page.should_branch():
+					id = page.target_id;
+					
 			break
 
 
@@ -245,37 +258,42 @@ func display_page(page:Page):
 				if page.next_music != VNGlobal.Music.SAME:
 					GlobalMusic.play_track(page.next_music);
 			VNGlobal.SceneTransitions.SCENESWITCH:
+				GlobalMusic.fade_out()
 				transition_mask.transition_out();
 				yield(transition_mask, "transition_completed")
 				
 				if page.next_background != VNGlobal.Backgrounds.SAME:
 					background.texture = backgrounds[page.next_background];
 				if page.next_music != VNGlobal.Music.SAME:
-					GlobalMusic.play_track(page.next_music);
+					GlobalMusic.queue_track(page.next_music);
+				reset_dialogue();
 					
 				transition_mask.transition_in(page.next_name);
 				yield(transition_mask, "transition_completed");
 				
 			VNGlobal.SceneTransitions.ENTRANCE:
+				GlobalMusic.fade_out()
 				transition_mask.transition_out();
 				yield(transition_mask, "transition_completed")
 				
 				if page.next_background != VNGlobal.Backgrounds.SAME:
 					background.texture = backgrounds[page.next_background];
 				if page.next_music != VNGlobal.Music.SAME:
-					GlobalMusic.play_track(page.next_music);
+					GlobalMusic.queue_track(page.next_music);
+				reset_dialogue()
 					
 				transition_mask.transition_entrance(page.next_name)
 				yield(transition_mask, "transition_completed");
 				
-
-		emit_signal("transition_finished")
 	elif page is ImageTogglePage:
 		if page.show:
 			popup_image.get_node("Background/Panel").texture = images[page.image];
 			popup_image.get_node("AnimationPlayer").play("Entrance");
 		else:
 			popup_image.get_node("AnimationPlayer").play_backwards("Entrance");
+			
+	elif page is SetFlagPage or page is IncrementRelationshipPage:
+		page.activate();
 	
 	state = WAITING
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bgm_maoudamashii_healing05.ogg-57989041a41296852d76df79fee126d5.oggstr"
+
+[deps]
+
+source_file="res://Music/NewTracks/bgm_maoudamashii_healing05.ogg"
+dest_files=[ "res://.import/bgm_maoudamashii_healing05.ogg-57989041a41296852d76df79fee126d5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
