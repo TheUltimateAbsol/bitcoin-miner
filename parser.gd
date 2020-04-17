@@ -235,6 +235,66 @@ func parse_action(line:String):
 			page.next_name = next_name;
 			
 			pages.push_back(page.serialize());
+		"SET MUSIC":
+			var error = check_args(parameters, 1, "SET MUSIC")
+			if error: return error;
+			
+			var page:TransitionPage = TransitionPage.new()
+			var next_background:String = VNGlobal.Backgrounds.SAME;
+			var next_music:String = parameters[0].to_upper()
+			var transition_type:String = VNGlobal.SceneTransitions.NONE;
+			var next_name:String = page.next_name
+			
+			
+			error = check_value(next_music, VNGlobal.Music.values(), "SET MUSIC")
+			if error: return error;
+
+			page.next_background = next_background;
+			page.next_music = next_music;
+			page.transition_type = transition_type;
+			page.next_name = next_name;
+			
+			pages.push_back(page.serialize());
+		"SET BACKGROUND":
+			var error = check_args(parameters, 1, "SET BACKGROUND")
+			if error: return error;
+			
+			var page:TransitionPage = TransitionPage.new()
+			var next_background:String = parameters[0].to_upper()
+			var next_music:String = VNGlobal.Music.SAME;
+			var transition_type:String = VNGlobal.SceneTransitions.NONE;
+			var next_name:String = page.next_name
+			
+			
+			error = check_value(next_background, VNGlobal.Backgrounds.values(), "SET BACKGROUND")
+			if error: return error;
+
+			page.next_background = next_background;
+			page.next_music = next_music;
+			page.transition_type = transition_type;
+			page.next_name = next_name;
+			
+			pages.push_back(page.serialize());
+		"FADE IN MUSIC":
+			var error = check_args(parameters, 1, "FADE IN MUSIC")
+			if error: return error;
+			
+			var page:TransitionPage = TransitionPage.new()
+			var next_background:String = VNGlobal.Backgrounds.SAME;
+			var next_music:String = parameters[0].to_upper()
+			var transition_type:String = VNGlobal.SceneTransitions.MUSICFADE;
+			var next_name:String = page.next_name
+			
+			
+			error = check_value(next_music, VNGlobal.Music.values(), "FADE IN MUSIC")
+			if error: return error;
+
+			page.next_background = next_background;
+			page.next_music = next_music;
+			page.transition_type = transition_type;
+			page.next_name = next_name;
+			
+			pages.push_back(page.serialize());
 		"MINING START":
 			var error = check_args(parameters, 0, "BEGIN MINING")
 			if error: return error;

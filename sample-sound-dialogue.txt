@@ -1,0 +1,53 @@
+//Characters: {NONE, ANNA, CLAIRE, JACK, CHAD, JUNE, SHAUN, ELIZABETH}
+//Expressions: {NORMAL, ANGRY, EMBARASSED, SAD, HAPPY, SHOCKED}
+
+@@SET BACKGROUND(none)
+@@SET MUSIC(NONE)
+Yet another regular day. Time to go to school, once again
+@@transition(hallway, none, entrance, School)
+Looks like there's no one here...
+@@SET MUSIC(NONE)
+Chad[happy]: that's where you're wrong, kiddo
+@@SET MUSIC(boisterous)
+Simon: !!!
+Simon: What are you doing here??!?
+Chad[normal]: Well I was just looking around, and and you know, studying.
+Chad[embarrassed]: [speed=slow] Yeah, studying...
+Simon: Isn't everyone on a field trip today?
+@@fade in music(none)
+Chad[sad]: Oh them? They're all dead
+@@set music(suspense)
+Simon: [speed=fast] DEAD!??! What happened?
+Chad[sad]: Well, it's a long story. 
+Chad[sad]: [delay=none] There was this nazi revolution and everyone started joining. However it looks like it was actually a trap all along and no one batted an eye. Turns out that they just killed everyone in the end without batting an eye. Strange world, isn't it?
+@@Set music(none)
+June[happy]: Hey guys! Long time no see!
+Chad[shocked]: !!!
+@@Set music(default)
+Simon: Chad: you have some explaining to do
+Chad[happy]: [speed=slow] Oh yeah, right...
+June: It's been two years since I last saw you guys. Amazing how time flies, amiright?
+Two whole years...
+June: Where have you guys been anyways?
+@@fade in music(none)
+Chad[sad]: ...
+June[shocked]: ?
+Simon: You don't remember?
+@@set BACKGROUND(none)
+@@set music(despair)
+Two years ago...
+That was the day that ended it all.
+Some virus called the woohoo virus swept across the nation and time came to a stop
+Hospitals were overcrowed, streets were filled with dead bodies
+And worst of all, we were out of toilet paper.
+Simon: Don't you remember the incident?
+@@set background(hallway)
+@@set music(none)
+June[happy]: Nope!
+June: But I did just hear something rather interesting
+@@set music(engaging)
+June: [speed=fast]7-Eleven is giving out free slurpees today! Absolutely free! No Charge!
+June[happy]: [speed=fast]Come on! If we don't hurry now, they are going to run out!
+Chad[happy]: Yay! slurpees
+I guess I'll follow along
+...

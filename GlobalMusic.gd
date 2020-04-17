@@ -10,17 +10,39 @@ const tracks = {
 	Global.GameMusic.BOSS :preload("res://Music/Tracks/Boss.ogg")
 }
 
+var current_request:MusicRequest = null;
+
 func fade_out():
+	$Tween.stop_all();
 	$Tween.interpolate_property(self, "volume_db", 0, -80, 2.0, Tween.TRANS_QUAD, Tween.EASE_IN)
 	$Tween.start()
 	
+func fade_into_track(track):
+	cancel()
+	
+	fade_out()
+	current_request = MusicRequest.new(track);
+	$Tween.connect("tween_all_completed", current_request, "queue_track", [self], CONNECT_ONESHOT)
+	
 func queue_track(track):
+	cancel()
+	
+	current_request = MusicRequest.new(track);
 	$Timer.start()
-	$Timer.connect("timeout", self, "play_track", [track], CONNECT_ONESHOT)
-
+	$Timer.connect("timeout", current_request, "play_track", [self], CONNECT_ONESHOT)
+	
 func play_track(track):
+	cancel();
+	
+	$Tween.stop_all();
 	volume_db = 0;
 	if playing: stop();
 	if (track != VNGlobal.Music.NONE): stream = tracks[track];
+	else:
+		stream = null;
 	play()
 
+func cancel():
+	if current_request != null:
+		current_request.cancel()
+		current_request = null;

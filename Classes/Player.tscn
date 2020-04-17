@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Classes/miner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Classes/Player.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://PlayerSprites/Player_Axe.png" type="Texture" id=6]
 [ext_resource path="res://PlayerSprites/Player_Duck.png" type="Texture" id=7]
 [ext_resource path="res://PlayerSprites/player_air_attack_1.png" type="Texture" id=8]
+[ext_resource path="res://PlayerSprites/Player_hanging_axe.png" type="Texture" id=9]
 
 [node name="Miner" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -17,7 +18,9 @@ walkingSprite = ExtResource( 5 )
 miningSprite = ExtResource( 6 )
 duckingSprite = ExtResource( 7 )
 airAttackSprite = ExtResource( 8 )
+hangingSprite = ExtResource( 9 )
 miningOffset = Vector2( 2, -2 )
 duckingOffset = Vector2( 1, 1 )
+hangingOffset = Vector2( -2, 10 )
 is_protagonist = true
 gameoverOffset = Vector2( 11, 0 )

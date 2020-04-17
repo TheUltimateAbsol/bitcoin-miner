@@ -12,6 +12,7 @@ export (Texture) var duckingSprite = preload("res://PlayerSprites/Miner_Duck_1.p
 export (Texture) var dyingSprite = preload("res://PlayerSprites/Miner_Hurt.png");
 export (Texture) var levelCompleteSprite = preload("res://PlayerSprites/Ending_1.png");
 export (Texture) var airAttackSprite = preload("res://PlayerSprites/air_attack_3.0.png");
+export (Texture) var hangingSprite = preload("res://PlayerSprites/miner_hang_axe_1.png");
 
 export (Vector2) var idleOffset = Vector2(0,0)
 export (Vector2) var jumpingOffset = Vector2(0,0)
@@ -21,6 +22,7 @@ export (Vector2) var duckingOffset = Vector2(1,0)
 export (Vector2) var dyingOffset = Vector2(0,0)
 export (Vector2) var levelCompleteOffset = Vector2(-6,-11)
 export (Vector2) var airAttackOffset = Vector2(0,0)
+export (Vector2) var hangingOffset = Vector2(0,0)
 
 #Dictates player animation states
 enum {ANIM_WALKING, ANIM_IDLE, ANIM_MINING, ANIM_JUMPING, ANIM_FALLING, ANIM_DUCKING, ANIM_DYING, ANIM_AIR_ATTACK, ANIM_HANGING, ANIM_GROUND_POUND}
@@ -49,8 +51,8 @@ func idle_anim(force_reset=false):
 func hang_anim():
 	if anim_state == ANIM_HANGING: return
 	_anim_reset()
-	set_offset(idleOffset)
-	sprite.texture = idleSprite
+	set_offset(hangingOffset)
+	sprite.texture = hangingSprite
 	sprite.frame = 0;
 	anim_state = ANIM_HANGING
 	

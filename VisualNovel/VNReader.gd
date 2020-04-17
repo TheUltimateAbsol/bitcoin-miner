@@ -284,7 +284,12 @@ func display_page(page:Page):
 					
 				transition_mask.transition_entrance(page.next_name)
 				yield(transition_mask, "transition_completed");
-				
+			VNGlobal.SceneTransitions.MUSICFADE:
+				if page.next_music != VNGlobal.Music.SAME:
+					GlobalMusic.fade_into_track(page.next_music);	
+				if page.next_background != VNGlobal.Backgrounds.SAME:
+					background.texture = backgrounds[page.next_background];
+					
 	elif page is ImageTogglePage:
 		if page.show:
 			popup_image.get_node("Background/Panel").texture = images[page.image];

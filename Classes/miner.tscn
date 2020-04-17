@@ -798,6 +798,7 @@ extents = Vector2( 1, 1 )
 ]]
 collision_layer = 2
 script = ExtResource( 1 )
+hangingOffset = Vector2( -5, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -847,4 +848,8 @@ collision_layer = 2
 position = Vector2( 0, -20 )
 shape = SubResource( 16 )
 disabled = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 [connection signal="area_entered" from="MiningHitbox" to="." method="_on_MiningHitbox_area_entered"]

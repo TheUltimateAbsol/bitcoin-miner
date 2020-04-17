@@ -10,8 +10,11 @@ const JUMP_SPEED = 200
 const WALK_TOLERANCE = 2
 
 enum {WAITING, WALKING, JUMPING, FALLING, ATTACKING, DUCKING, DYING, MIDATTACKING, MIDATTACKING2, MIDAIR_ATTACKING, HANGING, GROUND_POUNDING}
+enum DeathState {NONE, DEAD, RESPAWN}
+
 var is_facing_right = true;
 var state = WAITING;
+var death_state = DeathState.NONE
 
 var target = null;
 var jump_velocity = Vector2();
@@ -20,6 +23,8 @@ var frozen = false;
 var velocity = Vector2()
 var prev_jump_pressed = false
 var prev_jump_momentum_pressed = false
+
+var current_command = null
 
 signal target_reached
 signal path_traversed
@@ -116,14 +121,24 @@ func damage():
 	if state == DUCKING or state == MIDAIR_ATTACKING or state == GROUND_POUNDING:return false;
 	if vulnerable == false: return false;
 	
-	reset_input();
-	state = DYING;
-	die_anim();
-
-	velocity = Vector2(0, -200);
+	death_state = DeathState.DEAD
 	emit_signal("died");
 	return true;
 
+func die():
+	reset_input();
+	state = DYING;
+	die_anim();
+	velocity = Vector2(0, -200);
+	
+	$DeathTimer.start()
+	yield($DeathTimer, "timeout")
+	queue_free()
+
+func respawn():
+	death_state = DeathState.RESPAWN
+	emit_signal("died");
+	
 func _physics_process(delta):
 	if frozen: return;
 	
@@ -232,3 +247,9 @@ func can_super_jump():
 func freeze():
 	frozen= true
 	velocity = Vector2(0,0);
+	$CollisionShape2D.set_deferred("disabled", true)
+	
+func unfreeze():
+	frozen = false
+	$CollisionShape2D.set_deferred("disabled", false)
+	

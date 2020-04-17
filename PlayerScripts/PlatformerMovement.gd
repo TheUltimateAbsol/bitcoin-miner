@@ -4,10 +4,11 @@ var left_to_middle
 var right_to_middle
 var middle_to_left 
 var middle_to_right 
-var Miner = preload("res://Classes/miner.tscn");
+var MinerScene = preload("res://Classes/miner.tscn");
 var Win = preload("res://YOU_WIN.tscn");
 var miners = [];
-var main_command : Command = Command.new(Global.CommandTypes.IDLE)
+var main_command : Command = null
+var last_command : Command = null
 
 var levels = []
 var current_level = 0;
@@ -22,6 +23,7 @@ signal cancel_attack
 signal cancel_duck
 signal cancel_hang
 #This is just an alias
+#This is just an alias
 onready var main : KinematicBody2D = $Miner
 
 
@@ -30,6 +32,75 @@ var section = LEFT;
 
 signal paused
 signal room_cleared
+signal new_command_set
+
+func manage_command(bot:Miner, command:Command):
+	var current_command = command
+	bot.current_command = current_command
+	var dead = bot.death_state == Miner.DeathState.DEAD
+	while not dead:
+#		Respawn if necessary
+		if bot.death_state == Miner.DeathState.RESPAWN:
+			miners.erase(bot);
+			bot.queue_free();#should be like a "queue delete"
+			bot = new_miner(false, false);
+			
+		var result = current_command.perform_command(bot)
+		
+		var choice:int
+		if result is GDScriptFunctionState:
+			choice = yield(result, "completed")
+		else:
+			choice = result
+		match choice:
+			Command.WAIT:
+				yield(self, "new_command_set")
+				current_command = main_command
+			Command.ADVANCE: 
+				current_command = current_command.next
+			Command.DEAD:
+				pass
+				
+		bot.current_command = current_command
+		dead = bot.death_state == Miner.DeathState.DEAD
+
+#	When the bot died for real
+	
+	scan_for_completion(current_command)
+	miners.erase(bot);
+	on_miner_loss()
+	bot.die();#should be like a "queue delete"
+	
+func scan_for_completion(command:Command):
+	while command != null:
+		command.check_completion()
+		command = command.next
+
+# Precondition: There is only one active command in the list
+# This command is also the last command, and the main_command
+# There can be other commands, but they must come before the "last one"
+# They also cannot be marked as "last"
+func respawn():
+	for miner in miners:
+		if miner.current_command != last_command:
+			miner.respawn()
+			
+func respawn_to_main():
+	if last_command == main_command: return;
+	
+	var old_last = last_command
+	old_last.last = false
+	last_command = main_command
+	last_command.last = true
+	
+	respawn()
+	
+#	Link list delete old commands
+	while old_last != last_command:
+		var temp = old_last.next;
+		old_last.queue_free();
+		old_last = temp
+	
 
 func update_section(section_type):
 	section = section_type
@@ -145,11 +216,11 @@ func switch_level():
 	emit_signal("room_cleared");
 	
 func _ready():
-	add_child(main_command) # so its timer works
+	new_command(Global.CommandTypes.IDLE)
 	get_tree().paused = true;
 	
-	for i in range (1):
-		_on_ui_header_add_miner()
+#	for i in range (1):
+#		_on_ui_header_add_miner()
 
 	
 func finished_mining_fire():
@@ -180,6 +251,9 @@ func spawn():
 			miner.reset_input();
 			miner.position = main.position + Vector2(0, i*(-4))
 			i = i+1;
+			
+	new_command(Global.CommandTypes.IDLE)
+	respawn_to_main();
 
 #	$TileMap.display_path(left_to_middle);
 #	$TileMap.display_path(right_to_middle);
@@ -200,14 +274,60 @@ func _on_pause_menu_unpause():
 	$Pause/pause_menu.hide()
 	
 	
-func new_command(type, path=[], time=-1):
-	var new =  Command.new(type, path)
+func new_miner(animate=true, self_manage=true):
+	var new = MinerScene.instance();
+	$Miners.add_child(new)
+	miners.push_back(new);
+	
+	if (last_command == null):
+		yield(self, "new_command_set")
+	
+	#	TO AVOID A RACE CONDITION
+	var current_last = last_command	
+	
+	if animate:
+		yield(current_last.spawn_at_beginning(new, animate), "completed");
+	else:
+		current_last.spawn_at_beginning(new, animate)
+	
+#	Infinite loop until it's gone
+	if self_manage:
+		manage_command(new, current_last)
+		
+	return new;
+	
+	
+func new_command(type, path=[], time=-1):	
+	if main_command != null and main_command == last_command and miners.size() == 0:
+		delete_command(last_command);
+	
+	var new =  Command.new(type, path, main)
+	new.connect("command_completed", self, "delete_command", [new])
 	add_child(new);
-	main_command.link(new);
-	main_command.force_end(time);
+		
+	if main_command == null:
+		new.last = true;
+		last_command = new;
+	else:
+		main_command.link(new);
+		main_command.force_end(time);
+
 	main_command = new;
+	emit_signal("new_command_set")
 	print("New command ", type)
 	
+#Precondition: Command is the last command in the sequence
+func delete_command(command:Command):
+	if not command.last:
+		push_error("Command is being deleted but is not last");
+	if command.next == null:
+		main_command = null;
+		last_command = null;
+	else:
+		command.next.last = true;
+		last_command = command.next	
+	command.queue_free();
+
 func get_command():
 	if dead: return;
 	
@@ -239,7 +359,7 @@ func get_command():
 		
 
 		
-	if main.is_waiting():
+	if main.is_waiting() and main.is_on_floor():
 		if left_input:
 			if  section == MIDDLE:
 				main.follow_path(middle_to_left);
@@ -324,14 +444,7 @@ func _on_ui_header_add_miner():
 	
 	$Miner.vulnerable = false #This is so we don't have the player die until all are lost
 	
-	var new_miner = Miner.instance();
-	#This is because this will be called only on a collision check frame
-	#You can't add more collision frames during a collision check.
-	$Miners.call_deferred("add_child", new_miner)
-	miners.push_back(new_miner);
-	main_command.perform_command(new_miner);
-	new_miner.position = main.position + Vector2(0, -32);
-	new_miner.connect("died", self, "on_miner_loss");
+	call_deferred("new_miner")
 	
 func drop_win():
 	var win = Win.instance();
@@ -398,12 +511,7 @@ func revive():
 		var num_to_add = Global.numtotal - Global.numremaining
 		$ui_header.update_data(Global.numtotal, Global.numtotal, Global.numcoin);
 		for i in range(num_to_add):
-			var new_miner = Miner.instance();
-			$Miners.add_child(new_miner);
-			miners.push_back(new_miner);
-			main_command.perform_command(new_miner);
-			new_miner.position = main.position + Vector2(0, -32);
-			new_miner.connect("died", self, "on_miner_loss");
+			new_miner();
 	else:
 		$ui_header.initiate_countdown();
 		$DecoratorAnimations/Revive.play("Fail");
