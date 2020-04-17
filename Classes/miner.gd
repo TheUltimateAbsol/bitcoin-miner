@@ -117,9 +117,13 @@ func follow_path(path):
 		
 	emit_signal("path_traversed");
 
-func damage():
+func can_damage():
 	if state == DUCKING or state == MIDAIR_ATTACKING or state == GROUND_POUNDING:return false;
 	if vulnerable == false: return false;
+	return true
+
+func damage():
+	if not can_damage(): return false;
 	
 	death_state = DeathState.DEAD
 	emit_signal("died");

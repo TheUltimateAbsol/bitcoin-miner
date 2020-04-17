@@ -1,4 +1,4 @@
-extends "res://Classes/miner.gd"
+extends Miner
 
 export (Texture) var gameoverSprite = preload("res://PlayerSprites/protagonist-death_2.0.png")
 export (Vector2) var gameoverOffset = Vector2(0,0)
@@ -15,7 +15,8 @@ func game_over():
 		anim.play("Game Over")
 
 func damage():
-	if vulnerable == false: return false;
+	if not can_damage(): return false;
+	
 	reset_input();
 	freeze()
 	state = DYING;

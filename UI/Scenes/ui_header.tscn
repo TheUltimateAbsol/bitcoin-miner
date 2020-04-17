@@ -26,21 +26,20 @@ tracks/0/keys = {
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 8, 8 )
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 8, 8 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.878431, 0.941176, 0.909804, 1 )
 corner_detail = 1
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.658824, 0.752941, 0.690196, 1 )
 
-[sub_resource type="BitmapFont" id=5]
+[sub_resource type="BitmapFont" id=6]
 
-[sub_resource type="Animation" id=6]
-resource_name = "Countdown"
+[sub_resource type="Animation" id=7]
 length = 10.0
 step = 1.0
 tracks/0/type = "value"
@@ -139,7 +138,7 @@ margin_left = -13.0
 margin_top = -4.0
 margin_right = -5.0
 margin_bottom = 4.0
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
@@ -147,13 +146,13 @@ margin_left = -45.0
 margin_top = -2.0
 margin_right = -18.0
 margin_bottom = 2.0
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 step = 1.0
 
 [node name="Countdown" type="AnimationPlayer" parent="."]
-anims/Countdown = SubResource( 6 )
+anims/Countdown = SubResource( 7 )
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

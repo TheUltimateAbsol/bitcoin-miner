@@ -44,6 +44,8 @@ func manage_command(bot:Miner, command:Command):
 			miners.erase(bot);
 			bot.queue_free();#should be like a "queue delete"
 			bot = new_miner(false, false);
+			current_command = main_command
+			bot.current_command = current_command
 			
 		var result = current_command.perform_command(bot)
 		
@@ -81,7 +83,9 @@ func scan_for_completion(command:Command):
 # There can be other commands, but they must come before the "last one"
 # They also cannot be marked as "last"
 func respawn():
-	for miner in miners:
+#	Note: since we modify the array as we do the loop, we must make a copy
+	var miners_copy = miners.duplicate()
+	for miner in miners_copy:
 		if miner.current_command != last_command:
 			miner.respawn()
 			
