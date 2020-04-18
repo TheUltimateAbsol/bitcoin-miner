@@ -60,7 +60,7 @@ func do_command(type, must_wait, path, time_to_execute):
 				yield(bot, "midair_attack_ended");
 			Global.CommandTypes.GROUND_POUND:
 				bot.do_ground_pound();
-				yield(bot, "midair_attack_ended");
+				yield(bot, "ground_pound_ended");
 			Global.CommandTypes.HANG:
 				if not must_wait: 
 					pass

@@ -13,6 +13,7 @@ export (Texture) var dyingSprite = preload("res://PlayerSprites/Miner_Hurt.png")
 export (Texture) var levelCompleteSprite = preload("res://PlayerSprites/Ending_1.png");
 export (Texture) var airAttackSprite = preload("res://PlayerSprites/air_attack_3.0.png");
 export (Texture) var hangingSprite = preload("res://PlayerSprites/miner_hang_axe_1.png");
+export (Texture) var groundPoundSprite = preload("res://PlayerSprites/Miner_Ground_Pount_1.png")
 
 export (Vector2) var idleOffset = Vector2(0,0)
 export (Vector2) var jumpingOffset = Vector2(0,0)
@@ -23,15 +24,17 @@ export (Vector2) var dyingOffset = Vector2(0,0)
 export (Vector2) var levelCompleteOffset = Vector2(-6,-11)
 export (Vector2) var airAttackOffset = Vector2(0,0)
 export (Vector2) var hangingOffset = Vector2(0,0)
+export (Vector2) var groundPoundOffset = Vector2(6,-1)
 
 #Dictates player animation states
-enum {ANIM_WALKING, ANIM_IDLE, ANIM_MINING, ANIM_JUMPING, ANIM_FALLING, ANIM_DUCKING, ANIM_DYING, ANIM_AIR_ATTACK, ANIM_HANGING, ANIM_GROUND_POUND}
+enum {ANIM_WALKING, ANIM_IDLE, ANIM_MINING, ANIM_JUMPING, ANIM_FALLING, ANIM_DUCKING, ANIM_DYING, ANIM_AIR_ATTACK, ANIM_HANGING, ANIM_GROUND_POUND, ANIM_GROUND_POUND_END}
 var anim_state = ANIM_IDLE
 
 onready var sprite = $Sprite
 onready var anim = $AnimationPlayer
 export (bool) var is_protagonist = false;
 var vulnerable = true;
+var ground_pound_anim_ended = false;
 
 func _ready():
 	idle_anim(true);
@@ -171,21 +174,31 @@ func air_attack_anim():
 #Player action that starts a air attack
 #If player is already in this state, nothing happens
 func ground_pound_anim():
-	if anim_state == ANIM_GROUND_POUND: return
-	anim_state = ANIM_GROUND_POUND
-	_anim_reset()
-	set_offset(idleOffset)
-	sprite.texture = idleSprite
-	sprite.frame = 0;
-#	if anim_state == ANIM_DYING: return
-#	if anim_state != ANIM_GROUND_POUND:
-#		anim_state = ANIM_GROUND_POUND
-#		_anim_reset()
-#		sprite.hframes = 3
-#		sprite.vframes = 4
-#		set_offset(airAttackOffset);
-#		sprite.texture = airAttackSprite
-#		anim.play("Air Attack");
+	if anim_state == ANIM_DYING: return
+	if anim_state != ANIM_GROUND_POUND:
+		anim_state = ANIM_GROUND_POUND
+		_anim_reset()
+		sprite.hframes = 2
+		sprite.vframes = 3
+		set_offset(groundPoundOffset);
+		sprite.texture = groundPoundSprite
+		anim.play("Ground Pound");
+		
+#Player action that starts a air attack
+#If player is already in this state, nothing happens
+func ground_pound_end_anim():
+	if anim_state == ANIM_DYING: return
+	if anim_state != ANIM_GROUND_POUND_END:
+		anim_state = ANIM_GROUND_POUND_END
+		_anim_reset()
+		ground_pound_anim_ended = false
+		sprite.hframes = 2
+		sprite.vframes = 3
+		set_offset(groundPoundOffset);
+		sprite.texture = groundPoundSprite
+		anim.play("Ground Pound End");
+		yield(anim, "animation_finished")
+		ground_pound_anim_ended = true
 		
 #Player action that starts a falling motion
 #If player is already in this state, nothing happens
@@ -200,6 +213,7 @@ func fall_anim():
 		sprite.texture = jumpingSprite
 		anim.play("Fall");
 	
+
 #Flips the character in the correct direction
 #input true = faces right,
 #input false = faces left
@@ -210,6 +224,15 @@ func flip(right=true):
 			$MiningHitbox/CollisionShape2D.position = Vector2(
 				-$MiningHitbox/CollisionShape2D.position.x,
 				$MiningHitbox/CollisionShape2D.position.y)
+			$MiningHitbox/GroundPound.position = Vector2(
+				-$MiningHitbox/GroundPound.position.x,
+				$MiningHitbox/GroundPound.position.y)
+			$MiningHitbox/GroundPound2.position = Vector2(
+				-$MiningHitbox/GroundPound2.position.x,
+				$MiningHitbox/GroundPound2.position.y)
+			$CPUParticles2D.position = Vector2(
+				-$CPUParticles2D.position.x,
+				$CPUParticles2D.position.y)
 		sprite.flip_h = true;
 
 	else:
@@ -218,6 +241,15 @@ func flip(right=true):
 			$MiningHitbox/CollisionShape2D.position = Vector2(
 				-$MiningHitbox/CollisionShape2D.position.x,
 				$MiningHitbox/CollisionShape2D.position.y)
+			$MiningHitbox/GroundPound.position = Vector2(
+				-$MiningHitbox/GroundPound.position.x,
+				$MiningHitbox/GroundPound.position.y)
+			$MiningHitbox/GroundPound2.position = Vector2(
+				-$MiningHitbox/GroundPound2.position.x,
+				$MiningHitbox/GroundPound2.position.y)
+			$CPUParticles2D.position = Vector2(
+				-$CPUParticles2D.position.x,
+				$CPUParticles2D.position.y)
 		sprite.flip_h = false;
 		
 #Precondition: Not being modified by a RemoteTransform2D
@@ -251,6 +283,9 @@ func _anim_reset():
 #	$CollisionShape2D.position = Vector2(0, 1);
 	$MiningHitbox/CollisionShape2D.set_deferred("disabled", true)
 	$MiningHitbox/AirAttack.set_deferred("disabled", true)
+	$MiningHitbox/GroundPound.set_deferred("disabled", true)
+	$MiningHitbox/GroundPound2.set_deferred("disabled", true)
+	ground_pound_anim_ended = false
 	#print("reset");
 
 #PATCH FOR TAP MINING:

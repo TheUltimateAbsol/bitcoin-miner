@@ -9,7 +9,7 @@ const JUMP_SPEED = 200
 #Distance (in pixels) before it supposedly hits it's target when walking
 const WALK_TOLERANCE = 2
 
-enum {WAITING, WALKING, JUMPING, FALLING, ATTACKING, DUCKING, DYING, MIDATTACKING, MIDATTACKING2, MIDAIR_ATTACKING, HANGING, GROUND_POUNDING}
+enum {WAITING, WALKING, JUMPING, FALLING, ATTACKING, DUCKING, DYING, MIDATTACKING, MIDATTACKING2, MIDAIR_ATTACKING, HANGING, GROUND_POUNDING, GROUND_POUND_END}
 enum DeathState {NONE, DEAD, RESPAWN}
 
 var is_facing_right = true;
@@ -30,6 +30,7 @@ signal target_reached
 signal path_traversed
 signal jump_ended
 signal midair_attack_ended
+signal ground_pound_ended
 signal died
 signal start_hang
 
@@ -80,7 +81,11 @@ func do_midair_attack():
 func do_ground_pound():
 	state = GROUND_POUNDING;
 	jump_velocity = Vector2(0, JUMP_SPEED)
-	connect("midair_attack_ended", self, "stop_jump", [], CONNECT_ONESHOT);
+	connect("midair_attack_ended", self, "end_ground_pound", [], CONNECT_ONESHOT);
+	
+func end_ground_pound(time=0):
+	state = GROUND_POUND_END;
+	connect("ground_pound_ended", self, "stop_jump", [], CONNECT_ONESHOT);
 	
 func stop_jump(time=0):
 	state = WAITING;
@@ -161,6 +166,10 @@ func _physics_process(delta):
 			if on_floor:
 				velocity.x = 0;
 				idle_anim(); 
+		GROUND_POUND_END:
+			if on_floor:
+				velocity.x = 0;
+				ground_pound_end_anim(); 
 		FALLING:
 			pass;
 		JUMPING:
@@ -222,6 +231,9 @@ func _physics_process(delta):
 	
 	if (state == MIDAIR_ATTACKING or state == GROUND_POUNDING) and on_floor:
 		emit_signal("midair_attack_ended");
+		
+	if (state == GROUND_POUND_END) and ground_pound_anim_ended:
+		emit_signal("ground_pound_ended");
 		
 	#handle hanging
 	if state == JUMPING and target == null and is_protagonist and is_on_ceiling():
