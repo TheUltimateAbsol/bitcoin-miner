@@ -1,0 +1,259 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://VisualNovel/Characters/Coach Normal.png" type="Texture" id=1]
+[ext_resource path="res://VisualNovel/Characters/Eli_normal.png" type="Texture" id=2]
+[ext_resource path="res://VisualNovel/Characters/Jack Final.png" type="Texture" id=3]
+[ext_resource path="res://VisualNovel/Characters/Claire final.png" type="Texture" id=4]
+[ext_resource path="res://VisualNovel/Characters/Simon Normal.png" type="Texture" id=5]
+[ext_resource path="res://VisualNovel/Characters/title.png" type="Texture" id=6]
+[ext_resource path="res://VisualNovel/Characters/shaun finalll.png" type="Texture" id=7]
+[ext_resource path="res://VisualNovel/Characters/anna fina_.png" type="Texture" id=8]
+[ext_resource path="res://VisualNovel/Characters/Chad final.png" type="Texture" id=9]
+[ext_resource path="res://PlayerSprites/happy.png" type="Texture" id=10]
+[ext_resource path="res://VisualNovel/Characters/Jack's older brother 2.png" type="Texture" id=11]
+[ext_resource path="res://PlayerSprites/LOGO.png" type="Texture" id=12]
+[ext_resource path="res://VisualNovel/Characters/Alfred Normal.png" type="Texture" id=13]
+[ext_resource path="res://VisualNovel/Characters/nannndkkad.png" type="Texture" id=14]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.152941 )
+position = Vector2( 367.237, 679.899 )
+scale = Vector2( 2.25819, 2.81373 )
+texture = ExtResource( 6 )
+
+[node name="Miner" type="Polygon2D" parent="."]
+light_mask = 8192
+position = Vector2( 439.444, 2767.16 )
+polygon = PoolVector2Array( 276.197, -1465.2, 278.64, -1328.36, -65.8967, -1328.36, -116.396, -1387, -109.88, -1446.46, -131.872, -1499.41, -15.3972, -1519.77, 44.0619, -1479.04, 149.133, -1530.36 )
+
+[node name="Light2D2" type="Light2D" parent="Miner"]
+position = Vector2( 92.5143, -1332.1 )
+texture = ExtResource( 10 )
+texture_scale = 1.81
+mode = 2
+range_item_cull_mask = 8192
+
+[node name="Shaun" type="Polygon2D" parent="."]
+light_mask = 2048
+position = Vector2( 439.444, 2767.16 )
+polygon = PoolVector2Array( 277.276, -1798.57, 225.962, -1820.56, 142.068, -1718.75, 36.1821, -1840.11, -34.6801, -1833.6, -53.4138, -1772.51, -161.743, -1581.91, -134.05, -1502.09, -13.5028, -1521.64, 45.1417, -1478.47, 149.399, -1530.6, 277.276, -1463 )
+
+[node name="Light2D" type="Light2D" parent="Shaun"]
+position = Vector2( -15.0316, 20.0422 )
+texture = ExtResource( 7 )
+mode = 2
+range_item_cull_mask = 2048
+
+[node name="start_button" type="Polygon2D" parent="."]
+light_mask = 32768
+position = Vector2( 191.784, 1896.36 )
+color = Color( 0.388235, 0.721569, 0.337255, 1 )
+polygon = PoolVector2Array( 114.249, -629.937, 140.217, -573.161, 130.974, -518.145, 182.469, -458.288, -136.623, -456.527, -97.4518, -550.714, -17.3486, -533.109, 25.3437, -593.407 )
+
+[node name="Button" type="Button" parent="start_button"]
+light_mask = 16384
+margin_left = -53.0
+margin_top = -516.0
+margin_right = 87.0
+margin_bottom = -465.0
+text = "START"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Simon" type="Polygon2D" parent="."]
+light_mask = 4096
+position = Vector2( 191.784, 1896.36 )
+polygon = PoolVector2Array( 195.231, -905.563, 144.509, -823.968, 84.9666, -710.763, 116.576, -629.903, 25.424, -593.883, -16.4763, -532.871, -97.3365, -551.248, -136.296, -457.156, -190.693, -456.421, -191.428, -823.233, -78.2241, -791.624, 38.6557, -907.033, 92.3175, -884.98, 159.946, -959.225, 211.403, -962.165 )
+
+[node name="Light2D" type="Light2D" parent="Simon"]
+position = Vector2( -87.8792, 818.874 )
+texture = ExtResource( 5 )
+mode = 2
+range_item_cull_mask = 4096
+
+[node name="idk her name" type="Polygon2D" parent="."]
+light_mask = 1024
+position = Vector2( 191.784, 1896.36 )
+polygon = PoolVector2Array( 158.84, -960.046, 92.6812, -886.537, 38.2843, -907.854, -77.8604, -791.71, -191.065, -824.054, -191.065, -975.483, -80.8008, -956.37, -21.2582, -1043.85, 50.0458, -1032.82, 134.581, -1082.81 )
+
+[node name="Light2D" type="Light2D" parent="idk her name"]
+position = Vector2( 83.8848, 651.105 )
+texture = ExtResource( 14 )
+mode = 2
+range_item_cull_mask = 1024
+
+[node name="Elizabeth" type="Polygon2D" parent="."]
+light_mask = 129
+position = Vector2( 191.784, 1896.36 )
+polygon = PoolVector2Array( 137.216, -1085.36, 160.216, -959.357, 285.217, -968.357, 389.217, -848.357, 474.217, -951.357, 526.217, -927.357, 527.217, -1227.36, 476.217, -1249.36, 433.217, -1137.36, 353.217, -1203.36, 256.217, -1175.36, 261.217, -1236.36, 224.217, -1274.36, 191.217, -1232.36, 149.216, -1242.36, 120.216, -1161.36, 150.216, -1087.36 )
+
+[node name="Light2D" type="Light2D" parent="Elizabeth"]
+position = Vector2( 311.572, 571.215 )
+texture = ExtResource( 2 )
+mode = 2
+range_item_cull_mask = 128
+
+[node name="Claire" type="Polygon2D" parent="."]
+light_mask = 64
+position = Vector2( 191.784, 1896.36 )
+polygon = PoolVector2Array( 152.086, -1245.33, 119.264, -1158.04, 149.292, -1090.3, 50.8267, -1033.73, -22.4988, -1043.51, -79.7626, -956.217, -191.497, -973.676, -190.798, -1160.83, -143.311, -1204.83, 22.1948, -1188.76, 85.7437, -1264.18 )
+
+[node name="Light2D" type="Light2D" parent="Claire"]
+position = Vector2( 51.9287, 355.511 )
+texture = ExtResource( 4 )
+mode = 2
+range_item_cull_mask = 64
+
+[node name="chacd" type="Polygon2D" parent="."]
+light_mask = 32
+position = Vector2( 191.784, 1896.36 )
+polygon = PoolVector2Array( -191.297, -1160.1, -143.322, -1205.75, 22.267, -1189.5, 84.1696, -1263.78, 189.404, -1233.61, 223.45, -1273.84, 178.571, -1324.14, 209.522, -1410.8, 193.273, -1488.18, 101.967, -1399.97, 50.1231, -1457.23, 16.8505, -1418.54, -19.5172, -1458, -33.4453, -1433.24, -60.5277, -1434.79, -100.764, -1350.45, -123.204, -1358.96, -191.297, -1272.29 )
+
+[node name="Light2D" type="Light2D" parent="chacd"]
+position = Vector2( 35.9504, 279.616 )
+texture = ExtResource( 9 )
+mode = 2
+range_item_cull_mask = 32
+
+[node name="alfred" type="Polygon2D" parent="."]
+light_mask = 16
+position = Vector2( 191.784, 1896.36 )
+polygon = PoolVector2Array( 192.098, -1486.75, 210.832, -1409.38, 178.252, -1323.85, 261.332, -1236.7, 258.074, -1177.24, 355, -1202.49, 433.193, -1136.52, 477.176, -1249.73, 526.861, -1228.55, 526.861, -1453.36, 405.5, -1413.45, 370.879, -1480.63, 293.922, -1481.29, 307.854, -1536.36, 256.107, -1548.3 )
+
+[node name="Light2D" type="Light2D" parent="alfred"]
+position = Vector2( 434.577, 281.888 )
+texture = ExtResource( 13 )
+mode = 2
+range_item_cull_mask = 16
+
+[node name="Anna" type="Polygon2D" parent="."]
+light_mask = 8
+position = Vector2( 191.784, 1896.36 )
+polygon = PoolVector2Array( 253.36, -1548.68, 308.534, -1535.03, 293.745, -1480.99, 369.964, -1480.42, 404.092, -1416.15, 528.091, -1453.69, 528.091, -1743.78, 504.201, -1735.82, 468.936, -1677.8, 388.735, -1671.54, 383.047, -1622.62, 273.837, -1568.02 )
+
+[node name="Light2D" type="Light2D" parent="Anna"]
+position = Vector2( 427.356, -417.825 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 8 )
+mode = 2
+range_item_cull_mask = 8
+
+[node name="Jack_older_brother" type="Polygon2D" parent="."]
+light_mask = 4
+position = Vector2( 191.784, 1896.36 )
+polygon = PoolVector2Array( 139.095, -1895.57, 151.036, -1841.17, 206.1, -1780.8, 200.793, -1704.51, 276.423, -1654.09, 206.764, -1579.12, 219.369, -1556.56, 267.798, -1575.8, 272.442, -1568.51, 383.234, -1622.91, 389.205, -1672.66, 468.152, -1677.31, 503.977, -1736.35, 527.86, -1744.31, 528.523, -1896.9 )
+
+[node name="Light2D" type="Light2D" parent="Jack_older_brother"]
+position = Vector2( 461.004, -223.161 )
+texture = ExtResource( 11 )
+mode = 2
+range_item_cull_mask = 4
+
+[node name="Jack" type="Polygon2D" parent="."]
+light_mask = 2
+polygon = PoolVector2Array( 466.066, 329.545, 294.591, 494.162, 240.576, 438.432, 209.711, 475.299, 171.986, 436.717, 157.411, 463.296, 131.689, 459.867, 89.6781, 547.319, 68.2437, 537.03, -0.346405, 625.34, 1.11905, 2.78128, 280.495, 325.326, 359.502, 260.98, 414.074, 342.431, 458.872, 322.883 )
+
+[node name="Light2D" type="Light2D" parent="Jack"]
+light_mask = 2
+position = Vector2( 191.784, 1896.36 )
+texture = ExtResource( 3 )
+texture_scale = 0.96
+mode = 2
+range_item_cull_mask = 2
+
+[node name="coach" type="Polygon2D" parent="."]
+polygon = PoolVector2Array( 2.06707, 0.268978, 280.638, 323.587, 359.419, 261.823, 398.495, 317.285, 467.822, 242.915, 392.192, 192.495, 397.864, 114.975, 341.772, 55.731, 332.318, 2.15973 )
+
+[node name="Light2D" type="Light2D" parent="coach"]
+position = Vector2( 431.193, 1733.63 )
+texture = ExtResource( 1 )
+mode = 2
+
+[node name="lines" type="Node2D" parent="."]
+position = Vector2( 381.063, 571.02 )
+
+[node name="Line2D" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( 35.8963, 1160.12 )
+points = PoolVector2Array( -415.959, -1731.33, -137.322, -1407.58, -59.0382, -1469.28, -5.96445, -1391.66, 42.4653, -1408.9, 46.4459, -1402.27, 157.237, -1458, 163.208, -1509.08, 241.492, -1513.06, 279.97, -1572.11, 305.844, -1579.4 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D2" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( 35.8963, 1159.17 )
+points = PoolVector2Array( -86.5039, -1731.65, -75.6967, -1675.91, -19.9542, -1616.75, -24.5046, -1538.82, 51.1459, -1488.77, -18.8166, -1413.69 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D3" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( -381.063, -571.02 )
+points = PoolVector2Array( -4.49734, 626.913, 68.107, 536.484, 89.7214, 545.585, 131.244, 459.696, 156.271, 462.54, 171.629, 437.513, 208.032, 473.916, 239.316, 438.651, 293.921, 493.824, 460.011, 331.147 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D4" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( -381.063, -571.02 )
+points = PoolVector2Array( 723.128, 440.12, 597.754, 480.788, 561.256, 415.966, 485.338, 415.09, 499.062, 361.072, 445.628, 346.765 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D5" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( -381.063, -571.02 )
+points = PoolVector2Array( 721.11, 669.98, 670.205, 646.32, 623.96, 758.526, 546.527, 692.564, 448.302, 718.734, 451.528, 658.508, 370.152, 572.83, 401.34, 486.076, 383.416, 407.567 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D6" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( -381.063, -571.02 )
+points = PoolVector2Array( -3.03869, 737.188, 48.3023, 690.274, 213.276, 706.625, 275.762, 631.584, 382.338, 663.411, 414.749, 622.24 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D7" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( -381.063, -571.02 )
+points = PoolVector2Array( -5.75399, 918.747, 112.862, 937.726, 169.12, 853, 242.098, 862.038, 340.154, 806.683, 311.46, 734.836, 341.962, 654.177 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D8" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( -381.063, -571.02 )
+points = PoolVector2Array( 721.929, 971.731, 665.847, 943.445, 581.479, 1047.32, 476.141, 927.84, 351.784, 935.155, 326.912, 815.675 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D9" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( -381.063, -571.02 )
+points = PoolVector2Array( -1.3123, 1069.52, 114.244, 1103.65, 229.202, 988.092, 283.088, 1009.65, 351.943, 936.002 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D10" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( -380.859, -571.02 )
+points = PoolVector2Array( 404.129, 931.743, 387.472, 990.46, 277.443, 1185.49, 306.837, 1265.73, 423.221, 1246.27, 483.2, 1287.58, 588.065, 1235.94, 720.963, 1306.99 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D11" type="Line2D" parent="lines"]
+light_mask = 65536
+position = Vector2( -381.063, -571.794 )
+points = PoolVector2Array( 53.8825, 1445.32, 94.1117, 1343.57, 174.261, 1362.56, 216.884, 1302.33, 305.373, 1268.05, 330.854, 1322.26, 323.441, 1377.39, 377.508, 1445.01 )
+width = 20.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Logo" type="Sprite" parent="."]
+light_mask = 131072
+position = Vector2( 381.063, 571.02 )
+texture = ExtResource( 12 )
