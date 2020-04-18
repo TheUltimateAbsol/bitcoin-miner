@@ -32,7 +32,7 @@ func _on_angry_pressed():
 	flower_particles.set_emitting(false)
 	sweat_drop.visible = false
 	angry_vein.visible = true
-	animations.play("angry")
+	animations.play("angry2")
 	yield(animations, "animation_finished")
 
 func _on_sweat_pressed():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://characterEffects.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Characters/nannndkkad.png" type="Texture" id=2]
@@ -22,6 +22,81 @@ tracks/0/keys = {
 "values": [ Vector2( 0.03, 0.03 ), Vector2( 0.05, 0.05 ), Vector2( 0.03, 0.03 ) ]
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "angry2"
+tracks/0/type = "value"
+tracks/0/path = NodePath("angry_vein:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 301.285, 70.7741 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("angry_vein:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("angry_vein:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.03, 0.03 ), Vector2( 0.05, 0.05 ), Vector2( 0.03, 0.03 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("angry_vein2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 370.246, 84.1402 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("angry_vein2:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.4, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.03, 0.03 ), Vector2( 0.05, 0.05 ), Vector2( 0.03, 0.03 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("angry_vein2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "sweat"
 length = 0.5
@@ -38,7 +113,7 @@ tracks/0/keys = {
 "values": [ 0.0, 0.9999 ]
 }
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Curve2D" id=4]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 378.527, 59.9442, 0, 0, 0, 0, 380.048, 82.6806 )
 }
@@ -59,7 +134,6 @@ texture = ExtResource( 2 )
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 show_behind_parent = true
 position = Vector2( 344.708, 92.1279 )
-scale = Vector2( 1, 1 )
 emitting = false
 amount = 40
 lifetime = 2.3
@@ -106,23 +180,29 @@ text = "sweat drop"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/angry = SubResource( 1 )
+anims/angry2 = SubResource( 2 )
 anims/sweat = SubResource( 3 )
 
 [node name="angry_vein" type="Sprite" parent="."]
+position = Vector2( 301.285, 70.7741 )
+scale = Vector2( 0.03, 0.03 )
+texture = ExtResource( 4 )
+
+[node name="angry_vein2" type="Sprite" parent="."]
 visible = false
-position = Vector2( 355.718, 77.3603 )
+position = Vector2( 370.246, 84.1402 )
 scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 4 )
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2( 3.05176e-005, 7.62939e-006 )
-rotation = -7.51726e-005
-scale = Vector2( 1, 1 )
-curve = SubResource( 2 )
+visible = false
+position = Vector2( 3.05176e-05, 7.62939e-06 )
+rotation = -7.51726e-05
+curve = SubResource( 4 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2( 378.812, 64.2091 )
-rotation = 1.50398
+rotation = 1.50401
 offset = 4.31657
 
 [node name="sweat_drop" type="Sprite" parent="Path2D/PathFollow2D"]
