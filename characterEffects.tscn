@@ -1,33 +1,71 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://VisualNovel/Characters/nannndkkad.png" type="Texture" id=1]
-[ext_resource path="res://VisualNovel/Characters/flower2.png" type="Texture" id=2]
+[ext_resource path="res://characterEffects.gd" type="Script" id=1]
+[ext_resource path="res://VisualNovel/Characters/nannndkkad.png" type="Texture" id=2]
+[ext_resource path="res://VisualNovel/Characters/flower2.png" type="Texture" id=3]
+[ext_resource path="res://VisualNovel/PageClasses/angry_vein2.png" type="Texture" id=4]
+[ext_resource path="res://sweat_drop2.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "angry"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("angry_vein:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.0107476, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.03, 0.03 ), Vector2( 0.05, 0.05 ), Vector2( 0.03, 0.03 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "sweat"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.9999 ]
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 378.527, 59.9442, 0, 0, 0, 0, 380.048, 82.6806 )
+}
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -15.1093
-margin_top = 23.7432
-margin_right = -15.1093
-margin_bottom = 23.7432
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="character" type="Sprite" parent="."]
 position = Vector2( 369.995, 486.89 )
 scale = Vector2( 0.211462, 0.229946 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 show_behind_parent = true
-position = Vector2( -119.584, -1716.76 )
-scale = Vector2( 4.72898, 4.34885 )
+position = Vector2( 344.708, 92.1279 )
+scale = Vector2( 1, 1 )
+emitting = false
 amount = 40
 lifetime = 2.3
 explosiveness = 1.0
 randomness = 0.47
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 spread = 180.0
 gravity = Vector2( 0, -50 )
 initial_velocity = 106.04
@@ -44,3 +82,54 @@ scale_amount = 2.7
 scale_amount_random = 1.0
 hue_variation = 0.14
 hue_variation_random = 0.91
+
+[node name="happy" type="Button" parent="."]
+margin_left = 542.579
+margin_top = 45.2105
+margin_right = 686.579
+margin_bottom = 119.21
+text = "Happy"
+
+[node name="angry" type="Button" parent="."]
+margin_left = 549.474
+margin_top = 155.79
+margin_right = 688.474
+margin_bottom = 229.79
+text = "Angry"
+
+[node name="sweat" type="Button" parent="."]
+margin_left = 550.015
+margin_top = 262.781
+margin_right = 689.015
+margin_bottom = 336.781
+text = "sweat drop"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/angry = SubResource( 1 )
+anims/sweat = SubResource( 3 )
+
+[node name="angry_vein" type="Sprite" parent="."]
+visible = false
+position = Vector2( 355.718, 77.3603 )
+scale = Vector2( 0.03, 0.03 )
+texture = ExtResource( 4 )
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 3.05176e-005, 7.62939e-006 )
+rotation = -7.51726e-005
+scale = Vector2( 1, 1 )
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 378.812, 64.2091 )
+rotation = 1.50398
+offset = 4.31657
+
+[node name="sweat_drop" type="Sprite" parent="Path2D/PathFollow2D"]
+position = Vector2( 17.9189, -0.799072 )
+rotation = -1.58047
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 5 )
+[connection signal="pressed" from="happy" to="." method="_on_happy_pressed"]
+[connection signal="pressed" from="angry" to="." method="_on_angry_pressed"]
+[connection signal="pressed" from="sweat" to="." method="_on_sweat_pressed"]
