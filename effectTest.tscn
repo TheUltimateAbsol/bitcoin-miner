@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://effectTest.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/Bus.png" type="Texture" id=2]
 [ext_resource path="res://Screenshake.tscn" type="PackedScene" id=3]
+[ext_resource path="res://dialogebox2.png" type="Texture" id=4]
+[ext_resource path="res://Screenshake_sprite.tscn" type="PackedScene" id=5]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -18,6 +20,9 @@ margin_right = 8.35083
 margin_bottom = 3.34033
 texture = ExtResource( 2 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Screenshake" parent="TextureRect" instance=ExtResource( 3 )]
 
@@ -28,9 +33,29 @@ margin_right = 510.971
 margin_bottom = 602.602
 rect_min_size = Vector2( 300, 200 )
 text = "SHAKE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 357.755, 824.162 )
+texture = ExtResource( 4 )
+
+[node name="Screenshake_sprite" parent="Sprite" instance=ExtResource( 5 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2( 367.441, 721.52 )
-current = true
 smoothing_enabled = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 228.0
+margin_top = 783.0
+margin_right = 513.0
+margin_bottom = 921.0
+text = "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

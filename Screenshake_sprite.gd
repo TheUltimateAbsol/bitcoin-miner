@@ -7,11 +7,11 @@ const EASE = Tween.EASE_IN_OUT
 var amplitude = 0;
 var priority = 0
 
-onready var camera = get_parent()
+onready var sprite = get_parent()
 #onready var text_box = $Sprite
 #onready var camera = get_node("Camera")
 
-func start(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
+func start(duration = 0.2, frequency = 15, amplitude = 6, priority = 0):
 	if priority >= self.priority:
 		self.amplitude = amplitude
 		$Duration.wait_time = duration
@@ -20,7 +20,7 @@ func start(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
 		$Duration.start()
 		$Frequency.start()
 		
-		print(camera)
+		print(sprite)
 		
 		_new_shake()
 	
@@ -30,12 +30,12 @@ func _new_shake():
 	rand.x = rand_range(-amplitude, amplitude)
 	rand.y = rand_range(-amplitude, amplitude)
 	
-	$ShakeTween.interpolate_property(camera, "rect_position", camera.rect_position, rand, $Frequency.wait_time, TRANS, EASE)
+	$ShakeTween.interpolate_property(sprite, "offset", sprite.offset, rand, $Frequency.wait_time, TRANS, EASE)
 #	$ShakeTween.interpolate_property(text_box, "offset", text_box.offset, rand, $Frequency.wait_time, TRANS, EASE)  
 	$ShakeTween.start()
 
 func _reset():
-	$ShakeTween.interpolate_property(camera, "rect_position", camera.rect_position, Vector2(), $Frequency.wait_time, TRANS, EASE) 
+	$ShakeTween.interpolate_property(sprite, "offset", sprite.offset, Vector2(), $Frequency.wait_time, TRANS, EASE) 
 #	$ShakeTween.interpolate_property(text_box, "offest", text_box.offset, Vector2(), $Frequency.wait_time, TRANS, EASE)
 	$ShakeTween.start()
 	
