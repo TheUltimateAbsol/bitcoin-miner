@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://VisualNovel/VNEditor.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/LinkBar.tscn" type="PackedScene" id=2]
@@ -16,12 +16,6 @@
 [ext_resource path="res://VisualNovel/ErrorLink.tscn" type="PackedScene" id=14]
 [ext_resource path="res://VisualNovel/SpeakerInput.gd" type="Script" id=15]
 [ext_resource path="res://VisualNovel/ImageToggleInput.gd" type="Script" id=16]
-[ext_resource path="res://VisualNovel/TargetIdInput.gd" type="Script" id=17]
-[ext_resource path="res://VisualNovel/IntValueInput.gd" type="Script" id=18]
-[ext_resource path="res://VisualNovel/BoolValueInput.gd" type="Script" id=19]
-[ext_resource path="res://VisualNovel/CharacterImageInput.gd" type="Script" id=20]
-[ext_resource path="res://VisualNovel/CheckTypeInput.gd" type="Script" id=21]
-[ext_resource path="res://VisualNovel/FlagInput.gd" type="Script" id=22]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://VisualNovel/KIdDOS-Regular.ttf"
@@ -34,7 +28,7 @@ font_data = SubResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 64
-font_data = ExtResource( 12 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0.0470588, 0.301961, 1 )
@@ -93,10 +87,10 @@ tracks/3/keys = {
 [sub_resource type="DynamicFont" id=6]
 size = 30
 extra_spacing_top = 10
-font_data = ExtResource( 12 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=7]
-font_data = ExtResource( 12 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
@@ -105,7 +99,7 @@ bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
 size = 30
 extra_spacing_top = 10
 extra_spacing_bottom = 10
-font_data = ExtResource( 12 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.290196, 0.67451, 0.266667, 1 )
@@ -226,168 +220,11 @@ text = "Next ID"
 margin_top = 64.0
 margin_right = 74.0
 margin_bottom = 88.0
-max_value = 100000.0
-
-[node name="TargetIdInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 106.0
-margin_right = 480.0
-margin_bottom = 180.0
-script = ExtResource( 17 )
-
-[node name="GridContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/TargetIdInput"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 473.0
-margin_bottom = 67.0
-
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/TargetIdInput/GridContainer"]
-margin_right = 466.0
-margin_bottom = 14.0
-text = "Target Id"
-align = 1
-
-[node name="Next_id" type="Label" parent="Panel/HBoxContainer/Layout/TargetIdInput/GridContainer"]
-margin_top = 18.0
-margin_right = 466.0
-margin_bottom = 32.0
-text = "Next ID"
-
-[node name="target_id_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/TargetIdInput/GridContainer"]
-margin_top = 36.0
-margin_right = 466.0
-margin_bottom = 60.0
-max_value = 100000.0
-allow_greater = true
-
-[node name="FlagInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 184.0
-margin_right = 480.0
-margin_bottom = 240.0
-script = ExtResource( 22 )
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/FlagInput"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 473.0
-margin_bottom = 49.0
-
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/FlagInput/VBoxContainer2"]
-margin_right = 466.0
-margin_bottom = 14.0
-text = "Flag"
-align = 1
-
-[node name="sentence_info2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/FlagInput/VBoxContainer2"]
-margin_top = 18.0
-margin_right = 466.0
-margin_bottom = 42.0
-custom_constants/separation = 15
-alignment = 1
-
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/FlagInput/VBoxContainer2/sentence_info2"]
-margin_top = 5.0
-margin_right = 46.0
-margin_bottom = 19.0
-text = "Name: "
-
-[node name="flag_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/FlagInput/VBoxContainer2/sentence_info2"]
-margin_left = 61.0
-margin_right = 466.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-
-[node name="CheckTypeInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 244.0
-margin_right = 480.0
-margin_bottom = 296.0
-script = ExtResource( 21 )
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/CheckTypeInput"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 473.0
-margin_bottom = 45.0
-
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CheckTypeInput/VBoxContainer2"]
-margin_right = 466.0
-margin_bottom = 14.0
-text = "Operator"
-align = 1
-
-[node name="check_type_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CheckTypeInput/VBoxContainer2"]
-margin_top = 18.0
-margin_right = 466.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-align = 1
-
-[node name="IntValueInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 300.0
-margin_right = 480.0
-margin_bottom = 356.0
-script = ExtResource( 18 )
-
-[node name="GridContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/IntValueInput"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 473.0
-margin_bottom = 49.0
-
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/IntValueInput/GridContainer"]
-margin_right = 466.0
-margin_bottom = 14.0
-text = "Integer Value"
-align = 1
-
-[node name="value_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/IntValueInput/GridContainer"]
-margin_top = 18.0
-margin_right = 466.0
-margin_bottom = 42.0
-max_value = 100000.0
-allow_greater = true
-
-[node name="BoolValueInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 360.0
-margin_right = 480.0
-margin_bottom = 416.0
-script = ExtResource( 19 )
-
-[node name="GridContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/BoolValueInput"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 473.0
-margin_bottom = 49.0
-
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer"]
-margin_right = 466.0
-margin_bottom = 14.0
-text = "Boolean Value"
-align = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer"]
-margin_top = 18.0
-margin_right = 466.0
-margin_bottom = 42.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer/HBoxContainer2"]
-margin_top = 5.0
-margin_right = 43.0
-margin_bottom = 19.0
-text = "Value: "
-
-[node name="value_input" type="CheckBox" parent="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer/HBoxContainer2"]
-margin_left = 47.0
-margin_right = 71.0
-margin_bottom = 24.0
-align = 1
 
 [node name="SentenceInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 420.0
+margin_top = 106.0
 margin_right = 480.0
-margin_bottom = 522.0
+margin_bottom = 208.0
 script = ExtResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/SentenceInput"]
@@ -480,9 +317,9 @@ margin_right = 466.0
 margin_bottom = 88.0
 
 [node name="QuestionInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 526.0
+margin_top = 212.0
 margin_right = 480.0
-margin_bottom = 621.0
+margin_bottom = 307.0
 script = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput"]
@@ -515,8 +352,6 @@ margin_left = 223.0
 margin_right = 442.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-max_value = 100000.0
-allow_greater = true
 align = 1
 prefix = "next_id: "
 
@@ -538,78 +373,78 @@ margin_top = 81.0
 margin_right = 466.0
 margin_bottom = 81.0
 
-[node name="CharacterImageInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 625.0
+[node name="CharacterInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
+margin_top = 311.0
 margin_right = 480.0
-margin_bottom = 725.0
-script = ExtResource( 20 )
+margin_bottom = 411.0
+script = ExtResource( 7 )
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterImageInput"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
 margin_bottom = 93.0
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2"]
+[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2"]
 margin_right = 466.0
 margin_bottom = 14.0
 text = "Character Image"
 align = 1
 
-[node name="Row" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2"]
+[node name="Row" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2"]
 margin_top = 18.0
 margin_right = 466.0
 margin_bottom = 38.0
 custom_constants/separation = 15
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row"]
+[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/Row"]
 margin_top = 3.0
 margin_right = 225.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Character"
 
-[node name="character_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row"]
+[node name="character_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/Row"]
 margin_left = 240.0
 margin_right = 466.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 align = 1
 
-[node name="Row2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2"]
+[node name="Row2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2"]
 margin_top = 42.0
 margin_right = 466.0
 margin_bottom = 62.0
 custom_constants/separation = 15
 
-[node name="Label2" type="Label" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row2"]
+[node name="Label2" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/Row2"]
 margin_top = 3.0
 margin_right = 225.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Expression"
 
-[node name="expression_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row2"]
+[node name="expression_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/Row2"]
 margin_left = 240.0
 margin_right = 466.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 align = 1
 
-[node name="Row3" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2"]
+[node name="Row3" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2"]
 margin_top = 66.0
 margin_right = 466.0
 margin_bottom = 86.0
 custom_constants/separation = 15
 
-[node name="Label3" type="Label" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row3"]
+[node name="Label3" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/Row3"]
 margin_top = 3.0
 margin_right = 225.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Transition"
 
-[node name="transition_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row3"]
+[node name="transition_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/Row3"]
 margin_left = 240.0
 margin_right = 466.0
 margin_bottom = 20.0
@@ -617,9 +452,9 @@ size_flags_horizontal = 3
 align = 1
 
 [node name="SpeakerInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 729.0
+margin_top = 415.0
 margin_right = 480.0
-margin_bottom = 785.0
+margin_bottom = 471.0
 script = ExtResource( 15 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/SpeakerInput"]
@@ -678,9 +513,9 @@ margin_right = 109.0
 margin_bottom = 24.0
 
 [node name="TransitionInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 789.0
+margin_top = 475.0
 margin_right = 480.0
-margin_bottom = 917.0
+margin_bottom = 603.0
 script = ExtResource( 6 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/TransitionInput"]
@@ -775,9 +610,9 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="ImageToggleInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 921.0
+margin_top = 607.0
 margin_right = 480.0
-margin_bottom = 977.0
+margin_bottom = 663.0
 script = ExtResource( 16 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/ImageToggleInput"]
@@ -833,35 +668,10 @@ margin_right = 150.0
 margin_bottom = 24.0
 align = 1
 
-[node name="CharacterInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 981.0
-margin_right = 480.0
-margin_bottom = 1033.0
-script = ExtResource( 7 )
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterInput"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 473.0
-margin_bottom = 45.0
-
-[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2"]
-margin_right = 466.0
-margin_bottom = 14.0
-text = "Character"
-align = 1
-
-[node name="character_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2"]
-margin_top = 18.0
-margin_right = 466.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-align = 1
-
 [node name="DirectoryInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 1037.0
+margin_top = 667.0
 margin_right = 480.0
-margin_bottom = 1093.0
+margin_bottom = 723.0
 script = ExtResource( 8 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/DirectoryInput"]
@@ -890,7 +700,7 @@ margin_bottom = 1440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VNReader" parent="Panel/HBoxContainer/VNReaderBox" instance=ExtResource( 11 )]
+[node name="VNReader" parent="Panel/HBoxContainer/VNReaderBox" instance=ExtResource( 9 )]
 rect_scale = Vector2( 0.5, 0.5 )
 size_flags_horizontal = 9
 size_flags_vertical = 0
@@ -929,15 +739,12 @@ margin_left = -178.0
 margin_top = -66.0
 custom_fonts/font = SubResource( 3 )
 text = "SAVE"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SnackBar" type="Control" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 13 )
+script = ExtResource( 11 )
 
 [node name="Panel" type="Panel" parent="SnackBar"]
 anchor_right = 1.0
@@ -959,7 +766,7 @@ anims/Activate = SubResource( 5 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 14 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -981,7 +788,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Parser" parent="ImportMenu" instance=ExtResource( 15 )]
+[node name="Parser" parent="ImportMenu" instance=ExtResource( 12 )]
 
 [node name="Panel" type="Panel" parent="ImportMenu"]
 modulate = Color( 1, 1, 1, 0.878431 )
@@ -1093,14 +900,14 @@ margin_top = 5.0
 margin_right = 615.0
 margin_bottom = 95.0
 
-[node name="Control" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
+[node name="Control" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 610.0
 margin_bottom = 14.0
 percent_visible = 1.0
 
-[node name="Control2" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
+[node name="Control2" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
@@ -1108,7 +915,7 @@ margin_right = 610.0
 margin_bottom = 32.0
 percent_visible = 1.0
 
-[node name="Control3" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
+[node name="Control3" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 36.0
@@ -1116,7 +923,7 @@ margin_right = 610.0
 margin_bottom = 50.0
 percent_visible = 1.0
 
-[node name="Control4" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
+[node name="Control4" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 54.0
@@ -1124,7 +931,7 @@ margin_right = 610.0
 margin_bottom = 68.0
 percent_visible = 1.0
 
-[node name="Control5" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
+[node name="Control5" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 72.0
@@ -1185,18 +992,13 @@ text = "IMPORT!"
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Down" to="." method="down"]
 [connection signal="selected" from="Panel/HBoxContainer/VBoxContainer/ScrollContainer/LinkBar" to="." method="on_selected"]
 [connection signal="value_changed" from="Panel/HBoxContainer/Layout/IdInput/GridContainer/next_id_input" to="Panel/HBoxContainer/Layout/IdInput" method="_on_next_id_input_value_changed"]
-[connection signal="value_changed" from="Panel/HBoxContainer/Layout/TargetIdInput/GridContainer/target_id_input" to="Panel/HBoxContainer/Layout/TargetIdInput" method="_on_target_id_input_value_changed"]
-[connection signal="text_changed" from="Panel/HBoxContainer/Layout/FlagInput/VBoxContainer2/sentence_info2/flag_input" to="Panel/HBoxContainer/Layout/FlagInput" method="_on_flag_input_text_changed"]
-[connection signal="item_selected" from="Panel/HBoxContainer/Layout/CheckTypeInput/VBoxContainer2/check_type_input" to="Panel/HBoxContainer/Layout/CheckTypeInput" method="_on_check_type_input_item_selected"]
-[connection signal="value_changed" from="Panel/HBoxContainer/Layout/IntValueInput/GridContainer/value_input" to="Panel/HBoxContainer/Layout/IntValueInput" method="_on_value_input_value_changed"]
-[connection signal="toggled" from="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer/HBoxContainer2/value_input" to="Panel/HBoxContainer/Layout/BoolValueInput" method="_on_value_input_toggled"]
 [connection signal="text_entered" from="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_txt/sentence_input" to="Panel/HBoxContainer/Layout/SentenceInput" method="_on_sentence_input_text_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_txt/add_sentence" to="Panel/HBoxContainer/Layout/SentenceInput" method="add_sentence"]
 [connection signal="text_entered" from="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt/question_input" to="Panel/HBoxContainer/Layout/QuestionInput" method="_on_question_input_text_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt/add_question" to="Panel/HBoxContainer/Layout/QuestionInput" method="add_sentence"]
-[connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row/character_input" to="Panel/HBoxContainer/Layout/CharacterImageInput" method="_on_character_input_item_selected"]
-[connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row2/expression_input" to="Panel/HBoxContainer/Layout/CharacterImageInput" method="_on_expression_input_item_selected"]
-[connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row3/transition_input" to="Panel/HBoxContainer/Layout/CharacterImageInput" method="_on_transition_input_item_selected"]
+[connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/Row/character_input" to="Panel/HBoxContainer/Layout/CharacterInput" method="_on_character_input_item_selected"]
+[connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/Row2/expression_input" to="Panel/HBoxContainer/Layout/CharacterInput" method="_on_expression_input_item_selected"]
+[connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/Row3/transition_input" to="Panel/HBoxContainer/Layout/CharacterInput" method="_on_transition_input_item_selected"]
 [connection signal="text_changed" from="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2/HBoxContainer/name_input" to="Panel/HBoxContainer/Layout/SpeakerInput" method="_on_name_input_text_changed"]
 [connection signal="toggled" from="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2/HBoxContainer2/thought_input" to="Panel/HBoxContainer/Layout/SpeakerInput" method="_on_thought_input_toggled"]
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row/background_input" to="Panel/HBoxContainer/Layout/TransitionInput" method="_on_background_input_item_selected"]
@@ -1205,7 +1007,6 @@ text = "IMPORT!"
 [connection signal="text_changed" from="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row4/name_input" to="Panel/HBoxContainer/Layout/TransitionInput" method="_on_LineEdit_text_changed"]
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2/HBoxContainer/image_input" to="Panel/HBoxContainer/Layout/ImageToggleInput" method="_on_image_input_item_selected"]
 [connection signal="toggled" from="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2/HBoxContainer/HBoxContainer/show_input" to="Panel/HBoxContainer/Layout/ImageToggleInput" method="_on_show_input_toggled"]
-[connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2/character_input" to="Panel/HBoxContainer/Layout/CharacterInput" method="_on_character_input_item_selected"]
 [connection signal="text_changed" from="Panel/HBoxContainer/Layout/DirectoryInput/GridContainer/directory_input" to="Panel/HBoxContainer/Layout/DirectoryInput" method="_on_directory_input_text_changed"]
 [connection signal="pressed" from="Panel/HBoxContainer/VNReaderBox/VNReader/preview_btn" to="." method="preview_scene"]
 [connection signal="pressed" from="Exit" to="." method="_on_Button_pressed"]
