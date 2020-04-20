@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://FloatyTweener.gd" type="Script" id=1]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0.0238762, 0.0367937, -0.0504768, -14.6232, 0.0504768, 14.6232, 20.6431, 0.520887, 0, 0, 0, 0, 0.00360012, 0.0367937, 0, 0, 0, 0, 0.0238762, 0.0367937 )
+}
+
+[node name="FloatyTweener" type="Tween"]
+repeat = true
+playback/repeat = true
+script = ExtResource( 1 )
+
+[node name="Path2D" type="Path2D" parent="."]
+visible = false
+position = Vector2( 0.500687, -0.500687 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 0.0238762, 0.0367937 )
+rotate = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/PathFollow2D"]
+position = Vector2( -0.689565, 0.121916 )
+rotation = 0.549103
+update_rotation = false
+update_scale = false
+[connection signal="tween_all_completed" from="." to="." method="_on_FloatyTweener_tween_all_completed"]

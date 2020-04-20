@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://VisualNovel/Characters/Coach Normal.png" type="Texture" id=1]
 [ext_resource path="res://VisualNovel/Characters/Eli_normal.png" type="Texture" id=2]
@@ -14,6 +14,29 @@
 [ext_resource path="res://PlayerSprites/LOGO.png" type="Texture" id=12]
 [ext_resource path="res://VisualNovel/Characters/Alfred Normal.png" type="Texture" id=13]
 [ext_resource path="res://VisualNovel/Characters/nannndkkad.png" type="Texture" id=14]
+[ext_resource path="res://FloatyTweener.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Style/m3x6.ttf" type="DynamicFontData" id=16]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+extra_spacing_space = -8
+font_data = ExtResource( 16 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "New Anim"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Node2D" type="Node2D"]
 
@@ -43,6 +66,8 @@ light_mask = 2048
 position = Vector2( 439.444, 2767.16 )
 polygon = PoolVector2Array( 277.276, -1798.57, 225.962, -1820.56, 142.068, -1718.75, 36.1821, -1840.11, -34.6801, -1833.6, -53.4138, -1772.51, -161.743, -1581.91, -134.05, -1502.09, -13.5028, -1521.64, 45.1417, -1478.47, 149.399, -1530.6, 277.276, -1463 )
 
+[node name="FloatyTweener" parent="Shaun" instance=ExtResource( 15 )]
+
 [node name="Light2D" type="Light2D" parent="Shaun"]
 position = Vector2( -15.0316, 20.0422 )
 texture = ExtResource( 7 )
@@ -52,19 +77,25 @@ range_item_cull_mask = 2048
 [node name="start_button" type="Polygon2D" parent="."]
 light_mask = 32768
 position = Vector2( 191.784, 1896.36 )
-color = Color( 0.388235, 0.721569, 0.337255, 1 )
+color = Color( 0.0941176, 0.188235, 0.188235, 1 )
 polygon = PoolVector2Array( 114.249, -629.937, 140.217, -573.161, 130.974, -518.145, 182.469, -458.288, -136.623, -456.527, -97.4518, -550.714, -17.3486, -533.109, 25.3437, -593.407 )
 
-[node name="Button" type="Button" parent="start_button"]
-light_mask = 16384
-margin_left = -53.0
-margin_top = -516.0
-margin_right = 87.0
-margin_bottom = -465.0
-text = "START"
+[node name="Label" type="Label" parent="start_button"]
+light_mask = 32768
+margin_left = -84.893
+margin_top = -528.534
+margin_right = 115.107
+margin_bottom = -477.534
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.878431, 0.941176, 0.909804, 1 )
+text = "TAP TO START"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="start_button/Label"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 2 )
 
 [node name="Simon" type="Polygon2D" parent="."]
 modulate = Color( 0.654902, 0.654902, 0.654902, 1 )
@@ -92,7 +123,7 @@ range_item_cull_mask = 1024
 
 [node name="Elizabeth" type="Polygon2D" parent="."]
 modulate = Color( 0.654902, 0.654902, 0.654902, 1 )
-light_mask = 129
+light_mask = 128
 position = Vector2( 191.784, 1896.36 )
 polygon = PoolVector2Array( 137.216, -1085.36, 160.216, -959.357, 285.217, -968.357, 389.217, -848.357, 474.217, -951.357, 526.217, -927.357, 527.217, -1227.36, 476.217, -1249.36, 433.217, -1137.36, 353.217, -1203.36, 256.217, -1175.36, 261.217, -1236.36, 224.217, -1274.36, 191.217, -1232.36, 149.216, -1242.36, 120.216, -1161.36, 150.216, -1087.36 )
 
