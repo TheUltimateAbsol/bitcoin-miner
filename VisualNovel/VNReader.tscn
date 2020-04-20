@@ -316,7 +316,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 2, 1 ),
 "update": 0,
-"values": [ Vector2( 1e-005, 1e-005 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath(".:position")
@@ -408,7 +408,7 @@ anchor_top = 0.3
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -338.0
-margin_top = -187.0
+margin_top = -430.0
 margin_right = 363.0
 margin_bottom = 141.0
 mouse_filter = 2
@@ -671,7 +671,7 @@ color_ramp = SubResource( 14 )
 [node name="PopupImage" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 0 )
 position = Vector2( 379.04, 497.065 )
-scale = Vector2( 1e-005, 1e-005 )
+scale = Vector2( 1e-05, 1e-05 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PopupImage"]
 anims/Entrance = SubResource( 15 )

@@ -1,13 +1,6 @@
 extends Node
 
-#enum Characters {NONE, BOY, GIRL}
-#enum Transitions{NONE, FLASH, FADE, SLIDE_RIGHT, SLIDE_LEFT} #character
-#enum Expressions{DEFAULT, HAPPY, SAD}
-#enum Music{SAME, NONE, SIMPLE, SAD}
-#enum Backgrounds{SAME, NONE, CLASSROOM}
-#enum SoundEffect{NONE, DING, THWACK, WHACK} # when the text appears on the screen (sentence per sentence basis)
-
-const Characters = {"NONE":"NONE", "ANNA":"ANNA", "CLAIRE":"CLAIRE", "JACK":"JACK", "CHAD":"CHAD", "JUNE":"JUNE", "SHAUN":"SHAUN", "ELIZABETH":"ELIZABETH"} 
+const Characters = {"NONE":"NONE", "ANNA":"ANNA", "CLAIRE":"CLAIRE", "JACK":"JACK", "CHAD":"CHAD", "JUNE":"JUNE", "SHAUN":"SHAUN", "ELIZABETH":"ELIZABETH", "SIMON":"SIMON", "COACH":"COACH", "CHRIS":"CHRIS", "ALFRED":"ALFRED"} 
 const CharacterTransitions = {"DEFAULT":"DEFAULT"} #character
 const Music = {"SAME":"SAME", "NONE":"NONE", "DEFAULT":"DEFAULT", "SUSPENSE":"SUSPENSE", "DESPAIR":"DESPAIR", "ENGAGING":"ENGAGING", "BOISTEROUS":"BOISTEROUS"}
 const Expressions = {"NORMAL":"NORMAL", "ANGRY":"ANGRY", "EMBARRASSED":"EMBARRASSED", "SAD":"SAD", "HAPPY":"HAPPY", "SHOCKED":"SHOCKED"}

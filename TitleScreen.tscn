@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://VisualNovel/Characters/Expressions/claire/normal.png" type="Texture" id=1]
 [ext_resource path="res://VisualNovel/Characters/Expressions/elizabeth/normal.png" type="Texture" id=2]
@@ -38,6 +38,23 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "New Anim"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 0.5, 2, 0.5 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.01, 1.01 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -306,6 +323,7 @@ modulate = Color( 0.654902, 0.654902, 0.654902, 1 )
 polygon = PoolVector2Array( 2.06707, 0.268978, 280.638, 323.587, 359.419, 261.823, 398.495, 317.285, 467.822, 242.915, 392.192, 192.495, 397.864, 114.975, 341.772, 55.731, 332.318, 2.15973 )
 
 [node name="Light2D" type="Light2D" parent="CenterContainer/Node2D/coach"]
+light_mask = 0
 position = Vector2( 355.367, 1473.32 )
 scale = Vector2( 2.48025, 2.48025 )
 texture = ExtResource( 5 )
@@ -394,10 +412,25 @@ points = PoolVector2Array( 53.8825, 1445.32, 94.1117, 1343.57, 174.261, 1362.56,
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CenterContainer/Node2D"]
+light_mask = 0
+position = Vector2( 338.338, 560.594 )
+amount = 20
+lifetime = 1.5
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 1000.0
+scale_amount = 43.86
+color = Color( 0.878431, 0.941176, 0.909804, 1 )
+
 [node name="Logo" type="Sprite" parent="CenterContainer/Node2D"]
 light_mask = 131072
 position = Vector2( 374.15, 472.246 )
 texture = ExtResource( 12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/Node2D/Logo"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 5 )
 
 [node name="Starting Cover" type="Panel" parent="."]
 modulate = Color( 0, 0, 0, 0 )

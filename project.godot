@@ -225,7 +225,7 @@ _global_script_class_icons={
 [application]
 
 config/name="minecraft; the way home"
-run/main_scene="res://main.tscn"
+run/main_scene="res://TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -235,11 +235,13 @@ InputEventHandler="*res://InputEventHandler.gd"
 VNGlobal="*res://VisualNovel/VNGlobal.gd"
 GlobalMusic="*res://GlobalMusic.tscn"
 SaveData="*res://SaveData.gd"
+SceneChanger="*res://SceneChanger.tscn"
 
 [display]
 
 window/size/width=720
 window/size/height=1440
+window/size/resizable=false
 window/size/test_width=450
 window/size/test_height=720
 window/handheld/orientation="portrait"
@@ -293,6 +295,7 @@ attack={
 
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 
 [size]
 

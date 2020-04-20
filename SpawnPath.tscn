@@ -4,6 +4,7 @@
 [ext_resource path="res://SpawnPath.gd" type="Script" id=2]
 
 [sub_resource type="Curve2D" id=1]
+resource_local_to_scene = true
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0.117836, -0.0418549, -43.3095, -1.25172, 43.3095, 1.25172, 75.8376, -35.1733, 0, 0, 0, 0, 149.439, 0.375496 )
 }

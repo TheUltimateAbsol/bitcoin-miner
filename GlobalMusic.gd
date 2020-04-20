@@ -1,5 +1,7 @@
 extends AudioStreamPlayer
 
+const Music = {"TITLE":"TITLE"}
+
 const tracks = { 
 	VNGlobal.Music.DEFAULT: preload("res://Music/Tracks/Default.ogg"),
 	VNGlobal.Music.SUSPENSE:preload("res://Music/Tracks/Suspense.ogg"),
@@ -7,7 +9,8 @@ const tracks = {
 	VNGlobal.Music.ENGAGING:preload("res://Music/Tracks/Engaging.ogg"),
 	VNGlobal.Music.BOISTEROUS: preload("res://Music/Tracks/Boistrous.ogg"),
 	Global.GameMusic.LEVEL:preload("res://Music/Tracks/Level.wav"),
-	Global.GameMusic.BOSS :preload("res://Music/Tracks/Boss.ogg")
+	Global.GameMusic.BOSS :preload("res://Music/Tracks/Boss.ogg"),
+	Music.TITLE: preload("res://Music/Tracks/title.ogg")
 }
 
 var current_request:MusicRequest = null;
