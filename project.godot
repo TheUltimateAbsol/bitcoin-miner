@@ -240,12 +240,11 @@ SaveData="*res://SaveData.gd"
 
 window/size/width=720
 window/size/height=1440
-window/size/resizable=false
 window/size/test_width=450
 window/size/test_height=720
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
+window/stretch/aspect="keep"
 window/pixel=true
 
 [global]

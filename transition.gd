@@ -8,6 +8,9 @@ onready var sprite_anim = $arrow/Control/Sprite/AnimationPlayer
 onready var sprite = $arrow/Control
 onready var mask = $effect
 
+onready var wipe = preload("res://VisualNovel/textures/wipe.png")
+onready var default = preload("res://VisualNovel/textures/gradient_lr.png")
+
 signal transition_completed
 
 func _ready():
@@ -21,7 +24,12 @@ func _ready():
 #	yield(self, "transition_completed")
 #	transition_in("asdf");
 
+#note: I was really lazy here. It would be best if we had an array of filters
 func transition_out():
+	$effect.material.set_shader_param("filter",default)
+	_transition_out()
+	
+func _transition_out():
 	mask.show();
 	$Tween.interpolate_property(mask, "cutoff", 0.0, 1.0, 1.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
 	$Tween.start()
@@ -29,6 +37,9 @@ func transition_out():
 	yield($Tween, "tween_completed")
 	emit_signal("transition_completed");
 	
+func transition_out2():
+	$effect.material.set_shader_param("filter",wipe)
+	_transition_out()
 	
 func transition_in(new_text:String):
 	sprite.show()
