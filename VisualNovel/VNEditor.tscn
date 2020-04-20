@@ -34,7 +34,7 @@ font_data = SubResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 64
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0.0470588, 0.301961, 1 )
@@ -93,10 +93,10 @@ tracks/3/keys = {
 [sub_resource type="DynamicFont" id=6]
 size = 30
 extra_spacing_top = 10
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=7]
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
@@ -105,7 +105,7 @@ bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
 size = 30
 extra_spacing_top = 10
 extra_spacing_bottom = 10
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.290196, 0.67451, 0.266667, 1 )
@@ -890,7 +890,7 @@ margin_bottom = 1440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VNReader" parent="Panel/HBoxContainer/VNReaderBox" instance=ExtResource( 9 )]
+[node name="VNReader" parent="Panel/HBoxContainer/VNReaderBox" instance=ExtResource( 11 )]
 rect_scale = Vector2( 0.5, 0.5 )
 size_flags_horizontal = 9
 size_flags_vertical = 0
@@ -937,7 +937,7 @@ __meta__ = {
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 11 )
+script = ExtResource( 13 )
 
 [node name="Panel" type="Panel" parent="SnackBar"]
 anchor_right = 1.0
@@ -959,7 +959,7 @@ anims/Activate = SubResource( 5 )
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 13 )
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -981,7 +981,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Parser" parent="ImportMenu" instance=ExtResource( 12 )]
+[node name="Parser" parent="ImportMenu" instance=ExtResource( 15 )]
 
 [node name="Panel" type="Panel" parent="ImportMenu"]
 modulate = Color( 1, 1, 1, 0.878431 )
@@ -1093,14 +1093,14 @@ margin_top = 5.0
 margin_right = 615.0
 margin_bottom = 95.0
 
-[node name="Control" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 610.0
 margin_bottom = 14.0
 percent_visible = 1.0
 
-[node name="Control2" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control2" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
@@ -1108,7 +1108,7 @@ margin_right = 610.0
 margin_bottom = 32.0
 percent_visible = 1.0
 
-[node name="Control3" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control3" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 36.0
@@ -1116,7 +1116,7 @@ margin_right = 610.0
 margin_bottom = 50.0
 percent_visible = 1.0
 
-[node name="Control4" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control4" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 54.0
@@ -1124,7 +1124,7 @@ margin_right = 610.0
 margin_bottom = 68.0
 percent_visible = 1.0
 
-[node name="Control5" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
+[node name="Control5" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 16 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 72.0

@@ -30,6 +30,14 @@ onready var popup_image = $PopupImage
 onready var	popup_image_panel = $PopupImage/Background/Panel
 onready var transition_mask = $TransitionMask;
 
+onready var textbox_dialogue = $Control/TextBoxes/Dialogue
+onready var textbox_nextArrow = $Control/TextBoxes/NextArrow
+onready var textbox_thought = $Control/TextBoxes/Thought
+onready var textbox_thought_animation = $Control/TextBoxes/Thought/AnimationPlayer
+onready var textbox_dialogue_animation = $Control/TextBoxes/Dialogue/AnimationPlayer
+
+onready var conclusion_animation = $Conclusion/AnimationPlayer
+
 #timer stuff
 onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
 onready var delay_timer : TimerRequest = TimerRequest.new($DelayTimer);
@@ -116,7 +124,7 @@ func play():
 				if next_page != null and next_page is QuestionPage:
 					pass #skip question page waiting
 				else:
-					$Control/TextBoxes/NextArrow.visible = true;
+					textbox_nextArrow.visible = true;
 					yield(self, "goto_next_page")
 				
 			elif page is QuestionPage:
@@ -159,7 +167,7 @@ func play_json(json_data : Dictionary):
 func display_page(page:Page):
 	if state == PLAYING: return;
 	
-	$Control/TextBoxes/NextArrow.visible = false;
+	textbox_nextArrow.visible = false;
 	
 	state = PLAYING;
 	if page is ContentPage:
@@ -195,13 +203,13 @@ func display_page(page:Page):
 			dialogue_label.text = "" # This is so we can check for sequential speakers
 			name_label.text = ""
 			thought_label.text = ""
-			$Control/TextBoxes/Dialogue.hide();
+			textbox_dialogue.hide();
 			
 #			If we weren't already thinking
-			if not $Control/TextBoxes/Thought.visible:
-				$Control/TextBoxes/Thought.show();
-				$Control/TextBoxes/Thought/AnimationPlayer.play("Entrance")
-				yield($Control/TextBoxes/Thought/AnimationPlayer, "animation_finished")
+			if not textbox_thought.visible:
+				textbox_thought.show();
+				textbox_thought_animation.play("Entrance")
+				yield(textbox_thought_animation, "animation_finished")
 				
 
 		else:
@@ -209,14 +217,14 @@ func display_page(page:Page):
 			thought_label.text = "" # This is so we can check for sequential speakers
 			dialogue_label.text =""
 #			If we weren't talking or there's a new speaker
-			print(not $Control/TextBoxes/Dialogue.visible);
-			if not $Control/TextBoxes/Dialogue.visible or name_label.text != page.speaker_name:
-				$Control/TextBoxes/Dialogue.modulate = Color(0,0,0,0)
+			print(not textbox_dialogue.visible);
+			if not textbox_dialogue.visible or name_label.text != page.speaker_name:
+				textbox_dialogue.modulate = Color(0,0,0,0)
 				name_label.text = page.speaker_name
-				$Control/TextBoxes/Thought.hide();
-				$Control/TextBoxes/Dialogue.show();
-				$Control/TextBoxes/Dialogue/AnimationPlayer.play("Entrance")
-				yield($Control/TextBoxes/Dialogue/AnimationPlayer, "animation_finished")
+				textbox_thought.hide();
+				textbox_dialogue.show();
+				textbox_dialogue_animation.play("Entrance")
+				yield(textbox_dialogue_animation, "animation_finished")
 				
 			
 		for sentence in page.content:
@@ -236,7 +244,7 @@ func display_page(page:Page):
 		tap_skip = true;
 	elif page is EndPage:
 		print("ENDING");
-		$Conclusion/AnimationPlayer.play("Activate");
+		conclusion_animation.play("Activate");
 	elif page is QuestionPage:
 		answerBox.visible = true
 		answerBox.reset()
