@@ -999,10 +999,12 @@ position = Vector2( 14, 0 )
 shape = SubResource( 20 )
 
 [node name="GroundPound2" type="CollisionShape2D" parent="MiningHitbox"]
+visible = false
 position = Vector2( 20, 5 )
 shape = SubResource( 18 )
 
 [node name="HangingHitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HangingHitbox"]
