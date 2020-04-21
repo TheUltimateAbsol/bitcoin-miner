@@ -10,7 +10,7 @@ const tracks = {
 	VNGlobal.Music.BOISTEROUS: preload("res://Music/Tracks/Boistrous.ogg"),
 	Global.GameMusic.LEVEL:preload("res://Music/Tracks/Level.wav"),
 	Global.GameMusic.BOSS :preload("res://Music/Tracks/Boss.ogg"),
-	Music.TITLE: preload("res://Music/Tracks/title.ogg")
+	Global.GameMusic.TITLE:preload("res://Music/Tracks/title.ogg")
 }
 
 var current_request:MusicRequest = null;

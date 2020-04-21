@@ -1,8 +1,8 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/ClassroomB.png" type="Texture" id=2]
-[ext_resource path="res://VisualNovel/Characters/Expressions/anna/angry.png" type="Texture" id=3]
+[ext_resource path="res://VisualNovel/Characters/Expressions/anna/normal.png" type="Texture" id=3]
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=4]
 [ext_resource path="res://VisualNovel/slide_from_left.tres" type="Animation" id=5]
 [ext_resource path="res://VisualNovel/NPCTransitioner.gd" type="Script" id=6]
@@ -20,6 +20,7 @@
 [ext_resource path="res://VisualNovel/image_background.png" type="Texture" id=18]
 [ext_resource path="res://VisualNovel/Images/Letter.png" type="Texture" id=19]
 [ext_resource path="res://transition.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Screenshake.tscn" type="PackedScene" id=21]
 
 [sub_resource type="Shader" id=1]
 code = "
@@ -129,7 +130,7 @@ font_data = ExtResource( 13 )
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("..:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -141,7 +142,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/path = NodePath("..:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -379,9 +380,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="BackgroundContainer" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_clip_content = true
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="BackgroundContainer"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -83.4531
+margin_top = -775.805
+margin_right = 56.5469
+margin_bottom = 784.195
+rect_min_size = Vector2( 860, 1560 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -391,6 +407,9 @@ stretch_mode = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Screenshake" parent="BackgroundContainer/Background" instance=ExtResource( 21 )]
+property = "rect_position"
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
@@ -404,11 +423,11 @@ __meta__ = {
 
 [node name="NPC" type="TextureRect" parent="Control"]
 material = SubResource( 2 )
-anchor_top = 0.3
+anchor_top = 0.05
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -338.0
-margin_top = -430.0
+margin_top = -70.0
 margin_right = 363.0
 margin_bottom = 141.0
 mouse_filter = 2
@@ -535,31 +554,20 @@ __meta__ = {
 [node name="Dialogue" type="Node2D" parent="Control/TextBoxes"]
 position = Vector2( 554.863, 593.13 )
 
-[node name="Sprite" type="Sprite" parent="Control/TextBoxes/Dialogue"]
+[node name="Node2D" type="Node2D" parent="Control/TextBoxes/Dialogue"]
+
+[node name="Sprite" type="Sprite" parent="Control/TextBoxes/Dialogue/Node2D"]
 position = Vector2( -101.17, -384.341 )
 scale = Vector2( 2.5, 2.75 )
 texture = ExtResource( 10 )
 
-[node name="Text" type="Label" parent="Control/TextBoxes/Dialogue"]
-margin_left = -426.863
-margin_top = -491.13
-margin_right = 98.1367
-margin_bottom = -62.1298
-rect_rotation = -3.0
-custom_fonts/font = ExtResource( 11 )
-text = "asdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdasdf asdf asd fasdf asdf asdf as"
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NameBubble" type="Sprite" parent="Control/TextBoxes/Dialogue"]
+[node name="NameBubble" type="Sprite" parent="Control/TextBoxes/Dialogue/Node2D"]
 position = Vector2( -371.871, -547.052 )
 rotation = -0.0366519
 scale = Vector2( 1.6273, 1.77683 )
 texture = ExtResource( 12 )
 
-[node name="Name" type="Label" parent="Control/TextBoxes/Dialogue"]
+[node name="Name" type="Label" parent="Control/TextBoxes/Dialogue/Node2D"]
 margin_left = -485.507
 margin_top = -573.253
 margin_right = -255.507
@@ -572,8 +580,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/TextBoxes/Dialogue"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/TextBoxes/Dialogue/Node2D"]
 anims/Entrance = SubResource( 8 )
+
+[node name="Screenshake" parent="Control/TextBoxes/Dialogue/Node2D" instance=ExtResource( 21 )]
+property = "position"
+frequency = 60.0
+amplitude = 10.0
+
+[node name="Text" type="Label" parent="Control/TextBoxes/Dialogue"]
+margin_left = -426.863
+margin_top = -491.13
+margin_right = 98.1366
+margin_bottom = -62.1298
+rect_rotation = -3.0
+custom_fonts/font = ExtResource( 11 )
+text = "asdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdfasdf asdf asdasdf asdf asd fasdf asdf asdf as"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Thought" type="Node2D" parent="Control/TextBoxes"]
 visible = false

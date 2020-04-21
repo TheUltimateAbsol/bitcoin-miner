@@ -40,7 +40,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "New Anim"
 length = 0.5
 loop = true
@@ -57,11 +57,10 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.01, 1.01 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "New Anim"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -212,7 +211,7 @@ position = Vector2( 191.784, 1896.36 )
 polygon = PoolVector2Array( 137.216, -1085.36, 160.216, -959.357, 285.217, -968.357, 389.217, -848.357, 474.217, -951.357, 526.217, -927.357, 527.217, -1227.36, 476.217, -1249.36, 433.217, -1137.36, 353.217, -1203.36, 256.217, -1175.36, 261.217, -1236.36, 224.217, -1274.36, 191.217, -1232.36, 149.216, -1242.36, 120.216, -1161.36, 150.216, -1087.36 )
 
 [node name="Light2D" type="Light2D" parent="CenterContainer/Node2D/Elizabeth"]
-position = Vector2( 321.807, 99.8371 )
+position = Vector2( 324.325, -177.088 )
 scale = Vector2( 1.98399, 1.98399 )
 texture = ExtResource( 2 )
 mode = 2
@@ -341,6 +340,7 @@ position = Vector2( 35.8963, 1160.12 )
 points = PoolVector2Array( -415.959, -1731.33, -137.322, -1407.58, -59.0382, -1469.28, -5.96445, -1391.66, 38.0658, -1400.28, 46.4459, -1402.27, 157.237, -1458, 163.208, -1509.08, 241.492, -1513.06, 279.97, -1572.11, 305.844, -1579.4 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D2" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -348,6 +348,7 @@ position = Vector2( 35.8963, 1159.17 )
 points = PoolVector2Array( -86.5039, -1731.65, -75.6967, -1675.91, -19.9542, -1616.75, -24.5046, -1538.82, 51.1459, -1488.77, -18.8166, -1413.69 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D3" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -355,6 +356,7 @@ position = Vector2( -381.063, -571.02 )
 points = PoolVector2Array( -4.49734, 626.913, 68.107, 536.484, 89.7214, 545.585, 131.244, 459.696, 156.271, 462.54, 171.629, 437.513, 208.032, 473.916, 239.316, 438.651, 293.921, 493.824, 465.09, 328.408 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D4" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -362,6 +364,7 @@ position = Vector2( -381.063, -571.02 )
 points = PoolVector2Array( 723.128, 440.12, 597.754, 480.788, 561.256, 415.966, 485.338, 415.09, 499.062, 361.072, 445.628, 346.765 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D5" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -369,6 +372,7 @@ position = Vector2( -381.063, -571.02 )
 points = PoolVector2Array( 725.18, 671.687, 670.205, 646.32, 623.96, 758.526, 546.527, 692.564, 448.302, 718.734, 451.528, 658.508, 370.152, 572.83, 401.34, 486.076, 383.416, 407.567 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D6" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -376,6 +380,7 @@ position = Vector2( -381.063, -571.02 )
 points = PoolVector2Array( -3.03869, 737.188, 48.3023, 690.274, 213.276, 706.625, 275.762, 631.584, 382.338, 663.411, 414.749, 622.24 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D7" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -383,6 +388,7 @@ position = Vector2( -381.063, -571.02 )
 points = PoolVector2Array( -5.75399, 918.747, 112.862, 937.726, 169.12, 853, 242.098, 862.038, 348.187, 795.857, 311.46, 734.836, 341.962, 654.177 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D8" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -390,6 +396,7 @@ position = Vector2( -381.063, -571.02 )
 points = PoolVector2Array( 721.929, 971.731, 665.847, 943.445, 581.479, 1047.32, 476.141, 927.84, 351.784, 935.155, 326.912, 815.675 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D9" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -397,6 +404,7 @@ position = Vector2( -381.063, -571.02 )
 points = PoolVector2Array( -1.3123, 1069.52, 114.244, 1103.65, 229.202, 988.092, 283.088, 1009.65, 351.943, 936.002 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D10" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -404,6 +412,7 @@ position = Vector2( -380.859, -571.02 )
 points = PoolVector2Array( 404.129, 931.743, 387.472, 990.46, 277.443, 1185.49, 306.837, 1265.73, 423.221, 1246.27, 483.2, 1287.58, 588.065, 1235.94, 720.963, 1306.99 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="Line2D11" type="Line2D" parent="CenterContainer/Node2D/lines"]
 light_mask = 65536
@@ -411,6 +420,7 @@ position = Vector2( -381.063, -571.794 )
 points = PoolVector2Array( 53.8825, 1445.32, 94.1117, 1343.57, 174.261, 1362.56, 216.884, 1302.33, 305.373, 1268.05, 330.854, 1322.26, 323.441, 1377.39, 378.512, 1447.01 )
 width = 20.0
 default_color = Color( 1, 1, 1, 1 )
+antialiased = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="CenterContainer/Node2D"]
 light_mask = 0
@@ -430,29 +440,30 @@ texture = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/Node2D/Logo"]
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 5 )
+"anims/New Anim" = SubResource( 3 )
 
 [node name="Starting Cover" type="Panel" parent="."]
-modulate = Color( 0, 0, 0, 0 )
+modulate = Color( 1, 1, 1, 0 )
 light_mask = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Starting Cover"]
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 4 )
+"anims/New Anim" = SubResource( 5 )
 
 [node name="Button" type="Button" parent="Starting Cover"]
 modulate = Color( 1, 1, 1, 0 )
 light_mask = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
+disabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

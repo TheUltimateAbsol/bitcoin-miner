@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/embarassed.png-4ca2eda1e59573c2f8095ed45e5578bc.stex"
+path="res://.import/embarrassed.png-15c2b7a825e7a9c3d5dcffe257846f34.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Characters/Expressions/elizabeth/embarassed.png"
-dest_files=[ "res://.import/embarassed.png-4ca2eda1e59573c2f8095ed45e5578bc.stex" ]
+source_file="res://VisualNovel/Characters/Expressions/elizabeth/embarrassed.png"
+dest_files=[ "res://.import/embarrassed.png-15c2b7a825e7a9c3d5dcffe257846f34.stex" ]
 
 [params]
 

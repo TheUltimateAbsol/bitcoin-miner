@@ -18,14 +18,14 @@ const CHAR_WAIT = 1.0/25
 export (bool) var autoplay = false;
 
 onready var dialogue_label = $Control/TextBoxes/Dialogue/Text
-onready var name_label = $Control/TextBoxes/Dialogue/Name
+onready var name_label = $Control/TextBoxes/Dialogue/Node2D/Name
 onready var thought_label = $Control/TextBoxes/Thought/Text
 onready var text_boxes = $Control/TextBoxes
 # Control/Panel/MarginContainer/Control/TextLabel
 onready var npc = $Control/NPC
 onready var NPCTransitionPlayer = $Control/NPC/AnimationPlayer
 onready var answerBox = $Control/AnswerBox
-onready var background = $Background
+onready var background = $BackgroundContainer/Background
 onready var popup_image = $PopupImage
 onready var	popup_image_panel = $PopupImage/Background/Panel
 onready var transition_mask = $TransitionMask;
@@ -34,7 +34,7 @@ onready var textbox_dialogue = $Control/TextBoxes/Dialogue
 onready var textbox_nextArrow = $Control/TextBoxes/NextArrow
 onready var textbox_thought = $Control/TextBoxes/Thought
 onready var textbox_thought_animation = $Control/TextBoxes/Thought/AnimationPlayer
-onready var textbox_dialogue_animation = $Control/TextBoxes/Dialogue/AnimationPlayer
+onready var textbox_dialogue_animation = $Control/TextBoxes/Dialogue/Node2D/AnimationPlayer
 
 onready var conclusion_animation = $Conclusion/AnimationPlayer
 
@@ -328,6 +328,12 @@ func write_sentence (sentence, target_label:Label):
 	text_boxes.set_target(target_label);
 	
 	if (skipped == false):
+		match(sentence.effect):
+			VNGlobal.Effects.SHAKE:
+				$Control/TextBoxes/Dialogue/Node2D/Screenshake.start()
+				$Control2/Background/Screenshake.start()
+				
+		
 		text_boxes.play(target, wait_time)
 		yield(text_boxes, "completed");
 

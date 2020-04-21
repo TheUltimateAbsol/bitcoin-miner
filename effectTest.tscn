@@ -10,8 +10,19 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.35083
@@ -24,7 +35,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Screenshake" parent="TextureRect" instance=ExtResource( 3 )]
+[node name="Screenshake" parent="Control/TextureRect" instance=ExtResource( 3 )]
 
 [node name="Button" type="Button" parent="."]
 margin_left = 210.971
