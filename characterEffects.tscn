@@ -98,7 +98,7 @@ tracks/5/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "music_note"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Path2D2/PathFollow2D:unit_offset")
@@ -113,8 +113,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "sweat"
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
@@ -129,7 +128,7 @@ tracks/0/keys = {
 "values": [ 0.0, 0.9999 ]
 }
 
-[sub_resource type="Curve2D" id=4]
+[sub_resource type="Curve2D" id=5]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 378.527, 59.9442, 0, 0, 0, 0, 380.048, 82.6806 )
 }
@@ -212,8 +211,8 @@ text = "music note"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/angry = SubResource( 1 )
 anims/angry2 = SubResource( 2 )
-anims/music_note = SubResource( 5 )
-anims/sweat = SubResource( 3 )
+anims/music_note = SubResource( 3 )
+anims/sweat = SubResource( 4 )
 
 [node name="angry_vein" type="Sprite" parent="."]
 visible = false
@@ -228,10 +227,9 @@ scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 4 )
 
 [node name="Path2D" type="Path2D" parent="."]
-visible = false
 position = Vector2( 3.05176e-05, 7.62939e-06 )
 rotation = -7.51726e-05
-curve = SubResource( 4 )
+curve = SubResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2( 378.812, 64.2091 )
@@ -250,7 +248,7 @@ scale = Vector2( 1, 0.998042 )
 curve = SubResource( 6 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D2"]
-position = Vector2( 278.257, 58.541 )
+position = Vector2( 278.256, 58.5418 )
 rotation = 0.944113
 offset = 200.843
 rotate = false

@@ -38,6 +38,8 @@ onready var textbox_dialogue_animation = $Control/TextBoxes/Dialogue/Node2D/Anim
 
 onready var conclusion_animation = $Conclusion/AnimationPlayer
 
+onready var flashyflashyanim = $FlashyFlashy/AnimationPlayer
+
 #timer stuff
 onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
 onready var delay_timer : TimerRequest = TimerRequest.new($DelayTimer);
@@ -331,8 +333,13 @@ func write_sentence (sentence, target_label:Label):
 		match(sentence.effect):
 			VNGlobal.Effects.SHAKE:
 				$Control/TextBoxes/Dialogue/Node2D/Screenshake.start()
-				$Control2/Background/Screenshake.start()
-				
+				$BackgroundContainer/Background/Screenshake.start()
+			VNGlobal.Effects.FLASH:
+				flashyflashyanim.play("Activate")
+			VNGlobal.Effects.FLASH_SHAKE:
+				flashyflashyanim.play("Activate")
+				$Control/TextBoxes/Dialogue/Node2D/Screenshake.start()
+				$BackgroundContainer/Background/Screenshake.start()
 		
 		text_boxes.play(target, wait_time)
 		yield(text_boxes, "completed");

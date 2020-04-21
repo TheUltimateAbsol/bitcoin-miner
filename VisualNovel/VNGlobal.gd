@@ -7,7 +7,7 @@ const Expressions = {"NORMAL":"NORMAL", "ANGRY":"ANGRY", "EMBARRASSED":"EMBARRAS
 const Backgrounds = {"SAME":"SAME", "NONE":"NONE", "CLASSROOMA":"CLASSROOMA", "CLASSROOMB":"CLASSROOMB", "HALLWAY":"HALLWAY", "GYMlOCKER":"GYMLOCKER", "BUS":"BUS", "BEACH":"BEACH", "CAFETERIA":"CAFETERIA", "BEDROOM":"BEDROOM"}
 const SceneTransitions = {"NONE":"NONE", "SCENESWITCH":"SCENESWITCH", "ENTRANCE":"ENTRANCE", "MUSICFADE":"MUSICFADE"}
 # when the text appears on the screen (sentence per sentence basis)
-const Effects = {"NONE":"NONE", "SHAKE":"SHAKE"}
+const Effects = {"NONE":"NONE", "SHAKE":"SHAKE", "FLASH":"FLASH", "FLASH_SHAKE":"FLASH_SHAKE"}
 const SentenceSpeeds = {"DEFAULT": "DEFAULT", "FAST":"FAST", "SLOW":"SLOW"}
 const DelayLengths = {"DEFAULT": "DEFAULT", "NONE":"NONE", "SHORT":"SHORT", "LONG":"LONG"}
 const Images = {"LETTER":"LETTER"}
