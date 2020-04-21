@@ -8,27 +8,31 @@ var actions = ["up", "down", "attack"]
 var donePressed = false
 
 func activate():
+	# print("QuickTimeEvent")
 	visible = true;
 	$Circle.visible = false;
 	
 	Global.minersbought = 0
 	Global.minerprice = 10
 	
-	var temp = Timer.new();
-	temp.wait_time = 1;
-	add_child(temp);
-	temp.start();
-	yield(temp, "timeout");
-	temp.queue_free();
+#	var temp = Timer.new();
+#	temp.wait_time = 1;
+#	add_child(temp);
+#	temp.start();
+#	yield(temp, "timeout")
+#	temp.queue_free();
 	#TODO Currently every time this event is called, the initial price will always stay the same. 
 	
 	#TODO Make it so if the done button isn't pressed, stay waiting for an input.
 #	$AnimationPlayer.play("Activate");
 	InputEventHandler.connect("qt_input", self, "QTE_input_handler")
 	yield(self, "QTE_input");
-#	InputEventHandler.disconnect("qt_input", self, "QTE_input_handler");
+	InputEventHandler.disconnect("qt_input", self, "QTE_input_handler");
 	
 	visible = false;
+	
+	if Global.minersbought > 0:
+		QTE_Result = true;
 	
 	return QTE_Result;
 
@@ -44,6 +48,7 @@ func QTE_input_handler():
 	print("HELLO WORLD")
 	if Input.is_action_pressed("attack"):
 		#Global.numcoin -= minerPrice
+		print("HELLO WORLD ATTACK")
 		Global.minersbought += 1
 		Global.minerprice += 10 #TODO: Do we want to have the price increase linearly or logarithmically?
 		
@@ -54,8 +59,9 @@ func QTE_input_handler():
 	# 	QTE_Result = true;
 	# else:
 	# 	QTE_Result = false;
-	$AnimationPlayer.stop();
-	emit_signal("QTE_input");
+	#$AnimationPlayer.stop();
+	if Input.is_action_just_pressed("down"):
+		emit_signal("QTE_input");
 
 func _on_Button_pressed():
 	emit_signal("done_button_pressed")

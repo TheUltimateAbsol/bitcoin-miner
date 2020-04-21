@@ -390,6 +390,7 @@ func game_over():
 func revive():
 	$QuickTimeEvent.pause_mode = Node.PAUSE_MODE_PROCESS
 	get_tree().paused = true;
+	Global.minersbought = 0; # Clearing minersbought before going into the quicktime event.
 	var result = yield($QuickTimeEvent.activate(), "completed");
 	get_tree().paused = false;
 	$QuickTimeEvent.pause_mode = Node.PAUSE_MODE_INHERIT
@@ -398,6 +399,7 @@ func revive():
 		$DecoratorAnimations/Revive.play("Success");
 		$Miner.vulnerable = false #This is so we don't have the player die until all are lost
 		var num_to_add = Global.minersbought;
+		print(num_to_add)
 		$ui_header.update_data(Global.numtotal, Global.numtotal, Global.numcoin);
 		for i in range(num_to_add):
 			var new_miner = Miner.instance();

@@ -169,20 +169,20 @@ tracks/3/keys = {
 
 [sub_resource type="CanvasItemMaterial" id=6]
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 10 )
 
-[sub_resource type="Theme" id=17]
-default_font = SubResource( 16 )
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
 
-[sub_resource type="StyleBoxEmpty" id=7]
+[sub_resource type="StyleBoxEmpty" id=9]
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=10]
 size = 32
 outline_color = Color( 0.878431, 0.941176, 0.909804, 1 )
 font_data = ExtResource( 10 )
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
 tracks/0/interp = 1
@@ -210,7 +210,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 1 )
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=12]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("HBoxContainer2:visible")
@@ -290,7 +290,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=13]
 length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("BackLabel:rect_position")
@@ -341,12 +341,12 @@ tracks/3/keys = {
 "values": [ Vector2( 1e-05, 1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Curve2D" id=12]
+[sub_resource type="Curve2D" id=14]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 81, 111 )
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=15]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Miner/Node2D:position")
 tracks/0/interp = 1
@@ -398,7 +398,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=16]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Miner/Revive:visible")
 tracks/0/interp = 1
@@ -462,7 +462,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Miner/Revive:visible")
 tracks/0/interp = 1
@@ -536,6 +536,7 @@ texture = ExtResource( 2 )
 
 [node name="Startup" type="Node2D" parent="."]
 pause_mode = 1
+editor/display_folded = true
 z_index = 11
 
 [node name="Panel" type="Panel" parent="Startup"]
@@ -572,7 +573,6 @@ z_index = 10
 texture = ExtResource( 7 )
 
 [node name="Label" type="Sprite" parent="QuickTimeEvent"]
-editor/display_folded = true
 position = Vector2( 80, 76 )
 z_index = 10
 texture = ExtResource( 8 )
@@ -611,20 +611,22 @@ anims/Activate = SubResource( 5 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="QuickTimeEvent/AnimationPlayer"]
 
 [node name="doneButton" type="Sprite" parent="QuickTimeEvent"]
-position = Vector2( 15, 137 )
+position = Vector2( 38.5, 136.5 )
+scale = Vector2( 2.88462, 1.1 )
 texture = ExtResource( 11 )
 
-[node name="Button" type="Button" parent="QuickTimeEvent/doneButton"]
+[node name="Button" type="Button" parent="QuickTimeEvent"]
 material = SubResource( 6 )
-margin_left = -13.0
-margin_top = -8.0
-margin_right = 13.0
-margin_bottom = 5.0
-theme = SubResource( 17 )
-custom_styles/normal = SubResource( 7 )
-text = "Done"
+margin_left = 4.0
+margin_top = 128.0
+margin_right = 74.0
+margin_bottom = 141.0
+theme = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+text = "Done (Swipe down)"
 
 [node name="GameOver" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Background" type="Sprite" parent="GameOver"]
 visible = false
@@ -671,7 +673,7 @@ margin_left = -161.0
 margin_top = 15.0
 margin_right = -1.0
 margin_bottom = 41.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.0941176, 0.188235, 0.188235, 1 )
 text = "LEVEL COMPLETE"
 align = 1
@@ -681,21 +683,21 @@ margin_left = 160.0
 margin_top = 14.0
 margin_right = 319.999
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.313726, 0.470588, 0.407843, 1 )
 text = "LEVEL COMPLETE"
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LevelComplete"]
-anims/Activate = SubResource( 9 )
-anims/DisplayScores = SubResource( 10 )
-anims/FlashText = SubResource( 11 )
+anims/Activate = SubResource( 11 )
+anims/DisplayScores = SubResource( 12 )
+anims/FlashText = SubResource( 13 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LevelComplete/AnimationPlayer"]
 
 [node name="Path2D" type="Path2D" parent="LevelComplete"]
 editor/display_folded = true
-curve = SubResource( 12 )
+curve = SubResource( 14 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="LevelComplete/Path2D"]
 rotate = false
@@ -844,6 +846,7 @@ text = "        "
 align = 2
 
 [node name="OldLevelComplete" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="WinDropper" type="Node2D" parent="OldLevelComplete"]
 position = Vector2( 160, 0 )
@@ -856,6 +859,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="LevelLoadout" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Current" type="Node2D" parent="LevelLoadout"]
 position = Vector2( 0, 8 )
@@ -906,15 +910,15 @@ z_index = 10
 [node name="DecoratorAnimations" type="Node" parent="."]
 
 [node name="LevelUp" type="AnimationPlayer" parent="DecoratorAnimations"]
-anims/Level_Up = SubResource( 13 )
+anims/Level_Up = SubResource( 15 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DecoratorAnimations/LevelUp"]
 pause_mode = 2
 stream = ExtResource( 23 )
 
 [node name="Revive" type="AnimationPlayer" parent="DecoratorAnimations"]
-anims/Fail = SubResource( 14 )
-anims/Success = SubResource( 15 )
+anims/Fail = SubResource( 16 )
+anims/Success = SubResource( 17 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DecoratorAnimations/Revive"]
 pause_mode = 2
@@ -944,7 +948,7 @@ mouse_filter = 2
 pause_mode = 2
 stream = ExtResource( 28 )
 [connection signal="animation_finished" from="QuickTimeEvent/AnimationPlayer" to="QuickTimeEvent" method="QTE_anim_handler"]
-[connection signal="pressed" from="QuickTimeEvent/doneButton/Button" to="QuickTimeEvent" method="_on_Button_pressed"]
+[connection signal="pressed" from="QuickTimeEvent/Button" to="QuickTimeEvent" method="_on_Button_pressed"]
 [connection signal="add_miner" from="ui_header" to="." method="_on_ui_header_add_miner"]
 [connection signal="revive" from="ui_header" to="." method="revive"]
 [connection signal="pressed" from="Pause/Pause" to="." method="_on_Pause_pressed"]

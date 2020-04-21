@@ -12,7 +12,7 @@ var numseconds = 0;
 var numenemies = 0;
 
 var minersbought = 0;
-var minercost = 0;
+var minerprice = 0;
 
 enum NavLinkTypes {NONE, FLOOR, JUMP, FALL}
 
