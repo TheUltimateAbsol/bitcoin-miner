@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PARK2.png-7aa6bf6673eceda6abbb4565489a7cc8.stex"
+path="res://.import/park2.png-5264902e5f4586f4e3db1acb799cb796.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/PARK2.png"
-dest_files=[ "res://.import/PARK2.png-7aa6bf6673eceda6abbb4565489a7cc8.stex" ]
+source_file="res://VisualNovel/Backgrounds/park2.png"
+dest_files=[ "res://.import/park2.png-5264902e5f4586f4e3db1acb799cb796.stex" ]
 
 [params]
 

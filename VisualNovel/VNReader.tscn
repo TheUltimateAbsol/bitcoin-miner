@@ -1,7 +1,6 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
-[ext_resource path="res://VisualNovel/Backgrounds/ClassroomB.png" type="Texture" id=2]
 [ext_resource path="res://VisualNovel/Characters/Expressions/anna/normal.png" type="Texture" id=3]
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=4]
 [ext_resource path="res://VisualNovel/slide_from_left.tres" type="Animation" id=5]
@@ -18,7 +17,6 @@
 [ext_resource path="res://NextArrow.png" type="Texture" id=16]
 [ext_resource path="res://VisualNovel/Particles/kennyparticles/PNG/magic_05.png" type="Texture" id=17]
 [ext_resource path="res://VisualNovel/image_background.png" type="Texture" id=18]
-[ext_resource path="res://VisualNovel/Images/Letter.png" type="Texture" id=19]
 [ext_resource path="res://transition.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Screenshake.tscn" type="PackedScene" id=21]
 [ext_resource path="res://CharacterEffectPlayer.tscn" type="PackedScene" id=22]
@@ -422,7 +420,6 @@ rect_min_size = Vector2( 860, 1560 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 2 )
 expand = true
 stretch_mode = 7
 __meta__ = {
@@ -497,6 +494,7 @@ anchor_right = 1.0
 margin_top = -48.7005
 margin_bottom = 915.3
 rect_clip_content = true
+mouse_filter = 2
 alignment = 1
 script = ExtResource( 7 )
 __meta__ = {
@@ -506,10 +504,12 @@ __meta__ = {
 [node name="A" parent="Control/AnswerBox" instance=ExtResource( 8 )]
 margin_top = 76.0
 margin_bottom = 276.0
+mouse_filter = 2
 
 [node name="B" parent="Control/AnswerBox" instance=ExtResource( 8 )]
 margin_top = 280.0
 margin_bottom = 480.0
+mouse_filter = 2
 
 [node name="Arrow" parent="Control/AnswerBox/B" index="1"]
 self_modulate = Color( 0.839216, 0.172549, 0.101961, 1 )
@@ -537,6 +537,7 @@ position = Vector2( 163.797, 125.604 )
 [node name="C" parent="Control/AnswerBox" instance=ExtResource( 8 )]
 margin_top = 484.0
 margin_bottom = 684.0
+mouse_filter = 2
 
 [node name="Arrow" parent="Control/AnswerBox/C" index="1"]
 self_modulate = Color( 0.847059, 0.890196, 0.0627451, 1 )
@@ -552,6 +553,7 @@ position = Vector2( 163.797, 125.604 )
 [node name="D" parent="Control/AnswerBox" instance=ExtResource( 8 )]
 margin_top = 688.0
 margin_bottom = 888.0
+mouse_filter = 2
 
 [node name="Arrow" parent="Control/AnswerBox/D" index="1"]
 self_modulate = Color( 0.180392, 0.737255, 0.811765, 1 )
@@ -583,6 +585,7 @@ anchor_bottom = 1.0
 margin_left = -360.0
 margin_top = -365.6
 margin_right = 363.0
+mouse_filter = 2
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -722,12 +725,18 @@ anims/Activate = SubResource( 13 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="Conclusion"]
 modulate = Color( 1, 1, 1, 0.166667 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Conclusion"]
 anims/Activate = SubResource( 14 )
@@ -760,20 +769,31 @@ anchor_right = 0.5
 margin_left = -0.5
 margin_right = 505.5
 margin_bottom = 640.0
+mouse_filter = 2
 texture = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="TextureRect" parent="PopupImage/Background"]
-material = SubResource( 19 )
+[node name="MarginContainer" type="MarginContainer" parent="PopupImage/Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 47.7833
-margin_top = 56.3917
-margin_right = -31.2167
-margin_bottom = -42.6083
-texture = ExtResource( 19 )
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="TextureRect" parent="PopupImage/Background/MarginContainer"]
+material = SubResource( 19 )
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 486.0
+margin_bottom = 620.0
+mouse_filter = 2
 stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false

@@ -1,15 +1,15 @@
 extends Control
 
 const SENTENCE_SPEEDS = {
-	VNGlobal.SentenceSpeeds.DEFAULT : 1.0,
+	VNGlobal.SentenceSpeeds.DEFAULT : 1.5,
 	VNGlobal.SentenceSpeeds.FAST : 2.0,
-	VNGlobal.SentenceSpeeds.SLOW : 0.5
+	VNGlobal.SentenceSpeeds.SLOW : 1.0
 }
 
 const DELAY_LENGTHS = {
 	VNGlobal.DelayLengths.DEFAULT : 0.3,
 	VNGlobal.DelayLengths.SHORT : .1,
-	VNGlobal.DelayLengths.LONG : 1,
+	VNGlobal.DelayLengths.LONG : .5,
 	VNGlobal.DelayLengths.NONE : 0.0
 }
 
@@ -18,7 +18,7 @@ const HEAD_HEIGHTS = {
 	VNGlobal.Characters.ALFRED: 0.14215,
 	VNGlobal.Characters.ANNA: 0.29396,
 	VNGlobal.Characters.CHAD: 0.14563,
-	VNGlobal.Characters.CHRIS: 0.11611,
+	VNGlobal.Characters.CHRISTOPHER: 0.11611,
 	VNGlobal.Characters.COACH: 0.13729,
 	VNGlobal.Characters.ELIZABETH: 0.21646,
 	VNGlobal.Characters.JACK: 0.25646,
@@ -42,7 +42,7 @@ onready var NPCTransitionPlayer = $Control/NPC/AnimationPlayer
 onready var answerBox = $Control/AnswerBox
 onready var background = $BackgroundContainer/Background
 onready var popup_image = $PopupImage
-onready var	popup_image_panel = $PopupImage/Background/Panel
+onready var	popup_image_panel = $PopupImage/Background/MarginContainer/Panel
 onready var transition_mask = $TransitionMask;
 
 onready var textbox_dialogue = $Control/TextBoxes/Dialogue
@@ -287,7 +287,8 @@ func display_page(page:Page):
 				if page.next_music != VNGlobal.Music.SAME:
 					GlobalMusic.play_track(page.next_music);
 			VNGlobal.SceneTransitions.SCENESWITCH:
-				GlobalMusic.fade_out()
+				if page.next_music != VNGlobal.Music.SAME:
+					GlobalMusic.fade_out()
 				transition_mask.transition_out();
 				yield(transition_mask, "transition_completed")
 				
@@ -296,12 +297,15 @@ func display_page(page:Page):
 				if page.next_music != VNGlobal.Music.SAME:
 					GlobalMusic.queue_track(page.next_music);
 				reset_dialogue();
+				
+				npc.texture = null
 					
 				transition_mask.transition_in(page.next_name);
 				yield(transition_mask, "transition_completed");
 				
 			VNGlobal.SceneTransitions.ENTRANCE:
-				GlobalMusic.fade_out()
+				if page.next_music != VNGlobal.Music.SAME:
+					GlobalMusic.fade_out()
 				transition_mask.transition_out();
 				yield(transition_mask, "transition_completed")
 				
@@ -310,6 +314,8 @@ func display_page(page:Page):
 				if page.next_music != VNGlobal.Music.SAME:
 					GlobalMusic.queue_track(page.next_music);
 				reset_dialogue()
+				
+				npc.texture = null
 					
 				transition_mask.transition_entrance(page.next_name)
 				yield(transition_mask, "transition_completed");
@@ -321,7 +327,7 @@ func display_page(page:Page):
 					
 	elif page is ImageTogglePage:
 		if page.show:
-			popup_image.get_node("Background/Panel").texture = images[page.image];
+			popup_image_panel.texture = images[page.image];
 			popup_image.get_node("AnimationPlayer").play("Entrance");
 		else:
 			popup_image.get_node("AnimationPlayer").play_backwards("Entrance");

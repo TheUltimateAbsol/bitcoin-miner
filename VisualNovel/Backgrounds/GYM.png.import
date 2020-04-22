@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GYM.png-4a9448323f50ee2c1649723ec0ced2d2.stex"
+path="res://.import/gym.png-418f8f24382de0786e636804e483c851.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/GYM.png"
-dest_files=[ "res://.import/GYM.png-4a9448323f50ee2c1649723ec0ced2d2.stex" ]
+source_file="res://VisualNovel/Backgrounds/gym.png"
+dest_files=[ "res://.import/gym.png-418f8f24382de0786e636804e483c851.stex" ]
 
 [params]
 

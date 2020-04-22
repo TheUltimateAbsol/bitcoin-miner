@@ -42,6 +42,7 @@ func transition_out2():
 	_transition_out()
 	
 func transition_in(new_text:String):
+	sprite_anim.stop(true)
 	sprite.show()
 	arrow_node.show();
 	

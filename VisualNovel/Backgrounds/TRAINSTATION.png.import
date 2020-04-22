@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TRAINSTATION.png-e1907ea60a9ce9150dccb32dca169d40.stex"
+path="res://.import/trainstation.png-7f6d8d8226aecb98646349b6397e791a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/TRAINSTATION.png"
-dest_files=[ "res://.import/TRAINSTATION.png-e1907ea60a9ce9150dccb32dca169d40.stex" ]
+source_file="res://VisualNovel/Backgrounds/trainstation.png"
+dest_files=[ "res://.import/trainstation.png-7f6d8d8226aecb98646349b6397e791a.stex" ]
 
 [params]
 

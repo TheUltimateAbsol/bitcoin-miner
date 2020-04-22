@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/OFFICE.png-edd8f6d7336313617d4b08c7a3b32f3a.stex"
+path="res://.import/office.png-6c051c2e8105626b530c3230516eaa5b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/OFFICE.png"
-dest_files=[ "res://.import/OFFICE.png-edd8f6d7336313617d4b08c7a3b32f3a.stex" ]
+source_file="res://VisualNovel/Backgrounds/office.png"
+dest_files=[ "res://.import/office.png-6c051c2e8105626b530c3230516eaa5b.stex" ]
 
 [params]
 

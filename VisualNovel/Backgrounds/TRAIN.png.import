@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TRAIN.png-762c73a27cd8b9c327482ef236c81177.stex"
+path="res://.import/train.png-78a3c27c2ab2ed98a5976ba895680f9f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/TRAIN.png"
-dest_files=[ "res://.import/TRAIN.png-762c73a27cd8b9c327482ef236c81177.stex" ]
+source_file="res://VisualNovel/Backgrounds/train.png"
+dest_files=[ "res://.import/train.png-78a3c27c2ab2ed98a5976ba895680f9f.stex" ]
 
 [params]
 

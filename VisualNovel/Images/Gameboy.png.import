@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gameboy.png-53b744eda31e6718f7c411219a816f3f.stex"
+path="res://.import/gameboy.png-4d835c3398886511562b1473c8f81eca.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Images/Gameboy.png"
-dest_files=[ "res://.import/Gameboy.png-53b744eda31e6718f7c411219a816f3f.stex" ]
+source_file="res://VisualNovel/Images/gameboy.png"
+dest_files=[ "res://.import/gameboy.png-4d835c3398886511562b1473c8f81eca.stex" ]
 
 [params]
 

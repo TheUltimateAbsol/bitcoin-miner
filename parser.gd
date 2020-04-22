@@ -17,6 +17,7 @@ var answer_num:int = 0; #counts 1, 2, ... not 0, 1, 2...
 var line_number = 0;
 var LABEL_ids = {}
 var last_character_image = "";
+var last_character_expression = VNGlobal.Expressions.NORMAL;
 
 
 var errors= []; #This is evaluated in the end
@@ -235,6 +236,10 @@ func parse_action(line:String):
 			page.next_name = next_name;
 			
 			pages.push_back(page.serialize());
+			
+			if page.transition_type == VNGlobal.SceneTransitions.SCENESWITCH or page.transition_type == VNGlobal.SceneTransitions.ENTRANCE:
+				last_character_expression = VNGlobal.Expressions.NORMAL
+				last_character_image = VNGlobal.Characters.NONE
 		"SET MUSIC":
 			var error = check_args(parameters, 1, "SET MUSIC")
 			if error: return error;
@@ -296,9 +301,14 @@ func parse_action(line:String):
 			
 			pages.push_back(page.serialize());
 		"MINING START":
-			var error = check_args(parameters, 0, "BEGIN MINING")
+			var error = check_args(parameters, 1, "BEGIN MINING")
 			if error: return error;
-			pages.push_back(GameStartPage.new().serialize());
+			
+			var directory = parameters[0]
+			var page:GameStartPage = GameStartPage.new()
+			page.game_dir = directory
+			
+			pages.push_back(page.serialize());
 		"MINING END":
 			var error = check_args(parameters, 0, "GOTO")
 			if error: return error;
@@ -358,6 +368,7 @@ func parse_content(line:String):
 #	Since simon doesn't appear on the screen
 	if speaker_name.to_upper() == "SIMON":
 		character_image = last_character_image
+		character_expression = last_character_expression
 	
 #	Handle the parameters
 	for parameter in parameters:
@@ -397,6 +408,7 @@ func parse_content(line:String):
 		
 #	TODO: RESET THIS WHEN A TRANSITION PAGE COMES UP
 	last_character_image = character_image
+	last_character_expression = character_expression
 	
 #	Get each sentence and make a page
 #	Error if it's too long
@@ -461,6 +473,8 @@ func parse_content(line:String):
 					+ String(CHAR_LIMIT) + " character limit at " + String(fragment.length() + 1) + " characters");
 			
 			line = line.substr(next_splitter_location + 1).strip_edges();
+			
+			current_effect = VNGlobal.Effects.NONE
 			
 #			Parse the parameters
 			for parameter in sentence_parameters:
@@ -581,6 +595,7 @@ func parse(text):
 	errors= []
 	LABEL_ids = {}
 	last_character_image = VNGlobal.Characters.NONE;
+	last_character_expression = VNGlobal.Expressions.NORMAL;
 
 	for ln in range(info.size()):
 		var line:String = info[ln].c_unescape();
@@ -608,7 +623,9 @@ func parse(text):
 			
 		if (error):
 			errors.push_back(error);
-			
+		
+	pages.append(EndPage.new().serialize())	
+		
 #	Trim all GOTOs and LABELs
 	var to_delete:Array = []
 	for i in range(pages.size()):

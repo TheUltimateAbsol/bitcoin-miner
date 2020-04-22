@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CONTROLROOM.png-649f85b44379071b9b4005e69a34f3db.stex"
+path="res://.import/controlroom.png-ad1cab63718ae91da116ad48d22ef782.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/CONTROLROOM.png"
-dest_files=[ "res://.import/CONTROLROOM.png-649f85b44379071b9b4005e69a34f3db.stex" ]
+source_file="res://VisualNovel/Backgrounds/controlroom.png"
+dest_files=[ "res://.import/controlroom.png-ad1cab63718ae91da116ad48d22ef782.stex" ]
 
 [params]
 
