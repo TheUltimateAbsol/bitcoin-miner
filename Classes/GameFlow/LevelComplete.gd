@@ -41,8 +41,10 @@ func activate(miner: Miner):
 	$Path2D.curve.add_point(miner.position, Vector2(0,0), Vector2(0,0), 0);
 	$Path2D/PathFollow2D/RemoteTransform2D.set_remote_node(miner.get_path());
 
+	GlobalMusic.play_track(VNGlobal.Music.NONE)
 	$AnimationPlayer.play("Activate");
 	yield($AnimationPlayer, "animation_finished");
+	GlobalMusic.play_track(Global.GameMusic.VICTORY)
 	miner.flip(true);
 	miner.level_complete_anim();
 	$AnimationPlayer.play("FlashText");

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/arrow_entrance.wav-1d187a82481b8388a80d92559fa63dcd.sample"
+
+[deps]
+
+source_file="res://Music/SFX/arrow_entrance.wav"
+dest_files=[ "res://.import/arrow_entrance.wav-1d187a82481b8388a80d92559fa63dcd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

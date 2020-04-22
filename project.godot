@@ -236,16 +236,17 @@ VNGlobal="*res://VisualNovel/VNGlobal.gd"
 GlobalMusic="*res://GlobalMusic.tscn"
 SaveData="*res://SaveData.gd"
 SceneChanger="*res://SceneChanger.tscn"
+GlobalFX="*res://GlobalFX.tscn"
 
 [display]
 
 window/size/width=720
 window/size/height=1440
 window/size/resizable=false
-window/size/fullscreen=true
 window/size/test_width=450
 window/size/test_height=720
 window/handheld/orientation="portrait"
+window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 window/pixel=true
 

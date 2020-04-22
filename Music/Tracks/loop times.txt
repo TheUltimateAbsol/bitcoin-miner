@@ -1,0 +1,4 @@
+level should be looped back to around 1.5 seconds
+boss should be looped back to around 6 seconds
+victory should be looped back to around 1.5 seconds
+dead doesnt need to be looped

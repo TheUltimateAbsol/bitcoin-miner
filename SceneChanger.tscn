@@ -3,7 +3,7 @@
 [ext_resource path="res://PlayerSprites/Player_Walk.png" type="Texture" id=1]
 [ext_resource path="res://SceneChanger.gd" type="Script" id=2]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Fade"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -30,8 +30,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Load"
+[sub_resource type="Animation" id=2]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -81,11 +80,11 @@ frame = 2
 
 [node name="FadeOut" type="AnimationPlayer" parent="Control/Sprite"]
 pause_mode = 2
-anims/Fade = SubResource( 2 )
+anims/Fade = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Sprite"]
 pause_mode = 2
-anims/Load = SubResource( 1 )
+anims/Load = SubResource( 2 )
 
 [node name="TransitionTimer" type="Timer" parent="."]
 one_shot = true

@@ -4,7 +4,7 @@ const COMMENT = "//"
 const QUESTION_ANS = "##"
 const GAME_ACTION = "@@"
 const filePath = "da1V2.txt"
-const CHAR_LIMIT = 100
+const CHAR_LIMIT = 105
 const SENTENCE_SPLITTERS = "[,\\.!?…\\-\\n] "
 const SENTENCE_ENDERS = [".", "!", "?", "…", "-"]
 

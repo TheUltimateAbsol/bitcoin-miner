@@ -443,7 +443,7 @@ autoplay = "New Anim"
 "anims/New Anim" = SubResource( 3 )
 
 [node name="Starting Cover" type="Panel" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 0, 0, 0, 0 )
 light_mask = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -463,7 +463,6 @@ modulate = Color( 1, 1, 1, 0 )
 light_mask = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-disabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

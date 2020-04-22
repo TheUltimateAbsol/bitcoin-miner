@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Backgrounds/ClassroomB.png" type="Texture" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://VisualNovel/Images/Letter.png" type="Texture" id=19]
 [ext_resource path="res://transition.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Screenshake.tscn" type="PackedScene" id=21]
+[ext_resource path="res://CharacterEffectPlayer.tscn" type="PackedScene" id=22]
+[ext_resource path="res://flowers.tscn" type="PackedScene" id=23]
 
 [sub_resource type="Shader" id=1]
 code = "
@@ -224,10 +226,10 @@ tracks/0/keys = {
 "values": [ Vector2( 675, 442.288 ), Vector2( 687.222, 439.567 ), Vector2( 675, 442.288 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=18]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=13]
 resource_name = "Activate"
 length = 0.1
 tracks/0/type = "value"
@@ -243,7 +245,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0.498039 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=14]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -305,14 +307,14 @@ tracks/4/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=13]
+[sub_resource type="CanvasItemMaterial" id=15]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=14]
+[sub_resource type="Gradient" id=16]
 offsets = PoolRealArray( 0, 0.873469, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.412245, 0.412245, 0.412245, 1, 0, 0, 0, 1 )
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -351,7 +353,7 @@ tracks/2/keys = {
 "values": [ Vector2( 379.04, 497.065 ), Vector2( 107, 151 ) ]
 }
 
-[sub_resource type="Shader" id=16]
+[sub_resource type="Shader" id=18]
 code = "
 shader_type canvas_item;
 
@@ -384,8 +386,8 @@ void fragment() {
 	COLOR = mix(col, outline_color, maxa - mina);
 }"
 
-[sub_resource type="ShaderMaterial" id=17]
-shader = SubResource( 16 )
+[sub_resource type="ShaderMaterial" id=19]
+shader = SubResource( 18 )
 shader_param/outline_width = 2.0
 shader_param/outline_color = Color( 0.407843, 0.407843, 0.407843, 1 )
 
@@ -440,7 +442,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="flowers" parent="Control" instance=ExtResource( 23 )]
+position = Vector2( 379.673, 602.404 )
+scale = Vector2( 3, 3 )
+initial_velocity = 200.0
+damping = 76.48
+
 [node name="NPC" type="TextureRect" parent="Control"]
+modulate = Color( 0, 0, 0, 0 )
 material = SubResource( 2 )
 anchor_top = 0.05
 anchor_right = 1.0
@@ -466,6 +475,17 @@ anims/flash = SubResource( 5 )
 anims/slide_from_left = ExtResource( 5 )
 anims/slide_from_right = SubResource( 6 )
 script = ExtResource( 6 )
+
+[node name="EffectPlayerContainer" type="Control" parent="Control/NPC"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EffectPlayer" parent="Control/NPC/EffectPlayerContainer" instance=ExtResource( 22 )]
+scale = Vector2( 2, 2 )
 
 [node name="Sprite" type="Sprite" parent="Control"]
 visible = false
@@ -690,13 +710,13 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 18 )
+custom_styles/panel = SubResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FlashyFlashy"]
-anims/Activate = SubResource( 19 )
+anims/Activate = SubResource( 13 )
 
 [node name="Conclusion" type="Control" parent="."]
 anchor_right = 1.0
@@ -710,10 +730,10 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Conclusion"]
-anims/Activate = SubResource( 12 )
+anims/Activate = SubResource( 14 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Conclusion"]
-material = SubResource( 13 )
+material = SubResource( 15 )
 position = Vector2( -0.000645838, 398.088 )
 emitting = false
 amount = 50
@@ -724,7 +744,7 @@ gravity = Vector2( 0, 200 )
 angular_velocity = 313.55
 angular_velocity_random = 0.61
 scale_amount = 0.1
-color_ramp = SubResource( 14 )
+color_ramp = SubResource( 16 )
 
 [node name="PopupImage" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 0 )
@@ -732,7 +752,7 @@ position = Vector2( 379.04, 497.065 )
 scale = Vector2( 1e-05, 1e-05 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PopupImage"]
-anims/Entrance = SubResource( 15 )
+anims/Entrance = SubResource( 17 )
 
 [node name="Background" type="TextureRect" parent="PopupImage"]
 anchor_left = 0.5
@@ -746,7 +766,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="TextureRect" parent="PopupImage/Background"]
-material = SubResource( 17 )
+material = SubResource( 19 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 47.7833

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Stages/Tilesets/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Navigation/Scenes/TileMap.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Classes/AttackingEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemies/Sprites/Bat.png" type="Texture" id=6]
 [ext_resource path="res://Classes/GameFlow/Reminder.tscn" type="PackedScene" id=7]
+[ext_resource path="res://bossroom.gd" type="Script" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -355,6 +356,9 @@ text = "Good Luck!"
 
 [node name="AnimationPlayer" parent="Reminder" index="2"]
 autoplay = "FlyOut"
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource( 8 )
 [connection signal="timeout" from="BatMidBoss/Timer" to="BatMidBoss" method="cycle"]
 
 [editable path="BatMidBoss/Enemy"]

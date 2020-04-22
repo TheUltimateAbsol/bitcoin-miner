@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://PlayerScripts/PlatformerMovement.gd" type="Script" id=1]
 [ext_resource path="res://Stages/Backgrounds/Dark sharp cave.png" type="Texture" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://Classes/GameFlow/LevelComplete.gd" type="Script" id=14]
 [ext_resource path="res://Stages/Backgrounds/background.png" type="Texture" id=15]
 [ext_resource path="res://Stages/Backgrounds/Light Background.png" type="Texture" id=16]
-[ext_resource path="res://Sounds/253096_8_bit_Victory.wav" type="AudioStream" id=17]
 [ext_resource path="res://Classes/GameFlowAnimations/WinSpawner.tres" type="Animation" id=18]
 [ext_resource path="res://Classes/GameFlowAnimations/SceneSwitch.tres" type="Animation" id=19]
 [ext_resource path="res://Classes/Player.tscn" type="PackedScene" id=20]
@@ -183,20 +182,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 1.0 ]
-}
-tracks/1/type = "audio"
-tracks/1/path = NodePath("AnimationPlayer/AudioStreamPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 17 )
-} ],
-"times": PoolRealArray( 1 )
 }
 
 [sub_resource type="Animation" id=8]

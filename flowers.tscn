@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://VisualNovel/Characters/flower2.png" type="Texture" id=1]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.544715, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[node name="flowers" type="CPUParticles2D"]
+show_behind_parent = true
+position = Vector2( 2.47708, -44.9589 )
+emitting = false
+amount = 40
+lifetime = 2.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.47
+texture = ExtResource( 1 )
+spread = 180.0
+gravity = Vector2( 0, -50 )
+initial_velocity = 106.04
+initial_velocity_random = 0.52
+angular_velocity = 322.75
+angular_velocity_random = 1.0
+linear_accel = 31.04
+linear_accel_random = 1.0
+damping = 58.62
+damping_random = 0.48
+angle = 45.0
+angle_random = 1.0
+scale_amount = 2.7
+scale_amount_random = 1.0
+color_ramp = SubResource( 6 )
+hue_variation = 0.14
+hue_variation_random = 0.91

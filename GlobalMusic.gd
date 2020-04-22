@@ -3,14 +3,16 @@ extends AudioStreamPlayer
 const Music = {"TITLE":"TITLE"}
 
 const tracks = { 
-	VNGlobal.Music.DEFAULT: preload("res://Music/Tracks/Default.ogg"),
-	VNGlobal.Music.SUSPENSE:preload("res://Music/Tracks/Suspense.ogg"),
-	VNGlobal.Music.DESPAIR:preload("res://Music/Tracks/Despair.ogg"),
-	VNGlobal.Music.ENGAGING:preload("res://Music/Tracks/Engaging.ogg"),
-	VNGlobal.Music.BOISTEROUS: preload("res://Music/Tracks/Boistrous.ogg"),
-	Global.GameMusic.LEVEL:preload("res://Music/Tracks/Level.wav"),
-	Global.GameMusic.BOSS :preload("res://Music/Tracks/Boss.ogg"),
-	Global.GameMusic.TITLE:preload("res://Music/Tracks/title.ogg")
+	VNGlobal.Music.DEFAULT: preload("res://Music/Tracks/normal.ogg"),
+	VNGlobal.Music.SUSPENSE:preload("res://Music/Tracks/suspense.ogg"),
+	VNGlobal.Music.DESPAIR:preload("res://Music/Tracks/despair.ogg"),
+	VNGlobal.Music.ENGAGING:preload("res://Music/Tracks/engaging.ogg"),
+	VNGlobal.Music.BOISTEROUS: preload("res://Music/Tracks/boistrous.ogg"),
+	Global.GameMusic.LEVEL:preload("res://Music/Tracks/level.ogg"),
+	Global.GameMusic.BOSS:preload("res://Music/Tracks/boss.ogg"),
+	Global.GameMusic.TITLE:preload("res://Music/Tracks/title.ogg"),
+	Global.GameMusic.VICTORY:preload("res://Music/Tracks/victory.ogg"),
+	Global.GameMusic.GAMEOVER:preload("res://Music/Tracks/dead.ogg")
 }
 
 var current_request:MusicRequest = null;

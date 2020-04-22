@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sweat.wav-b04f7547ba4fd99c73aea8dc5ce3107f.sample"
+
+[deps]
+
+source_file="res://Music/SFX/sweat.wav"
+dest_files=[ "res://.import/sweat.wav-b04f7547ba4fd99c73aea8dc5ce3107f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,146 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://characterEffects.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/Characters/nannndkkad.png" type="Texture" id=2]
-[ext_resource path="res://VisualNovel/Characters/flower2.png" type="Texture" id=3]
-[ext_resource path="res://VisualNovel/PageClasses/angry_vein2.png" type="Texture" id=4]
-[ext_resource path="res://sweat_drop2.png" type="Texture" id=5]
-[ext_resource path="res://musicNote.png" type="Texture" id=6]
-
-[sub_resource type="Animation" id=1]
-resource_name = "angry"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("angry_vein:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.0107476, 0.2, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.03, 0.03 ), Vector2( 0.05, 0.05 ), Vector2( 0.03, 0.03 ) ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "angry2"
-tracks/0/type = "value"
-tracks/0/path = NodePath("angry_vein:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 301.285, 70.7741 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("angry_vein:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("angry_vein:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.03, 0.03 ), Vector2( 0.05, 0.05 ), Vector2( 0.03, 0.03 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("angry_vein2:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 370.246, 84.1402 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("angry_vein2:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.4, 0.6, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.03, 0.03 ), Vector2( 0.05, 0.05 ), Vector2( 0.03, 0.03 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("angry_vein2:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "music_note"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Path2D2/PathFollow2D:unit_offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 2, 0.5 ),
-"update": 0,
-"values": [ 0.0, 1.0 ]
-}
-
-[sub_resource type="Animation" id=4]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.9999 ]
-}
-
-[sub_resource type="Curve2D" id=5]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 378.527, 59.9442, 0, 0, 0, 0, 380.048, 82.6806 )
-}
-
-[sub_resource type="Curve2D" id=6]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 278.257, 58.541, 0, 0, 0, 0, 284.194, 56.9279, 0, 0, 0, 0, 288.127, 56.2622, 0, 0, 0, 0, 290.697, 56.3878, 0, 0, 0, 0, 294.77, 57.0157, 0, 0, 0, 0, 298.28, 58.6484, 0, 0, 0, 0, 301.351, 61.1602, 0, 0, 0, 0, 303.356, 63.8604, 0, 0, 0, 0, 305.299, 67.6281, 0, 0, 0, 0, 305.989, 69.3864, 0, 0, 0, 0, 306.49, 71.0818, 0, 0, 0, 0, 306.302, 72.8401, 0, 0, 0, 0, 306.553, 74.0332, 0, 0, 0, 0, 306.302, 77.5497, 0, 0, 0, 0, 305.049, 83.0129, 0, 0, 0, 0, 301.557, 86.93, 0, 0, 0, 0, 296.022, 87.1453, 0, 0, 0, 0, 288.607, 87.253, 0, 0, 0, 0, 280.951, 87.2144, 0, 0, 0, 0, 276.337, 90.6839, 0, 0, 0, 0, 275.309, 93.6455, 0, 0, 0, 0, 274.666, 98.1523, 0, 0, 0, 0, 274.721, 101.401, 0, 0, 0, 0, 274.905, 102.463, 0, 0, 0, 0, 277.485, 107.448, 0, 0, 0, 0, 280.341, 111.233, 0, 0, 0, 0, 282.368, 112.803, 0, 0, 0, 0, 284.626, 113.449, 0, 0, 0, 0, 290.108, 115.018, 0, 0, 0, 0, 298.569, 115.02, 0, 0, 0, 0, 304.422, 114.662, 0, 0, 0, 0, 308.297, 111.406, 0, 0, 0, 0, 308.512, 106.56, 0, 0, 0, 0, 308.351, 103.545, 0, 0, 0, 0, 307.653, 99.7227, 0, 0, 0, 0, 305.718, 93.6389, 0, 0, 0, 0, 304.547, 91.4335, 0, 0, 0, 0, 303.059, 90.1618, 0, 0, 0, 0, 300.302, 88.9778, 0, 0, 0, 0, 297.895, 88.2761, 0, 0, 0, 0, 295.269, 87.0044, 0, 0, 0, 0, 291.111, 86.3466, 0, 0, 0, 0, 284.616, 83.9109, 0, 0, 0, 0, 282.996, 81.8009, 0, 0, 0, 0, 280.566, 79.8532, 0, 0, 0, 0, 278.623, 77.1751, 0, 0, 0, 0, 276.76, 74.7405, 0, 0, 0, 0, 276.193, 71.9002, 0, 0, 0, 0, 275.464, 67.8425, 0, 0, 0, 0, 276.193, 65.0021, 0, 0, 0, 0, 275.95, 61.8371, 0, 0, 0, 0, 278.257, 58.541 )
-}
+[ext_resource path="res://CharacterEffectPlayer.tscn" type="PackedScene" id=3]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 9.26862
+margin_top = -0.386192
+margin_right = 9.26862
+margin_bottom = -0.38623
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -151,38 +21,15 @@ position = Vector2( 369.995, 486.89 )
 scale = Vector2( 0.211462, 0.229946 )
 texture = ExtResource( 2 )
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-show_behind_parent = true
-position = Vector2( 344.708, 92.1279 )
-emitting = false
-amount = 40
-lifetime = 2.3
-explosiveness = 1.0
-randomness = 0.47
-texture = ExtResource( 3 )
-spread = 180.0
-gravity = Vector2( 0, -50 )
-initial_velocity = 106.04
-initial_velocity_random = 0.52
-angular_velocity = 322.75
-angular_velocity_random = 1.0
-linear_accel = 31.04
-linear_accel_random = 1.0
-damping = 58.62
-damping_random = 0.48
-angle = 45.0
-angle_random = 1.0
-scale_amount = 2.7
-scale_amount_random = 1.0
-hue_variation = 0.14
-hue_variation_random = 0.91
-
 [node name="happy" type="Button" parent="."]
 margin_left = 542.579
 margin_top = 45.2105
 margin_right = 686.579
 margin_bottom = 119.21
 text = "Happy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="angry" type="Button" parent="."]
 margin_left = 549.474
@@ -200,6 +47,9 @@ margin_top = 262.781
 margin_right = 689.015
 margin_bottom = 336.781
 text = "sweat drop"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="music_note" type="Button" parent="."]
 margin_left = 550.015
@@ -208,56 +58,7 @@ margin_right = 689.015
 margin_bottom = 442.789
 text = "music note"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/angry = SubResource( 1 )
-anims/angry2 = SubResource( 2 )
-anims/music_note = SubResource( 3 )
-anims/sweat = SubResource( 4 )
-
-[node name="angry_vein" type="Sprite" parent="."]
-visible = false
-position = Vector2( 301.285, 70.7741 )
-scale = Vector2( 0.03, 0.03 )
-texture = ExtResource( 4 )
-
-[node name="angry_vein2" type="Sprite" parent="."]
-visible = false
-position = Vector2( 370.246, 84.1402 )
-scale = Vector2( 0.03, 0.03 )
-texture = ExtResource( 4 )
-
-[node name="Path2D" type="Path2D" parent="."]
-position = Vector2( 3.05176e-05, 7.62939e-06 )
-rotation = -7.51726e-05
-curve = SubResource( 5 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 378.812, 64.2091 )
-rotation = 1.50401
-offset = 4.31657
-
-[node name="sweat_drop" type="Sprite" parent="Path2D/PathFollow2D"]
-position = Vector2( 17.9189, -0.799072 )
-rotation = -1.58047
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 5 )
-
-[node name="Path2D2" type="Path2D" parent="."]
-position = Vector2( -0.230347, 0.103489 )
-scale = Vector2( 1, 0.998042 )
-curve = SubResource( 6 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D2"]
-position = Vector2( 278.256, 58.5418 )
-rotation = 0.944113
-offset = 200.843
-rotate = false
-
-[node name="music_note" type="Sprite" parent="Path2D2/PathFollow2D"]
-position = Vector2( -0.431396, -0.0831909 )
-rotation = -0.980894
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 6 )
+[node name="HeadCenter" parent="." instance=ExtResource( 3 )]
 [connection signal="pressed" from="happy" to="." method="_on_happy_pressed"]
 [connection signal="pressed" from="angry" to="." method="_on_angry_pressed"]
 [connection signal="pressed" from="sweat" to="." method="_on_sweat_pressed"]

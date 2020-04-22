@@ -459,7 +459,6 @@ func drop_win():
 func win():
 #	$LevelComplete/AnimationPlayer.play("WinSpawner");
 #	$LevelComplete/Timer.connect("timeout", self, "drop_win");
-	get_node("AudioStreamPlayer").stop();
 	
 	$LevelLoadout.visible = false;
 	$Miners.visible = false;
@@ -493,14 +492,27 @@ func game_over():
 	release_connections();
 	$ui_header.update_data(0, Global.numtotal, Global.numcoin);
 	$ui_header.stop_countdown();
-	$Miner.game_over();
-	$GameOver/AnimationPlayer.play("GameOver")
 	
 	#Hide everything
-	$LevelLoadout.visible = false;
 	$Miner.pause_mode = Node.PAUSE_MODE_PROCESS
 	$GameOver.pause_mode = Node.PAUSE_MODE_PROCESS
 	get_tree().paused = true;
+	
+	GlobalMusic.play_track(VNGlobal.Music.NONE)
+	
+	var timer = Timer.new()
+	timer.pause_mode = Node.PAUSE_MODE_PROCESS
+	timer.wait_time = 0.5
+	timer.one_shot = true
+	add_child(timer)
+	timer.start()
+	yield(timer, "timeout")
+	timer.queue_free()
+	
+	$LevelLoadout.visible = false;
+	GlobalMusic.play_track(Global.GameMusic.GAMEOVER)
+	$Miner.game_over();
+	$GameOver/AnimationPlayer.play("GameOver")
 
 func revive():
 	$QuickTimeEvent.pause_mode = Node.PAUSE_MODE_PROCESS
@@ -559,7 +571,7 @@ func start():
 	yield($Startup/AnimationPlayer, "animation_finished");
 	get_tree().paused = false;
 	
-	$AudioStreamPlayer.play();
+	GlobalMusic.play_track(Global.GameMusic.LEVEL)
 	
 
 func _on_Miner_start_hang():

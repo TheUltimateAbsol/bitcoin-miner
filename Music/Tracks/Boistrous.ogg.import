@@ -2,14 +2,14 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/Boistrous.ogg-6dbdf23721866f8a06b9b47350000680.oggstr"
+path="res://.import/boistrous.ogg-704b43a1ad76c70ec79f70fbff17f2cd.oggstr"
 
 [deps]
 
-source_file="res://Music/Tracks/Boistrous.ogg"
-dest_files=[ "res://.import/Boistrous.ogg-6dbdf23721866f8a06b9b47350000680.oggstr" ]
+source_file="res://Music/Tracks/boistrous.ogg"
+dest_files=[ "res://.import/boistrous.ogg-704b43a1ad76c70ec79f70fbff17f2cd.oggstr" ]
 
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=7.0

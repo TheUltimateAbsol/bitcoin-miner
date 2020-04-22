@@ -13,6 +13,21 @@ const DELAY_LENGTHS = {
 	VNGlobal.DelayLengths.NONE : 0.0
 }
 
+const HEAD_HEIGHTS = {
+	VNGlobal.Characters.NONE: 0.0,
+	VNGlobal.Characters.ALFRED: 0.14215,
+	VNGlobal.Characters.ANNA: 0.29396,
+	VNGlobal.Characters.CHAD: 0.14563,
+	VNGlobal.Characters.CHRIS: 0.11611,
+	VNGlobal.Characters.COACH: 0.13729,
+	VNGlobal.Characters.ELIZABETH: 0.21646,
+	VNGlobal.Characters.JACK: 0.25646,
+	VNGlobal.Characters.JUNE: 0.20451,
+	VNGlobal.Characters.SHAUN: 0.14278,
+	VNGlobal.Characters.SIMON: 0.21646,
+	VNGlobal.Characters.CLAIRE: 0.21646
+}
+
 const CHAR_WAIT = 1.0/25
 
 export (bool) var autoplay = false;
@@ -39,6 +54,8 @@ onready var textbox_dialogue_animation = $Control/TextBoxes/Dialogue/Node2D/Anim
 onready var conclusion_animation = $Conclusion/AnimationPlayer
 
 onready var flashyflashyanim = $FlashyFlashy/AnimationPlayer
+onready var effect_player_container = $Control/NPC/EffectPlayerContainer
+onready var effect_player = $Control/NPC/EffectPlayerContainer/EffectPlayer
 
 #timer stuff
 onready var letter_timer : TimerRequest = TimerRequest.new($LetterTimer);
@@ -128,6 +145,7 @@ func play():
 				else:
 					textbox_nextArrow.visible = true;
 					yield(self, "goto_next_page")
+					GlobalFX.play_sound(GlobalFX.PAGE_SWITCH)
 				
 			elif page is QuestionPage:
 				var func_pointer = display_page(page)
@@ -190,6 +208,7 @@ func display_page(page:Page):
 #			is_new_character = true;
 		
 		npc.show()
+		effect_player_container.anchor_top = HEAD_HEIGHTS[page.character_image]
 		
 		if not is_new_character:
 			npc.texture = target_image;
@@ -334,12 +353,27 @@ func write_sentence (sentence, target_label:Label):
 			VNGlobal.Effects.SHAKE:
 				$Control/TextBoxes/Dialogue/Node2D/Screenshake.start()
 				$BackgroundContainer/Background/Screenshake.start()
+				GlobalFX.play_sound(GlobalFX.SLAM)
 			VNGlobal.Effects.FLASH:
 				flashyflashyanim.play("Activate")
 			VNGlobal.Effects.FLASH_SHAKE:
+				GlobalFX.play_sound(GlobalFX.SLAM)
 				flashyflashyanim.play("Activate")
 				$Control/TextBoxes/Dialogue/Node2D/Screenshake.start()
 				$BackgroundContainer/Background/Screenshake.start()
+			VNGlobal.Effects.MUSIC_NOTE:
+				effect_player.music_note()
+			VNGlobal.Effects.ANGRY:
+				effect_player.angry()
+			VNGlobal.Effects.EXCLAMATION:
+				effect_player.exclamation()
+			VNGlobal.Effects.FLOWERY:
+				GlobalFX.play_sound(GlobalFX.FLOWERY)
+				$Control/flowers.emitting = true
+			VNGlobal.Effects.FRUSTRATED:
+				effect_player.frustrated()
+			VNGlobal.Effects.SWEAT:
+				effect_player.sweat()
 		
 		text_boxes.play(target, wait_time)
 		yield(text_boxes, "completed");
@@ -360,6 +394,7 @@ func skip():
 	letter_timer.force_end();
 	delay_timer.force_end();
 	text_boxes.force_end();
+	effect_player.reset();
 
 func list_files_in_directory(path):
 	var files = []

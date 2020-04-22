@@ -9,6 +9,7 @@ func play_game():
 	SceneChanger.change_scene("res://main.tscn")
 
 func _on_Button_pressed():
+	GlobalFX.play_sound(GlobalFX.TITLE_START)
 	GlobalMusic.fade_into_track(VNGlobal.Music.NONE)
 	get_node("Starting Cover/Button").disabled = true
 	$TransitionMask.transition_out2()

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/CHARGE_Servo_24_Semi_Up_500ms_stereo.wav-d9b4ed2c220fb5baa3f2a23d23b9dcae.sample"
+
+[deps]
+
+source_file="res://Music/SFX/Ideas/CHARGE_Servo_24_Semi_Up_500ms_stereo.wav"
+dest_files=[ "res://.import/CHARGE_Servo_24_Semi_Up_500ms_stereo.wav-d9b4ed2c220fb5baa3f2a23d23b9dcae.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

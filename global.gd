@@ -3,7 +3,7 @@ extends Node
 var num_bots = 0;
 enum NavPointTypes {NONE, PLATFORM, LEFT_EDGE, RIGHT_EDGE, SOLO}
 enum CommandTypes {IDLE, MOVE, MINE, DUCK, JUMP, MIDAIR_ATTACK, SUPER_JUMP, HANG, FALL, GROUND_POUND}
-const GameMusic = {"BOSS":"BOSS","LEVEL":"LEVEL", "TITLE":"TITLE"}
+const GameMusic = {"BOSS":"BOSS","LEVEL":"LEVEL", "TITLE":"TITLE", "VICTORY":"VICTORY", "GAMEOVER":"GAMEOVER"}
 
 var numremaining = 1
 var numtotal = 1

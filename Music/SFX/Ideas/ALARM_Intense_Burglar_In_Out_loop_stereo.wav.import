@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ALARM_Intense_Burglar_In_Out_loop_stereo.wav-b03b76f9d239296cc3d6bbfa06f46077.sample"
+
+[deps]
+
+source_file="res://Music/SFX/Ideas/ALARM_Intense_Burglar_In_Out_loop_stereo.wav"
+dest_files=[ "res://.import/ALARM_Intense_Burglar_In_Out_loop_stereo.wav-b03b76f9d239296cc3d6bbfa06f46077.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -2,14 +2,14 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/Despair.ogg-dbcfd8131af6778b952698eb44d7ed45.oggstr"
+path="res://.import/despair.ogg-58ffb0c5eccf0457d9b84a8197f99bbf.oggstr"
 
 [deps]
 
-source_file="res://Music/Tracks/Despair.ogg"
-dest_files=[ "res://.import/Despair.ogg-dbcfd8131af6778b952698eb44d7ed45.oggstr" ]
+source_file="res://Music/Tracks/despair.ogg"
+dest_files=[ "res://.import/despair.ogg-58ffb0c5eccf0457d9b84a8197f99bbf.oggstr" ]
 
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=19.0

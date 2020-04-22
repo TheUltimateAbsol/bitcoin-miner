@@ -2,14 +2,14 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/Boss.ogg-8ffab66cc9c0276d1da98b561e5ff37b.oggstr"
+path="res://.import/boss.ogg-c640ff589617446757210fcc385b596e.oggstr"
 
 [deps]
 
-source_file="res://Music/Tracks/Boss.ogg"
-dest_files=[ "res://.import/Boss.ogg-8ffab66cc9c0276d1da98b561e5ff37b.oggstr" ]
+source_file="res://Music/Tracks/boss.ogg"
+dest_files=[ "res://.import/boss.ogg-c640ff589617446757210fcc385b596e.oggstr" ]
 
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=6.0

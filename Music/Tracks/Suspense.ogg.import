@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/Suspense.ogg-03bccf874cfe195d794ae621c1c87122.oggstr"
+path="res://.import/suspense.ogg-82c006cc47d96bcc18fc82db44cde700.oggstr"
 
 [deps]
 
-source_file="res://Music/Tracks/Suspense.ogg"
-dest_files=[ "res://.import/Suspense.ogg-03bccf874cfe195d794ae621c1c87122.oggstr" ]
+source_file="res://Music/Tracks/suspense.ogg"
+dest_files=[ "res://.import/suspense.ogg-82c006cc47d96bcc18fc82db44cde700.oggstr" ]
 
 [params]
 
