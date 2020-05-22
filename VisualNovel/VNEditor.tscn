@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://VisualNovel/VNEditor.gd" type="Script" id=1]
 [ext_resource path="res://VisualNovel/LinkBar.tscn" type="PackedScene" id=2]
@@ -22,24 +22,34 @@
 [ext_resource path="res://VisualNovel/CharacterImageInput.gd" type="Script" id=20]
 [ext_resource path="res://VisualNovel/CheckTypeInput.gd" type="Script" id=21]
 [ext_resource path="res://VisualNovel/FlagInput.gd" type="Script" id=22]
+[ext_resource path="res://VisualNovel/RantInput.gd" type="Script" id=23]
+[ext_resource path="res://Style/m3x6.ttf" type="DynamicFontData" id=24]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="DynamicFont" id=1]
+size = 32
+extra_spacing_top = -8
+font_data = ExtResource( 24 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
 font_path = "res://VisualNovel/KIdDOS-Regular.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 70
 outline_size = 2
 outline_color = Color( 0.105882, 0.364706, 0, 1 )
-font_data = SubResource( 1 )
+font_data = SubResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=5]
 size = 64
 font_data = ExtResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0.0470588, 0.301961, 1 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:visible")
@@ -90,29 +100,30 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=8]
 size = 30
 extra_spacing_top = 10
 font_data = ExtResource( 10 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=9]
 font_data = ExtResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=11]
 size = 30
 extra_spacing_top = 10
 extra_spacing_bottom = 10
 font_data = ExtResource( 10 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.290196, 0.67451, 0.266667, 1 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = SubResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -133,48 +144,48 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_right = 245.0
+margin_right = 254.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer"]
-margin_right = 245.0
-margin_bottom = 20.0
+margin_right = 254.0
+margin_bottom = 24.0
 alignment = 1
 
 [node name="New" type="MenuButton" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_right = 40.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 text = "New"
 flat = false
 
 [node name="Import" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 44.0
-margin_right = 100.0
-margin_bottom = 20.0
+margin_right = 108.0
+margin_bottom = 24.0
 text = "Import"
 
 [node name="Delete" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 104.0
-margin_right = 159.0
-margin_bottom = 20.0
+margin_left = 112.0
+margin_right = 170.0
+margin_bottom = 24.0
 text = "Delete"
 
 [node name="Up" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 163.0
-margin_right = 193.0
-margin_bottom = 20.0
+margin_left = 174.0
+margin_right = 202.0
+margin_bottom = 24.0
 text = "Up"
 
 [node name="Down" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 197.0
-margin_right = 245.0
-margin_bottom = 20.0
+margin_left = 206.0
+margin_right = 254.0
+margin_bottom = 24.0
 text = "Down"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/VBoxContainer"]
-margin_top = 24.0
-margin_right = 245.0
+margin_top = 28.0
+margin_right = 254.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -182,330 +193,369 @@ size_flags_vertical = 3
 [node name="LinkBar" parent="Panel/HBoxContainer/VBoxContainer/ScrollContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 245.0
+margin_right = 254.0
 margin_bottom = 700.0
 rect_min_size = Vector2( 185, 700 )
 size_flags_horizontal = 3
 
 [node name="Layout" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_left = 249.0
-margin_right = 729.0
+margin_left = 258.0
+margin_right = 738.0
 margin_bottom = 1440.0
 rect_min_size = Vector2( 480, 435 )
 
 [node name="IdInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
 margin_right = 480.0
-margin_bottom = 102.0
+margin_bottom = 118.0
 script = ExtResource( 3 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/IdInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 95.0
+margin_bottom = 111.0
 
 [node name="id" type="Label" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
-margin_right = 74.0
-margin_bottom = 14.0
+margin_right = 146.0
+margin_bottom = 18.0
 size_flags_vertical = 5
 text = "ID"
 
 [node name="id_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
-margin_top = 18.0
-margin_right = 74.0
-margin_bottom = 42.0
+margin_top = 22.0
+margin_right = 146.0
+margin_bottom = 50.0
 editable = false
 
 [node name="Next_id" type="Label" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
-margin_top = 46.0
-margin_right = 74.0
-margin_bottom = 60.0
+margin_top = 54.0
+margin_right = 146.0
+margin_bottom = 72.0
 text = "Next ID"
 
 [node name="next_id_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/IdInput/GridContainer"]
-margin_top = 64.0
-margin_right = 74.0
-margin_bottom = 88.0
+margin_top = 76.0
+margin_right = 146.0
+margin_bottom = 104.0
 max_value = 100000.0
 
 [node name="TargetIdInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 106.0
+margin_top = 122.0
 margin_right = 480.0
-margin_bottom = 180.0
+margin_bottom = 208.0
 script = ExtResource( 17 )
 
 [node name="GridContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/TargetIdInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 67.0
+margin_bottom = 79.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/TargetIdInput/GridContainer"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Target Id"
 align = 1
 
 [node name="Next_id" type="Label" parent="Panel/HBoxContainer/Layout/TargetIdInput/GridContainer"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 32.0
+margin_bottom = 40.0
 text = "Next ID"
 
 [node name="target_id_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/TargetIdInput/GridContainer"]
-margin_top = 36.0
+margin_top = 44.0
 margin_right = 466.0
-margin_bottom = 60.0
+margin_bottom = 72.0
 max_value = 100000.0
 allow_greater = true
 
 [node name="FlagInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 184.0
+margin_top = 212.0
 margin_right = 480.0
-margin_bottom = 240.0
+margin_bottom = 276.0
 script = ExtResource( 22 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/FlagInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 49.0
+margin_bottom = 57.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/FlagInput/VBoxContainer2"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Flag"
 align = 1
 
 [node name="sentence_info2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/FlagInput/VBoxContainer2"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 42.0
+margin_bottom = 50.0
 custom_constants/separation = 15
 alignment = 1
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/FlagInput/VBoxContainer2/sentence_info2"]
 margin_top = 5.0
-margin_right = 46.0
-margin_bottom = 19.0
+margin_right = 50.0
+margin_bottom = 23.0
 text = "Name: "
 
 [node name="flag_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/FlagInput/VBoxContainer2/sentence_info2"]
-margin_left = 61.0
+margin_left = 65.0
 margin_right = 466.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="CheckTypeInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 244.0
+margin_top = 280.0
 margin_right = 480.0
-margin_bottom = 296.0
+margin_bottom = 340.0
 script = ExtResource( 21 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/CheckTypeInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 45.0
+margin_bottom = 53.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CheckTypeInput/VBoxContainer2"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Operator"
 align = 1
 
 [node name="check_type_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CheckTypeInput/VBoxContainer2"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 38.0
+margin_bottom = 46.0
 size_flags_horizontal = 3
 align = 1
 
 [node name="IntValueInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 300.0
+margin_top = 344.0
 margin_right = 480.0
-margin_bottom = 356.0
+margin_bottom = 408.0
 script = ExtResource( 18 )
 
 [node name="GridContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/IntValueInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 49.0
+margin_bottom = 57.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/IntValueInput/GridContainer"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Integer Value"
 align = 1
 
 [node name="value_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/IntValueInput/GridContainer"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 42.0
+margin_bottom = 50.0
 max_value = 100000.0
 allow_greater = true
 
 [node name="BoolValueInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 360.0
+margin_top = 412.0
 margin_right = 480.0
-margin_bottom = 416.0
+margin_bottom = 474.0
 script = ExtResource( 19 )
 
 [node name="GridContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/BoolValueInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 49.0
+margin_bottom = 55.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Boolean Value"
 align = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 42.0
+margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer/HBoxContainer2"]
-margin_top = 5.0
-margin_right = 43.0
-margin_bottom = 19.0
+margin_top = 4.0
+margin_right = 52.0
+margin_bottom = 22.0
 text = "Value: "
 
 [node name="value_input" type="CheckBox" parent="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer/HBoxContainer2"]
-margin_left = 47.0
-margin_right = 71.0
-margin_bottom = 24.0
+margin_left = 56.0
+margin_right = 80.0
+margin_bottom = 26.0
+align = 1
+
+[node name="RantInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
+margin_top = 478.0
+margin_right = 480.0
+margin_bottom = 554.0
+script = ExtResource( 23 )
+
+[node name="GridContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/RantInput"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 473.0
+margin_bottom = 69.0
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/RantInput/GridContainer"]
+margin_right = 466.0
+margin_bottom = 18.0
+text = "Rant Mode"
+align = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/RantInput/GridContainer"]
+margin_top = 22.0
+margin_right = 466.0
+margin_bottom = 62.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/RantInput/GridContainer/HBoxContainer2"]
+margin_top = 11.0
+margin_right = 386.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+text = "On: "
+
+[node name="value_input" type="CheckButton" parent="Panel/HBoxContainer/Layout/RantInput/GridContainer/HBoxContainer2"]
+margin_left = 390.0
+margin_right = 466.0
+margin_bottom = 40.0
 align = 1
 
 [node name="SentenceInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 420.0
+margin_top = 558.0
 margin_right = 480.0
-margin_bottom = 522.0
+margin_bottom = 676.0
 script = ExtResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/SentenceInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 95.0
+margin_bottom = 111.0
 
 [node name="sentence_info" type="Label" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Sentence Info"
 align = 1
 
 [node name="sentence_info2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 38.0
+margin_bottom = 46.0
 custom_constants/separation = 15
 alignment = 1
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 36.0
+margin_left = 20.0
 margin_top = 3.0
-margin_right = 79.0
-margin_bottom = 17.0
+margin_right = 64.0
+margin_bottom = 21.0
 text = "Speed:"
 
 [node name="sent_speed_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 94.0
-margin_right = 162.0
-margin_bottom = 20.0
+margin_left = 79.0
+margin_right = 148.0
+margin_bottom = 24.0
 text = "Speed"
 align = 1
 
 [node name="Label2" type="Label" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 177.0
+margin_left = 163.0
 margin_top = 3.0
-margin_right = 217.0
-margin_bottom = 17.0
+margin_right = 205.0
+margin_bottom = 21.0
 text = "Delay:"
 
 [node name="sent_delay_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 232.0
-margin_right = 297.0
-margin_bottom = 20.0
+margin_left = 220.0
+margin_right = 287.0
+margin_bottom = 24.0
 text = "Delay"
 align = 1
 
 [node name="Label3" type="Label" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 312.0
+margin_left = 302.0
 margin_top = 3.0
-margin_right = 351.0
-margin_bottom = 17.0
+margin_right = 354.0
+margin_bottom = 21.0
 text = "Effect:"
 
 [node name="sound_menu" type="OptionButton" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_info2"]
-margin_left = 366.0
-margin_right = 430.0
-margin_bottom = 20.0
+margin_left = 369.0
+margin_right = 446.0
+margin_bottom = 24.0
 text = "Effect"
 
 [node name="sentence_txt" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer"]
-margin_top = 42.0
+margin_top = 50.0
 margin_right = 466.0
-margin_bottom = 66.0
+margin_bottom = 78.0
 alignment = 1
 
 [node name="sentence_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_txt"]
 margin_right = 442.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 placeholder_text = "Enter a sentence fragment..."
 
 [node name="add_sentence" type="Button" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_txt"]
 margin_left = 446.0
 margin_right = 466.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 text = "+"
 
 [node name="sentences_lable" type="Label" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer"]
-margin_top = 70.0
+margin_top = 82.0
 margin_right = 466.0
-margin_bottom = 84.0
+margin_bottom = 100.0
 text = "Sentences Made:"
 
 [node name="sentence_list" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer"]
-margin_top = 88.0
+margin_top = 104.0
 margin_right = 466.0
-margin_bottom = 88.0
+margin_bottom = 104.0
 
 [node name="QuestionInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 526.0
+margin_top = 680.0
 margin_right = 480.0
-margin_bottom = 621.0
+margin_bottom = 791.0
 script = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 88.0
+margin_bottom = 104.0
 
 [node name="question_info" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Question Info (if page is Queston)"
 align = 1
 
 [node name="question_txt" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 42.0
+margin_bottom = 50.0
 alignment = 1
 
 [node name="question_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
 margin_right = 219.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 expand_to_text_length = true
 placeholder_text = "Answer Text"
@@ -513,7 +563,7 @@ placeholder_text = "Answer Text"
 [node name="next_id_input" type="SpinBox" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
 margin_left = 223.0
 margin_right = 442.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 max_value = 100000.0
 allow_greater = true
@@ -523,369 +573,389 @@ prefix = "next_id: "
 [node name="add_question" type="Button" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt"]
 margin_left = 446.0
 margin_right = 466.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 text = "+"
 
 [node name="questions_lable" type="Label" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
-margin_top = 46.0
+margin_top = 54.0
 margin_right = 466.0
-margin_bottom = 77.0
+margin_bottom = 93.0
 text = "Answers:
 "
 
 [node name="question_list" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer"]
-margin_top = 81.0
+margin_top = 97.0
 margin_right = 466.0
-margin_bottom = 81.0
+margin_bottom = 97.0
 
 [node name="CharacterImageInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 625.0
+margin_top = 795.0
 margin_right = 480.0
-margin_bottom = 725.0
+margin_bottom = 955.0
 script = ExtResource( 20 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterImageInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 93.0
+margin_bottom = 153.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Character Image"
 align = 1
 
 [node name="Row" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 38.0
+margin_bottom = 46.0
 custom_constants/separation = 15
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row"]
 margin_top = 3.0
 margin_right = 225.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Character"
 
 [node name="character_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row"]
 margin_left = 240.0
 margin_right = 466.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 align = 1
 
 [node name="Row2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2"]
-margin_top = 42.0
+margin_top = 50.0
 margin_right = 466.0
-margin_bottom = 62.0
+margin_bottom = 74.0
 custom_constants/separation = 15
 
 [node name="Label2" type="Label" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row2"]
 margin_top = 3.0
 margin_right = 225.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Expression"
 
 [node name="expression_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row2"]
 margin_left = 240.0
 margin_right = 466.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 align = 1
 
 [node name="Row3" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2"]
-margin_top = 66.0
+margin_top = 78.0
 margin_right = 466.0
-margin_bottom = 86.0
+margin_bottom = 102.0
 custom_constants/separation = 15
 
 [node name="Label3" type="Label" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row3"]
 margin_top = 3.0
 margin_right = 225.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Transition"
 
 [node name="transition_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row3"]
 margin_left = 240.0
 margin_right = 466.0
-margin_bottom = 20.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="Row4" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2"]
+margin_top = 106.0
+margin_right = 466.0
+margin_bottom = 146.0
+custom_constants/separation = 15
+
+[node name="Label3" type="Label" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row4"]
+margin_top = 11.0
+margin_right = 225.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+text = "Use Last Character?"
+
+[node name="last_character_input" type="CheckButton" parent="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row4"]
+margin_left = 240.0
+margin_right = 466.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 align = 1
 
 [node name="SpeakerInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 729.0
+margin_top = 959.0
 margin_right = 480.0
-margin_bottom = 785.0
+margin_bottom = 1023.0
 script = ExtResource( 15 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/SpeakerInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 49.0
+margin_bottom = 57.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Speaker Settings"
 align = 1
 
 [node name="sentence_info2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 42.0
+margin_bottom = 50.0
 custom_constants/separation = 15
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2"]
 margin_right = 225.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2/HBoxContainer"]
 margin_top = 5.0
-margin_right = 46.0
-margin_bottom = 19.0
+margin_right = 50.0
+margin_bottom = 23.0
 text = "Name: "
 
 [node name="name_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2/HBoxContainer"]
-margin_left = 50.0
+margin_left = 54.0
 margin_right = 225.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2"]
 margin_left = 240.0
 margin_right = 466.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2/HBoxContainer2"]
 margin_top = 5.0
-margin_right = 81.0
-margin_bottom = 19.0
+margin_right = 104.0
+margin_bottom = 23.0
 text = "Is Thought?: "
 
 [node name="thought_input" type="CheckBox" parent="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2/HBoxContainer2"]
-margin_left = 85.0
-margin_right = 109.0
-margin_bottom = 24.0
+margin_left = 108.0
+margin_right = 132.0
+margin_bottom = 28.0
 
 [node name="TransitionInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 789.0
+margin_top = 1027.0
 margin_right = 480.0
-margin_bottom = 917.0
+margin_bottom = 1175.0
 script = ExtResource( 6 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/TransitionInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 121.0
+margin_bottom = 141.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Scene Transition"
 align = 1
 
 [node name="Row" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 38.0
+margin_bottom = 46.0
 custom_constants/separation = 15
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row"]
 margin_top = 3.0
 margin_right = 225.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Target Background"
 
 [node name="background_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row"]
 margin_left = 240.0
 margin_right = 466.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 align = 1
 
 [node name="Row2" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2"]
-margin_top = 42.0
+margin_top = 50.0
 margin_right = 466.0
-margin_bottom = 62.0
+margin_bottom = 74.0
 custom_constants/separation = 15
 
 [node name="Label2" type="Label" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row2"]
 margin_top = 3.0
 margin_right = 225.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Target Music"
 
 [node name="music_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row2"]
 margin_left = 240.0
 margin_right = 466.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 align = 1
 
 [node name="Row3" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2"]
-margin_top = 66.0
+margin_top = 78.0
 margin_right = 466.0
-margin_bottom = 86.0
+margin_bottom = 102.0
 custom_constants/separation = 15
 
 [node name="Label3" type="Label" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row3"]
 margin_top = 3.0
 margin_right = 225.0
-margin_bottom = 17.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 text = "Transition Type"
 
 [node name="transition_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row3"]
 margin_left = 240.0
 margin_right = 466.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 align = 1
 
 [node name="Row4" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2"]
-margin_top = 90.0
+margin_top = 106.0
 margin_right = 466.0
-margin_bottom = 114.0
+margin_bottom = 134.0
 custom_constants/separation = 15
 
 [node name="Label3" type="Label" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row4"]
 margin_top = 5.0
 margin_right = 225.0
-margin_bottom = 19.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "Next Scene Name (if any)"
 
 [node name="name_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row4"]
 margin_left = 240.0
 margin_right = 466.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="ImageToggleInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 921.0
+margin_top = 1179.0
 margin_right = 480.0
-margin_bottom = 977.0
+margin_bottom = 1241.0
 script = ExtResource( 16 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/ImageToggleInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 49.0
+margin_bottom = 55.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Image Toggle"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 42.0
+margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2/HBoxContainer"]
-margin_top = 5.0
-margin_right = 48.0
-margin_bottom = 19.0
+margin_top = 4.0
+margin_right = 58.0
+margin_bottom = 22.0
 text = "Image: "
 
 [node name="image_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2/HBoxContainer"]
-margin_left = 52.0
-margin_right = 257.0
-margin_bottom = 24.0
+margin_left = 62.0
+margin_right = 262.0
+margin_bottom = 26.0
 size_flags_horizontal = 3
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2/HBoxContainer"]
-margin_left = 261.0
+margin_left = 266.0
 margin_right = 466.0
-margin_bottom = 24.0
+margin_bottom = 26.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="Label2" type="Label" parent="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2/HBoxContainer/HBoxContainer"]
-margin_left = 54.0
-margin_top = 5.0
+margin_left = 50.0
+margin_top = 4.0
 margin_right = 122.0
-margin_bottom = 19.0
+margin_bottom = 22.0
 text = "Show/Hide"
 
 [node name="show_input" type="CheckBox" parent="Panel/HBoxContainer/Layout/ImageToggleInput/VBoxContainer2/HBoxContainer/HBoxContainer"]
 margin_left = 126.0
 margin_right = 150.0
-margin_bottom = 24.0
+margin_bottom = 26.0
 align = 1
 
 [node name="CharacterInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 981.0
+margin_top = 1245.0
 margin_right = 480.0
-margin_bottom = 1033.0
+margin_bottom = 1305.0
 script = ExtResource( 7 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer/Layout/CharacterInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 45.0
+margin_bottom = 53.0
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "Character"
 align = 1
 
 [node name="character_input" type="OptionButton" parent="Panel/HBoxContainer/Layout/CharacterInput/VBoxContainer2"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 38.0
+margin_bottom = 46.0
 size_flags_horizontal = 3
 align = 1
 
 [node name="DirectoryInput" type="PanelContainer" parent="Panel/HBoxContainer/Layout"]
-margin_top = 1037.0
+margin_top = 1309.0
 margin_right = 480.0
-margin_bottom = 1093.0
+margin_bottom = 1373.0
 script = ExtResource( 8 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/Layout/DirectoryInput"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 473.0
-margin_bottom = 49.0
+margin_bottom = 57.0
 
 [node name="directory" type="Label" parent="Panel/HBoxContainer/Layout/DirectoryInput/GridContainer"]
 margin_right = 466.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 size_flags_vertical = 5
 text = "Level Directory"
 
 [node name="directory_input" type="LineEdit" parent="Panel/HBoxContainer/Layout/DirectoryInput/GridContainer"]
-margin_top = 18.0
+margin_top = 22.0
 margin_right = 466.0
-margin_bottom = 42.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
 placeholder_text = "Enter a File Directory..."
 
 [node name="VNReaderBox" type="Control" parent="Panel/HBoxContainer"]
-margin_left = 733.0
-margin_right = 733.0
+margin_left = 742.0
+margin_right = 742.0
 margin_bottom = 1440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -901,7 +971,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 2.34668
 margin_bottom = 44.3467
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Preview Scene"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -927,7 +997,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -178.0
 margin_top = -66.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 text = "SAVE"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -943,7 +1013,7 @@ script = ExtResource( 11 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 30 )
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 6 )
 
 [node name="Label" type="Label" parent="SnackBar/Panel"]
 anchor_right = 1.0
@@ -953,7 +1023,7 @@ align = 1
 valign = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SnackBar"]
-anims/Activate = SubResource( 5 )
+anims/Activate = SubResource( 7 )
 
 [node name="ImportMenu" type="Control" parent="."]
 visible = false
@@ -1001,7 +1071,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="ImportMenu/VBoxContainer"]
 margin_right = 720.0
 margin_bottom = 41.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "IMPORT MENU"
 align = 1
 
@@ -1009,7 +1079,7 @@ align = 1
 margin_top = 45.0
 margin_right = 720.0
 margin_bottom = 61.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "(WARNING: This deletes the current save data)"
 align = 1
 
@@ -1058,7 +1128,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="ImportMenu/VBoxContainer/ErrorPanel"]
 margin_left = 50.0
 margin_right = 670.0
-margin_bottom = 118.0
+margin_bottom = 122.0
 
 [node name="Label" type="Label" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer"]
 margin_right = 620.0
@@ -1077,7 +1147,7 @@ margin_right = 620.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 10 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer"]
 margin_right = 620.0
@@ -1091,7 +1161,7 @@ custom_constants/margin_bottom = 5
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 615.0
-margin_bottom = 95.0
+margin_bottom = 111.0
 
 [node name="Control" parent="ImportMenu/VBoxContainer/ErrorPanel/VBoxContainer/ScrollContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 14 )]
 anchor_right = 0.0
@@ -1148,7 +1218,7 @@ __meta__ = {
 modulate = Color( 0, 0.811765, 1, 1 )
 margin_left = 50.0
 margin_right = 670.0
-margin_bottom = 14.0
+margin_bottom = 18.0
 text = "No errors occured in the import"
 
 [node name="MarginContainer2" type="MarginContainer" parent="ImportMenu/VBoxContainer"]
@@ -1169,15 +1239,15 @@ alignment = 1
 margin_left = 174.0
 margin_right = 306.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 11 )
 text = "Cancel"
 
 [node name="Submit" type="Button" parent="ImportMenu/VBoxContainer/MarginContainer2/HBoxContainer"]
 margin_left = 406.0
 margin_right = 546.0
 margin_bottom = 57.0
-custom_styles/normal = SubResource( 10 )
-custom_fonts/font = SubResource( 9 )
+custom_styles/normal = SubResource( 12 )
+custom_fonts/font = SubResource( 11 )
 text = "IMPORT!"
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Import" to="." method="_on_Import_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Delete" to="." method="delete"]
@@ -1190,6 +1260,7 @@ text = "IMPORT!"
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/CheckTypeInput/VBoxContainer2/check_type_input" to="Panel/HBoxContainer/Layout/CheckTypeInput" method="_on_check_type_input_item_selected"]
 [connection signal="value_changed" from="Panel/HBoxContainer/Layout/IntValueInput/GridContainer/value_input" to="Panel/HBoxContainer/Layout/IntValueInput" method="_on_value_input_value_changed"]
 [connection signal="toggled" from="Panel/HBoxContainer/Layout/BoolValueInput/GridContainer/HBoxContainer2/value_input" to="Panel/HBoxContainer/Layout/BoolValueInput" method="_on_value_input_toggled"]
+[connection signal="toggled" from="Panel/HBoxContainer/Layout/RantInput/GridContainer/HBoxContainer2/value_input" to="Panel/HBoxContainer/Layout/RantInput" method="_on_value_input_toggled"]
 [connection signal="text_entered" from="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_txt/sentence_input" to="Panel/HBoxContainer/Layout/SentenceInput" method="_on_sentence_input_text_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Layout/SentenceInput/VBoxContainer/sentence_txt/add_sentence" to="Panel/HBoxContainer/Layout/SentenceInput" method="add_sentence"]
 [connection signal="text_entered" from="Panel/HBoxContainer/Layout/QuestionInput/VBoxContainer/question_txt/question_input" to="Panel/HBoxContainer/Layout/QuestionInput" method="_on_question_input_text_entered"]
@@ -1197,6 +1268,7 @@ text = "IMPORT!"
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row/character_input" to="Panel/HBoxContainer/Layout/CharacterImageInput" method="_on_character_input_item_selected"]
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row2/expression_input" to="Panel/HBoxContainer/Layout/CharacterImageInput" method="_on_expression_input_item_selected"]
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row3/transition_input" to="Panel/HBoxContainer/Layout/CharacterImageInput" method="_on_transition_input_item_selected"]
+[connection signal="toggled" from="Panel/HBoxContainer/Layout/CharacterImageInput/VBoxContainer2/Row4/last_character_input" to="Panel/HBoxContainer/Layout/CharacterImageInput" method="_on_last_character_input_toggled"]
 [connection signal="text_changed" from="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2/HBoxContainer/name_input" to="Panel/HBoxContainer/Layout/SpeakerInput" method="_on_name_input_text_changed"]
 [connection signal="toggled" from="Panel/HBoxContainer/Layout/SpeakerInput/VBoxContainer2/sentence_info2/HBoxContainer2/thought_input" to="Panel/HBoxContainer/Layout/SpeakerInput" method="_on_thought_input_toggled"]
 [connection signal="item_selected" from="Panel/HBoxContainer/Layout/TransitionInput/VBoxContainer2/Row/background_input" to="Panel/HBoxContainer/Layout/TransitionInput" method="_on_background_input_item_selected"]

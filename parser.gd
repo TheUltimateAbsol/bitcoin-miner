@@ -16,8 +16,6 @@ var question_num:int = 0; #counts 1, 2, ... not 0, 1, 2...
 var answer_num:int = 0; #counts 1, 2, ... not 0, 1, 2...
 var line_number = 0;
 var LABEL_ids = {}
-var last_character_image = "";
-var last_character_expression = VNGlobal.Expressions.NORMAL;
 
 
 var errors= []; #This is evaluated in the end
@@ -237,9 +235,6 @@ func parse_action(line:String):
 			
 			pages.push_back(page.serialize());
 			
-			if page.transition_type == VNGlobal.SceneTransitions.SCENESWITCH or page.transition_type == VNGlobal.SceneTransitions.ENTRANCE:
-				last_character_expression = VNGlobal.Expressions.NORMAL
-				last_character_image = VNGlobal.Characters.NONE
 		"SET MUSIC":
 			var error = check_args(parameters, 1, "SET MUSIC")
 			if error: return error;
@@ -334,6 +329,8 @@ func parse_content(line:String):
 	var current_speed = VNGlobal.SentenceSpeeds.DEFAULT;
 	var current_delay = VNGlobal.DelayLengths.DEFAULT;
 	var current_effect = VNGlobal.Effects.NONE;
+	var use_last_character = false;
+	var rant = false;
 	
 #	Syntax check
 	if not is_properly_matched(line, "[", "]"):
@@ -343,6 +340,7 @@ func parse_content(line:String):
 #	Get the name
 	if line.find(":") < 0:
 		is_thought = true;
+		use_last_character = true;
 	else:
 		var name_line = line.substr(0, line.find(":")).strip_edges();
 		line = line.substr(line.find(":") + 1).strip_edges()
@@ -367,8 +365,7 @@ func parse_content(line:String):
 
 #	Since simon doesn't appear on the screen
 	if speaker_name.to_upper() == "SIMON":
-		character_image = last_character_image
-		character_expression = last_character_expression
+		use_last_character = true;
 	
 #	Handle the parameters
 	for parameter in parameters:
@@ -390,6 +387,7 @@ func parse_content(line:String):
 			"EMBARRASSED":
 				character_expression = VNGlobal.Expressions.EMBARRASSED
 			"TO":
+				use_last_character = false
 				var target_character = sub_parameters[1]
 				var char_found = false
 				for character in VNGlobal.Characters.values():
@@ -403,12 +401,10 @@ func parse_content(line:String):
 				character_image = VNGlobal.Characters.NONE
 			"INTERNAL":
 				is_thought = true;
+			"RANT":
+				rant = true;
 			_:
 				return error_message("Content", line_number, "Invalid Character Parameter " + parameter)
-		
-#	TODO: RESET THIS WHEN A TRANSITION PAGE COMES UP
-	last_character_image = character_image
-	last_character_expression = character_expression
 	
 #	Get each sentence and make a page
 #	Error if it's too long
@@ -550,12 +546,11 @@ func parse_content(line:String):
 			if sentences.size() == 0:
 				return error_message("Content", line_number, "Run on sentence")
 		
-		to_save.push_back(ContentPage.new(0, 0, sentences, character_image, character_expression, character_transition, speaker_name, is_thought).serialize())
+		to_save.push_back(ContentPage.new(0, 0, sentences, character_image, character_expression, character_transition, speaker_name, is_thought, rant, use_last_character).serialize())
 	
 #	Save the good pages
 	for page in to_save:
 		pages.push_back(page)
-		
 	return null
 	
 func parse_answer(line):
@@ -594,8 +589,6 @@ func parse(text):
 	line_number = 0;
 	errors= []
 	LABEL_ids = {}
-	last_character_image = VNGlobal.Characters.NONE;
-	last_character_expression = VNGlobal.Expressions.NORMAL;
 
 	for ln in range(info.size()):
 		var line:String = info[ln].c_unescape();

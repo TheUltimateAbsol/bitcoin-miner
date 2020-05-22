@@ -19,13 +19,15 @@ onready var boolValueInput = $Panel/HBoxContainer/Layout/BoolValueInput
 onready var characterInput = $Panel/HBoxContainer/Layout/CharacterInput
 onready var targetIdInput = $Panel/HBoxContainer/Layout/TargetIdInput
 onready var flagInput = $Panel/HBoxContainer/Layout/FlagInput
+onready var rantInput = $Panel/HBoxContainer/Layout/RantInput
 onready var LinkBar = $Panel/HBoxContainer/VBoxContainer/ScrollContainer/LinkBar
 
 const VNReaderClass = preload("res://VisualNovel/VNReader.tscn");
 #Used to identify input types
 enum Inputs {ID, SENTENCE, SCENE, CHARACTER_IMAGE, CHARACTER, 
 	DIRECTORY, QUESTION, SPEAKER, TRANSITION, IMAGE,
-	INT_VALUE, BOOL_VALUE, CHECK_TYPE, TARGET_ID, FLAG}
+	INT_VALUE, BOOL_VALUE, CHECK_TYPE, TARGET_ID, FLAG,
+	RANT}
 
 var data_json #This is what we read in from a file. Honestly, I'm not sure why it's here
 var save_data : Array #Our save data
@@ -37,7 +39,7 @@ var current_index = -1; #This says what page is currently selected
 # classNode is a link to the actual class (given by classname)
 var classes = {
 	"ContentPage": {
-		"dependencies": [Inputs.ID, Inputs.SENTENCE, Inputs.CHARACTER_IMAGE, Inputs.SPEAKER],
+		"dependencies": [Inputs.ID, Inputs.SENTENCE, Inputs.CHARACTER_IMAGE, Inputs.SPEAKER, Inputs.RANT],
 		"classNode": ContentPage,
 	},
 	"GameStartPage": {
@@ -112,6 +114,8 @@ func type_to_input(input_type):
 			return flagInput;
 		Inputs.CHARACTER:
 			return characterInput
+		Inputs.RANT:
+			return rantInput;
 		_:
 			push_error("INVALID INPUT " + String(input_type))
 			return null;

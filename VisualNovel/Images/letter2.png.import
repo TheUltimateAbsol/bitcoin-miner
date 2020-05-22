@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/classroom_angle.png-4fe089c3ff3510054e8879a3729b9408.stex"
+path="res://.import/letter2.png-6081850d317bac66e11a4bf896535610.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/classroom_angle.png"
-dest_files=[ "res://.import/classroom_angle.png-4fe089c3ff3510054e8879a3729b9408.stex" ]
+source_file="res://VisualNovel/Images/letter2.png"
+dest_files=[ "res://.import/letter2.png-6081850d317bac66e11a4bf896535610.stex" ]
 
 [params]
 

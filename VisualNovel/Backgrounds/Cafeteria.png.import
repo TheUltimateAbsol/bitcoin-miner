@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cafeteria.png-b1f22c3f4ca5705958b5828c21c020df.stex"
+path="res://.import/Cafeteria.png-c999e5db4b025f92b4cbdf03113d19e6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://VisualNovel/Backgrounds/cafeteria.png"
-dest_files=[ "res://.import/cafeteria.png-b1f22c3f4ca5705958b5828c21c020df.stex" ]
+source_file="res://VisualNovel/Backgrounds/Cafeteria.png"
+dest_files=[ "res://.import/Cafeteria.png-c999e5db4b025f92b4cbdf03113d19e6.stex" ]
 
 [params]
 

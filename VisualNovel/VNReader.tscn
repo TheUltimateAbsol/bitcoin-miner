@@ -1,6 +1,7 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://VisualNovel/VNReader.gd" type="Script" id=1]
+[ext_resource path="res://VisualNovel/Images/letter.png" type="Texture" id=2]
 [ext_resource path="res://VisualNovel/Characters/Expressions/anna/normal.png" type="Texture" id=3]
 [ext_resource path="res://VisualNovel/fade in.tres" type="Animation" id=4]
 [ext_resource path="res://VisualNovel/slide_from_left.tres" type="Animation" id=5]
@@ -779,21 +780,23 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 20
-custom_constants/margin_top = 20
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
+custom_constants/margin_right = 50
+custom_constants/margin_top = 50
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 50
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="TextureRect" parent="PopupImage/Background/MarginContainer"]
 material = SubResource( 19 )
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 486.0
-margin_bottom = 620.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 456.0
+margin_bottom = 590.0
 mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
 stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false

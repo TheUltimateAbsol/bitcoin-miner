@@ -230,7 +230,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://global.gd"
+Global="*res://Global.gd"
 InputEventHandler="*res://InputEventHandler.gd"
 VNGlobal="*res://VisualNovel/VNGlobal.gd"
 GlobalMusic="*res://GlobalMusic.tscn"
@@ -258,6 +258,10 @@ etc=true
 "import etc"=true
 "Impport Etc"=true
 ETC=true
+
+[gui]
+
+theme/custom_font="res://Style/DEFAULT_TEXT.tres"
 
 [input]
 

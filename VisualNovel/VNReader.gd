@@ -142,6 +142,8 @@ func play():
 				var next_page = find_save_data_page(page.next_id) 
 				if next_page != null and next_page is QuestionPage:
 					pass #skip question page waiting
+				elif page.rant:
+					pass #we keep going when ranting
 				else:
 					textbox_nextArrow.visible = true;
 					yield(self, "goto_next_page")
@@ -197,12 +199,14 @@ func display_page(page:Page):
 		var is_new_character = false;
 		var target_image;
 		
-		if page.character_image == VNGlobal.Characters.NONE: 
+		if page.use_last_character:
+			target_image = npc.texture;
+		elif page.character_image == VNGlobal.Characters.NONE: 
 			target_image = null;
 		else:
 			target_image = expressions[page.character_image][page.character_expression]
 		
-		if current_character != page.character_image and npc.visible:
+		if not page.use_last_character and current_character != page.character_image and npc.visible:
 			is_new_character = true;
 #		if npc.texture != target_image and npc.visible:
 #			is_new_character = true;
@@ -450,7 +454,7 @@ func load_data(file_path):
 		print("JSON data is not an array")
 		
 	save_data = data_json.result
-	
+		
 	#Parse it into pages
 	var page_table = []
 	for item in save_data:

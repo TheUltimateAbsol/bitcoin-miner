@@ -323,7 +323,7 @@ polygon = PoolVector2Array( 2.06707, 0.268978, 280.638, 323.587, 359.419, 261.82
 
 [node name="Light2D" type="Light2D" parent="CenterContainer/Node2D/coach"]
 light_mask = 0
-position = Vector2( 355.367, 1473.32 )
+position = Vector2( 325.157, 1425.49 )
 scale = Vector2( 2.48025, 2.48025 )
 texture = ExtResource( 5 )
 mode = 2
